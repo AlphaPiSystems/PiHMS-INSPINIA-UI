@@ -1,0 +1,416 @@
+<app-page-title title="Patients" subTitle="" /><!-- MAIN PANEL -->
+
+<div class="d-flex flex-column flex-grow-1 overflow-hidden">
+  <form name="patientForm" #patientForm="ngForm">
+    <!-- ===== PERSONAL DETAILS ===== -->
+    <div class="card border shadow-sm mb-3">
+      <div class="card-header d-flex align-items-center gap-2 bg-white py-2">
+        <div
+          class="rounded-2 d-flex align-items-center justify-content-center bg-primary bg-opacity-10 border border-primary border-opacity-25"
+          style="width:30px;height:30px;">
+          <svg width="14" height="14" fill="none" viewBox="0 0 14 14" stroke="#1a6fd4" stroke-width="1.5">
+            <circle cx="7" cy="4.5" r="2.5" />
+            <path d="M2 12c0-2.5 2-4.5 5-4.5s5 2 5 4.5" />
+          </svg>
+        </div>
+        <span class="fw-semibold" style="font-size:15px;">Personal Details</span>
+        <span class="ms-auto" style="font-size:11px;">Required fields marked *</span>
+      </div>
+      <div class="card-body">
+
+        <!-- Photo upload -->
+        <!-- Photo upload -->
+        <div class="d-flex align-items-center gap-3 pb-3 mb-3 border-bottom">
+
+          <div class="d-flex align-items-center gap-3">
+
+            <!-- Image Preview Circle -->
+            <div
+              (click)="fileInput.click()"
+      style="
+        width:90px;
+        height:90px;
+        border-radius:50%;
+        overflow:hidden;
+        border:2px dashed #ccc;
+        display:flex;
+        align-items:center;
+        justify-content:center;
+        cursor:pointer;
+        background:#f8f9fa;
+      ">
+
+              @if (imageUrl) {
+                <img
+                  [src]="imageUrl"
+                  style="width:100%; height:100%; object-fit:cover;" />
+              } @else {
+                <span style="font-size:12px; color:#888;">photo</span>
+              }
+
+
+            </div>
+
+            <!-- ✅ ADD THIS (missing part) -->
+            <input
+              type="file"
+              accept="image/*"
+              hidden
+              (change)="onFileChange($event)"
+              #fileInput>
+
+            </div>
+
+            <div>
+              <p class="fw-semibold mb-1" style="font-size:13px;">Patient Photo</p>
+              <p style="font-size:12px;">Passport-size. Accepted: JPG, PNG. Max 2 MB.</p>
+
+              <div class="d-flex gap-1">
+                <span class="badge bg-primary bg-opacity-10 text-primary fw-normal" style="font-size:11px;">JPG</span>
+                <span class="badge bg-primary bg-opacity-10 text-primary fw-normal" style="font-size:11px;">PNG</span>
+                <span class="badge bg-primary bg-opacity-10 text-primary fw-normal" style="font-size:11px;">≤ 2 MB</span>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="row g-3">
+            <div class="col-md-2">
+              <label class="form-label fw-medium ">Title</label>
+              <select class="form-select form-select-sm " [(ngModel)]="patient.title" name="title">
+                <option value="">Select</option>
+                <option value="Mr.">Mr.</option>
+                <option value="Mrs.">Mrs.</option>
+                <option value="Miss">Miss</option>
+                <option value="Dr.">Dr.</option>
+                <option value="Prof.">Prof.</option>
+              </select>
+            </div>
+
+            <div class="col-md-2">
+              <label class="form-label  fw-medium">First Name <span class="text-danger">*</span></label>
+              <input class="form-control form-control-sm " [(ngModel)]="patient.firstName" name="firstName"
+                placeholder="e.g. Ravi" required>
+              </div>
+
+              <div class="col-md-2">
+                <label class="form-label  fw-medium">Last Name <span class="text-danger">*</span></label>
+                <input class="form-control form-control-sm " [(ngModel)]="patient.lastName" name="lastName"
+                  placeholder="e.g. Kumar" required>
+                </div>
+
+                <div class="col-md-2">
+                  <label class="form-label  fw-medium">Gender <span class="text-danger">*</span></label>
+                  <select class="form-select form-select-sm " [(ngModel)]="patient.gender" name="gender"
+                    required>
+                    <option value="">Select</option>
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                    <option value="Other">Other</option>
+                  </select>
+                </div>
+
+                <div class="col-md-2">
+                  <label class="form-label  fw-medium ">DOB <span class="text-danger">*</span></label>
+                  <input type="text" ngxDaterangepickerBootstrap [singleDatePicker]="true" [autoApply]="true"
+                    [locale]="{ format: 'YYYY-MM-DD' }" class="form-control form-control-sm" [(ngModel)]="patient.dob"
+                    name="dob" placeholder="YYYY-MM-DD">
+                  </div>
+
+                  <div class="col-md-2">
+                    <label class="form-label  fw-medium ">Age</label>
+                    <input class="form-control form-control-sm " [(ngModel)]="patient.age" name="age"
+                      type="number" placeholder="Auto" min="0" max="150">
+                    </div>
+
+                    <div class="col-md-3">
+                      <label class="form-label  fw-medium ">Marital Status</label>
+                      <select class="form-select form-select-sm " [(ngModel)]="patient.maritalStatus"
+                        name="maritalStatus">
+                        <option value="">Select</option>
+                        <option value="Single">Single</option>
+                        <option value="Married">Married</option>
+                        <option value="Divorced">Divorced</option>
+                        <option value="Widowed">Widowed</option>
+                      </select>
+                    </div>
+
+                    <div class="col-md-3">
+                      <label class="form-label  fw-medium ">Blood Group</label>
+                      <select class="form-select form-select-sm " [(ngModel)]="patient.bloodGroup"
+                        name="bloodGroup">
+                        <option value="">Select</option>
+                        <option value="A+">A+</option>
+                        <option value="A-">A&minus;</option>
+                        <option value="B+">B+</option>
+                        <option value="B-">B&minus;</option>
+                        <option value="O+">O+</option>
+                        <option value="O-">O&minus;</option>
+                        <option value="AB+">AB+</option>
+                        <option value="AB-">AB&minus;</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- ===== ADDITIONAL DETAILS ===== -->
+              <div class="card border shadow-sm mb-3">
+                <div class="card-header d-flex align-items-center gap-2 bg-white py-2">
+                  <div
+                    class="rounded-2 d-flex align-items-center justify-content-center bg-primary bg-opacity-10 border border-primary border-opacity-25"
+                    style="width:30px;height:30px;">
+                    <svg width="14" height="14" fill="none" viewBox="0 0 14 14" stroke="#1a6fd4" stroke-width="1.5">
+                      <rect x="2" y="2" width="10" height="10" rx="2" />
+                      <path d="M5 7h4M5 5h4M5 9h2" />
+                    </svg>
+                  </div>
+                  <span class="fw-semibold" style="font-size:15px;">Additional Details</span>
+                </div>
+                <div class="card-body">
+                  <div class="row g-3">
+
+                    <div class="col-md-3">
+                      <label class="form-label  fw-medium ">Aadhaar Number <span class="text-danger">*</span></label>
+                      <input class="form-control form-control-sm " [(ngModel)]="patient.aadhaarNumber"
+                        name="aadhaar" placeholder="XXXX XXXX XXXX" maxlength="14" required>
+                      </div>
+
+                      <div class="col-md-3">
+                        <label class="form-label  fw-medium ">Mobile <span class="text-danger">*</span></label>
+                        <input class="form-control form-control-sm " [(ngModel)]="patient.phoneNumber" name="mobile"
+                          placeholder="+91 XXXXX XXXXX" type="tel" required>
+                        </div>
+
+                        <div class="col-md-3">
+                          <label class="form-label  fw-medium ">Email</label>
+                          <input class="form-control form-control-sm " [(ngModel)]="patient.email" name="email"
+                            placeholder="patient@example.com" type="email">
+                          </div>
+
+                          <div class="col-md-3">
+                            <label class="form-label  fw-medium ">Religion</label>
+                            <select class="form-select form-select-sm " [(ngModel)]="patient.religion" name="religion">
+                              <option value="">Select</option>
+                              <option value="Hindu">Hindu</option>
+                              <option value="Muslim">Muslim</option>
+                              <option value="Christian">Christian</option>
+                              <option value="Sikh">Sikh</option>
+                              <option value="Buddhist">Buddhist</option>
+                              <option value="Jain">Jain</option>
+                              <option value="Other">Other</option>
+                            </select>
+                          </div>
+
+                          <div class="col-md-3">
+                            <label class="form-label  fw-medium ">Occupation</label>
+                            <input class="form-control form-control-sm " [(ngModel)]="patient.occupation"
+                              name="occupation" placeholder="e.g. Software Engineer">
+                            </div>
+
+                            <div class="col-md-3">
+                              <label class="form-label  fw-medium ">Monthly Income (&#8377;)</label>
+                              <input class="form-control form-control-sm " [(ngModel)]="patient.monthlyIncome"
+                                name="monthlyIncome" type="number" placeholder="e.g. 50000">
+                              </div>
+
+                              <div class="col-md-3">
+                                <label class="form-label  fw-medium ">Nationality</label>
+                                <select class="form-select form-select-sm " [(ngModel)]="patient.nationality"
+                                  name="nationality">
+                                  <option value="Indian">India</option>
+                                  <option value="Other">Other</option>
+                                </select>
+                              </div>
+
+                              <div class="col-md-3">
+                                <label class="form-label  fw-medium ">Category</label>
+                                <select class="form-select form-select-sm " [(ngModel)]="patient.category" name="category">
+                                  <option value="">Select</option>
+                                  <option value="General">General</option>
+                                  <option value="OBC">OBC</option>
+                                  <option value="SC">SC</option>
+                                  <option value="ST">ST</option>
+                                </select>
+                              </div>
+
+                              <div class="col-md-3">
+                                <label class="form-label  fw-medium ">Patient Type</label>
+                                <select class="form-select form-select-sm " [(ngModel)]="patient.patientType"
+                                  name="patientType">
+                                  <option value="OPD">OPD</option>
+                                  <option value="IPD">IPD</option>
+                                  <option value="Emergency">Emergency</option>
+                                </select>
+                              </div>
+
+                            </div>
+                          </div>
+                        </div>
+
+                        <!-- ===== ADDRESS ===== -->
+                        <div class="card border shadow-sm mb-3">
+                          <div class="card-header d-flex align-items-center gap-2 bg-white py-2">
+                            <div
+                              class="rounded-2 d-flex align-items-center justify-content-center bg-primary bg-opacity-10 border border-primary border-opacity-25"
+                              style="width:30px;height:30px;">
+                              <svg width="14" height="14" fill="none" viewBox="0 0 14 14" stroke="#1a6fd4" stroke-width="1.5">
+                                <path d="M7 1C4.8 1 3 2.8 3 5c0 3 4 8 4 8s4-5 4-8c0-2.2-1.8-4-4-4z" />
+                                <circle cx="7" cy="5" r="1.5" />
+                              </svg>
+                            </div>
+                            <span class="fw-semibold" style="font-size:15px;">Address</span>
+                          </div>
+                          <div class="card-body">
+                            <div class="row g-3">
+
+                              <div class="col-md-6">
+                                <label class="form-label  fw-medium ">Address Line 1</label>
+                                <input class="form-control form-control-sm " [(ngModel)]="patient.address" name="address"
+                                  placeholder="House / Flat No., Street, Area">
+                                </div>
+
+                                <div class="col-md-6">
+                                  <label class="form-label  fw-medium ">Address Line 2</label>
+                                  <input class="form-control form-control-sm " [(ngModel)]="patient.addressLine2"
+                                    name="addressLine2" placeholder="Landmark, Colony (optional)">
+                                  </div>
+
+                                  <div class="col-md-3">
+                                    <label class="form-label  fw-medium ">Country</label>
+                                    <select class="form-select form-select-sm " [(ngModel)]="patient.country" name="country">
+                                      <option value="" disabled>Select Country</option>
+                                      @for (c of countries; track c) {
+                                        <option [ngValue]="c">{{ c }}</option>
+                                      }
+                                    </select>
+                                  </div>
+
+                                  <div class="col-md-3">
+                                    <label class="form-label  fw-medium ">State</label>
+                                    <select class="form-select form-select-sm " [(ngModel)]="patient.state" name="state">
+                                      <option value="" disabled>Select State</option>
+                                      @for (state of indiaStates; track state) {
+                                        <option [ngValue]="state">{{ state }}</option>
+                                      }
+                                    </select>
+                                  </div>
+
+                                  <div class="col-md-3">
+                                    <label class="form-label  fw-medium ">City</label>
+                                    <select class="form-select form-select-sm " [(ngModel)]="patient.city" name="city">
+                                      <option value="" disabled>Select City</option>
+                                      @for (city of karnatakaCities; track city) {
+                                        <option [ngValue]="city">{{ city }}</option>
+                                      }
+                                    </select>
+                                  </div>
+
+                                  <div class="col-md-3">
+                                    <label class="form-label  fw-medium ">Postal Code</label>
+                                    <input class="form-control form-control-sm " [(ngModel)]="patient.postalCode"
+                                      name="postalCode" placeholder="560001" maxlength="6">
+                                    </div>
+
+                                  </div>
+                                </div>
+                              </div>
+
+                              <!-- ===== EMERGENCY DETAILS ===== -->
+                              <div class="card border shadow-sm mb-3">
+                                <div class="card-header d-flex align-items-center gap-2 bg-white py-2">
+                                  <div
+                                    class="rounded-2 d-flex align-items-center justify-content-center bg-primary bg-opacity-10 border border-primary border-opacity-25"
+                                    style="width:30px;height:30px;">
+                                    <svg width="14" height="14" fill="none" viewBox="0 0 14 14" stroke="#1a6fd4" stroke-width="1.5">
+                                      <path d="M7 2v4M7 8v.5" />
+                                      <circle cx="7" cy="7" r="5.5" />
+                                    </svg>
+                                  </div>
+                                  <span class="fw-semibold" style="font-size:15px;">Emergency &amp; Doctor Details</span>
+                                </div>
+                                <div class="card-body">
+                                  <div class="row g-3">
+
+                                    <div class="col-md-3">
+                                      <label class="form-label  fw-medium ">Contact Name <span class="text-danger">*</span></label>
+                                      <input class="form-control form-control-sm " [(ngModel)]="patient.contactName"
+                                        name="contactName" placeholder="Full name" required>
+                                      </div>
+
+                                      <div class="col-md-3">
+                                        <label class="form-label  fw-medium ">Phone <span class="text-danger">*</span></label>
+                                        <input class="form-control form-control-sm " [(ngModel)]="patient.contactPhone"
+                                          name="contactPhone" placeholder="+91 XXXXX XXXXX" type="tel" required>
+                                        </div>
+
+                                        <div class="col-md-3">
+                                          <label class="form-label  fw-medium ">Email</label>
+                                          <input class="form-control form-control-sm " [(ngModel)]="patient.contactEmail"
+                                            name="contactEmail" placeholder="contact@example.com" type="email">
+                                          </div>
+
+                                          <div class="col-md-3">
+                                            <label class="form-label  fw-medium ">Relationship</label>
+                                            <select class="form-select form-select-sm " [(ngModel)]="patient.relationship"
+                                              name="relationship">
+                                              <option value="">Select</option>
+                                              <option value="Spouse">Spouse</option>
+                                              <option value="Parent">Parent</option>
+                                              <option value="Sibling">Sibling</option>
+                                              <option value="Child">Child</option>
+                                              <option value="Friend">Friend</option>
+                                              <option value="Guardian">Guardian</option>
+                                            </select>
+                                          </div>
+
+                                          <div class="col-md-3">
+                                            <label class="form-label  fw-medium ">Referring Doctor</label>
+                                            <select class="form-select form-select-sm " [(ngModel)]="patient.referringDoctor"
+                                              name="referringDoctor">
+                                              <option value="">Select</option>
+                                              @for (doc of doctors; track doc) {
+                                                <option [ngValue]="doc.id">{{ doc.name }}</option>
+                                              }
+                                            </select>
+                                          </div>
+
+                                          <div class="col-md-3">
+                                            <label class="form-label  fw-medium ">Family Doctor</label>
+                                            <select class="form-select form-select-sm " [(ngModel)]="patient.familyDoctor"
+                                              name="familyDoctor">
+                                              <option value="">Select</option>
+                                              @for (doc of doctors; track doc) {
+                                                <option [ngValue]="doc.id">{{ doc.name }}</option>
+                                              }
+                                            </select>
+                                          </div>
+
+                                          <div class="col-md-3">
+                                            <label class="form-label  fw-medium ">Insurance Provider</label>
+                                            <input class="form-control form-control-sm " [(ngModel)]="patient.insuranceProvider"
+                                              name="insuranceProvider" placeholder="e.g. Star Health">
+                                            </div>
+
+                                            <div class="col-md-3">
+                                              <label class="form-label  fw-medium ">Policy Number</label>
+                                              <input class="form-control form-control-sm " [(ngModel)]="patient.policyNumber"
+                                                name="policyNumber" placeholder="Policy number">
+                                              </div>
+
+                                            </div>
+                                          </div>
+                                        </div>
+
+                                      </form>
+
+                                      <!-- ===== FOOTER BAR ===== -->
+
+                                      <div class="d-flex justify-content-between mb-2">
+                                        <button type="button" class="btn btn-danger" (click)="cancelDetails()">Cancel</button>
+                                        <button type="submit" class="btn btn-success" [disabled]="patientForm.invalid">Save</button>
+                                      </div>
+
+
+
+                                    </div><!-- /main panel -->

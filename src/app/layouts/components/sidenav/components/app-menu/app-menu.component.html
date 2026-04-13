@@ -1,0 +1,76 @@
+<ul class="side-nav">
+  @for (item of menuItems; track item) {
+    @if (item.isTitle) {
+      <li class="side-nav-title">{{ item.label }}</li>
+    }
+    @if (!item.isTitle) {
+      <!-- menu item without any child -->
+      @if (!hasSubMenu(item)) {
+        <ng-container *ngTemplateOutlet="MenuItem;context:{item}"/>
+      }
+      <!-- menu item with child -->
+      @if (hasSubMenu(item)) {
+        <ng-container *ngTemplateOutlet="MenuItemWithChildren;context:{item}"/>
+      }
+    }
+  }
+</ul>
+
+<ng-template #MenuItemWithChildren let-item="item">
+  <li class="side-nav-item" [ngClass]="{'active': isChildActive(item)}">
+    <button (click)="item.isCollapsed = !item.isCollapsed" class="side-nav-link"
+      [attr.aria-expanded]="!item.isCollapsed">
+      @if (item.icon) {
+        <span class="menu-icon">
+          <ng-icon [name]="item.icon"></ng-icon>
+        </span>
+      }
+      <span class="menu-text">{{ item.label }}</span>
+      @if (item.badge) {
+        <span [class]="`badge bg-${item.badge.variant}`">{{ item.badge.text }}</span>
+      }
+      @if (!item.badge) {
+        <span class="menu-arrow">
+          <ng-icon name="tablerChevronDown"></ng-icon>
+        </span>
+      }
+    </button>
+    <div #collapse="ngbCollapse" [(ngbCollapse)]="item.isCollapsed" class="collapse">
+      <ul class="sub-menu">
+        @for (child of item.children; track child) {
+          <!-- menu item without any child -->
+          @if (!hasSubMenu(child)) {
+            <ng-container *ngTemplateOutlet="MenuItem;context:{item:child}"/>
+          }
+          <!-- menu item with child -->
+          @if (hasSubMenu(child)) {
+            <ng-container *ngTemplateOutlet="MenuItemWithChildren;context:{item:child}"/>
+          }
+        }
+      </ul>
+    </div>
+  </li>
+</ng-template>
+
+<ng-template #MenuItem let-item="item">
+  <li class="side-nav-item" [ngClass]="{'active': isActive(item)}">
+    @if (item.url) {
+      <a [routerLink]="item.url" [target]="item.target" class="side-nav-link"
+        [ngClass]="{'disabled': item.isDisabled,'special-menu': item.isSpecial, 'active': isActive(item)}"
+        [attr.data-active-link]="isActive(item)"
+        (click)="hideBackDrop(item.url)"
+        >
+        @if (item.icon) {
+          <span class="menu-icon">
+            <ng-icon [name]="item.icon"></ng-icon>
+          </span>
+        }
+        <span class="menu-text">{{ item.label }}</span>
+        @if (item.badge) {
+          <span [ngClass]="`badge text-bg-${item.badge.variant} opacity-50`"
+          [innerHTML]="item.badge.text"></span>
+        }
+      </a>
+    }
+  </li>
+</ng-template>

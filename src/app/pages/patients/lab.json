@@ -1,0 +1,598 @@
+[
+  {
+  "labId": 1,
+  "patientId": 1,
+  "testName": "Complete Blood Count (CBC)",
+  "category": "Hematology",
+  "date": "2019-04-09",
+  "labName": "Aditya Laboratory",
+  "doctor": "Dr. Udaya Kumar M",
+  "status": "Attention",
+  "summary": "Low hemoglobin, abnormal differential count",
+  "results": {
+    "hemoglobin": {
+      "value": "10.0 g/dL",
+      "normalRange": "11.5 - 16.5 g/dL",
+      "status": "Low"
+    },
+    "totalLeucocyteCount": {
+      "value": "11,000 cells/cu.mm",
+      "normalRange": "4,000 - 11,000",
+      "status": "Normal"
+    },
+    "polymorphs": {
+      "value": "21%",
+      "normalRange": "40 - 75%",
+      "status": "Low"
+    },
+    "lymphocytes": {
+      "value": "75%",
+      "normalRange": "20 - 50%",
+      "status": "High"
+    },
+    "monocytes": {
+      "value": "2%",
+      "normalRange": "2 - 10%",
+      "status": "Normal"
+    },
+    "eosinophils": {
+      "value": "2%",
+      "normalRange": "1 - 6%",
+      "status": "Normal"
+    },
+    "basophils": {
+      "value": "0%",
+      "normalRange": "0 - 1%",
+      "status": "Normal"
+    },
+    "rbcCount": {
+      "value": "4.5 million/cu.mm",
+      "normalRange": "3.8 - 5.8",
+      "status": "Normal"
+    },
+    "pcv": {
+      "value": "31.7%",
+      "normalRange": "37 - 48%",
+      "status": "Low"
+    },
+    "plateletCount": {
+      "value": "3,41,000 /cu.mm",
+      "normalRange": "1,50,000 - 4,50,000",
+      "status": "Normal"
+    },
+    "mcv": {
+      "value": "70.1 cu.micron",
+      "normalRange": "78 - 94",
+      "status": "Low"
+    },
+    "mch": {
+      "value": "22.1 pg",
+      "normalRange": "27 - 32",
+      "status": "Low"
+    },
+    "mchc": {
+      "value": "31.5%",
+      "normalRange": "32 - 38",
+      "status": "Low"
+    },
+    "crp": {
+      "value": "1.50 mg/L",
+      "normalRange": "Up to 6 mg/L",
+      "status": "Normal"
+    }
+  },
+  "file": "blood-report-101.jpg"
+},
+  {
+    "labId": 2,
+    "patientId": 1,
+    "testName": "X-Ray Chest",
+    "category": "Radiology",
+    "date": "2026-03-15",
+    "labName": "City Scan Center",
+    "doctor": "Dr. Mehta",
+    "status": "Normal",
+    "summary": "No infection",
+    "results": {
+      "finding": {
+        "value": "Clear",
+        "normalRange": "-",
+        "status": "Normal"
+      }
+    },
+    "file": ""
+  },
+
+  {
+    "labId": 3,
+    "patientId": 1,
+    "testName": "Urine Test",
+    "category": "Pathology",
+    "date": "2026-03-01",
+    "labName": "Health Lab",
+    "doctor": "Dr. Rao",
+    "status": "Normal",
+    "summary": "No abnormalities",
+    "results": {
+      "urineAnalysis": {
+        "value": "Normal",
+        "normalRange": "Normal",
+        "status": "Normal"
+      }
+    },
+    "file": ""
+  },
+
+  {
+    "labId": 4,
+    "patientId": 1,
+    "testName": "Liver Function Test",
+    "category": "Biochemistry",
+    "date": "2026-02-20",
+    "labName": "Apollo Lab",
+    "doctor": "Dr. Sharma",
+    "status": "Warning",
+    "summary": "Mild enzyme increase",
+    "results": {
+      "liverEnzymes": {
+        "value": "Slightly Elevated",
+        "normalRange": "Normal",
+        "status": "High"
+      }
+    },
+    "file": ""
+  },
+
+  {
+    "labId": 5,
+    "patientId": 1,
+    "testName": "Kidney Function Test",
+    "category": "Biochemistry",
+    "date": "2026-02-10",
+    "labName": "Care Lab",
+    "doctor": "Dr. Verma",
+    "status": "Normal",
+    "summary": "Kidney functioning well",
+    "results": {
+      "creatinine": {
+        "value": "Normal",
+        "normalRange": "0.6 - 1.2",
+        "status": "Normal"
+      }
+    },
+    "file": ""
+  },
+
+  {
+    "labId": 6,
+    "patientId": 1,
+    "testName": "Blood Sugar Test",
+    "category": "Biochemistry",
+    "date": "2026-01-28",
+    "labName": "Care Lab",
+    "doctor": "Dr. Verma",
+    "status": "Critical",
+    "summary": "Fasting sugar elevated",
+    "results": {
+      "glucose": {
+        "value": "High",
+        "normalRange": "70 - 100",
+        "status": "High"
+      }
+    },
+    "file": ""
+  },
+
+  {
+    "labId": 7,
+    "patientId": 1,
+    "testName": "ECG",
+    "category": "Cardiology",
+    "date": "2026-01-15",
+    "labName": "Heart Center",
+    "doctor": "Dr. Reddy",
+    "status": "Normal",
+    "summary": "Heart rhythm normal",
+    "results": {
+      "ecgReport": {
+        "value": "Normal",
+        "normalRange": "Normal",
+        "status": "Normal"
+      }
+    },
+    "file": ""
+  },
+
+  {
+    "labId": 8,
+    "patientId": 1,
+    "testName": "Thyroid Test",
+    "category": "Endocrinology",
+    "date": "2025-12-30",
+    "labName": "Thyro Lab",
+    "doctor": "Dr. Iyer",
+    "status": "Normal",
+    "summary": "Thyroid levels stable",
+    "results": {
+      "tsh": {
+        "value": "Normal",
+        "normalRange": "0.4 - 4.0",
+        "status": "Normal"
+      }
+    },
+    "file": ""
+  },
+
+  {
+    "labId": 9,
+    "patientId": 1,
+    "testName": "CT Scan",
+    "category": "Radiology",
+    "date": "2025-12-10",
+    "labName": "Scan Center",
+    "doctor": "Dr. Khan",
+    "status": "Normal",
+    "summary": "No abnormalities detected",
+    "results": {
+      "scanFinding": {
+        "value": "Normal",
+        "normalRange": "-",
+        "status": "Normal"
+      }
+    },
+    "file": ""
+  },
+
+  {
+    "labId": 10,
+    "patientId": 1,
+    "testName": "Vitamin D Test",
+    "category": "Biochemistry",
+    "date": "2025-11-25",
+    "labName": "Health Lab",
+    "doctor": "Dr. Rao",
+    "status": "Warning",
+    "summary": "Vitamin D deficiency",
+    "results": {
+      "vitaminD": {
+        "value": "Low",
+        "normalRange": "30 - 100",
+        "status": "Low"
+      }
+    },
+    "file": ""
+  },{
+  "labId": 1,
+  "patientId": 1,
+  "testName": "Complete Blood Count (CBC)",
+  "category": "Hematology",
+  "date": "2019-04-09",
+  "labName": "Aditya Laboratory",
+  "doctor": "Dr. Udaya Kumar M",
+  "status": "Attention",
+  "summary": "Low hemoglobin, abnormal differential count",
+  "results": {
+    "hemoglobin": {
+      "value": "10.0 g/dL",
+      "normalRange": "11.5 - 16.5 g/dL",
+      "status": "Low"
+    },
+    "totalLeucocyteCount": {
+      "value": "11,000 cells/cu.mm",
+      "normalRange": "4,000 - 11,000",
+      "status": "Normal"
+    },
+    "polymorphs": {
+      "value": "21%",
+      "normalRange": "40 - 75%",
+      "status": "Low"
+    },
+    "lymphocytes": {
+      "value": "75%",
+      "normalRange": "20 - 50%",
+      "status": "High"
+    },
+    "monocytes": {
+      "value": "2%",
+      "normalRange": "2 - 10%",
+      "status": "Normal"
+    },
+    "eosinophils": {
+      "value": "2%",
+      "normalRange": "1 - 6%",
+      "status": "Normal"
+    },
+    "basophils": {
+      "value": "0%",
+      "normalRange": "0 - 1%",
+      "status": "Normal"
+    },
+    "rbcCount": {
+      "value": "4.5 million/cu.mm",
+      "normalRange": "3.8 - 5.8",
+      "status": "Normal"
+    },
+    "pcv": {
+      "value": "31.7%",
+      "normalRange": "37 - 48%",
+      "status": "Low"
+    },
+    "plateletCount": {
+      "value": "3,41,000 /cu.mm",
+      "normalRange": "1,50,000 - 4,50,000",
+      "status": "Normal"
+    },
+    "mcv": {
+      "value": "70.1 cu.micron",
+      "normalRange": "78 - 94",
+      "status": "Low"
+    },
+    "mch": {
+      "value": "22.1 pg",
+      "normalRange": "27 - 32",
+      "status": "Low"
+    },
+    "mchc": {
+      "value": "31.5%",
+      "normalRange": "32 - 38",
+      "status": "Low"
+    },
+    "crp": {
+      "value": "1.50 mg/L",
+      "normalRange": "Up to 6 mg/L",
+      "status": "Normal"
+    }
+  },
+  "file": "blood-report-101.jpg"
+},{
+  "labId": 1,
+  "patientId": 1,
+  "testName": "Complete Blood Count (CBC)",
+  "category": "Hematology",
+  "date": "2019-04-09",
+  "labName": "Aditya Laboratory",
+  "doctor": "Dr. Udaya Kumar M",
+  "status": "Attention",
+  "summary": "Low hemoglobin, abnormal differential count",
+  "results": {
+    "hemoglobin": {
+      "value": "10.0 g/dL",
+      "normalRange": "11.5 - 16.5 g/dL",
+      "status": "Low"
+    },
+    "totalLeucocyteCount": {
+      "value": "11,000 cells/cu.mm",
+      "normalRange": "4,000 - 11,000",
+      "status": "Normal"
+    },
+    "polymorphs": {
+      "value": "21%",
+      "normalRange": "40 - 75%",
+      "status": "Low"
+    },
+    "lymphocytes": {
+      "value": "75%",
+      "normalRange": "20 - 50%",
+      "status": "High"
+    },
+    "monocytes": {
+      "value": "2%",
+      "normalRange": "2 - 10%",
+      "status": "Normal"
+    },
+    "eosinophils": {
+      "value": "2%",
+      "normalRange": "1 - 6%",
+      "status": "Normal"
+    },
+    "basophils": {
+      "value": "0%",
+      "normalRange": "0 - 1%",
+      "status": "Normal"
+    },
+    "rbcCount": {
+      "value": "4.5 million/cu.mm",
+      "normalRange": "3.8 - 5.8",
+      "status": "Normal"
+    },
+    "pcv": {
+      "value": "31.7%",
+      "normalRange": "37 - 48%",
+      "status": "Low"
+    },
+    "plateletCount": {
+      "value": "3,41,000 /cu.mm",
+      "normalRange": "1,50,000 - 4,50,000",
+      "status": "Normal"
+    },
+    "mcv": {
+      "value": "70.1 cu.micron",
+      "normalRange": "78 - 94",
+      "status": "Low"
+    },
+    "mch": {
+      "value": "22.1 pg",
+      "normalRange": "27 - 32",
+      "status": "Low"
+    },
+    "mchc": {
+      "value": "31.5%",
+      "normalRange": "32 - 38",
+      "status": "Low"
+    },
+    "crp": {
+      "value": "1.50 mg/L",
+      "normalRange": "Up to 6 mg/L",
+      "status": "Normal"
+    }
+  },
+  "file": "blood-report-101.jpg"
+},
+{
+  "labId": 1,
+  "patientId": 1,
+  "testName": "Complete Blood Count (CBC)",
+  "category": "Hematology",
+  "date": "2019-04-09",
+  "labName": "Aditya Laboratory",
+  "doctor": "Dr. Udaya Kumar M",
+  "status": "Attention",
+  "summary": "Low hemoglobin, abnormal differential count",
+  "results": {
+    "hemoglobin": {
+      "value": "10.0 g/dL",
+      "normalRange": "11.5 - 16.5 g/dL",
+      "status": "Low"
+    },
+    "totalLeucocyteCount": {
+      "value": "11,000 cells/cu.mm",
+      "normalRange": "4,000 - 11,000",
+      "status": "Normal"
+    },
+    "polymorphs": {
+      "value": "21%",
+      "normalRange": "40 - 75%",
+      "status": "Low"
+    },
+    "lymphocytes": {
+      "value": "75%",
+      "normalRange": "20 - 50%",
+      "status": "High"
+    },
+    "monocytes": {
+      "value": "2%",
+      "normalRange": "2 - 10%",
+      "status": "Normal"
+    },
+    "eosinophils": {
+      "value": "2%",
+      "normalRange": "1 - 6%",
+      "status": "Normal"
+    },
+    "basophils": {
+      "value": "0%",
+      "normalRange": "0 - 1%",
+      "status": "Normal"
+    },
+    "rbcCount": {
+      "value": "4.5 million/cu.mm",
+      "normalRange": "3.8 - 5.8",
+      "status": "Normal"
+    },
+    "pcv": {
+      "value": "31.7%",
+      "normalRange": "37 - 48%",
+      "status": "Low"
+    },
+    "plateletCount": {
+      "value": "3,41,000 /cu.mm",
+      "normalRange": "1,50,000 - 4,50,000",
+      "status": "Normal"
+    },
+    "mcv": {
+      "value": "70.1 cu.micron",
+      "normalRange": "78 - 94",
+      "status": "Low"
+    },
+    "mch": {
+      "value": "22.1 pg",
+      "normalRange": "27 - 32",
+      "status": "Low"
+    },
+    "mchc": {
+      "value": "31.5%",
+      "normalRange": "32 - 38",
+      "status": "Low"
+    },
+    "crp": {
+      "value": "1.50 mg/L",
+      "normalRange": "Up to 6 mg/L",
+      "status": "Normal"
+    }
+  },
+  "file": "blood-report-101.jpg"
+},{
+  "labId": 1,
+  "patientId": 1,
+  "testName": "Complete Blood Count (CBC)",
+  "category": "Hematology",
+  "date": "2019-04-09",
+  "labName": "Aditya Laboratory",
+  "doctor": "Dr. Udaya Kumar M",
+  "status": "Attention",
+  "summary": "Low hemoglobin, abnormal differential count",
+  "results": {
+    "hemoglobin": {
+      "value": "10.0 g/dL",
+      "normalRange": "11.5 - 16.5 g/dL",
+      "status": "Low"
+    },
+    "totalLeucocyteCount": {
+      "value": "11,000 cells/cu.mm",
+      "normalRange": "4,000 - 11,000",
+      "status": "Normal"
+    },
+    "polymorphs": {
+      "value": "21%",
+      "normalRange": "40 - 75%",
+      "status": "Low"
+    },
+    "lymphocytes": {
+      "value": "75%",
+      "normalRange": "20 - 50%",
+      "status": "High"
+    },
+    "monocytes": {
+      "value": "2%",
+      "normalRange": "2 - 10%",
+      "status": "Normal"
+    },
+    "eosinophils": {
+      "value": "2%",
+      "normalRange": "1 - 6%",
+      "status": "Normal"
+    },
+    "basophils": {
+      "value": "0%",
+      "normalRange": "0 - 1%",
+      "status": "Normal"
+    },
+    "rbcCount": {
+      "value": "4.5 million/cu.mm",
+      "normalRange": "3.8 - 5.8",
+      "status": "Normal"
+    },
+    "pcv": {
+      "value": "31.7%",
+      "normalRange": "37 - 48%",
+      "status": "Low"
+    },
+    "plateletCount": {
+      "value": "3,41,000 /cu.mm",
+      "normalRange": "1,50,000 - 4,50,000",
+      "status": "Normal"
+    },
+    "mcv": {
+      "value": "70.1 cu.micron",
+      "normalRange": "78 - 94",
+      "status": "Low"
+    },
+    "mch": {
+      "value": "22.1 pg",
+      "normalRange": "27 - 32",
+      "status": "Low"
+    },
+    "mchc": {
+      "value": "31.5%",
+      "normalRange": "32 - 38",
+      "status": "Low"
+    },
+    "crp": {
+      "value": "1.50 mg/L",
+      "normalRange": "Up to 6 mg/L",
+      "status": "Normal"
+    }
+  },
+  "file": "blood-report-101.jpg"
+}
+]

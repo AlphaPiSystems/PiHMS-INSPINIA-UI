@@ -1,0 +1,136 @@
+<div class="container-fluid h-100 d-flex flex-column">
+
+    <app-page-title title="Edit Visit" subTitle="" />
+
+    <div class="container flex-grow-1 d-flex flex-column">
+
+        <div class="card mt-2 flex-grow-1 d-flex flex-column shadow-sm">
+
+            <div class="card-header">
+                <h4 class="card-title mb-0">Edit Visit</h4>
+            </div>
+
+            <div class="card-body overflow-hidden">
+
+                <div class="row g-3 h-100">
+
+                    <!-- LEFT COLUMN -->
+                    <div class="col-md-6 d-flex flex-column gap-3">
+
+                        <!-- Visit Date -->
+                        <div>
+                            <label class="form-label fs-5 text-dark">Visit Date</label>
+                            <input type="date" class="form-control" [(ngModel)]="form.date">
+                        </div>
+
+                        <!-- Doctor -->
+                        <div>
+                            <label class="form-label fs-5 text-dark">Doctor</label>
+                            <input type="text" class="form-control" [(ngModel)]="form.doctor">
+                        </div>
+
+                        <!-- Department -->
+                        <div>
+                            <label class="form-label fs-5 text-dark">Department</label>
+                            <input type="text" class="form-control" [(ngModel)]="form.department">
+                        </div>
+
+                        <!-- Complaint -->
+                        <div class="flex-grow-1">
+                            <label class="form-label fs-5 text-dark">Complaint</label>
+                            <textarea class="form-control h-100"
+                                [(ngModel)]="form.complaint"></textarea>
+                        </div>
+
+                    </div>
+
+                    <!-- RIGHT COLUMN -->
+                    <div class="col-md-6 d-flex flex-column gap-3">
+
+                        <!-- Vitals -->
+                        <div>
+                            <label class="form-label fs-5 text-dark">Vitals</label>
+
+                            <div class="row g-2">
+                                <div class="col-6">
+                                    <input type="text" class="form-control"
+                                        placeholder="Temp"
+                                        [(ngModel)]="form.vitals.temperature">
+                                </div>
+
+                                <div class="col-6">
+                                    <input type="text" class="form-control"
+                                        placeholder="BP"
+                                        [(ngModel)]="form.vitals.bp">
+                                </div>
+
+                                <div class="col-6">
+                                    <input type="text" class="form-control"
+                                        placeholder="Pulse"
+                                        [(ngModel)]="form.vitals.pulse">
+                                </div>
+
+                                <div class="col-6">
+                                    <input type="text" class="form-control"
+                                        placeholder="Weight"
+                                        [(ngModel)]="form.vitals.weight">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Diagnosis -->
+                        <div>
+                            <label class="form-label fs-5 text-dark">Diagnosis</label>
+                            <input type="text" class="form-control"
+                                [(ngModel)]="form.diagnosis">
+                        </div>
+
+                        <!-- Prescription -->
+                        <div>
+                            <label class="form-label fs-5 text-dark">Medicine</label>
+                            <input type="text" class="form-control"
+                                [(ngModel)]="form.medicine">
+
+                            <div class="d-flex gap-2 mt-2">
+                                <input type="text" class="form-control"
+                                    placeholder="Dosage"
+                                    [(ngModel)]="form.dosage">
+
+                                <input type="text" class="form-control"
+                                    placeholder="Duration"
+                                    [(ngModel)]="form.duration">
+                            </div>
+                        </div>
+
+                        <!-- Notes -->
+                        <div>
+                            <label class="form-label fs-5 text-dark">Notes</label>
+                            <textarea class="form-control"
+                                [(ngModel)]="form.notes"></textarea>
+                        </div>
+
+                        <!-- Follow-up -->
+                        <div>
+                            <label class="form-label fs-5 text-dark">Follow-up</label>
+                            <input type="date" class="form-control"
+                                [(ngModel)]="form.followUpDate">
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- FOOTER FIXED -->
+            <div class="card-footer text-end bg-white">
+                <button class="btn btn-primary px-4" (click)="saveVisit()">
+                    Save Visit
+                </button>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

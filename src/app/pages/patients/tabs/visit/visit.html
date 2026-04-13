@@ -1,0 +1,250 @@
+<div class="container-fluid">
+  <app-page-title title="Patients" subTitle="" />
+
+  <div class="row">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-header border-light justify-content-between">
+
+          <div class="d-flex align-items-center gap-2">
+            <span class="me-2 fw-semibold">Filter By:</span>
+
+            <div class="app-search">
+              <select [(ngModel)]="dateFilter" (ngModelChange)="applyDateFilter()"
+                class="form-select form-control">
+
+                <option value="all">All</option>
+                <option value="today">Current Day</option>
+                <option value="week">Current Week</option>
+                <option value="100">Recent 100</option>
+                <option value="500">Recent 500</option>
+                <option value="1000">Recent 1000</option>
+
+              </select>
+              <lucide-angular [img]="LucideBox" class="app-search-icon text-muted" />
+            </div>
+
+            <div>
+              <select [(ngModel)]="tableService.pageSize" class="form-select form-control my-1 my-md-0">
+                <option [ngValue]="5">5</option>
+                <option [ngValue]="8">8</option>
+                <option [ngValue]="10">10</option>
+                <option [ngValue]="15">15</option>
+                <option [ngValue]="20">20</option>
+              </select>
+            </div>
+
+          </div>
+
+
+
+          <div class="d-flex gap-1">
+            <div class="app-search">
+              <input [(ngModel)]="tableService.searchTerm" data-table-search type="search"
+                class="form-control" placeholder="Search Doctor / Complaint / Diagnosis">
+                <lucide-angular [img]="LucideSearch" class="app-search-icon text-muted" />
+              </div>
+              @if (hasSelection) {
+                <button class="btn btn-danger" (click)="deleteSelected()">Delete</button>
+              }
+              <!-- <a routerLink="/ecommerce/products/grid" class="btn btn-soft-primary btn-icon">
+              <lucide-angular [img]="LucideLayoutGrid" class="fs-lg"/>
+            </a>
+            <a routerLink="/ecommerce/products" class="btn btn-primary btn-icon">
+              <lucide-angular [img]="LucideList" class="fs-lg"/>
+            </a> -->
+            <a routerLink="/patients/newvisit" class="btn btn-success ms-1">
+              <lucide-angular [img]="LucidePlus" class="fs-sm me-1" />
+              Visit
+            </a>
+          </div>
+        </div>
+
+        <div class="table-responsive">
+          <table class="table table-custom table-centered table-select table-hover w-100 mb-0">
+            <thead class="bg-light align-middle bg-opacity-25 thead-sm">
+              <tr class="text-uppercase fs-xxs">
+                <th>SL.No</th>
+                <th>Date </th>
+                <th>Doctor</th>
+                <th>
+                  Complaint
+                </th>
+                <th>
+                  Diagnosis
+                </th>
+                <th>
+                  Follow-up
+                </th>
+
+                <th class="text-center" style="width: 1%;">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              @if ((total$ | async)! > 0) {
+                @for (visit of visit$ | async; track $index; let i = $index) {
+                  <tr>
+                    <td>{{ (tableService.page - 1) * tableService.pageSize + i + 1 }}</td>
+                    <td>
+                    {{ visit.date }}</td>
+
+                    <td>{{  visit.doctor }}</td>
+                    <td>{{visit.complaint}}</td>
+                    <td>{{visit.diagnosis}}</td>
+
+                    <td>{{visit.followUp || '-'}}</td>
+                    <td>
+                      <div class="d-flex justify-content-center gap-1">
+
+                        <!-- View Dashboard -->
+                        <a  (click)="openViewModal(visit)"
+                          class="btn btn-light btn-icon btn-sm rounded-circle" ngbTooltip="View">
+                          <ng-icon name="tablerEye" class="fs-lg" />
+                        </a>
+
+                        <!-- Add Visit -->
+                        <a  [routerLink]="['/patients/visitedit', visit.id]"
+                          class="btn btn-primary btn-icon btn-sm rounded-circle" ngbTooltip="Add Visit">
+                          <ng-icon name="tablerEdit" class="fs-lg" />
+                        </a>
+                        <a (click)="deleteVisit(visit.id)"
+                          class="btn btn-danger btn-icon btn-sm rounded-circle" ngbTooltip="Add Visit">
+                          <ng-icon name="tablerTrash" class="fs-lg" />
+                        </a>
+
+
+                      </div>
+                    </td>
+                  </tr>
+                }
+              } @else {
+                <tr class="no-results">
+                  <td colspan="11" class="text-center text-muted py-3">Nothing found.</td>
+                </tr>
+              }
+            </tbody>
+          </table>
+
+        </div>
+        <div class="card-footer border-0">
+          @if ((total$ | async)! > 0) {
+            <div class="d-flex justify-content-between align-items-center pagination-boxed">
+              <div class="text-muted">
+                {{ tableService.showingRange }} products
+              </div>
+              <ngb-pagination [collectionSize]="(total$ | async)!" [(page)]="tableService.page"
+                [pageSize]="tableService.pageSize">
+                <ng-template ngbPaginationPrevious>
+                  <ng-icon name="tablerChevronLeft" />
+                </ng-template>
+                <ng-template ngbPaginationNext>
+                  <ng-icon name="tablerChevronRight" />
+                </ng-template>
+              </ngb-pagination>
+            </div>
+          }
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+<ng-template #viewModal let-modal>
+
+  <div class="modal-header">
+    <h5 class="modal-title">Visit Details</h5>
+    <button type="button" class="btn-close" (click)="modal.dismiss()"></button>
+  </div>
+
+  <div class="modal-body">
+
+    <!-- BASIC INFO -->
+    <div class="mb-3 p-2 border rounded bg-light">
+      <div class="fw-semibold mb-2">Visit Info</div>
+
+      <div class="row">
+        <div class="col-6">
+          <small class="text-muted">Date</small><br>
+          {{ selectedVisit?.date }}
+        </div>
+
+        <div class="col-6">
+          <small class="text-muted">Doctor</small><br>
+          {{ selectedVisit?.doctor }}
+        </div>
+      </div>
+    </div>
+
+    <!-- COMPLAINT -->
+    <div class="mb-3 p-2 border rounded bg-light">
+      <div class="fw-semibold mb-1">Complaint</div>
+      {{ selectedVisit?.complaint }}
+    </div>
+
+    <!-- VITALS -->
+    <div class="mb-3 p-2 border rounded bg-light">
+      <div class="fw-semibold mb-2">Vitals</div>
+
+      <div class="row text-center">
+        <div class="col-3">
+          <small class="text-muted">Temp</small><br>
+          {{ selectedVisit?.vitals?.temperature || '-' }}
+        </div>
+        <div class="col-3">
+          <small class="text-muted">BP</small><br>
+          {{ selectedVisit?.vitals?.bp || '-' }}
+        </div>
+        <div class="col-3">
+          <small class="text-muted">Pulse</small><br>
+          {{ selectedVisit?.vitals?.pulse || '-' }}
+        </div>
+        <div class="col-3">
+          <small class="text-muted">Weight</small><br>
+          {{ selectedVisit?.vitals?.weight || '-' }}
+        </div>
+      </div>
+    </div>
+
+    <!-- DIAGNOSIS -->
+    <div class="mb-3 p-2 border rounded bg-light">
+      <div class="fw-semibold mb-1">Diagnosis</div>
+      {{ selectedVisit?.diagnosis }}
+    </div>
+
+    <!-- PRESCRIPTION -->
+    <div class="mb-3 p-2 border rounded bg-light">
+      <div class="fw-semibold mb-2">Prescription</div>
+
+      @if (selectedVisit?.prescription?.length > 0) {
+        <div>
+          @for (med of selectedVisit.prescription; track med) {
+            <div class="mb-1">
+              <span class="fw-semibold">{{ med.medicine }}</span>
+              <span class="text-muted"> - {{ med.dosage }} ({{ med.duration }})</span>
+            </div>
+          }
+        </div>
+      } @else {
+        <span class="text-muted">No medicines</span>
+      }
+
+      <ng-template #noMed>
+        <span class="text-muted">No medicines</span>
+      </ng-template>
+    </div>
+
+    <!-- NOTES -->
+    <div class="mb-3 p-2 border rounded bg-light">
+      <div class="fw-semibold mb-1">Notes</div>
+      {{ selectedVisit?.notes || '-' }}
+    </div>
+
+    <!-- FOLLOW UP -->
+    <div class="p-2 border rounded bg-light">
+      <div class="fw-semibold mb-1">Follow-up</div>
+      {{ selectedVisit?.followUp || '-' }}
+    </div>
+
+  </div>
+
+</ng-template>

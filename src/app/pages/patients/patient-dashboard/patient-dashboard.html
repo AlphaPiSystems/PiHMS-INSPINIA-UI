@@ -1,0 +1,443 @@
+<div class="container-fluid">
+
+  <!-- HEADER -->
+  <div class="card border-0 shadow-sm mt-3">
+    <div class="card-body">
+      <div class="d-flex flex-wrap justify-content-between align-items-center gap-3">
+
+        <div class="d-flex align-items-center gap-3">
+          <div class="avatar avatar-xxl">
+            <img src="assets/images/users/user-2.jpg" alt="avatar-2"
+              class="img-fluid img-thumbnail rounded-circle">
+            </div>
+            <div>
+              <h4 class="text-nowrap fw-bold mb-1">{{patient.firstName}} {{patient.lastName}}</h4>
+              <p class="text-muted mb-1">{{patient.patientNo}}</p>
+              <p class="text-muted mb-1">{{patient.gender}} | {{patient.age}} years</p>
+            </div>
+          </div>
+
+          <div class="d-flex flex-wrap gap-2">
+            <a [routerLink]="['/patients/details', patient?.id]" class="btn btn-outline-primary d-flex align-items-center gap-1" href="javascript:void(0)">
+              <ng-icon name="tablerEdit" class="fs-lg" /> Edit Profile
+            </a>
+            <a class="btn btn-primary d-flex align-items-center gap-1" href="javascript:void(0)">
+              <ng-icon name="tablerReceipt" class="fs-lg" /> OP Bill
+            </a>
+            <a class="btn btn-danger d-flex align-items-center gap-1" href="javascript:void(0)">
+              <ng-icon name="tablerBed" class="fs-lg" /> Admit
+            </a>
+          </div>
+
+        </div>
+      </div>
+    </div>
+    <!-- END HEADER -->
+
+
+    <!-- STAT STRIP -->
+    <div class="row g-3">
+
+      <div class="col-6 col-md-3">
+        <div class="card h-100 mb-0">
+          <div class="card-body">
+            <a [routerLink]="['/patients/visit', patient?.id]" class="text-muted float-end mt-n1 fs-xl">
+              <ng-icon name="tablerExternalLink" />
+            </a>
+            <h5>Total Visits</h5>
+            <div class="d-flex align-items-center gap-2 my-2">
+              <div class="avatar-md flex-shrink-0">
+                <span class="avatar-title text-bg-primary rounded-circle fs-22">
+                  <ng-icon name="tablerEye" />
+                </span>
+              </div>
+              <h3 class="mb-0">3</h3>
+              <span class="badge badge-soft-primary ms-auto">Recent</span>
+            </div>
+            <p class="d-flex justify-content-between mb-0  text-muted">
+              <span>Last Visit</span>
+              <b>10 Apr 2026</b>
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-6 col-md-3">
+        <div class="card h-100 mb-0">
+          <div class="card-body">
+            <a [routerLink]="['/patients/billing', patient?.id]" class="text-muted float-end mt-n1 fs-xl">
+              <ng-icon name="tablerExternalLink" />
+            </a>
+            <h5>Pending Bills</h5>
+            <div class="d-flex align-items-center gap-2 my-2">
+              <div class="avatar-md flex-shrink-0">
+                <span class="avatar-title text-bg-warning rounded-circle fs-22">
+                  <ng-icon name="tablerFileInvoice" />
+                </span>
+              </div>
+              <h3 class="mb-0">₹0</h3>
+              <span class="badge badge-soft-success ms-auto">Clear</span>
+            </div>
+            <p class="d-flex justify-content-between mb-0  text-muted">
+              <span>Status</span>
+              <b>No dues</b>
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-6 col-md-3">
+        <div class="card h-100 mb-0">
+          <div class="card-body">
+            <a [routerLink]="[]" class="text-muted float-end mt-n1 fs-xl">
+              <ng-icon name="tablerExternalLink" />
+            </a>
+            <h5>Last Visit</h5>
+            <div class="d-flex align-items-center gap-2 my-2">
+              <div class="avatar-md flex-shrink-0">
+                <span class="avatar-title text-bg-success rounded-circle fs-22">
+                  <ng-icon name="tablerCalendar" />
+                </span>
+              </div>
+              <h6 class="mb-0">10 Apr 2026</h6>
+            </div>
+            <p class="d-flex justify-content-between mb-0  text-muted">
+              <span>Doctor</span>
+              <b>{{ patient?.referringDoctor }}</b>
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-6 col-md-3">
+        <div class="card h-100 mb-0">
+          <div class="card-body">
+            <a [routerLink]="[]" class="text-muted float-end mt-n1 fs-xl">
+              <ng-icon name="tablerExternalLink" />
+            </a>
+            <h5>Insurance</h5>
+            <div class="d-flex align-items-center gap-2 my-2">
+              <div class="avatar-md flex-shrink-0">
+                <span class="avatar-title text-bg-danger rounded-circle fs-22">
+                  <ng-icon name="tablerShieldCheck" />
+                </span>
+              </div>
+              <h5 class="mb-0">Active</h5>
+              <span class="badge badge-soft-success ms-auto">Valid</span>
+            </div>
+            <p class="d-flex justify-content-between mb-0  text-muted">
+              <span>Scheme</span>
+              <b>ESIC</b>
+            </p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <!-- END STAT STRIP -->
+
+
+    <!-- MAIN BODY
+    Desktop order : [Navigate+PatientInfo] | [Recent Visits] | [Conditions+Alerts]
+    Mobile order  : Conditions+Alerts → Recent Visits → Navigate+PatientInfo
+    Only order-* classes changed — zero structural change
+    -->
+    <div class="row g-3 mt-1">
+
+      <!-- Col 1: Navigate + Patient Info | desktop order-1, mobile order-3 -->
+      <div class="col-12 col-md-4 order-1 order-md-1">
+
+        <div class="card border-0 shadow-sm mb-3">
+          <div class="card-header bg-white border-bottom">
+            <h5 class="mb-0 fw-bold">Navigate to Patient Records</h5>
+          </div>
+          <div class="card-body p-3">
+            <div class="row g-2">
+
+              <div class="col-4">
+                <a [routerLink]="['/patients/lab', patient?.id]"
+                  class="border rounded-4 text-center p-2 h-100 d-flex flex-column align-items-center gap-1 text-decoration-none">
+                  <span class="d-inline-flex align-items-center justify-content-center rounded-3 bg-primary-subtle text-primary"
+                    style="width:40px;height:40px;">
+                    <ng-icon name="tablerFlask" style="font-size:20px;"></ng-icon>
+                  </span>
+                  <span class="fw-semibold  text-dark">Lab reports</span>
+                </a>
+              </div>
+
+              <div class="col-4">
+                <a [routerLink]="['/patients/visit', patient?.id]"
+                  class="border rounded-4 text-center p-2 h-100 d-flex flex-column align-items-center gap-1 text-decoration-none">
+                  <span class="bg-success-subtle text-success rounded-3 d-inline-flex align-items-center justify-content-center"
+                    style="width:40px;height:40px;">
+                    <ng-icon name="tablerClipboard" style="font-size:20px;"></ng-icon>
+                  </span>
+                  <span class="fw-semibold  text-dark">Visits</span>
+                </a>
+              </div>
+
+              <div class="col-4">
+                <a [routerLink]="['/patients/scanning', patient?.id]"
+                  class="border rounded-4 text-center p-2 h-100 d-flex flex-column align-items-center gap-1 text-decoration-none">
+                  <span class="bg-info-subtle text-info rounded-3 d-inline-flex align-items-center justify-content-center"
+                    style="width:40px;height:40px;">
+                    <ng-icon name="tablerScan" style="font-size:20px;"></ng-icon>
+                  </span>
+                  <span class="fw-semibold  text-dark">Scan reports</span>
+                </a>
+              </div>
+
+              <div class="col-4">
+                <a [routerLink]="['/patients/history',patient?.id]"
+                  class="border rounded-4 text-center p-2 h-100 d-flex flex-column align-items-center gap-1 text-decoration-none">
+                  <span class="bg-warning-subtle text-warning rounded-3 d-inline-flex align-items-center justify-content-center"
+                    style="width:40px;height:40px;">
+                    <ng-icon name="tablerRepeat" style="font-size:20px;"></ng-icon>
+                  </span>
+                  <span class="fw-semibold  text-dark">History</span>
+                </a>
+              </div>
+
+              <div class="col-4">
+                <a [routerLink]="['/patients/billing', patient?.id]"
+                  class="border rounded-4 text-center p-2 h-100 d-flex flex-column align-items-center gap-1 text-decoration-none">
+                  <span class="bg-danger-subtle text-danger rounded-3 d-inline-flex align-items-center justify-content-center"
+                    style="width:40px;height:40px;">
+                    <ng-icon name="tablerCreditCard" style="font-size:20px;"></ng-icon>
+                  </span>
+                  <span class="fw-semibold  text-dark">Billing</span>
+                </a>
+              </div>
+
+              <div class="col-4">
+                <a [routerLink]="['/patients/insurance',patient?.id]"
+                  class="border rounded-4 text-center p-2 h-100 d-flex flex-column align-items-center gap-1 text-decoration-none">
+                  <span class="bg-secondary-subtle text-secondary rounded-3 d-inline-flex align-items-center justify-content-center"
+                    style="width:40px;height:40px;">
+                    <ng-icon name="tablerShieldCheck" style="font-size:20px;"></ng-icon>
+                  </span>
+                  <span class="fw-semibold  text-dark">Insurance</span>
+                </a>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        <div class="card border-0 shadow-sm">
+          <div class="card-header bg-white border-bottom py-2">
+            <h5 class="mb-0 fw-bold">Patient Info</h5>
+          </div>
+          <div class="card-body p-0">
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item d-flex justify-content-between px-3 py-2">
+                <span class="text-muted">Patient ID</span>
+                <strong>{{ patient?.patientNo }}</strong>
+              </li>
+              <li class="list-group-item d-flex justify-content-between px-3 py-2">
+                <span class="text-muted">Age / Gender</span>
+                <strong>{{ patient?.age }} / {{ patient?.gender }}</strong>
+              </li>
+              <li class="list-group-item d-flex justify-content-between px-3 py-2">
+                <span class="text-muted">Phone</span>
+                <strong class="text-primary">{{ patient?.phoneNumber }}</strong>
+              </li>
+              <li class="list-group-item d-flex justify-content-between px-3 py-2">
+                <span class="text-muted">City</span>
+                <strong>{{ patient?.city }}</strong>
+              </li>
+              <li class="list-group-item d-flex justify-content-between px-3 py-2">
+                <span class="text-muted">Emergency</span>
+                <strong>{{ patient?.contactName }}</strong>
+              </li>
+              <li class="list-group-item d-flex justify-content-between px-3 py-2">
+                <span class="text-muted">Registered</span>
+                <strong>{{ patient?.registrationDate | date:'dd MMM yyyy' }}</strong>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+
+
+      <!-- Col 2: Recent Visits | desktop order-2, mobile order-2 -->
+      <div class="col-12 col-md-5 order-2 order-md-2 mb-3">
+        <div class="card border-0 shadow-sm h-100">
+
+          <div class="card-header bg-white border-bottom d-flex justify-content-between align-items-center">
+            <h5 class="mb-0 fw-bold">Recent Visits</h5>
+            <a [routerLink]="['/patients/visit', patient?.id]"
+              class="btn btn-sm btn-outline-secondary d-flex align-items-center gap-1">
+              See all <ng-icon name="tablerArrowRight" size="14"></ng-icon>
+            </a>
+          </div>
+
+          <div class="card-body p-3">
+
+            <!-- Fever -->
+            <div class="d-flex gap-3 pb-3 border-bottom mb-3">
+              <span class="avatar-title bg-primary-subtle text-primary rounded-circle d-flex align-items-center justify-content-center flex-shrink-0"
+                style="width:36px;height:36px;">
+                <ng-icon name="tablerStethoscope" size="16"></ng-icon>
+              </span>
+              <div class="flex-grow-1 min-w-0">
+                <div class="d-flex justify-content-between align-items-start flex-wrap gap-1">
+                  <span class="fw-semibold">Fever</span>
+                  <small class="text-muted text-nowrap">10 Apr 2026</small>
+                </div>
+                <small class="text-muted d-block">Dr. Sharma · Outpatient</small>
+                <div class="mt-2 p-2 bg-light rounded small">
+                  <span class="fw-semibold">Paracetamol 500mg</span>
+                  <span class="text-muted ms-1">· 1 tab / 6 hrs · 5 days</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Headache -->
+            <div class="d-flex gap-3 pb-3 border-bottom mb-3">
+              <span class="avatar-title bg-primary-subtle text-primary rounded-circle d-flex align-items-center justify-content-center flex-shrink-0"
+                style="width:36px;height:36px;">
+                <ng-icon name="tablerStethoscope" size="16"></ng-icon>
+              </span>
+              <div class="flex-grow-1 min-w-0">
+                <div class="d-flex justify-content-between align-items-start flex-wrap gap-1">
+                  <span class="fw-semibold">Headache</span>
+                  <small class="text-muted text-nowrap">15 Mar 2026</small>
+                </div>
+                <small class="text-muted d-block">Dr. Reddy · Outpatient</small>
+                <small class="text-muted fst-italic">No medication prescribed</small>
+              </div>
+            </div>
+
+            <!-- BP Checkup -->
+            <div class="d-flex gap-3 pb-3 border-bottom mb-3">
+              <span class="avatar-title bg-primary-subtle text-primary rounded-circle d-flex align-items-center justify-content-center flex-shrink-0"
+                style="width:36px;height:36px;">
+                <ng-icon name="tablerStethoscope" size="16"></ng-icon>
+              </span>
+              <div class="flex-grow-1 min-w-0">
+                <div class="d-flex justify-content-between align-items-start flex-wrap gap-1">
+                  <span class="fw-semibold">BP Checkup</span>
+                  <small class="text-muted text-nowrap">02 Feb 2026</small>
+                </div>
+                <small class="text-muted d-block">Dr. Sharma · Outpatient</small>
+                <small class="text-muted">BP: 138/88 mmHg · Medication adjusted</small>
+              </div>
+            </div>
+
+            <!-- Appendectomy -->
+            <div class="d-flex gap-3 pb-3 border-bottom mb-3">
+              <span class="avatar-title bg-secondary-subtle text-secondary rounded-circle d-flex align-items-center justify-content-center flex-shrink-0"
+                style="width:36px;height:36px;">
+                <ng-icon name="tablerScalpel" size="16"></ng-icon>
+              </span>
+              <div class="flex-grow-1 min-w-0">
+                <div class="d-flex justify-content-between align-items-start flex-wrap gap-1">
+                  <span class="fw-semibold">Appendectomy</span>
+                  <small class="text-muted text-nowrap">15 Jun 2023</small>
+                </div>
+                <small class="text-muted">Surgical · Discharged after 3 days</small>
+              </div>
+            </div>
+
+            <!-- HbA1c Lab -->
+            <div class="d-flex gap-3">
+              <span class="avatar-title bg-warning-subtle text-warning rounded-circle d-flex align-items-center justify-content-center flex-shrink-0"
+                style="width:36px;height:36px;">
+                <ng-icon name="tablerFlask" size="16"></ng-icon>
+              </span>
+              <div class="flex-grow-1 min-w-0">
+                <div class="d-flex justify-content-between align-items-start flex-wrap gap-1">
+                  <span class="fw-semibold">HbA1c Lab Report</span>
+                  <small class="text-muted text-nowrap">10 Mar 2026</small>
+                </div>
+                <small class="text-muted">Result: 7.2% — within target range</small>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+
+      <!-- Col 3: Conditions + Alerts | desktop order-3, mobile order-1 (appears first on phone) -->
+      <div class="col-12 col-md-3 order-3 order-md-3">
+
+        <!-- Conditions + Surgeries -->
+        <div class="card border-0 shadow-sm mb-3">
+          <div class="card-body p-3">
+
+            <h5 class="mb-2 fw-bold">Conditions</h5>
+            <div class="d-flex flex-wrap gap-2 mb-3">
+              @for (c of patients?.conditions; track c) {
+                <span
+                  class="badge badge-soft-warning text-dark px-2 py-1 rounded-pill fw-semibold">
+                  {{ c }}
+                </span>
+              }
+              @if (!patients?.conditions || patients?.conditions?.length === 0) {
+                <span
+                  class="text-muted  fst-italic">
+                  No conditions on record
+                </span>
+              }
+            </div>
+
+            <h5 class="mb-2 fw-bold border-bottom pb-1">Surgeries</h5>
+            @for (s of patients?.surgeries; track s) {
+              <div
+                class="d-flex justify-content-between align-items-center py-2 border-bottom">
+                <span class="fw-semibold text-dark ">{{ s.name }}</span>
+                <span class="text-dark ">{{ s.date | date:'dd MMM yyyy' }}</span>
+              </div>
+            }
+            @if (!patients?.surgeries || patients?.surgeries?.length === 0) {
+              <span
+                class="text-muted  fst-italic d-block pt-1">
+                No surgeries on record
+              </span>
+            }
+
+          </div>
+        </div>
+
+        <!-- Critical Alerts -->
+        <div class="card border-0 shadow-sm">
+          <div class="card-header bg-white border-bottom py-2">
+            <h5 class="mb-0 fw-bold">
+              <ng-icon name="tablerAlertTriangle" class="text-danger me-1" size="14"></ng-icon>
+              Critical Alerts
+            </h5>
+          </div>
+          <div class="card-body p-3" style="max-height:250px; overflow-y:auto;">
+
+            @if (!alerts || alerts?.length === 0) {
+              <div
+                class="text-muted  fst-italic mb-2">
+                No active alerts
+              </div>
+            }
+
+            @for (alert of alerts; track alert) {
+              <div class="alert alert-danger d-flex align-items-start gap-2 py-2 px-3 mb-2"
+                >
+                <ng-icon name="tablerAlertCircle" class="flex-shrink-0 mt-1" size="14"></ng-icon>
+                <span class="fw-semibold ">{{ alert }} — confirmed allergy</span>
+              </div>
+            }
+
+            <div class="alert alert-warning d-flex align-items-start gap-2 py-2 px-3 mb-0">
+              <ng-icon name="tablerInfoCircle" class="flex-shrink-0 mt-1" size="14"></ng-icon>
+              <span class="fw-semibold ">On Metformin — check drug interactions</span>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+    <!-- END MAIN BODY -->
+
+  </div>
