@@ -26,7 +26,7 @@ import {products} from '@/app/pages/masters/diagtests/data';
 // import {NgbdSortableHeader} from '@core/directive/sortable.directive';
 // import {ProductType} from '@/app/views/ecommerce/products/types';
 // import {products} from '@/app/views/ecommerce/products/data';
-import {AsyncPipe} from '@angular/common';
+import {AsyncPipe, CommonModule} from '@angular/common';
 
 @Component({
   selector: 'app-diagtest',
@@ -42,6 +42,7 @@ import {AsyncPipe} from '@angular/common';
         NgbPaginationNext,
         NgbPaginationPrevious,
         AsyncPipe,
+        CommonModule
 ],
   templateUrl: './diagtest.html',
     styles: ``,

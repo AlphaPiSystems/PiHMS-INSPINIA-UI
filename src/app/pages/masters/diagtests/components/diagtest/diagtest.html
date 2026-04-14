@@ -1,249 +1,237 @@
+<style>
+  /* .table-custom {
+    border-collapse: collapse;
+  } */
+
+  /* .table-custom th,
+  .table-custom td {
+    border: 1px solid #adb5bd !important;
+  } */
+
+  /* ✅ FIXED: same as other borders */
+  /* .table-custom thead th {
+    border-bottom: 1px solid #adb5bd !important;
+  } */
+</style>
 <div class="container-fluid">
-    <app-page-title title="Tests" subTitle="Masters"/>
 
-    <!-- <div class="row row-cols-xxl-5 row-cols-md-3 row-cols-1 align-items-center g-1">
-        @for (item of widgets; track $index) {
-            <div class="col">
-                <app-statistic-widget1 [item]="item" cardClass="mb-1"/>
+    <!-- ✅ PAGE TITLE -->
+    <app-page-title title="Tests" subTitle="Masters"></app-page-title>
+
+    <!-- ✅ CARD -->
+    <div class="card mt-2" style="border: 1px solid #adb5bd;">
+
+        <!-- 🔍 HEADER -->
+        <div class="card-header d-flex justify-content-between align-items-center flex-wrap gap-2"
+             style="border-bottom: 1px solid #adb5bd;">
+
+            <!-- LEFT -->
+            <div class="d-flex gap-2 align-items-center flex-wrap">
+
+                <div class="app-search">
+                    <input [(ngModel)]="tableService.searchTerm"
+                           type="search"
+                           class="form-control"
+                           placeholder="Search Test / Short / Report Name..."
+                           style="min-width: 300px; border: 1px solid #adb5bd;">
+                    <lucide-angular [img]="LucideSearch"
+                                    class="app-search-icon text-muted"/>
+                </div>
+
+                @if (hasSelection) {
+                    <button class="btn btn-danger"
+                            style="border: 1px solid #adb5bd;"
+                            (click)="deleteSelected()">
+                        Delete
+                    </button>
+                }
+
             </div>
-        }
-    </div> -->
 
-    <div class="row">
-        <div class="col-12">
-            <div class="card">
-                <div class="card-header border-light justify-content-between">
-                    <div class="d-flex gap-2">
-                        <div class="app-search">
-                            <input [(ngModel)]="tableService.searchTerm" data-table-search type="search"
-                                   class="form-control"
-                                   placeholder="Search Test / Short / Report Name..."
-                                   style="width: 300px;">
-                            <lucide-angular [img]="LucideSearch" class="app-search-icon text-muted"/>
-                        </div>
-                        @if (hasSelection) {
-                            <button class="btn btn-danger" (click)="deleteSelected()">Delete</button>
-                        }
-                    </div>
+            <!-- ✅ CENTER FILTER -->
+            <div class="d-flex align-items-center gap-2 flex-nowrap">
 
-                    <div class="d-flex align-items-center gap-2">
-                        <span class="me-2 fw-semibold">Filter By:</span>
+                <span class="fw-semibold mb-0">Filter By:</span>
 
-                        <!-- <div class="app-search">
-                            <select [(ngModel)]="categoryFilter"
-                                    (ngModelChange)="tableService.setFilter('category', categoryFilter)"
-                                    class="form-select form-control my-1 my-md-0">
-                                <option value="All">Category</option>
-                                <option value="Electronics">Electronics</option>
-                                <option value="Fashion">Fashion</option>
-                                <option value="Home">Home</option>
-                                <option value="Sports">Sports</option>
-                                <option value="Beauty">Beauty</option>
-                            </select>
-                            <lucide-angular [img]="LucideTag" class="app-search-icon text-muted"/>
-                        </div> -->
-
-                        <div class="app-search">
-                            <select [(ngModel)]="statusFilter"
-                                    (ngModelChange)="tableService.setFilter('Type', statusFilter)"
-                                    class="form-select form-control my-1 my-md-0">
-                                <option value="All">Type</option>
-                                <option value="SNG">Single</option>
-                                <option value="PRO">PRO</option>
-                                <option value="MUL">Multiple</option>
-                            </select>
-                            <lucide-angular [img]="LucideBox" class="app-search-icon text-muted"/>
-                        </div>
-
-                        <!-- <div class="app-search">
-                            <select [(ngModel)]="ratingFilter"
-                                    (ngModelChange)="tableService.setFilter('rating', ratingFilter)"
-                                    class="form-select form-control my-1 my-md-0">
-                                <option value="All">Rating</option>
-                                <option value="5">5</option>
-                                <option value="4">4</option>
-                                <option value="3">3</option>
-                                <option value="2">2</option>
-                                <option value="1">1</option>
-                            </select>
-                            <lucide-angular [img]="LucideStar" class="app-search-icon text-muted"/>
-                        </div> -->
-
-                        <div>
-                            <select [(ngModel)]="tableService.pageSize" class="form-select form-control my-1 my-md-0">
-                                <option [ngValue]="5">5</option>
-                                <option [ngValue]="8">8</option>
-                                <option [ngValue]="10">10</option>
-                                <option [ngValue]="15">15</option>
-                                <option [ngValue]="20">20</option>
-                            </select>
-                        </div>
-
-                    </div>
-
-                    <div class="d-flex gap-1">
-                        <!-- <a routerLink="/ecommerce/products/grid" class="btn btn-soft-primary btn-icon">
-                            <lucide-angular [img]="LucideLayoutGrid" class="fs-lg"/>
-                        </a>
-                        <a routerLink="/ecommerce/products" class="btn btn-primary btn-icon">
-                            <lucide-angular [img]="LucideList" class="fs-lg"/>
-                        </a> -->
-                        <a routerLink="/ecommerce/products/add" class="btn btn-purple ms-1">
-                            <lucide-angular [img]="LucidePlus" class="fs-sm me-2"/>
-                            Add Test
-                        </a>
-                    </div>
+                <!-- Type with icon inside -->
+                <div class="app-search" style="min-width: 150px;">
+                    <select [(ngModel)]="statusFilter"
+                            (ngModelChange)="tableService.setFilter('Type', statusFilter)"
+                            class="form-select form-control"
+                            style="border: 1px solid #adb5bd; padding-right: 30px;">
+                        <option value="All">Type</option>
+                        <option value="SNG">Single</option>
+                        <option value="PRO">PRO</option>
+                        <option value="MUL">Multiple</option>
+                    </select>
+                    <lucide-angular [img]="LucideBox"
+                                    class="app-search-icon text-muted"></lucide-angular>
                 </div>
 
-                <div class="table-responsive">
-                    <table class="table table-custom table-centered table-select table-hover w-100 mb-0">
-                        <thead class="bg-light align-middle bg-opacity-25 thead-sm">
-                        <tr class="text-uppercase fs-xxs">
-                            <!-- <th class="ps-3" style="width: 1%;">
-                                <input [(ngModel)]="selectAll"
-                                       (change)="toggleAllSelection()"
-                                       class="form-check-input form-check-input-light fs-14 mt-0"
-                                       type="checkbox" id="select-all-products" value="option">
-                            </th> -->
-                            <th class="text-center">SL#</th>
-                            <th >Test Name
-                            </th>
-                            <th>Short Name</th>
-                            <th >
-                                Report Name
-                            </th>
-                            <!-- <th >Test Type
-                            </th> -->
-                            <th >Test Type
-                            </th>
-                            <th >
-                                Report Type
-                            </th>
-                            <th >
-                                Is Outsourced
-                            </th>
-                            <!-- <th >
-                                Status
-                            </th>
-                            <th >
-                                Published
-                            </th> -->
-                            <th class="text-center" style="width: 1%;">Actions</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                            @if ((total$ | async)! > 0) {
-                                @for (product of products$ | async; track $index) {
-                                    <tr>
-                                        <!-- <td class="ps-3">
-                                            <input [(ngModel)]="product.selected"
-                                                   (change)="toggleSingleSelection()"
-                                                   class="form-check-input form-check-input-light fs-14 product-item-check mt-0"
-                                                   type="checkbox" value="option">
-                                        </td> -->
-                                        <!-- <td>
-                                            <div class="d-flex"> -->
-                                                <!-- <div class="avatar-md me-3">
-                                                    <img [src]="product.image" alt="Product" class="img-fluid rounded">
-                                                </div> -->
-                                                <!-- <div>
-                                                    <h5 class="mb-1">
-                                                        <a routerLink="/ecommerce/products/{{product.Notes}}"
-                                                           class="link-reset">{{ truncateText(product.Name) }}</a>
-                                                    </h5>
-                                                    <p class="text-muted mb-0 fs-xxs">by: {{ product.ReportName }}</p>
-                                                </div> -->
-                                            <!-- </div>
-                                        </td> -->
-                                        <!-- ✅ SL# -->
-                                        <td class="text-center">
-                                            {{ (tableService.page - 1) * tableService.pageSize + $index + 1 }}
-                                        </td>
-                                        <td>{{ product.Name }}</td>
-                                        <td>{{ product.ShortName }}</td>
-                                        <td>
-                                            <!-- <h5 class="fs-base mb-0 fw-medium">{{ product.ReportName }}</h5> -->
-                                             {{ product.ReportName }}
-                                        </td>
-                                        <!-- <td>{{ currency }}{{ product.DiagDepartmentID }}</td> -->
-                                        <!-- <td>{{ product.Type }}</td> -->
-                                        <!-- <td>
-                                            <app-rating [rate]="product.rating"/>
-                                            <span class="ms-1"><a routerLink="/ecommerce/reviews"
-                                                                  class="link-reset fw-semibold">({{ product.reviews }}
-                                                )</a></span>
-                                        </td> -->
-                                        <td>
-                                            <span class="badge fs-xxs" [class]="
-                                              product.Type === 'SNG' ? 'badge-soft-warning' :
-                                              product.Type === 'PRO' ? 'badge-soft-danger' :
-                                              'badge-soft-success'
-                                            ">{{ product.Type }}</span></td>
-                                        <!-- <td>{{ product.date }} <small class="text-muted">{{ product.time }}</small></td> -->
-                                        <td class="text-center">{{ product.ReportType }}</td>
-                                        <td class="text-center">{{ product.IsOutsourced }}</td>
-                                        <td>
-                                            <div class="d-flex justify-content-center gap-1">
-                                                <a [routerLink]="[]"
-                                                   class="btn btn-light btn-icon btn-sm rounded-circle">
-                                                    <ng-icon
-                                                        name="tablerEye" class="fs-lg"/>
-                                                </a>
-                                                <!-- <a [routerLink]="[]"
-                                                   class="btn btn-light btn-icon btn-sm rounded-circle">
-                                                    <ng-icon
-                                                        name="tablerEdit" class="fs-lg"/>
-                                                </a> -->
-                                                <!-- <button
-                                                    class="btn btn-light btn-icon btn-sm rounded-circle"
-                                                    (click)="tableService.deleteItem(product)">
-                                                    <ng-icon
-                                                        name="tablerTrash" class="fs-lg"/>
-                                                </button> -->
-                                                <div class="d-flex flex-wrap gap-2">
-                                                    <!-- @for (color of colorsVariants; track $index) { -->
-                                                        <button type="button"
-                                                                class="btn btn-outline-purple">Edit
-                                                        </button>
-                                                    <!-- } -->
-                                                </div>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                }
-                            } @else {
-                                <tr class="no-results">
-                                    <td colspan="11" class="text-center text-muted py-3">Nothing found.</td>
-                                </tr>
-                            }
-                        </tbody>
-                    </table>
+                <!-- Page Size -->
+                <select [(ngModel)]="tableService.pageSize"
+                        class="form-select"
+                        style="width: 80px; border: 1px solid #adb5bd;">
+                    <option [ngValue]="5">5</option>
+                    <option [ngValue]="8">8</option>
+                    <option [ngValue]="10">10</option>
+                    <option [ngValue]="15">15</option>
+                    <option [ngValue]="20">20</option>
+                </select>
 
-                </div>
-                <div class="card-footer border-0">
-                    @if ((total$ | async)! > 0) {
-                        <div
-                            class="d-flex justify-content-between align-items-center pagination-boxed">
-                            <div class="text-muted">
-                                {{ tableService.showingRange }} tests
-                            </div>
-                            <ngb-pagination
-                                [collectionSize]="(total$ | async)!"
-                                [(page)]="tableService.page"
-                                [pageSize]="tableService.pageSize"
-                            >
-                                <ng-template ngbPaginationPrevious>
-                                    <ng-icon name="tablerChevronLeft"/>
-                                </ng-template>
-                                <ng-template ngbPaginationNext>
-                                    <ng-icon name="tablerChevronRight"/>
-                                </ng-template>
-                            </ngb-pagination>
-                        </div>
-                    }
-                </div>
+            </div>
+
+            <!-- RIGHT -->
+            <div>
+                <a routerLink="/ecommerce/products/add"
+                   class="btn btn-purple"
+                   style="border: 1px solid #adb5bd;">
+                    <lucide-angular [img]="LucidePlus" class="fs-sm me-2"/>
+                    Add Test
+                </a>
             </div>
 
         </div>
+
+        <!-- 📊 TABLE -->
+        <div class="table-responsive">
+
+            <!-- ✅ TABLE STYLE -->
+            <style>
+                /* .table-custom {
+                    border-collapse: collapse;
+                } */
+
+                .table-custom th,
+                .table-custom td {
+                    border: 1px solid #adb5bd ;
+                }
+
+                .table-custom thead th {
+                    border-bottom: 1px solid #adb5bd ;
+                }
+            </style>
+
+            <table class="table table-custom table-centered table-hover w-100 mb-0">
+
+                <!-- HEADER -->
+                <thead class="bg-light align-middle bg-opacity-25 thead-sm">
+                <tr class="text-uppercase fs-xxs">
+                    <th class="text-center" style="border: none;">SL#</th>
+                    <th style="border-top: none;">Test Name</th>
+                    <th style="border-top: none;">Short Name</th>
+                    <th style="border-top: none;">Report Name</th>
+                    <th class="text-center" style="border-top: none;">Test Type</th>
+                    <th class="text-center" style="border-top: none;">Report Type</th>
+                    <th class="text-center" style="border-top: none;">Is Outsourced</th>
+                    <th class="text-center" style="width: 1%; border-top: none;">Actions</th>
+                </tr>
+                </thead>
+                
+                <!-- BODY -->
+                <tbody>
+                @if ((total$ | async)! > 0) {
+
+                    @for (product of products$ | async; track $index) {
+
+                    <tr>
+                    <!-- FIRST COLUMN (remove left border) -->
+                    <td class="text-center" style="border-left: none;">
+                        {{ (tableService.page - 1) * tableService.pageSize + $index + 1 }}
+                    </td>
+
+                    <td>{{ product.Name }}</td>
+                    <td>{{ product.ShortName }}</td>
+                    <td>{{ product.ReportName }}</td>
+
+                    <td class="text-center">
+                        <span class="badge fs-xxs" [class]="
+                        product.Type === 'SNG' ? 'badge-soft-warning' :
+                        product.Type === 'PRO' ? 'badge-soft-danger' :
+                        'badge-soft-success'
+                        ">
+                        {{ product.Type }}
+                        </span>
+                    </td>
+
+                    <td class="text-center">{{ product.ReportType }}</td>
+                    <td class="text-center">{{ product.IsOutsourced }}</td>
+
+                    <!-- LAST COLUMN (remove right border) -->
+                    <td style="border-right: none;">
+                        <div class="d-flex justify-content-center gap-2">
+
+                        <!-- View -->
+                        <a [routerLink]="[]"
+                            class="btn btn-light btn-icon btn-sm rounded-circle"
+                            style="border: 1px solid #adb5bd;">
+                            <ng-icon name="tablerEye" class="fs-lg"/>
+                        </a>
+
+                        <!-- Edit -->
+                        <button type="button"
+                                class="btn btn-success btn-sm"
+                                style="border: 1px solid #adb5bd;">
+                            Edit
+                        </button>
+
+                        </div>
+                    </td>
+                    </tr>
+                    }
+
+                } @else {
+                    <tr>
+                        <td colspan="8" class="text-center text-muted py-3">
+                            Nothing found.
+                        </td>
+                    </tr>
+                }
+                </tbody>
+
+            </table>
+
+            <!-- ✅ PAGINATION INSIDE BORDER -->
+                <div style="border: none; padding: 2px 8px;">
+
+                    @if ((total$ | async)! > 0) {
+
+                        <div class="d-flex align-items-center justify-content-between flex-nowrap"
+                            style="min-height: 28px;">
+
+                            <!-- ✅ LEFT TEXT (BIGGER FONT) -->
+                            <div class="text-muted fw-medium"
+                                style="font-size: 14px; white-space: nowrap;">
+                                {{ tableService.showingRange }} tests
+                            </div>
+
+                            <!-- ✅ PAGINATION (SMALL + COMPACT) -->
+                            <ngb-pagination
+                                class="pagination-sm mb-0"
+                                style="margin: 0;"
+                                [collectionSize]="(total$ | async)!"
+                                [(page)]="tableService.page"
+                                [pageSize]="tableService.pageSize">
+
+                                <ng-template ngbPaginationPrevious>
+                                    <ng-icon name="tablerChevronLeft"/>
+                                </ng-template>
+
+                                <ng-template ngbPaginationNext>
+                                    <ng-icon name="tablerChevronRight"/>
+                                </ng-template>
+
+                            </ngb-pagination>
+
+                        </div>
+
+                    }
+
+                </div>
+
+            
+        </div>
+
     </div>
+
 </div>

@@ -1,5 +1,4 @@
 import {Routes} from '@angular/router';
-import { MasterComponent } from './diagtests/master';
 
 export const MASTER_ROUTES: Routes = [
     // {
