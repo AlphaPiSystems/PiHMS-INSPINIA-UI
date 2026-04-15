@@ -20,90 +20,121 @@ import {toTitleCase} from '@/app/utils/string-utils';
 import {RatingComponent} from '@app/components/rating.component';
 import {FormsModule} from '@angular/forms';
 import {NgbPagination, NgbPaginationNext, NgbPaginationPrevious} from '@ng-bootstrap/ng-bootstrap';
-
-import {ProductType} from '@/app/pages/masters/diagtests/types';
-import {products} from '@/app/pages/masters/diagtests/data';
-// import {NgbdSortableHeader} from '@core/directive/sortable.directive';
-// import {ProductType} from '@/app/views/ecommerce/products/types';
-// import {products} from '@/app/views/ecommerce/products/data';
-import {AsyncPipe, CommonModule} from '@angular/common';
+import {NgbdSortableHeader} from '@core/directive/sortable.directive';
+import {TestType} from '../../types'
+import diagtestData from '../../diagtestdata.json';
+import { AsyncPipe, CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-diagtest',
-  imports: [        PageTitleComponent,
-        // StatisticWidget1Component,
+  imports: [
+        PageTitleComponent,
         LucideAngularModule,
         RouterLink,
         NgIcon,
-        // RatingComponent,
+        RatingComponent,
         FormsModule,
         NgbPagination,
-        // NgbdSortableHeader,
+        NgbdSortableHeader,
         NgbPaginationNext,
         NgbPaginationPrevious,
-        AsyncPipe,
-        CommonModule
-],
+        AsyncPipe,CommonModule   ],
   templateUrl: './diagtest.html',
-    styles: ``,
-    providers:[TableService],
+  styleUrl: './diagtest.scss',
+  providers:[TableService],
 })
+export class DiagTest implements OnInit {
 
-export class Diagtest {
-    protected readonly LucideSearch = LucideSearch;
-    protected readonly LucideLayoutGrid = LucideLayoutGrid;
-    protected readonly LucideList = LucideList;
-    protected readonly LucidePlus = LucidePlus;
+  protected readonly LucideSearch = LucideSearch;
+  protected readonly LucideLayoutGrid = LucideLayoutGrid;
+  protected readonly LucideList = LucideList;
+  protected readonly LucidePlus = LucidePlus;
 
-    protected readonly currency = currency;
-    protected readonly toTitleCase = toTitleCase;
+  protected readonly currency = currency;
+  protected readonly toTitleCase = toTitleCase;
 
-    categoryFilter = "All"
-    statusFilter = "All"
-    ratingFilter = "All"
-    selectAll = false;
+  statusFilter = "All";
+  dateFilter = 'all';
+  selectAll = false;
 
-    products$: Observable<ProductType[]>
-    total$: Observable<number>;
+  total$: Observable<number>;
+  tests$: Observable<TestType[]>;
 
-    constructor(public tableService: TableService<ProductType>) {
-        this.products$ = this.tableService.items$
-        this.total$ = this.tableService.total$
-    }
+  // ✅ STORE ORIGINAL DATA
+  allTests: any[] = [];
 
-    ngOnInit(): void {
-        this.tableService.setItems(products, 8)
-    }
+  constructor(public tableService: TableService<TestType>) {
+    this.tests$ = this.tableService.items$;
+    this.total$ = this.tableService.total$;
+  }
 
-    protected readonly LucideTag = LucideTag;
-    protected readonly LucideBox = LucideBox;
-    protected readonly LucideStar = LucideStar;
+ngOnInit(): void {
+  const data: TestType[] = diagtestData;
 
-    truncateText(text: string, limit: number = 21): string {
-        return text.length > limit ? text.substring(0, limit) + '...' : text;
-    }
+  this.allTests = data;
 
+  console.log('Loaded Data:', this.allTests); // ✅ debug
 
-    toggleAllSelection() {
-        this.tableService.setAllSelection(this.selectAll);
-    }
-
-    toggleSingleSelection() {
-        this.tableService.items$.subscribe(items => {
-            this.selectAll = items.every((item: any) => item.selected);
-        }).unsubscribe();
-    }
-
-    deleteSelected() {
-        this.tableService.deleteSelectedItems();
-        this.selectAll = false;
-    }
-
-    get hasSelection(): boolean {
-        return this.tableService.hasSelectedItems();
-    }
-
+  this.tableService.setItems(this.allTests, this.tableService.pageSize);
+}
   
+  // -------------------------
+  // ACTIONS
+  // -------------------------
 
+  toggleAllSelection() {
+    this.tableService.setAllSelection(this.selectAll);
+  }
+
+  toggleSingleSelection() {
+    this.tableService.items$.subscribe(items => {
+      this.selectAll = items.every((item: any) => item.selected);
+    }).unsubscribe();
+  }
+
+  deleteSelected() {
+    this.tableService.deleteSelectedItems();
+    this.selectAll = false;
+  }
+
+  get hasSelection(): boolean {
+    return this.tableService.hasSelectedItems();
+  }
+
+  // -------------------------
+  // FILTER
+  // -------------------------
+
+  applyDateFilter() {
+
+    let filtered = [];
+    const today = new Date();
+
+
+    switch (this.dateFilter) {
+
+      case 'SNG':
+      case 'MUL':
+      case 'PRO':
+        filtered = this.allTests.filter(p => p.Type === this.dateFilter);
+        break;
+
+      default:
+        filtered = this.allTests;
+    }
+
+  this.tableService.setItems(filtered, this.tableService.pageSize);
+}
+
+      
+  // -------------------------
+
+  protected readonly LucideTag = LucideTag;
+  protected readonly LucideBox = LucideBox;
+  protected readonly LucideStar = LucideStar;
+
+  truncateText(text: string, limit: number = 21): string {
+    return text.length > limit ? text.substring(0, limit) + '...' : text;
+  }
 
 }

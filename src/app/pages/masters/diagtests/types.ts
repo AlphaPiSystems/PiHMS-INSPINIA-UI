@@ -1,5 +1,4 @@
-
-export type ProductType = {
+export type TestType = {
   id: number;
   Code: string;
   Name: string;
@@ -36,13 +35,25 @@ export type ProductType = {
   selected?: boolean,
 }
 
-export type TestType = {
-    id: number,
-    name: string,
-    code: string,
-    category: string,
-    price: number,
-    status: "active" | "inactive",
-    date: string,
-    time: string;
-}   
+// export type TestType = {
+//     id: number,
+//     name: string,
+//     code: string,
+//     category: string,
+//     price: number,
+//     status: "active" | "inactive",
+//     date: string,
+//     time: string;
+// }   
+
+export type PatientType = {
+  id: number;
+  uhid: string;
+  name: string;
+  age: number;
+  gender: string;
+  registereddate:string
+  phone: string;
+  lastVisit: string;
+  status: 'OP' | 'IP';
+}
