@@ -1,0 +1,44 @@
+{
+  "patientId": 1,
+
+  "recentVisits": [
+    {
+      "date": "2026-04-10",
+      "doctor": "Dr. Sharma",
+      "reason": "Fever"
+    },
+    {
+      "date": "2026-03-15",
+      "doctor": "Dr. Reddy",
+      "reason": "Headache"
+    }
+  ],
+
+  "chronicConditions": [
+    "Diabetes",
+    "Hypertension"
+  ],
+
+  "allergies": [
+    "Dust Allergy",
+    "Penicillin"
+  ],
+
+  "pastSurgeries": [
+    {
+      "name": "Appendectomy",
+      "date": "2023-06-15"
+    }
+  ],
+
+  "familyHistory": [
+    {
+      "relation": "Father",
+      "condition": "Diabetes"
+    },
+    {
+      "relation": "Mother",
+      "condition": "Hypertension"
+    }
+  ]
+}

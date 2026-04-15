@@ -1,0 +1,152 @@
+<div class="container-fluid">
+  <app-page-title title="Patients" subTitle="" />
+
+  <div class="row">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-header border-light justify-content-between">
+
+          <div class="d-flex align-items-center gap-2">
+            <span class="me-2 fw-semibold">Filter By:</span>
+
+            <div class="app-search">
+              <select [(ngModel)]="dateFilter" (ngModelChange)="applyDateFilter()"
+                class="form-select form-control">
+
+                <option value="all">All</option>
+                <option value="today">Current Day</option>
+                <option value="week">Current Week</option>
+                <option value="custom">Custom Range</option>
+                <option value="100">Recent 100</option>
+                <option value="500">Recent 500</option>
+                <option value="1000">Recent 1000</option>
+
+              </select>
+              <lucide-angular [img]="LucideBox" class="app-search-icon text-muted" />
+            </div>
+
+            @if (dateFilter === 'custom') {
+            <div class="d-flex align-items-center gap-1">
+              <input type="date" class="form-control" [(ngModel)]="fromDate" (ngModelChange)="applyDateFilter()"
+                style="max-width: 130px;">
+              <span class="text-muted px-1">to</span>
+              <input type="date" class="form-control" [(ngModel)]="toDate" (ngModelChange)="applyDateFilter()"
+                style="max-width: 130px;">
+            </div>
+            }
+
+            <div>
+              <select [(ngModel)]="tableService.pageSize" class="form-select form-control my-1 my-md-0">
+                <option [ngValue]="5">5</option>
+                <option [ngValue]="8">8</option>
+                <option [ngValue]="10">10</option>
+                <option [ngValue]="15">15</option>
+                <option [ngValue]="20">20</option>
+              </select>
+            </div>
+
+          </div>
+
+
+
+          <div class="d-flex gap-1">
+            <div class="app-search">
+              <input [(ngModel)]="tableService.searchTerm" data-table-search type="search"
+                class="form-control" placeholder="Search Doctor / Complaint / Diagnosis">
+                <lucide-angular [img]="LucideSearch" class="app-search-icon text-muted" />
+              </div>
+              @if (hasSelection) {
+                <button class="btn btn-danger" (click)="deleteSelected()">Delete</button>
+              }
+              <!-- <a routerLink="/ecommerce/products/grid" class="btn btn-soft-primary btn-icon">
+              <lucide-angular [img]="LucideLayoutGrid" class="fs-lg"/>
+            </a>
+            <a routerLink="/ecommerce/products" class="btn btn-primary btn-icon">
+              <lucide-angular [img]="LucideList" class="fs-lg"/>
+            </a> -->
+            <a routerLink="/patients/newvisit" class="btn btn-success ms-1">
+              <lucide-angular [img]="LucidePlus" class="fs-sm me-1" />
+              Visit
+            </a>
+          </div>
+        </div>
+
+        <div class="table-responsive">
+          <table class="table table-custom table-centered table-select table-hover w-100 mb-0">
+            <thead class="bg-light align-middle bg-opacity-25 thead-sm">
+              <tr class="text-uppercase fs-xxs">
+                <th>SL.No</th>
+                <th>Date </th>
+                <th>Doctor</th>
+                <th>
+                  Complaint
+                </th>
+                <th>
+                  Diagnosis
+                </th>
+                <th>
+                  Follow-up
+                </th>
+
+                <th class="text-center" style="width: 1%;">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              @if ((total$ | async)! > 0) {
+                @for (visit of visit$ | async; track $index; let i = $index) {
+                  <tr>
+                    <td>{{ (tableService.page - 1) * tableService.pageSize + i + 1 }}</td>
+                    <td>
+                    {{ visit.date }}</td>
+
+                    <td>{{  visit.doctor }}</td>
+                    <td>{{visit.complaint}}</td>
+                    <td>{{visit.diagnosis}}</td>
+
+                    <td>{{visit.followUp || '-'}}</td>
+                    <td>
+                      <div class="d-flex justify-content-center gap-1">
+
+                        <a [routerLink]="['/patients/visitedit', visit.id]" [queryParams]="{ mode: 'view' }"
+                          class="btn btn-light btn-icon btn-sm rounded-circle" ngbTooltip="View Visit">
+                          <ng-icon name="tablerEye" class="fs-lg" />
+                        </a>
+                        <a (click)="deleteVisit(visit.id)"
+                          class="btn btn-danger btn-icon btn-sm rounded-circle" ngbTooltip="Delete Visit">
+                          <ng-icon name="tablerTrash" class="fs-lg" />
+                        </a>
+
+                      </div>
+                    </td>
+                  </tr>
+                }
+              } @else {
+                <tr class="no-results">
+                  <td colspan="11" class="text-center text-muted py-3">Nothing found.</td>
+                </tr>
+              }
+            </tbody>
+          </table>
+
+        </div>
+        <div class="card-footer border-0">
+          @if ((total$ | async)! > 0) {
+            <div class="d-flex justify-content-between align-items-center pagination-boxed">
+              <div class="text-muted">
+                {{ tableService.showingRange }} products
+              </div>
+              <ngb-pagination [collectionSize]="(total$ | async)!" [(page)]="tableService.page"
+                [pageSize]="tableService.pageSize">
+                <ng-template ngbPaginationPrevious>
+                  <ng-icon name="tablerChevronLeft" />
+                </ng-template>
+                <ng-template ngbPaginationNext>
+                  <ng-icon name="tablerChevronRight" />
+                </ng-template>
+              </ngb-pagination>
+            </div>
+          }
+        </div>
+      </div>
+
+</div>

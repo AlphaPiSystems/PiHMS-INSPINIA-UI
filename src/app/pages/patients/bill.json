@@ -1,0 +1,110 @@
+[
+  {
+    "patientId": 1,
+    "billId": 1,
+    "type": "OP",
+    "billName": "Consultation",
+    "date": "2026-04-01",
+    "doctor": "Dr. Sharma",
+    "items": [
+      { "itemName": "Doctor Consultation", "qty": 1, "units": 1, "amount": 500 },
+      { "itemName": "Blood Pressure Check", "qty": 1, "units": 1, "amount": 100 },
+      { "itemName": "General Checkup", "qty": 1, "units": 1, "amount": 300 }
+    ]
+  },
+  {
+    "patientId": 1,
+    "billId": 2,
+    "type": "OP",
+    "billName": "Lab Tests",
+    "date": "2026-04-03",
+    "doctor": "Dr. Mehta",
+    "items": [
+      { "itemName": "Blood Test", "qty": 1, "units": 1, "amount": 800 },
+      { "itemName": "Urine Test", "qty": 1, "units": 1, "amount": 400 },
+      { "itemName": "Thyroid Test", "qty": 1, "units": 1, "amount": 1200 }
+    ]
+  },
+  {
+    "patientId": 1,
+    "billId": 3,
+    "type": "OP",
+    "billName": "Dental Visit",
+    "date": "2026-04-05",
+    "doctor": "Dr. Reddy",
+    "items": [
+      { "itemName": "Consultation", "qty": 1, "units": 1, "amount": 300 },
+      { "itemName": "Teeth Cleaning", "qty": 1, "units": 1, "amount": 1500 },
+      { "itemName": "X-Ray", "qty": 1, "units": 1, "amount": 500 }
+    ]
+  },
+
+  {
+    "patientId": 1,
+    "billId": 4,
+    "type": "IP",
+    "billName": "Surgery Package",
+    "date": "2026-04-02",
+    "doctor": "Dr. Rao",
+    "items": [
+      { "itemName": "Operation Charges", "qty": 1, "units": 1, "amount": 20000 },
+      { "itemName": "Room Rent", "qty": 1, "units": 3, "amount": 3000 },
+      { "itemName": "Medicines", "qty": 5, "units": 1, "amount": 2000 },
+      { "itemName": "Nursing Charges", "qty": 1, "units": 3, "amount": 1500 }
+    ]
+  },
+  {
+    "patientId": 1,
+    "billId": 5,
+    "type": "IP",
+    "billName": "Maternity Package",
+    "date": "2026-04-06",
+    "doctor": "Dr. Priya",
+    "items": [
+      { "itemName": "Delivery Charges", "qty": 1, "units": 1, "amount": 25000 },
+      { "itemName": "Room Rent", "qty": 1, "units": 4, "amount": 4000 },
+      { "itemName": "Medicines", "qty": 6, "units": 1, "amount": 3000 },
+      { "itemName": "Baby Care", "qty": 1, "units": 1, "amount": 2000 }
+    ]
+  },
+  {
+    "patientId": 1,
+    "billId": 6,
+    "type": "IP",
+    "billName": "ICU Admission",
+    "date": "2026-04-07",
+    "doctor": "Dr. Khan",
+    "items": [
+      { "itemName": "ICU Charges", "qty": 1, "units": 2, "amount": 10000 },
+      { "itemName": "Ventilator Support", "qty": 1, "units": 2, "amount": 8000 },
+      { "itemName": "Medicines", "qty": 10, "units": 1, "amount": 5000 },
+      { "itemName": "Monitoring Charges", "qty": 1, "units": 2, "amount": 2000 },{ "itemName": "ICU Charges", "qty": 1, "units": 2, "amount": 10000 },{ "itemName": "ICU Charges", "qty": 1, "units": 2, "amount": 10000 },{ "itemName": "ICU Charges", "qty": 1, "units": 2, "amount": 10000 },{ "itemName": "ICU Charges", "qty": 1, "units": 2, "amount": 10000 },{ "itemName": "ICU Charges", "qty": 1, "units": 2, "amount": 10000 },{ "itemName": "ICU", "qty": 1, "units": 2, "amount": 10000 },{ "itemName": "Monitoring Charges", "qty": 1, "units": 2, "amount": 2000 }
+    ]
+  },
+  {
+    "patientId": 1,
+    "billId": 7,
+    "type": "OP",
+    "billName": "Consultation",
+    "date": "2026-04-01",
+    "doctor": "Dr. Sharma",
+    "items": [
+      { "itemName": "Doctor Consultation", "qty": 1, "units": 1, "amount": 500 },
+      { "itemName": "Blood Pressure Check", "qty": 1, "units": 1, "amount": 100 },
+      { "itemName": "General Checkup", "qty": 1, "units": 1, "amount": 300 }
+    ]
+  },
+  {
+    "patientId": 1,
+    "billId": 8,
+    "type": "OP",
+    "billName": "Consultation",
+    "date": "2026-04-01",
+    "doctor": "Dr. Sharma",
+    "items": [
+      { "itemName": "Doctor Consultation", "qty": 1, "units": 1, "amount": 500 },
+      { "itemName": "Blood Pressure Check", "qty": 1, "units": 1, "amount": 100 },
+      { "itemName": "General Checkup", "qty": 1, "units": 1, "amount": 300 }
+    ]
+  }
+]

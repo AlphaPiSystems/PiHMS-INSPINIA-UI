@@ -1,0 +1,124 @@
+{
+  "patientId": 1,
+  "visits": [
+    {
+      "visitId": 101,
+      "date": "2026-04-10",
+      "doctor": "Dr. Sharma",
+      "department": "General Medicine",
+      "complaint": "Fever and body pain",
+      "vitals": {
+        "temperature": "101 F",
+        "bp": "120/80",
+        "pulse": 82,
+        "weight": "70 kg"
+      },
+      "diagnosis": "Viral Fever",
+      "prescription": [
+        {
+          "medicine": "Paracetamol",
+          "dosage": "500 mg",
+          "duration": "5 days"
+        }
+      ],
+      "notes": "Take rest and drink fluids",
+      "followUpDate": "2026-04-15"
+    },
+
+    {
+      "visitId": 102,
+      "date": "2026-03-15",
+      "doctor": "Dr. Reddy",
+      "department": "Neurology",
+      "complaint": "Severe headache",
+      "vitals": {
+        "temperature": "98.6 F",
+        "bp": "130/90",
+        "pulse": 78,
+        "weight": "70 kg"
+      },
+      "diagnosis": "Migraine",
+      "prescription": [
+        {
+          "medicine": "Sumatriptan",
+          "dosage": "50 mg",
+          "duration": "3 days"
+        }
+      ],
+      "notes": "Avoid stress and bright light",
+      "followUpDate": "2026-03-25"
+    },
+
+    {
+      "visitId": 103,
+      "date": "2026-02-05",
+      "doctor": "Dr. Mehta",
+      "department": "Cardiology",
+      "complaint": "Chest discomfort",
+      "vitals": {
+        "temperature": "98.4 F",
+        "bp": "140/95",
+        "pulse": 88,
+        "weight": "71 kg"
+      },
+      "diagnosis": "Hypertension",
+      "prescription": [
+        {
+          "medicine": "Amlodipine",
+          "dosage": "5 mg",
+          "duration": "30 days"
+        }
+      ],
+      "notes": "Reduce salt intake",
+      "followUpDate": "2026-03-05"
+    },
+
+    {
+      "visitId": 104,
+      "date": "2026-01-12",
+      "doctor": "Dr. Sharma",
+      "department": "General Medicine",
+      "complaint": "Cough and cold",
+      "vitals": {
+        "temperature": "99 F",
+        "bp": "118/78",
+        "pulse": 80,
+        "weight": "70 kg"
+      },
+      "diagnosis": "Upper Respiratory Infection",
+      "prescription": [
+        {
+          "medicine": "Cough Syrup",
+          "dosage": "10 ml",
+          "duration": "5 days"
+        }
+      ],
+      "notes": "Steam inhalation advised",
+      "followUpDate": null
+    },
+
+    {
+      "visitId": 105,
+      "date": "2025-12-20",
+      "doctor": "Dr. Reddy",
+      "department": "Orthopedics",
+      "complaint": "Knee pain",
+      "vitals": {
+        "temperature": "98.7 F",
+        "bp": "122/82",
+        "pulse": 76,
+        "weight": "72 kg"
+      },
+      "diagnosis": "Early Osteoarthritis",
+      "prescription": [
+        {
+          "medicine": "Ibuprofen",
+          "dosage": "400 mg",
+          "duration": "7 days"
+        }
+      ],
+      "notes": "Physiotherapy suggested",
+      "followUpDate": "2026-01-05"
+    }
+  ]
+}

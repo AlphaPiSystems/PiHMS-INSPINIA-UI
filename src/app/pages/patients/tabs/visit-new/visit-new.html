@@ -1,0 +1,152 @@
+<div class="container-fluid h-100 d-flex flex-column">
+
+    <app-page-title title="Add Visit" subTitle="" />
+
+    <!-- Expanded container -->
+    <div class="container-fluid flex-grow-1 d-flex flex-column pb-3">
+
+        <div class="card mt-2 flex-grow-1 d-flex flex-column shadow-sm border-0 overflow-hidden">
+
+            <div class="card-header  border-bottom d-flex justify-content-between align-items-center py-2">
+                <h4 class="card-title mb-0 d-flex align-items-center gap-2">
+                    <div class="bg-success text-white rounded d-flex align-items-center justify-content-center" style="width: 28px; height: 28px;">
+                        <ng-icon name="tablerPlus" size="16"></ng-icon>
+                    </div>
+                    Add Visit
+                </h4>
+            </div>
+
+            <!-- Optimized Background -->
+            <div class="card-body overflow-auto p-4">
+
+                <div class="row g-4">
+
+                    <!-- LEFT COLUMN -->
+                    <div class="col-md-6 d-flex flex-column gap-3">
+                        <h6 class=" fw-bold text-uppercase mb-0 border-bottom pb-1" style="font-size: 11px; letter-spacing: 0.6px;">Basic Info</h6>
+                        
+                        <div class="row g-3">
+                            <!-- Visit Date -->
+                            <div class="col-12 col-xl-6">
+                                <label class="form-label fs-sm fw-medium">Visit Date</label>
+                                <input type="date" class="form-control form-control-sm" [(ngModel)]="form.date">
+                            </div>
+
+                            <!-- Doctor -->
+                            <div class="col-12 col-xl-6">
+                                <label class="form-label fs-sm fw-medium">Doctor</label>
+                                <input type="text" class="form-control form-control-sm" [(ngModel)]="form.doctor" placeholder="Dr. Name">
+                            </div>
+
+                            <!-- Department -->
+                            <div class="col-12">
+                                <label class="form-label fs-sm fw-medium">Department</label>
+                                <input type="text" class="form-control form-control-sm" [(ngModel)]="form.department" placeholder="e.g. Cardiology">
+                            </div>
+                        </div>
+
+                        <h6 class=" fw-bold text-uppercase mt-2 mb-0 border-bottom pb-1" style="font-size: 11px; letter-spacing: 0.6px;">Clinical Observations</h6>
+                        
+                        <!-- Complaint -->
+                        <div class="flex-grow-1 d-flex flex-column mb-2">
+                            <label class="form-label fs-sm fw-medium">Complaint</label>
+                            <textarea class="form-control form-control-sm flex-grow-1" rows="3" [(ngModel)]="form.complaint"></textarea>
+                        </div>
+
+                        <!-- Diagnosis -->
+                        <div>
+                            <label class="form-label fs-sm fw-medium">Diagnosis</label>
+                            <input type="text" class="form-control form-control-sm" [(ngModel)]="form.diagnosis" placeholder="Primary diagnosis...">
+                        </div>
+                    </div>
+
+                    <!-- RIGHT COLUMN -->
+                    <div class="col-md-6 d-flex flex-column gap-3">
+
+                        <h6 class=" fw-bold text-uppercase mb-0 border-bottom pb-1" style="font-size: 11px; letter-spacing: 0.6px;">Vitals</h6>
+                        
+                        <!-- Vitals -->
+                        <div class="row g-2">
+                            <div class="col-6 col-md-3">
+                                <label class="form-label fs-sm fw-medium">Temperature</label>
+                                <input type="text" class="form-control form-control-sm text-danger fw-medium" placeholder="Temp" [(ngModel)]="form.vitals.temperature">
+                            </div>
+
+                            <div class="col-6 col-md-3">
+                                <label class="  form-label fs-sm fw-medium">BP</label>
+                                <input type="text" class="form-control form-control-sm text-primary fw-medium" placeholder="BP" [(ngModel)]="form.vitals.bp">
+                            </div>
+
+                            <div class="col-6 col-md-3">
+                                <label class="form-label fs-sm fw-medium">Pulse</label>
+                                <input type="text" class="form-control form-control-sm text-warning fw-medium" placeholder="Pulse" [(ngModel)]="form.vitals.pulse">
+                            </div>
+
+                            <div class="col-6 col-md-3">
+                                <label class="form-label fs-sm fw-medium">Weight</label>
+                                <input type="text" class="form-control form-control-sm text-info fw-medium" placeholder="Weight" [(ngModel)]="form.vitals.weight">
+                            </div>
+                        </div>
+
+                        <!-- Prescription Array -->
+                        <div class="d-flex justify-content-between align-items-end mt-2 border-bottom pb-1">
+                            <h6 class=" fw-bold text-uppercase mb-0" style="font-size: 11px; letter-spacing: 0.6px;">Medicine</h6>
+                            <button class="btn btn-xs btn-soft-primary d-flex align-items-center gap-1 py-0 px-2" (click)="addMedicine()">
+                                <ng-icon name="tablerPlus" size="12"></ng-icon> Add
+                            </button>
+                        </div>
+
+                        <div>
+                            @if (form.prescription.length === 0) {
+                                <div class="text-muted fs-sm fst-italic">No actively prescribed medication.</div>
+                            }
+                            @for(med of form.prescription; track med; let i = $index) {
+                                <div class="row g-2 align-items-center mb-2">
+                                    <div class="col-12 col-sm-5">
+                                        <input type="text" class="form-control form-control-sm fw-medium" placeholder="Medicine" [(ngModel)]="med.medicine">
+                                    </div>
+                                    <div class="col-5 col-sm-3">
+                                        <input type="text" class="form-control form-control-sm " placeholder="Dosage" [(ngModel)]="med.dosage">
+                                    </div>
+                                    <div class="col-7 col-sm-4 d-flex align-items-center gap-1">
+                                        <input type="text" class="form-control form-control-sm w-100" placeholder="Duration" [(ngModel)]="med.duration">
+                                        
+                                        <button class="btn btn-sm btn-icon btn-outline-danger p-0 d-flex align-items-center justify-content-center" style="width: 28px; min-width: 28px; height: 28px;" (click)="removeMedicine(i)">
+                                            <ng-icon name="tablerTrash" size="14"></ng-icon>
+                                        </button>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+
+                        <h6 class=" fw-bold text-uppercase mt-2 mb-0 border-bottom pb-1" style="font-size: 11px; letter-spacing: 0.6px;">Additional</h6>
+
+                        <!-- Follow-up -->
+                        <div class="mb-2">
+                            <label class="form-label fw-medium text-success fs-sm d-flex align-items-center gap-1"><ng-icon name="tablerCalendarEvent"></ng-icon> Follow-up</label>
+                            <input type="date" class="form-control form-control-sm border-success text-success fw-medium" [(ngModel)]="form.followUpDate">
+                        </div>
+
+                        <!-- Notes -->
+                        <div class="mb-1 flex-grow-1 d-flex flex-column">
+                            <label class="form-label fw-medium fs-sm">Notes</label>
+                            <textarea class="form-control form-control-sm flex-grow-1" rows="2" [(ngModel)]="form.notes"></textarea>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- FOOTER FIXED -->
+            <div class="card-footer  border-top text-end p-3 px-3">
+                <button class="btn btn-sm btn-success d-inline-flex align-items-center gap-1 px-3 shadow-sm" (click)="saveVisit()">
+                    <ng-icon name="tablerDeviceFloppy" size="16"></ng-icon> Save Record
+                </button>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

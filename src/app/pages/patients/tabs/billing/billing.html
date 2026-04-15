@@ -1,0 +1,228 @@
+<div class="container-fluid py-2 px-3 billing-viewport shadow-sm"
+    [class.details-active]="showMobileDetails"
+    [style.height]="showMobileDetails ? 'auto' : 'calc(100vh - 120px)'"
+    [style.overflow]="showMobileDetails ? 'visible' : 'hidden'"
+    style="background-color: #f3f3f4; border: 1px solid #e7eaec;">
+    
+    <!-- Using a custom class-based approach for responsiveness since we can't use @media inline easily -->
+    <!-- However, we can use Bootstrap's standard responsive classes for display -->
+    
+    <div class="row g-2 h-100">
+        <!-- Sidebar: Visible on Desktop OR if not showing details on Mobile -->
+        <div class="col-xl-3 flex-column h-100" style="overflow: hidden;"
+             [ngClass]="showMobileDetails ? 'd-none d-xl-flex' : 'd-flex'">
+            
+            <h5 class="fw-bold mb-2 text-dark" style="font-size: 17px;">Bills</h5>
+            
+            <!-- Search & Filters -->
+            <div class="bg-white p-3 border rounded shadow-none mb-2" style="border-color: #e7eaec !important;">
+                <div class="mb-2">
+                    <div class="input-group input-group-sm">
+                        <span class="input-group-text bg-transparent border-end-0 py-1" style="border-color: #e7eaec;">
+                            <lucide-angular [img]="LucideSearch" size="14" class=""></lucide-angular>
+                        </span>
+                        <input type="text" class="form-control border-start-0 ps-1 py-1"
+                            style="font-size: 14px; border-color: #e7eaec;" placeholder="Search bill, doctor..."
+                            [(ngModel)]="searchTerm" (ngModelChange)="applyFilters()">
+                    </div>
+                </div>
+
+                <div class="btn-group btn-group-sm w-100 mb-2">
+                    <button class="btn btn-sm py-1"
+                        [ngClass]="typeFilter === 'All' ? 'btn-primary' : 'btn-outline-primary'"
+                        (click)="typeFilter='All'; applyFilters()">
+                        All
+                    </button>
+                    <button class="btn btn-sm py-1"
+                        [ngClass]="typeFilter === 'OP' ? 'btn-primary' : 'btn-outline-primary'"
+                        (click)="typeFilter='OP'; applyFilters()">
+                        OP
+                    </button>
+                    <button class="btn btn-sm py-1"
+                        [ngClass]="typeFilter === 'IP' ? 'btn-primary' : 'btn-outline-primary'"
+                        (click)="typeFilter='IP'; applyFilters()">
+                        IP
+                    </button>
+                </div>
+
+                <div class="mb-0">
+                    <div class="input-group input-group-sm">
+                        <span class="input-group-text bg-transparent border-end-0 py-1" style="border-color: #e7eaec;">
+                            <lucide-angular [img]="LucideCalendar" size="14" class=""></lucide-angular>
+                        </span>
+                        <input ngxDaterangepickerBootstrap type="text"
+                            class="form-control border-start-0 ps-1 py-1 "
+                            style="font-size: 14px; border-color: #e7eaec;" placeholder="Date range"
+                            [(ngModel)]="selectedDateRange" (ngModelChange)="applyFilters()" [autoApply]="true"
+                            [showDropdowns]="true">
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-uppercase fw-bold  mb-1 px-1" style="font-size: 12px; letter-spacing: 0.5px;">
+                Bill History</div>
+
+            <!-- History List -->
+            <div class="flex-grow-1" style="overflow-y: auto; min-height: 0;">
+                @if (filteredBills.length === 0) {
+                <div class="text-center py-4 " style="font-size: 14px;">No bills found</div>
+                }
+                @for (bill of filteredBills; track bill.billId) {
+                <div [style.borderLeft]="selectedBill?.billId === bill.billId ? '3px solid #1ab394' : '3px solid transparent'"
+                    [style.background]="selectedBill?.billId === bill.billId ? '#f9f9f9' : '#fff'"
+                    class="border rounded p-2 mb-2 cursor-pointer shadow-none"
+                    style="transition: background 0.1s; border-color: #e7eaec !important;" (click)="selectBill(bill)">
+
+                    <div class="d-flex justify-content-between align-items-start mb-1">
+                        <div style="font-size: 12px; font-weight: bold; color: #1ab394; text-transform: uppercase;">
+                            {{bill.type}}</div>
+                        <div class="" style="font-size: 11px;">{{bill.date}}</div>
+                    </div>
+                    <div class="fw-bold text-dark mb-1" style="font-size: 15px;">{{bill.billName}}</div>
+                    <div class="d-flex justify-content-between align-items-end">
+                        <div class="" style="font-size: 13px;">ID: #{{bill.billId}}</div>
+                        <div class="fw-bold text-primary" style="font-size: 15px;">₹{{getBillTotal(bill)}}</div>
+                    </div>
+                </div>
+                }
+            </div>
+        </div>
+
+        <!-- Main Content: Visible on Desktop OR if showing details on Mobile -->
+        <div class="col-xl-9 flex-column h-100" style="overflow: hidden;"
+             [ngClass]="showMobileDetails ? 'd-flex' : 'd-none d-xl-flex'">
+             
+            <div class="d-flex justify-content-between align-items-center mb-2">
+                <div class="d-flex align-items-center gap-2">
+                    <!-- Back button only on small screens when showing details -->
+                    <button (click)="backToList()" class="btn btn-sm p-1 border shadow-none d-xl-none bg-white">
+                        <lucide-angular [img]="LucideArrowLeft" size="14" class="text-dark"></lucide-angular>
+                    </button>
+                    <h5 class="fw-bold mb-0 text-dark" style="font-size: 17px;">Bill Details</h5>
+                </div>
+                
+                <div class="d-flex gap-2">
+                    <button
+                        class="btn btn-sm btn-outline-secondary px-2 d-flex align-items-center gap-1 border shadow-none py-1"
+                        style="font-size: 13px; border-color: #e7eaec !important; background: #fff;">
+                        <lucide-angular [img]="LucideDownload" size="12"></lucide-angular> <span class="d-none d-sm-inline">Download</span>
+                    </button>
+                    <button class="btn btn-sm btn-primary px-2 d-flex align-items-center gap-1 shadow-none py-1"
+                        style="font-size: 13px; background-color: #1ab394; border-color: #1ab394;">
+                        <lucide-angular [img]="LucidePrinter" size="12"></lucide-angular> <span class="d-none d-sm-inline">Print</span>
+                    </button>
+                </div>
+            </div>
+
+            @if (selectedBill) {
+            <div class="bg-white border rounded shadow-none flex-grow-1 overflow-hidden d-flex flex-column mb-3 mb-xl-0"
+                style="border-color: #e7eaec !important;">
+                <!-- Detail Header -->
+                <div class="p-3 border-bottom bg-white" style="border-color: #e7eaec !important;">
+                    <div class="row g-3">
+                        <div class="col-6 col-md-3">
+                            <div class="text-uppercase  fw-bold mb-1"
+                                style="font-size: 11px; letter-spacing: 0.3px;">Bill Information</div>
+                            <div class="fw-bold text-dark" style="font-size: 15px;">#{{selectedBill.billId}} -
+                                {{selectedBill.billName}}</div>
+                            <div class="" style="font-size: 13px;">{{selectedBill.date}}</div>
+                        </div>
+                        <div class="col-6 col-md-3 border-start ps-3" style="border-color: #f1f1f1 !important;">
+                            <div class="text-uppercase  fw-bold mb-1"
+                                style="font-size: 11px; letter-spacing: 0.3px;">Attending Doctor</div>
+                            <div class="fw-bold text-dark" style="font-size: 15px;">{{selectedBill.doctor}}</div>
+                            <div class="" style="font-size: 13px;">Primary Physician</div>
+                        </div>
+                        <div class="col-6 col-md-3 border-start ps-3 mt-3 " style="border-color: #f1f1f1 !important;">
+                            <div class="text-uppercase  fw-bold mb-1"
+                                style="font-size: 11px; letter-spacing: 0.3px;">Patient Details</div>
+                            <div class="fw-bold text-dark" style="font-size: 15px;">{{patient?.firstName}}
+                                {{patient?.lastName}}</div>
+                            <div class="" style="font-size: 13px;">ID: {{patient?.patientNo}}</div>
+                        </div>
+                        <div class="col-6 col-md-3 text-md-end border-start ps-3 mt-3" style="border-color: #f1f1f1 !important;">
+                            <div class="text-uppercase  fw-bold mb-1"
+                                style="font-size: 11px; letter-spacing: 0.3px;">Payment Status</div>
+                            <span class="badge px-2 py-1"
+                                style="font-size: 12px; background-color: #1ab394;">Paid</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Items Table -->
+                <div class="table-responsive flex-grow-1" style="overflow-y: auto; min-height: 0;">
+                    <table class="table mb-0 border-0">
+                        <thead class="sticky-top" style="background-color: #fafafa; z-index: 10;">
+                            <tr class="text-uppercase  fw-bold"
+                                style="font-size: 12px; border-bottom: 1px solid #f1f1f1;">
+                                <th class="text-center py-2 px-2" style="width: 40px;">#</th>
+                                <th class="py-2">Item Description</th>
+                                <th class="text-center py-2 d-none d-sm-table-cell">Rate</th>
+                                <th class="text-center py-2">Qty</th>
+                                <th class="text-end pe-3 py-2">Total</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @for (item of selectedBill.items; track $index) {
+                            <tr style="font-size: 14px;">
+                                <td class="text-center  py-2 border-bottom"
+                                    style="border-color: #f5f5f5 !important;">{{$index + 1}}</td>
+                                <td class="fw-bold text-dark py-2 border-bottom"
+                                    style="border-color: #f5f5f5 !important;">
+                                    {{item.itemName}}
+                                    <div class="d-sm-none  fw-normal" style="font-size: 12px;">₹{{item.amount}}</div>
+                                </td>
+                                <td class="text-center py-2 border-bottom  d-none d-sm-table-cell"
+                                    style="border-color: #f5f5f5 !important;">₹{{item.amount}}</td>
+                                <td class="text-center py-2 border-bottom " style="font-size: 13px;">
+                                    {{item.qty}}</td>
+                                <td class="text-end pe-3 fw-bold text-dark py-2 border-bottom"
+                                    style="border-color: #f5f5f5 !important;">₹{{item.amount * (item.units || 1)}}</td>
+                            </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Calculation Summary -->
+                <div class="p-3 bg-light bg-opacity-10 mt-auto">
+                    <div class="row justify-content-end">
+                        <div class="col-8 col-md-4">
+                            <div class="d-flex justify-content-between mb-1">
+                                <span class="" style="font-size: 13px;">Sub Total</span>
+                                <span class="fw-bold text-dark"
+                                    style="font-size: 13px;">₹{{getBillTotal(selectedBill)}}</span>
+                            </div>
+                            <div class="d-flex justify-content-between mb-1">
+                                <span class="" style="font-size: 13px;">Tax (0%)</span>
+                                <span class="fw-bold text-dark" style="font-size: 13px;">₹0</span>
+                            </div>
+                            <div class="d-flex justify-content-between mb-1">
+                                <span class="" style="font-size: 13px;">Discount</span>
+                                <span class="fw-bold text-danger" style="font-size: 13px;">-₹0</span>
+                            </div>
+                            <div class="border-top my-1"
+                                style="border-top-style: dashed !important; border-color: #e7eaec !important;"></div>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span class="fw-bold text-dark" style="font-size: 15px;">Grand Total</span>
+                                <span class="fw-bold text-primary"
+                                    style="font-size: 18px;">₹{{getBillTotal(selectedBill)}}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            } @else {
+            <div class="bg-white border rounded shadow-none d-flex align-items-center justify-content-center p-5 text-center flex-grow-1"
+                style="border-color: #e7eaec !important;">
+                <div>
+                    <lucide-angular [img]="LucideInfo" size="48" class=" mb-3 opacity-50"></lucide-angular>
+                    <h5 class="text-dark fw-bold">No Bill Selected</h5>
+                    <p class="" style="font-size: 15px;">Please select a bill from the left list to see
+                        details.</p>
+                </div>
+            </div>
+            }
+        </div>
+    </div>
+</div>
