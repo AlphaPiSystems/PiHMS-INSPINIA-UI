@@ -78,7 +78,7 @@ export const menuItems: MenuItemType[] = [
                 children: [
                     {label: 'Tests', url: '/diagtest/diagtest'},
                     {label: 'Test Ref Range', url: '/diagtest/testrange'},
-                    {label: 'Test Groups', url: '/diagtest/testrange'},
+                    {label: 'Test Groups', url: '/diaggroup/diaggroup'},
                     {label: 'Units', url: '/diagtest/testrange'},
                     {label: 'Samples', url: '/diagtest/testrange'},
                     {label: 'Test Instrumentation', url: '/diagtest/testrange'},

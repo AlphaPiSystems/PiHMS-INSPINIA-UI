@@ -1,0 +1,221 @@
+<div class="bento-dashboard">
+  
+  <div class="bento-header">
+    <div>
+      <h1>{{patient?.ReportName || 'Diagnostic Test Definition'}}</h1>
+      <p>Laboratory Protocol Configuration</p>
+    </div>
+  </div>
+
+  <form role="form" class="bento-grid">
+
+    <!-- Card: General Info -->
+    <div class="bento-card primary-bento col-8">
+      <span class="card-label">General Information</span>
+      <div class="inner-grid-3">
+        <div class="bento-input-group" style="grid-column: span 2;">
+          <label>Test Name <span class="req">*</span></label>
+          <input type="text" class="bento-input" [(ngModel)]="patient.Name" name="testname" placeholder="E.g. Complete Blood Count">
+        </div>
+        <div class="bento-input-group">
+          <label>Report Name <span class="req">*</span></label>
+          <input type="text" class="bento-input" [(ngModel)]="patient.ReportName" name="testreportname" placeholder="Public Name">
+        </div>
+        <div class="bento-input-group">
+          <label>Code <span class="req">*</span></label>
+          <input type="text" class="bento-input" [(ngModel)]="patient.Code" name="testcode" placeholder="XYZ">
+        </div>
+        <div class="bento-input-group">
+          <label>Short Name <span class="req">*</span></label>
+          <input type="text" class="bento-input" [(ngModel)]="patient.ShortName" name="testshortname" placeholder="Short">
+        </div>
+        <div class="bento-input-group">
+          <label>Type <span class="req">*</span></label>
+          <select class="bento-select" [(ngModel)]="patient.Type" name="testtype">
+             <option value="" disabled>Select</option>
+             <option value="SNG">Single (SNG)</option>
+             <option value="MUL">Multiple (MUL)</option>
+             <option value="PRO">Profile (PRO)</option>
+             <option value="PKG">Package (PKG)</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card: Result Config -->
+    <div class="bento-card secondary-bento col-4">
+      <span class="card-label">Result Config</span>
+      <div class="inner-grid-1">
+        <div class="bento-input-group">
+          <label>Unit <span class="req">*</span></label>
+          <input class="bento-input" [(ngModel)]="patient.Unit" name="testunit" placeholder="E.g. mg/dL">
+        </div>
+        <div class="bento-input-group">
+          <label>Has Range <span class="req">*</span></label>
+          <select class="bento-select" [(ngModel)]="patient.HasNormalRange" name="testhasnormalrange">
+             <option value="" disabled>Select</option>
+             <option value="Yes">Yes</option>
+             <option value="No">No</option>
+          </select>
+        </div>
+        <div class="bento-input-group">
+           <label>Default Value <span class="req">*</span></label>
+           <input class="bento-input" [(ngModel)]="patient.DefaultValue" name="testdefaultvalue" placeholder="None">
+        </div>
+      </div>
+    </div>
+
+    <!-- Card: Formatting -->
+    <div class="bento-card accent-bento col-5">
+      <span class="card-label">Report Formats</span>
+      <div class="inner-grid">
+        <div class="bento-input-group" style="grid-column: span 2;">
+          <label>Clinical Notes</label>
+          <input class="bento-input" [(ngModel)]="patient.Notes" name="testnotes" placeholder="Notes printed on report">
+        </div>
+        <div class="bento-input-group" style="grid-column: span 2;">
+          <label>Internal Comments</label>
+          <input class="bento-input" [(ngModel)]="patient.Comments" name="testcomments" placeholder="Hidden from public">
+        </div>
+        <div class="bento-input-group">
+          <label>Report Type <span class="req">*</span></label>
+          <select class="bento-select" [(ngModel)]="patient.ReportType" name="reportingtype">
+            <option value="" disabled>Select</option>
+            <option value="Value">Value</option>
+            <option value="Text Fixed">Fixed</option>
+            <option value="Text MultiLine">MultiLine</option>
+          </select>
+        </div>
+        <div class="bento-input-group">
+          <label>Alignment <span class="req">*</span></label>
+          <select class="bento-select" [(ngModel)]="patient.ReportAlign" name="reportingalign">
+            <option value="" disabled>Select</option>
+            <option value="LeftAlign">Left</option>
+            <option value="CenterBold">Bold</option>
+            <option value="Not Required">None</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card: Lab Ops -->
+    <div class="bento-card tertiary-bento col-7">
+      <span class="card-label">Lab Operations</span>
+      <div class="inner-grid-3">
+        <div class="bento-input-group" style="grid-column: span 2;">
+          <label>Instrument Name <span class="req">*</span></label>
+          <input class="bento-input" [(ngModel)]="patient.InstrumentName" name="testinstrument" placeholder="Analyzers, etc.">
+        </div>
+        <div class="bento-input-group">
+          <label>Investig. Type <span class="req">*</span></label>
+          <select class="bento-select" [(ngModel)]="patient.InvestigationType" name="investigationtype">
+            <option value="" disabled>Select</option>
+            <option value="Special">Special</option>
+            <option value="Routine">Routine</option>
+            <option value="Death">Death</option>
+          </select>
+        </div>
+        <div class="bento-input-group">
+          <label>Test Name In Inst <span class="req">*</span></label>
+          <input class="bento-input" [(ngModel)]="patient.TestNameInInstrument" name="testnameininstrument" placeholder="Machine identifier">
+        </div>
+        <div class="bento-input-group">
+          <label>Methodology <span class="req">*</span></label>
+          <input class="bento-input" [(ngModel)]="patient.Methodology" name="testmethodology" placeholder="Methodology">
+        </div>
+        <div class="bento-input-group">
+          <label>Sample ID <span class="req">*</span></label>
+          <input class="bento-input" [(ngModel)]="patient.SampleID" name="sampleid" placeholder="Sample ID">
+        </div>
+        <div class="bento-input-group">
+          <label>Department <span class="req">*</span></label>
+          <input type="text" class="bento-input" [(ngModel)]="patient.DepartmentID" name="testdepartment" placeholder="Dept">
+        </div>
+        <div class="bento-input-group">
+          <label>Outsourced</label>
+          <select class="bento-select" [(ngModel)]="patient.IsOutsourced" name="testisoutsourced">
+            <option value="No">No</option>
+            <option value="Yes">Yes</option>
+          </select>
+        </div>
+        <div class="bento-input-group">
+          <label>NABL Approved</label>
+          <select class="bento-select" [(ngModel)]="patient.IsNABLApproved" name="testisnablapproved">
+            <option value="No">No</option>
+            <option value="Yes">Yes</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <!-- Data Tables -->
+    <div class="bento-card primary-bento col-12" *ngIf="patient?.Type === 'SNG'" style="overflow-x: auto;">
+      <span class="card-label">Reference Ranges</span>
+      <table class="bento-table">
+        <thead>
+          <tr>
+            <th class="text-center">#</th>
+            <th>Age Start</th>
+            <th>Age End</th>
+            <th>Unit</th>
+            <th>Gender</th>
+            <th>Min</th>
+            <th>Max</th>
+            <th>Min Panic</th>
+            <th>Max Panic</th>
+            <th>Range Type</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="text-center">1</td>
+            <td><input type="text" class="table-input" value="20"></td>
+            <td><input type="text" class="table-input" value="60"></td>
+            <td><select class="table-select"><option>Year</option></select></td>
+            <td><select class="table-select"><option>Female</option></select></td>
+            <td><input type="text" class="table-input" value="28"></td>
+            <td><input type="text" class="table-input" value="78"></td>
+            <td><input type="text" class="table-input" value=""></td>
+            <td><input type="text" class="table-input" value=""></td>
+            <td><select class="table-select"><option>Value</option></select></td>
+          </tr>
+          <tr>
+            <td class="text-center">2</td>
+            <td><input type="text" class="table-input" value="61"></td>
+            <td><input type="text" class="table-input" value="100"></td>
+            <td><select class="table-select"><option>Year</option></select></td>
+            <td><select class="table-select"><option>Female</option></select></td>
+            <td><input type="text" class="table-input" value="40"></td>
+            <td><input type="text" class="table-input" value="111"></td>
+            <td><input type="text" class="table-input" value=""></td>
+            <td><input type="text" class="table-input" value=""></td>
+            <td><select class="table-select"><option>Value</option></select></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="bento-card secondary-bento col-12" *ngIf="patient?.Type === 'MUL' || patient?.Type === 'PRO'">
+      <span class="card-label">Related Sub Tests</span>
+      <table class="bento-table">
+        <thead>
+          <tr>
+            <th class="text-center">#</th>
+            <th>Diagnostic Test Name</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td class="text-center">1</td><td>Complete Blood Count (CBC)</td></tr>
+          <tr><td class="text-center">2</td><td>Liver Function Test (LFT)</td></tr>
+          <tr><td class="text-center">3</td><td>Kidney Function Test (KFT)</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="bento-actions">
+      <button class="btn btn-cancel" type="button">Cancel</button>
+      <button class="btn btn-save" type="submit">Save Changes</button>
+    </div>
+
+  </form>
+</div>

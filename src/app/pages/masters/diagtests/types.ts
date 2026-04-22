@@ -8,7 +8,6 @@ export type TestType = {
   SampleID: number | null;
   InstrumentName: string | null;
   TestNameInInstrument: string;
-  DiagDepartmentID: number;
   ReportingPriority: number;
   IsOutsourced: string;
   IsNABLApproved: string;
@@ -25,7 +24,7 @@ export type TestType = {
   ReportAlign: string;
   PageBreakNeeded: string;
   BranchID: number;
-  DepartmentID: number;
+  DepartmentID: string;
   CreatedStaffID: number;
   CreatedDateTime: string;
   UpdatedStaffID: number;
