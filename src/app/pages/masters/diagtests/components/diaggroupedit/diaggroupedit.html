@@ -1,0 +1,157 @@
+<div class="container-fluid">
+  <app-page-title title="Edit Diagnostic Group" />
+
+  <div class="row" style="display: flex; align-items: stretch;">
+
+    <!-- Column 1: Search Test and Add to Group -->
+    <div class="col-lg-4" style="display: flex; flex-direction: column;">
+      <div class="ibox float-e-margins"
+        style="background:#fff; box-shadow: 0 2px 4px rgba(0,0,0,0.08); border-radius: 4px; margin-bottom: 20px; flex: 1; display: flex; flex-direction: column;">
+        <div class="ibox-title"
+          style="border-top: 4px solid #23c6c8; padding: 15px 20px; border-bottom: 1px solid #f0f0f0;">
+          <h5 style="font-weight: 600; margin-bottom: 10px; font-size: 13px; text-transform: uppercase;">Search Test and
+            Add to Group</h5>
+          <div class="app-search">
+            <input type="text" placeholder="Filter available tests..." class="form-control" [(ngModel)]="searchText"
+              (ngModelChange)="availablePage = 1" style="font-size: 13px; height: 32px;">
+            <lucide-angular [img]="LucideSearch" class="app-search-icon text-muted" />
+          </div>
+        </div>
+        <div class="ibox-content" style="padding: 0; flex: 1; display: flex; flex-direction: column;">
+          <div style="flex: 1; overflow-y: auto;">
+            <table class="table table-striped table-hover table-condensed"
+              style="margin-bottom: 0; font-size: 13px; border: none;">
+              <thead style="background-color: #f5f5f6; position: sticky; top: 0; z-index: 10;">
+                <tr class="text-uppercase fs-xxs">
+                  <th style="width: 100px; padding: 10px; border: none;">Code</th>
+                  <th style="padding: 10px; border: none;">Test Name</th>
+                  <th style="width: 80px; text-align: right; padding: 10px; border: none;">Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let test of getPaginatedAvailableTests()">
+                  <td style="vertical-align: middle; padding: 8px 10px; border: 1px solid #f0f0f0;">{{test.Code}}</td>
+                  <td style="vertical-align: middle; padding: 8px 10px; border: 1px solid #f0f0f0;">{{test.Name}}</td>
+                  <td style="text-align: right; vertical-align: middle; padding: 8px; border: 1px solid #f0f0f0;">
+                    <button class="btn btn-xs btn-primary" (click)="addTestToGroup(test)"
+                      style="padding: 3px 10px; border-radius: 4px; font-weight: 600;">
+                      Add
+                    </button>
+                  </td>
+                </tr>
+                <tr *ngIf="getFilteredAvailableTests().length === 0">
+                  <td colspan="3" class="text-center py-3 text-muted">No tests found.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <!-- Pagination for Available Tests -->
+          <div class="d-flex justify-content-center p-3 border-top" *ngIf="getFilteredAvailableTests().length > 0">
+            <ngb-pagination [collectionSize]="getFilteredAvailableTests().length" [(page)]="availablePage"
+              [pageSize]="availableItemsPerPage" [maxSize]="3" class="pagination-sm">
+              <ng-template ngbPaginationPrevious><i class="fa fa-chevron-left"></i></ng-template>
+              <ng-template ngbPaginationNext><i class="fa fa-chevron-right"></i></ng-template>
+            </ngb-pagination>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Column 2: Tests Linked with -->
+    <div class="col-lg-4" style="display: flex; flex-direction: column;">
+      <div class="ibox float-e-margins"
+        style="background:#fff; box-shadow: 0 2px 4px rgba(0,0,0,0.08); border-radius: 4px; margin-bottom: 20px; flex: 1; display: flex; flex-direction: column;">
+        <div class="ibox-title"
+          style="border-top: 4px solid #1c84c6; padding: 15px 20px; border-bottom: 1px solid #f0f0f0; display: flex; justify-content: space-between; align-items: center;">
+          <h5 style="font-weight: 600; margin: 0; font-size: 13px; text-transform: uppercase;">
+            Tests Linked with: {{selectedGroup?.Name}}
+            <span class="badge badge-primary ms-2" style="font-size: 10px; margin-left: 10px;" *ngIf="selectedGroup?.Type && selectedGroup.Type.toUpperCase() !== 'SNG'">{{selectedGroup.Type}}</span>
+          </h5>
+          <span class="label label-primary" style="font-size: 10px;">{{linkedTests.length}} Linked</span>
+        </div>
+        <div class="ibox-content" style="padding: 0; flex: 1; display: flex; flex-direction: column;">
+          <div style="flex: 1; overflow-y: auto;">
+            <table class="table table-striped table-hover table-condensed"
+              style="margin-bottom: 0; font-size: 13px; border: none;">
+              <thead style="background-color: #f5f5f6; position: sticky; top: 0; z-index: 10;">
+                <tr class="text-uppercase fs-xxs">
+                  <th style="width: 60px; text-align: center; padding: 10px; border: none;">Pri#</th>
+                  <th style="padding: 10px; border: none;">Test Name</th>
+                  <th style="width: 80px; text-align: right; padding: 10px; border: none;">Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let test of getPaginatedLinkedTests()">
+                  <td style="text-align: center; vertical-align: middle; padding: 8px; border: 1px solid #f0f0f0;">
+                    {{test.Priority}}</td>
+                  <td style="vertical-align: middle; padding: 8px 10px; border: 1px solid #f0f0f0;">{{test.Name}}</td>
+                  <td style="text-align: right; vertical-align: middle; padding: 8px; border: 1px solid #f0f0f0;">
+                    <button class="btn btn-xs btn-danger" (click)="removeTestFromGroup(test.id)"
+                      style="padding: 3px 10px; border-radius: 4px; font-weight: 600; font-size: 11px;">
+                      Delete
+                    </button>
+                  </td>
+                </tr>
+                <tr *ngIf="linkedTests.length === 0">
+                  <td colspan="3" class="text-center py-3 text-muted">No tests linked yet.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <!-- Pagination for Linked Tests -->
+          <div class="d-flex justify-content-center p-3 border-top" *ngIf="linkedTests.length > 0">
+            <ngb-pagination [collectionSize]="linkedTests.length" [(page)]="linkedPage" [pageSize]="linkedItemsPerPage"
+              [maxSize]="3" class="pagination-sm">
+              <ng-template ngbPaginationPrevious><i class="fa fa-chevron-left"></i></ng-template>
+              <ng-template ngbPaginationNext><i class="fa fa-chevron-right"></i></ng-template>
+            </ngb-pagination>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Column 3: Full Test Structure -->
+    <div class="col-lg-4" style="display: flex;">
+      <div class="ibox float-e-margins"
+        style="background:#fff; box-shadow: 0 2px 4px rgba(0,0,0,0.08); border-radius: 4px; margin-bottom: 20px; width: 100%; display: flex; flex-direction: column; border: 1px solid #e7eaec;">
+        <div class="ibox-title"
+          style="border-top: 4px solid #2f4050; padding: 15px 20px; border-bottom: 1px solid #f0f0f0; background: #fafafa;">
+          <h5 style="font-weight: 600; margin: 0; font-size: 13px; text-transform: uppercase;">Structure Report</h5>
+        </div>
+        <div class="ibox-content" style="padding: 20px; flex: 1; overflow-y: auto;">
+          <div *ngIf="selectedGroup" class="report-display">
+            <!-- Report details from selectedGroup -->
+            <div style="border-bottom: 2px solid #333; margin-bottom: 20px;"></div>
+            <div style="display: flex; border-bottom: 2px solid #333; padding-bottom: 8px; margin-bottom: 15px;">
+              <span style="font-weight: 700; font-size: 11px; text-transform: uppercase; width: 40%;">Investigations</span>
+              <span style="font-weight: 700; font-size: 11px; text-transform: uppercase; flex: 1; text-align: center;">Observed Values</span>
+              <span style="font-weight: 700; font-size: 11px; text-transform: uppercase; flex: 1; text-align: center;">Unit</span>
+              <span style="font-weight: 700; font-size: 11px; text-transform: uppercase; flex: 1; text-align: right;">Reference Range</span>
+            </div>
+
+            <div style="text-align: center; margin-bottom: 20px;">
+              <h4 style="font-weight: 700; font-size: 14px; text-transform: uppercase; margin-top: 5px; text-decoration: underline;">
+                {{selectedGroup?.Name}}
+              </h4>
+            </div>
+
+            <table style="width: 100%; border-collapse: collapse; font-size: 11px;">
+              <tbody>
+                <tr *ngFor="let child of structureData" style="border-bottom: 1px solid #f0f0f0;">
+                  <td style="padding: 8px 4px; color: #333; width: 40%;" [style.padding-left.px]="child.depth * 20 + 4"
+                    [style.font-weight]="['PRO', 'MUL', 'PKG'].includes(child.Type?.toUpperCase() || '') ? '700' : '400'">
+                    {{child.Name}}
+                  </td>
+                  <td style="padding: 8px 4px; text-align: center; color: #999; flex: 1;">---</td>
+                  <td style="padding: 8px 4px; text-align: center; color: #999; flex: 1;">---</td>
+                  <td style="padding: 8px 4px; text-align: right; color: #999; flex: 1;">---</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

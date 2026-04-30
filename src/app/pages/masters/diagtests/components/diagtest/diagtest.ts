@@ -116,6 +116,7 @@ ngOnInit(): void {
       case 'SNG':
       case 'MUL':
       case 'PRO':
+      case 'PKG':
         filtered = this.allTests.filter(p => p.Type === this.dateFilter);
         break;
 

@@ -7,16 +7,21 @@ import { CountUpModule } from 'ngx-countup';
 import { FormsModule } from '@angular/forms';
 import { NgxDaterangepickerBootstrapDirective } from 'ngx-daterangepicker-bootstrap';
 
+import { PageTitleComponent } from '@app/components/page-title.component';
+import { SAMPLE_LIST } from '../samples/sample-data';
+
 @Component({
     selector: 'app-diagtestadd',
     standalone: true,
-    imports: [CommonModule, NgIcon,RouterLink,CountUpModule,FormsModule, NgxDaterangepickerBootstrapDirective],
+    imports: [CommonModule, NgIcon,RouterLink,CountUpModule,FormsModule, NgxDaterangepickerBootstrapDirective, PageTitleComponent],
     templateUrl: './diagtestadd.html',
+    styleUrls: ['./diagtestadd.scss']
 })
 export class DiagTestAdd implements OnInit {
 
   lastVisit: any = null;
   patient: any = null;
+  samples = SAMPLE_LIST;
 
   totalVisits: number = 0;
   pendingBill: number = 0;
@@ -29,6 +34,48 @@ export class DiagTestAdd implements OnInit {
 
   insurance: any = null;
 
+  referenceRanges: any[] = [
+    { id: 1, ageStart: '', ageEnd: '', ageUnit: 'Year', gender: 'Female', minVal: '', maxVal: '', minPanic: '', maxPanic: '', unit: '', rangeType: 'SingleTextLine', rangeText: '', ageError: false },
+    { id: 2, ageStart: '', ageEnd: '', ageUnit: 'Year', gender: 'Male', minVal: '', maxVal: '', minPanic: '', maxPanic: '', unit: '', rangeType: 'SingleTextLine', rangeText: '', ageError: false }
+  ];
+
+  addReferenceRange() {
+    this.referenceRanges.push({
+      id: this.referenceRanges.length > 0 ? Math.max(...this.referenceRanges.map(r => r.id)) + 1 : 1,
+      ageStart: 0,
+      ageEnd: 100,
+      ageUnit: 'Year',
+      gender: 'Both',
+      minVal: '',
+      maxVal: '',
+      minPanic: '',
+      maxPanic: '',
+      unit: '',
+      rangeType: 'SingleTextLine',
+      rangeText: '',
+      ageError: false
+    });
+  }
+
+  validateAgeRange(range: any) {
+    range.ageError = false;
+    
+    // Ensure min and max limits
+    if (range.ageStart < 0) range.ageStart = 0;
+    if (range.ageStart > 100) range.ageStart = 100;
+    if (range.ageEnd < 0) range.ageEnd = 0;
+    if (range.ageEnd > 100) range.ageEnd = 100;
+
+    const start = Number(range.ageStart);
+    const end = Number(range.ageEnd);
+    
+    if (start !== null && end !== null && !isNaN(start) && !isNaN(end)) {
+      if (start >= end) {
+        range.ageError = true;
+      }
+    }
+  }
+
   constructor(private route: ActivatedRoute) {}
 
   hover: string = '';
@@ -38,6 +85,11 @@ export class DiagTestAdd implements OnInit {
     const data: any[] = patientData;
 
     this.patient = data.find(p => p.id === id);
+
+    // Initialize patient object if not found (for Add functionality)
+    if (!this.patient) {
+      this.patient = {};
+    }
 
     // Example mock assignment (IMPORTANT)
     if (this.patient) {

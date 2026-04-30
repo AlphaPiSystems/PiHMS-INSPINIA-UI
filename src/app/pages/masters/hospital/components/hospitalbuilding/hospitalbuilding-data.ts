@@ -1,0 +1,53 @@
+export const BUILDING_LIST = [
+  {
+    id: 'BLD001',
+    Name: 'Main Block',
+    ShortName: 'MB',
+    RegisteredName: 'Main Medical Block',
+    ApplicationType: 'PI-HMS-ADV',
+    NameDisplayOption: 'Full Name',
+    Address: '123 Health Ave',
+    City: 'Bangalore',
+    State: 'Karnataka',
+    Country: 'India',
+    PostalCode: '560001',
+    PhonePrimary: '+91 8012345678',
+    PhoneSecondary: '+91 8012345679',
+    Email: 'info@mainblock.com',
+    URL: 'www.mainblock.com'
+  },
+  {
+    id: 'BLD002',
+    Name: 'Annex Building',
+    ShortName: 'AB',
+    RegisteredName: 'Annex Care Unit',
+    ApplicationType: 'Clinic',
+    NameDisplayOption: 'Short Name',
+    Address: '456 Wellness Rd',
+    City: 'Bangalore',
+    State: 'Karnataka',
+    Country: 'India',
+    PostalCode: '560002',
+    PhonePrimary: '+91 8023456789',
+    PhoneSecondary: '',
+    Email: 'contact@annexbuilding.com',
+    URL: 'www.annexbuilding.com'
+  },
+  {
+    id: 'BLD003',
+    Name: 'Diagnostic Center',
+    ShortName: 'DC',
+    RegisteredName: 'Global Diagnostic Center',
+    ApplicationType: 'Lab',
+    NameDisplayOption: 'Registered Name',
+    Address: '789 Lab Street',
+    City: 'Mumbai',
+    State: 'Maharashtra',
+    Country: 'India',
+    PostalCode: '400001',
+    PhonePrimary: '+91 2234567890',
+    PhoneSecondary: '+91 2234567891',
+    Email: 'admin@globaldiag.com',
+    URL: 'www.globaldiag.com'
+  }
+];

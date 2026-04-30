@@ -1,33 +1,17 @@
-<div class="row wrapper border-bottom white-bg page-heading"
-  style="padding: 8px 20px 10px; margin-bottom: 12px; box-shadow: 0 1px 2px rgba(0,0,0,0.08);">
-  <div class="col-lg-10">
-    <h2 style="margin-top: 5px; margin-bottom: 5px; font-weight: 600; font-size: 18px;">{{patient?.ReportName ||
-      'Diagnostic Test Definition'}}</h2>
-    <ol class="breadcrumb" style="background-color: transparent; padding: 0; margin-bottom: 0; font-size: 11px;">
-      <li class="breadcrumb-item">
-        <a [routerLink]="['/']">Home</a>
-      </li>
-      <li class="breadcrumb-item">
-        <a>Tests & Profiles</a>
-      </li>
-      <li class="breadcrumb-item active">
-        <strong style="color: #1ab394;">Test Configuration</strong>
-      </li>
-    </ol>
-  </div>
-</div>
+<div class="container-fluid">
+  <app-page-title title="Edit Test" />
 
 <div class="wrapper wrapper-content animated fadeInRight" style="padding-top: 0;">
   <div class="row">
     <!-- Section 1: General Test Information -->
-    <div class="col-lg-12 mb-2">
+    <div class="col-lg-12 mb-1">
       <div class="ibox float-e-margins"
         style="background:#fff; box-shadow: 0 2px 4px rgba(0,0,0,0.08); border-radius: 4px;">
-        <div class="ibox-title" style="padding: 8px 20px; border-bottom: 1px solid #f0f0f0;">
-          <h5 style="font-weight: 600; margin: 0; font-size: 14px; text-transform: uppercase;">General Test Information
+        <div class="ibox-title" style="border-top: 4px solid #1ab394; padding: 6px 15px; border-bottom: 1px solid #f0f0f0;">
+          <h5 style="font-weight: 600; margin: 0; font-size: 14px; text-transform: uppercase;">General Test Information NC
           </h5>
         </div>
-        <div class="ibox-content" style="padding: 10px 20px;">
+        <div class="ibox-content" style="padding: 8px 15px;">
           <form role="form">
             <div class="row">
               <div class="col-md-4 col-sm-12">
@@ -35,7 +19,7 @@
                   <label class="col-sm-4 text-start col-form-label" style="font-weight: 600;">Name</label>
                   <div class="col-sm-8">
                     <input type="text" class="form-control" [(ngModel)]="patient.Name" name="testname"
-                      placeholder="Test Name" readonly style="border-radius: 2px;">
+                      placeholder="Test Name" style="border-radius: 2px;">
                   </div>
                 </div>
               </div>
@@ -44,7 +28,7 @@
                   <label class="col-sm-4 text-start col-form-label" style="font-weight: 600;">Code</label>
                   <div class="col-sm-8">
                     <input type="text" class="form-control" [(ngModel)]="patient.Code" name="testcode"
-                      placeholder="Code" readonly style="border-radius: 2px;">
+                      placeholder="Code" style="border-radius: 2px;">
                   </div>
                 </div>
               </div>
@@ -53,7 +37,7 @@
                   <label class="col-sm-4 text-start col-form-label" style="font-weight: 600;">Short Name</label>
                   <div class="col-sm-8">
                     <input type="text" class="form-control" [(ngModel)]="patient.ShortName" name="testshortname"
-                      placeholder="Short" readonly style="border-radius: 2px;">
+                      placeholder="Short" style="border-radius: 2px;">
                   </div>
                 </div>
               </div>
@@ -64,7 +48,7 @@
                   <label class="col-sm-4 text-start col-form-label" style="font-weight: 600;">Report Name</label>
                   <div class="col-sm-8">
                     <input type="text" class="form-control" [(ngModel)]="patient.ReportName" name="testreportname"
-                      placeholder="Report Name" readonly style="border-radius: 2px;">
+                      placeholder="Report Name" style="border-radius: 2px;">
                   </div>
                 </div>
               </div>
@@ -72,7 +56,7 @@
                 <div class="form-group row align-items-center" style="margin-bottom: 0;">
                   <label class="col-sm-4 text-start col-form-label" style="font-weight: 600;">Type</label>
                   <div class="col-sm-8">
-                    <select class="form-select form-control" [(ngModel)]="patient.Type" name="testtype" disabled
+                    <select class="form-select form-control" [(ngModel)]="patient.Type" name="testtype"
                       style="border-radius: 2px; cursor: pointer;">
                       <option value="" disabled>Select</option>
                       <option value="SNG">Single (SNG)</option>
@@ -90,14 +74,14 @@
     </div>
 
     <!-- Section 2: Laboratory Operations & Equipment -->
-    <div class="col-lg-12 mb-2">
+    <div class="col-lg-12 mb-1" *ngIf="patient.Type !== 'MUL' && patient.Type !== 'PRO' && patient.Type !== 'PKG'">
       <div class="ibox float-e-margins"
         style="background:#fff; box-shadow: 0 2px 4px rgba(0,0,0,0.08); border-radius: 4px;">
-        <div class="ibox-title" style="padding: 8px 20px; border-bottom: 1px solid #f0f0f0;">
+        <div class="ibox-title" style="border-top: 4px solid #1c84c6; padding: 6px 15px; border-bottom: 1px solid #f0f0f0;">
           <h5 style="font-weight: 600; margin: 0; font-size: 14px; text-transform: uppercase;">Laboratory Operations &
             Equipment</h5>
         </div>
-        <div class="ibox-content" style="padding: 10px 20px;">
+        <div class="ibox-content" style="padding: 8px 15px;">
           <form role="form">
             <div class="row">
               <div class="col-md-4 col-sm-12">
@@ -117,11 +101,14 @@
               </div>
               <div class="col-md-4 col-sm-12">
                 <div class="form-group row align-items-center" style="margin-bottom: 8px;">
-                  <label class="col-sm-4 text-start col-form-label" style="font-weight: 600;">Sample ID <span
+                  <label class="col-sm-4 text-start col-form-label" style="font-weight: 600;">Sample <span
                       class="text-danger">*</span></label>
                   <div class="col-sm-8">
-                    <input class="form-control" [(ngModel)]="patient.SampleID" name="sampleid" placeholder="Sample ID"
+                    <select class="form-select form-control" [(ngModel)]="patient.SampleID" name="sampleid"
                       required style="border-radius: 2px;">
+                      <option value="">Select Sample</option>
+                      <option *ngFor="let s of samples" [value]="s.FullName">{{ s.FullName }}</option>
+                    </select>
                   </div>
                 </div>
               </div>
@@ -216,14 +203,14 @@
     </div>
 
     <!-- Section 3: Report Formatting & Output -->
-    <div class="col-lg-12 mb-2">
+    <div class="col-lg-12 mb-1" *ngIf="patient.Type !== 'MUL' && patient.Type !== 'PRO' && patient.Type !== 'PKG'">
       <div class="ibox float-e-margins"
         style="background:#fff; box-shadow: 0 2px 4px rgba(0,0,0,0.08); border-radius: 4px;">
-        <div class="ibox-title" style="padding: 8px 20px; border-bottom: 1px solid #f0f0f0;">
+        <div class="ibox-title" style="border-top: 4px solid #23c6c8; padding: 6px 15px; border-bottom: 1px solid #f0f0f0;">
           <h5 style="font-weight: 600; margin: 0; font-size: 14px; text-transform: uppercase;">Report Formatting &
             Output</h5>
         </div>
-        <div class="ibox-content" style="padding: 12px 20px; background-color: #fcfcfc;">
+        <div class="ibox-content" style="padding: 8px 15px; background-color: #fcfcfc;">
           <form role="form">
             <div class="row">
               <div class="col-md-4 col-sm-12">
@@ -299,13 +286,13 @@
     </div>
 
     <!-- Section 4: Result Configuration -->
-    <div class="col-lg-12 mb-2">
+    <div class="col-lg-12 mb-1" *ngIf="patient.Type !== 'MUL' && patient.Type !== 'PRO' && patient.Type !== 'PKG'">
       <div class="ibox float-e-margins"
         style="background:#fff; box-shadow: 0 2px 4px rgba(0,0,0,0.08); border-radius: 4px; height: 100%; display: flex; flex-direction: column; margin-bottom: 0;">
-        <div class="ibox-title" style="padding: 8px 20px; border-bottom: 1px solid #f0f0f0;">
+        <div class="ibox-title" style="border-top: 4px solid #f8ac59; padding: 6px 15px; border-bottom: 1px solid #f0f0f0;">
           <h5 style="font-weight: 600; margin: 0; font-size: 14px; text-transform: uppercase;">Result Configuration</h5>
         </div>
-        <div class="ibox-content" style="padding: 20px; flex: 1;">
+        <div class="ibox-content" style="padding: 10px 15px; flex: 1;">
           <form role="form">
             <div class="row">
               <div class="col-md-4 col-sm-12">
@@ -334,11 +321,11 @@
               </div>
               <div class="col-md-4 col-sm-12">
                 <div class="form-group row align-items-center" style="margin-bottom: 0;">
-                  <label class="col-sm-4 text-start col-form-label" style="font-weight: 600;">Default <span
+                  <label class="col-sm-4 text-start col-form-label" style="font-weight: 600; padding-right: 0;">Default Report Data <span
                       class="text-danger">*</span></label>
                   <div class="col-sm-8">
                     <input type="text" class="form-control" [(ngModel)]="patient.Unit" name="testdefaultvalue"
-                      placeholder="Default" required style="border-radius: 2px;">
+                      placeholder="Default Report Data" required style="border-radius: 2px;">
                   </div>
                 </div>
               </div>
@@ -349,15 +336,17 @@
     </div>
 
     <!-- Section 5: Reference Ranges (FOR SINGLE TESTS) -->
-    <div class="col-lg-12 mb-2" *ngIf="patient?.Type === 'SNG'">
+    <div class="col-lg-12 mb-1" *ngIf="patient?.Type === 'SNG'">
       <div class="ibox float-e-margins"
         style="background:#fff; box-shadow: 0 2px 4px rgba(0,0,0,0.08); border-radius: 4px; height: 100%; display: flex; flex-direction: column; margin-bottom: 0;">
         <div class="ibox-title"
-          style="padding: 8px 20px; border-bottom: 1px solid #f0f0f0; display: flex; justify-content: space-between; align-items: center;">
+          style="border-top: 4px solid #1c84c6; padding: 6px 15px; border-bottom: 1px solid #f0f0f0; display: flex; justify-content: space-between; align-items: center;">
           <h5 style="font-weight: 600; margin: 0; font-size: 14px; text-transform: uppercase;">Reference Ranges</h5>
+          <button class="btn btn-primary btn-sm" type="button" (click)="addReferenceRange()" style="background-color: #1ab394; border-color: #1ab394; padding: 4px 12px; font-weight: 600; font-size: 12px; border-radius: 2px;">
+            <i class="fa fa-plus"></i> Add Reference Range
+          </button>
         </div>
-        <div class="ibox-content"
-          style="padding: 0; overflow: auto; max-height: 150px; flex: 1; border: 1px solid #e7eaec; margin: 5px 15px; border-radius: 2px;">
+        <div class="ibox-content" style="padding: 0; overflow: auto; max-height: 220px; flex: 1; border: 1px solid #e7eaec; margin: 5px 15px; border-radius: 2px;">
           <table class="table table-bordered table-striped table-hover table-condensed"
             style="margin-bottom: 0; font-size: 13px; border: none;">
             <thead
@@ -367,10 +356,10 @@
                   style="font-weight: 600; text-align: center; width: 50px; padding: 6px 8px; border: 1px solid #e7eaec; background-color: #f5f5f6;">
                   SL #</th>
                 <th
-                  style="font-weight: 600; min-width: 80px; padding: 6px 8px; border: 1px solid #e7eaec; background-color: #f5f5f6;">
+                  style="font-weight: 600; min-width: 60px; padding: 6px 8px; border: 1px solid #e7eaec; background-color: #f5f5f6;">
                   Age Start</th>
                 <th
-                  style="font-weight: 600; min-width: 80px; padding: 6px 8px; border: 1px solid #e7eaec; background-color: #f5f5f6;">
+                  style="font-weight: 600; min-width: 60px; padding: 6px 8px; border: 1px solid #e7eaec; background-color: #f5f5f6;">
                   Age End</th>
                 <th
                   style="font-weight: 600; min-width: 90px; padding: 6px 8px; border: 1px solid #e7eaec; background-color: #f5f5f6;">
@@ -394,7 +383,7 @@
                   style="font-weight: 600; min-width: 80px; padding: 6px 8px; border: 1px solid #e7eaec; background-color: #f5f5f6;">
                   Unit</th>
                 <th
-                  style="font-weight: 600; min-width: 90px; padding: 6px 8px; border: 1px solid #e7eaec; background-color: #f5f5f6;">
+                  style="font-weight: 600; min-width: 140px; padding: 6px 8px; border: 1px solid #e7eaec; background-color: #f5f5f6;">
                   Range Type</th>
                 <th
                   style="font-weight: 600; min-width: 200px; padding: 6px 8px; border: 1px solid #e7eaec; background-color: #f5f5f6;">
@@ -402,628 +391,89 @@
               </tr>
             </thead>
             <tbody>
-              <!-- Row 1 -->
-              <tr>
-                <td style="text-align: center; vertical-align: middle; padding: 4px 8px; border: 1px solid #e7eaec;">1
+              <tr *ngFor="let range of referenceRanges; let i = index">
+                <td style="text-align: center; vertical-align: middle; padding: 4px 8px; border: 1px solid #e7eaec;">{{ i + 1 }}</td>
+                <td style="padding: 4px 8px; border: 1px solid #e7eaec;">
+                  <input type="number" min="0" max="100" class="form-control input-sm" 
+                    [(ngModel)]="range.ageStart" [name]="'ageStart' + i" (ngModelChange)="validateAgeRange(range)"
+                    [ngClass]="{'border-danger': range.ageError}"
+                    style="border-radius: 2px; height: 26px; font-size: 12px; padding: 2px 5px;"
+                    title="{{range.ageError ? 'Age Start must be less than Age End' : ''}}">
                 </td>
-                <td style="padding: 4px 8px; border: 1px solid #e7eaec;"><input type="text"
-                    class="form-control input-sm" value="20"
-                    style="border-radius: 2px; height: 26px; font-size: 12px; padding: 2px 5px;"></td>
-                <td style="padding: 4px 8px; border: 1px solid #e7eaec;"><input type="text"
-                    class="form-control input-sm" value="60"
-                    style="border-radius: 2px; height: 26px; font-size: 12px; padding: 2px 5px;"></td>
-                <td style="padding: 4px 8px; border: 1px solid #e7eaec;"><select
-                    class="form-select form-control input-sm"
-                    style="border-radius: 2px; height: 26px; padding: 0px 5px; font-size: 12px;">
-                    <option value="Year" selected>Year</option>
-                  </select></td>
-                <td style="padding: 4px 8px; border: 1px solid #e7eaec;"><select
-                    class="form-select form-control input-sm"
-                    style="border-radius: 2px; height: 26px; padding: 0px 5px; font-size: 12px;">
-                    <option value="Female" selected>Female</option>
-                  </select></td>
-                <td style="padding: 4px 8px; border: 1px solid #e7eaec;"><input type="text"
-                    class="form-control input-sm" value="28"
-                    style="border-radius: 2px; height: 26px; font-size: 12px; padding: 2px 5px;"></td>
-                <td style="padding: 4px 8px; border: 1px solid #e7eaec;"><input type="text"
-                    class="form-control input-sm" value="78"
-                    style="border-radius: 2px; height: 26px; font-size: 12px; padding: 2px 5px;"></td>
-                <td style="padding: 4px 8px; border: 1px solid #e7eaec;"><input type="text"
-                    class="form-control input-sm" value=""
-                    style="border-radius: 2px; height: 26px; font-size: 12px; padding: 2px 5px;"></td>
-                <td style="padding: 4px 8px; border: 1px solid #e7eaec;"><input type="text"
-                    class="form-control input-sm" value=""
-                    style="border-radius: 2px; height: 26px; font-size: 12px; padding: 2px 5px;"></td>
-                <td style="padding: 4px 8px; border: 1px solid #e7eaec;"><input type="text"
-                    class="form-control input-sm" value="U/L"
-                    style="border-radius: 2px; height: 26px; font-size: 12px; padding: 2px 5px;"></td>
-                <td style="padding: 4px 8px; border: 1px solid #e7eaec;"><select
-                    class="form-select form-control input-sm"
-                    style="border-radius: 2px; height: 26px; padding: 0px 5px; font-size: 12px;">
-                    <option value="Value" selected>Value</option>
-                  </select></td>
-                <td style="padding: 4px 8px; border: 1px solid #e7eaec;"><input type="text"
-                    class="form-control input-sm" value=""
-                    style="border-radius: 2px; height: 26px; font-size: 12px; padding: 2px 5px;"></td>
-              </tr>
-              <!-- Row 2 -->
-              <tr>
-                <td style="text-align: center; vertical-align: middle; padding: 4px 8px; border: 1px solid #e7eaec;">2
+                <td style="padding: 4px 8px; border: 1px solid #e7eaec;">
+                  <input type="number" min="0" max="100" class="form-control input-sm" 
+                    [(ngModel)]="range.ageEnd" [name]="'ageEnd' + i" (ngModelChange)="validateAgeRange(range)"
+                    [ngClass]="{'border-danger': range.ageError}"
+                    style="border-radius: 2px; height: 26px; font-size: 12px; padding: 2px 5px;"
+                    title="{{range.ageError ? 'Age Start must be less than Age End' : ''}}">
                 </td>
-                <td style="padding: 4px 8px; border: 1px solid #e7eaec;"><input type="text"
-                    class="form-control input-sm" value="61"
-                    style="border-radius: 2px; height: 26px; font-size: 12px; padding: 2px 5px;"></td>
-                <td style="padding: 4px 8px; border: 1px solid #e7eaec;"><input type="text"
-                    class="form-control input-sm" value="100"
-                    style="border-radius: 2px; height: 26px; font-size: 12px; padding: 2px 5px;"></td>
-                <td style="padding: 4px 8px; border: 1px solid #e7eaec;"><select
-                    class="form-select form-control input-sm"
-                    style="border-radius: 2px; height: 26px; padding: 0px 5px; font-size: 12px;">
-                    <option value="Year" selected>Year</option>
-                  </select></td>
-                <td style="padding: 4px 8px; border: 1px solid #e7eaec;"><select
-                    class="form-select form-control input-sm"
-                    style="border-radius: 2px; height: 26px; padding: 0px 5px; font-size: 12px;">
-                    <option value="Female" selected>Female</option>
-                  </select></td>
-                <td style="padding: 4px 8px; border: 1px solid #e7eaec;"><input type="text"
-                    class="form-control input-sm" value="40"
-                    style="border-radius: 2px; height: 26px; font-size: 12px; padding: 2px 5px;"></td>
-                <td style="padding: 4px 8px; border: 1px solid #e7eaec;"><input type="text"
-                    class="form-control input-sm" value="111"
-                    style="border-radius: 2px; height: 26px; font-size: 12px; padding: 2px 5px;"></td>
-                <td style="padding: 4px 8px; border: 1px solid #e7eaec;"><input type="text"
-                    class="form-control input-sm" value=""
-                    style="border-radius: 2px; height: 26px; font-size: 12px; padding: 2px 5px;"></td>
-                <td style="padding: 4px 8px; border: 1px solid #e7eaec;"><input type="text"
-                    class="form-control input-sm" value=""
-                    style="border-radius: 2px; height: 26px; font-size: 12px; padding: 2px 5px;"></td>
-                <td style="padding: 4px 8px; border: 1px solid #e7eaec;"><input type="text"
-                    class="form-control input-sm" value="U/L"
-                    style="border-radius: 2px; height: 26px; font-size: 12px; padding: 2px 5px;"></td>
-                <td style="padding: 4px 8px; border: 1px solid #e7eaec;"><select
-                    class="form-select form-control input-sm"
-                    style="border-radius: 2px; height: 26px; padding: 0px 5px; font-size: 12px;">
-                    <option value="Value" selected>Value</option>
-                  </select></td>
-                <td style="padding: 4px 8px; border: 1px solid #e7eaec;"><input type="text"
-                    class="form-control input-sm" value=""
-                    style="border-radius: 2px; height: 26px; font-size: 12px; padding: 2px 5px;"></td>
-              </tr>
-              <!-- Row 3 -->
-              <tr>
-                <td style="text-align: center; vertical-align: middle; padding: 4px 8px; border: 1px solid #e7eaec;">3
+                <td style="padding: 4px 8px; border: 1px solid #e7eaec;">
+                  <select class="form-select form-control input-sm" style="border-radius: 2px; height: 26px; padding: 0px 5px; font-size: 12px;">
+                    <option [value]="range.ageUnit" selected>{{ range.ageUnit }}</option>
+                  </select>
                 </td>
-                <td style="padding: 4px 8px; border: 1px solid #e7eaec;"><input type="text"
-                    class="form-control input-sm" value="20"
-                    style="border-radius: 2px; height: 26px; font-size: 12px; padding: 2px 5px;"></td>
-                <td style="padding: 4px 8px; border: 1px solid #e7eaec;"><input type="text"
-                    class="form-control input-sm" value="60"
-                    style="border-radius: 2px; height: 26px; font-size: 12px; padding: 2px 5px;"></td>
-                <td style="padding: 4px 8px; border: 1px solid #e7eaec;"><select
-                    class="form-select form-control input-sm"
-                    style="border-radius: 2px; height: 26px; padding: 0px 5px; font-size: 12px;">
-                    <option value="Year" selected>Year</option>
-                  </select></td>
-                <td style="padding: 4px 8px; border: 1px solid #e7eaec;"><select
-                    class="form-select form-control input-sm"
-                    style="border-radius: 2px; height: 26px; padding: 0px 5px; font-size: 12px;">
-                    <option value="Male" selected>Male</option>
-                  </select></td>
-                <td style="padding: 4px 8px; border: 1px solid #e7eaec;"><input type="text"
-                    class="form-control input-sm" value="38"
-                    style="border-radius: 2px; height: 26px; font-size: 12px; padding: 2px 5px;"></td>
-                <td style="padding: 4px 8px; border: 1px solid #e7eaec;"><input type="text"
-                    class="form-control input-sm" value="94"
-                    style="border-radius: 2px; height: 26px; font-size: 12px; padding: 2px 5px;"></td>
-                <td style="padding: 4px 8px; border: 1px solid #e7eaec;"><input type="text"
-                    class="form-control input-sm" value=""
-                    style="border-radius: 2px; height: 26px; font-size: 12px; padding: 2px 5px;"></td>
-                <td style="padding: 4px 8px; border: 1px solid #e7eaec;"><input type="text"
-                    class="form-control input-sm" value=""
-                    style="border-radius: 2px; height: 26px; font-size: 12px; padding: 2px 5px;"></td>
-                <td style="padding: 4px 8px; border: 1px solid #e7eaec;"><input type="text"
-                    class="form-control input-sm" value="U/L"
-                    style="border-radius: 2px; height: 26px; font-size: 12px; padding: 2px 5px;"></td>
-                <td style="padding: 4px 8px; border: 1px solid #e7eaec;"><select
-                    class="form-select form-control input-sm"
-                    style="border-radius: 2px; height: 26px; padding: 0px 5px; font-size: 12px;">
-                    <option value="Value" selected>Value</option>
-                  </select></td>
-                <td style="padding: 4px 8px; border: 1px solid #e7eaec;"><input type="text"
-                    class="form-control input-sm" value=""
-                    style="border-radius: 2px; height: 26px; font-size: 12px; padding: 2px 5px;"></td>
-              </tr>
-              <!-- Row 4 -->
-              <tr>
-                <td style="text-align: center; vertical-align: middle; padding: 4px 8px; border: 1px solid #e7eaec;">4
+                <td style="padding: 4px 8px; border: 1px solid #e7eaec;">
+                  <select class="form-select form-control input-sm" style="border-radius: 2px; height: 26px; padding: 0px 5px; font-size: 12px;">
+                    <option [value]="range.gender" selected>{{ range.gender }}</option>
+                  </select>
                 </td>
-                <td style="padding: 4px 8px; border: 1px solid #e7eaec;"><input type="text"
-                    class="form-control input-sm" value="61"
-                    style="border-radius: 2px; height: 26px; font-size: 12px; padding: 2px 5px;"></td>
-                <td style="padding: 4px 8px; border: 1px solid #e7eaec;"><input type="text"
-                    class="form-control input-sm" value="100"
-                    style="border-radius: 2px; height: 26px; font-size: 12px; padding: 2px 5px;"></td>
-                <td style="padding: 4px 8px; border: 1px solid #e7eaec;"><select
-                    class="form-select form-control input-sm"
-                    style="border-radius: 2px; height: 26px; padding: 0px 5px; font-size: 12px;">
-                    <option value="Year" selected>Year</option>
-                  </select></td>
-                <td style="padding: 4px 8px; border: 1px solid #e7eaec;"><select
-                    class="form-select form-control input-sm"
-                    style="border-radius: 2px; height: 26px; padding: 0px 5px; font-size: 12px;">
-                    <option value="Male" selected>Male</option>
-                  </select></td>
-                <td style="padding: 4px 8px; border: 1px solid #e7eaec;"><input type="text"
-                    class="form-control input-sm" value="43"
-                    style="border-radius: 2px; height: 26px; font-size: 12px; padding: 2px 5px;"></td>
-                <td style="padding: 4px 8px; border: 1px solid #e7eaec;"><input type="text"
-                    class="form-control input-sm" value="88"
-                    style="border-radius: 2px; height: 26px; font-size: 12px; padding: 2px 5px;"></td>
-                <td style="padding: 4px 8px; border: 1px solid #e7eaec;"><input type="text"
-                    class="form-control input-sm" value=""
-                    style="border-radius: 2px; height: 26px; font-size: 12px; padding: 2px 5px;"></td>
-                <td style="padding: 4px 8px; border: 1px solid #e7eaec;"><input type="text"
-                    class="form-control input-sm" value=""
-                    style="border-radius: 2px; height: 26px; font-size: 12px; padding: 2px 5px;"></td>
-                <td style="padding: 4px 8px; border: 1px solid #e7eaec;"><input type="text"
-                    class="form-control input-sm" value="U/L"
-                    style="border-radius: 2px; height: 26px; font-size: 12px; padding: 2px 5px;"></td>
-                <td style="padding: 4px 8px; border: 1px solid #e7eaec;"><select
-                    class="form-select form-control input-sm"
-                    style="border-radius: 2px; height: 26px; padding: 0px 5px; font-size: 12px;">
-                    <option value="Value" selected>Value</option>
-                  </select></td>
-                <td style="padding: 4px 8px; border: 1px solid #e7eaec;"><input type="text"
-                    class="form-control input-sm" value=""
-                    style="border-radius: 2px; height: 26px; font-size: 12px; padding: 2px 5px;"></td>
-              </tr>
-              <!-- Row 5 -->
-              <tr>
-                <td style="text-align: center; vertical-align: middle; padding: 4px 8px; border: 1px solid #e7eaec;">5
+                <td style="padding: 4px 8px; border: 1px solid #e7eaec;">
+                  <input type="text" class="form-control input-sm" [value]="range.minVal"
+                    style="border-radius: 2px; height: 26px; font-size: 12px; padding: 2px 5px;">
                 </td>
-                <td style="padding: 4px 8px; border: 1px solid #e7eaec;"><input type="text"
-                    class="form-control input-sm" value="0"
-                    style="border-radius: 2px; height: 26px; font-size: 12px; padding: 2px 5px;"></td>
-                <td style="padding: 4px 8px; border: 1px solid #e7eaec;"><input type="text"
-                    class="form-control input-sm" value="5"
-                    style="border-radius: 2px; height: 26px; font-size: 12px; padding: 2px 5px;"></td>
-                <td style="padding: 4px 8px; border: 1px solid #e7eaec;"><select
-                    class="form-select form-control input-sm"
-                    style="border-radius: 2px; height: 26px; padding: 0px 5px; font-size: 12px;">
-                    <option value="Year" selected>Year</option>
-                  </select></td>
-                <td style="padding: 4px 8px; border: 1px solid #e7eaec;"><select
-                    class="form-select form-control input-sm"
-                    style="border-radius: 2px; height: 26px; padding: 0px 5px; font-size: 12px;">
-                    <option value="Male" selected>Male</option>
-                  </select></td>
-                <td style="padding: 4px 8px; border: 1px solid #e7eaec;"><input type="text"
-                    class="form-control input-sm" value="60"
-                    style="border-radius: 2px; height: 26px; font-size: 12px; padding: 2px 5px;"></td>
-                <td style="padding: 4px 8px; border: 1px solid #e7eaec;"><input type="text"
-                    class="form-control input-sm" value="321"
-                    style="border-radius: 2px; height: 26px; font-size: 12px; padding: 2px 5px;"></td>
-                <td style="padding: 4px 8px; border: 1px solid #e7eaec;"><input type="text"
-                    class="form-control input-sm" value=""
-                    style="border-radius: 2px; height: 26px; font-size: 12px; padding: 2px 5px;"></td>
-                <td style="padding: 4px 8px; border: 1px solid #e7eaec;"><input type="text"
-                    class="form-control input-sm" value=""
-                    style="border-radius: 2px; height: 26px; font-size: 12px; padding: 2px 5px;"></td>
-                <td style="padding: 4px 8px; border: 1px solid #e7eaec;"><input type="text"
-                    class="form-control input-sm" value="U/L"
-                    style="border-radius: 2px; height: 26px; font-size: 12px; padding: 2px 5px;"></td>
-                <td style="padding: 4px 8px; border: 1px solid #e7eaec;"><select
-                    class="form-select form-control input-sm"
-                    style="border-radius: 2px; height: 26px; padding: 0px 5px; font-size: 12px;">
-                    <option value="Value" selected>Value</option>
-                  </select></td>
-                <td style="padding: 4px 8px; border: 1px solid #e7eaec;"><input type="text"
-                    class="form-control input-sm" value=""
-                    style="border-radius: 2px; height: 26px; font-size: 12px; padding: 2px 5px;"></td>
-              </tr>
-              <!-- Rows 6-14 added similarly -->
-              <tr>
-                <td style="text-align: center; vertical-align: middle; padding: 4px 8px; border: 1px solid #e7eaec;">6
+                <td style="padding: 4px 8px; border: 1px solid #e7eaec;">
+                  <input type="text" class="form-control input-sm" [value]="range.maxVal"
+                    style="border-radius: 2px; height: 26px; font-size: 12px; padding: 2px 5px;">
                 </td>
-                <td style="padding: 4px 8px; border: 1px solid #e7eaec;"><input type="text"
-                    class="form-control input-sm" value="0"
-                    style="border-radius: 2px; height: 26px; font-size: 12px; padding: 2px 5px;"></td>
-                <td style="padding: 4px 8px; border: 1px solid #e7eaec;"><input type="text"
-                    class="form-control input-sm" value="5"
-                    style="border-radius: 2px; height: 26px; font-size: 12px; padding: 2px 5px;"></td>
-                <td style="padding: 4px 8px; border: 1px solid #e7eaec;"><select
-                    class="form-select form-control input-sm"
-                    style="border-radius: 2px; height: 26px; padding: 0px 5px; font-size: 12px;">
-                    <option value="Year" selected>Year</option>
-                  </select></td>
-                <td style="padding: 4px 8px; border: 1px solid #e7eaec;"><select
-                    class="form-select form-control input-sm"
-                    style="border-radius: 2px; height: 26px; padding: 0px 5px; font-size: 12px;">
-                    <option value="Female" selected>Female</option>
-                  </select></td>
-                <td style="padding: 4px 8px; border: 1px solid #e7eaec;"><input type="text"
-                    class="form-control input-sm" value="60"
-                    style="border-radius: 2px; height: 26px; font-size: 12px; padding: 2px 5px;"></td>
-                <td style="padding: 4px 8px; border: 1px solid #e7eaec;"><input type="text"
-                    class="form-control input-sm" value="321"
-                    style="border-radius: 2px; height: 26px; font-size: 12px; padding: 2px 5px;"></td>
-                <td style="padding: 4px 8px; border: 1px solid #e7eaec;"><input type="text"
-                    class="form-control input-sm" value=""
-                    style="border-radius: 2px; height: 26px; font-size: 12px; padding: 2px 5px;"></td>
-                <td style="padding: 4px 8px; border: 1px solid #e7eaec;"><input type="text"
-                    class="form-control input-sm" value=""
-                    style="border-radius: 2px; height: 26px; font-size: 12px; padding: 2px 5px;"></td>
-                <td style="padding: 4px 8px; border: 1px solid #e7eaec;"><input type="text"
-                    class="form-control input-sm" value="U/L"
-                    style="border-radius: 2px; height: 26px; font-size: 12px; padding: 2px 5px;"></td>
-                <td style="padding: 4px 8px; border: 1px solid #e7eaec;"><select
-                    class="form-select form-control input-sm"
-                    style="border-radius: 2px; height: 26px; padding: 0px 5px; font-size: 12px;">
-                    <option value="Value" selected>Value</option>
-                  </select></td>
-                <td style="padding: 4px 8px; border: 1px solid #e7eaec;"><input type="text"
-                    class="form-control input-sm" value=""
-                    style="border-radius: 2px; height: 26px; font-size: 12px; padding: 2px 5px;"></td>
-              </tr>
-              <tr>
-                <td style="text-align: center; vertical-align: middle; padding: 4px 8px; border: 1px solid #e7eaec;">7
+                <td style="padding: 4px 8px; border: 1px solid #e7eaec;">
+                  <input type="text" class="form-control input-sm" [value]="range.minPanic"
+                    style="border-radius: 2px; height: 26px; font-size: 12px; padding: 2px 5px;">
                 </td>
-                <td style="padding: 4px 8px; border: 1px solid #e7eaec;"><input type="text"
-                    class="form-control input-sm" value="5"
-                    style="border-radius: 2px; height: 26px; font-size: 12px; padding: 2px 5px;"></td>
-                <td style="padding: 4px 8px; border: 1px solid #e7eaec;"><input type="text"
-                    class="form-control input-sm" value="10"
-                    style="border-radius: 2px; height: 26px; font-size: 12px; padding: 2px 5px;"></td>
-                <td style="padding: 4px 8px; border: 1px solid #e7eaec;"><select
-                    class="form-select form-control input-sm"
-                    style="border-radius: 2px; height: 26px; padding: 0px 5px; font-size: 12px;">
-                    <option value="Year" selected>Year</option>
-                  </select></td>
-                <td style="padding: 4px 8px; border: 1px solid #e7eaec;"><select
-                    class="form-select form-control input-sm"
-                    style="border-radius: 2px; height: 26px; padding: 0px 5px; font-size: 12px;">
-                    <option value="Male" selected>Male</option>
-                  </select></td>
-                <td style="padding: 4px 8px; border: 1px solid #e7eaec;"><input type="text"
-                    class="form-control input-sm" value="110"
-                    style="border-radius: 2px; height: 26px; font-size: 12px; padding: 2px 5px;"></td>
-                <td style="padding: 4px 8px; border: 1px solid #e7eaec;"><input type="text"
-                    class="form-control input-sm" value="360"
-                    style="border-radius: 2px; height: 26px; font-size: 12px; padding: 2px 5px;"></td>
-                <td style="padding: 4px 8px; border: 1px solid #e7eaec;"><input type="text"
-                    class="form-control input-sm" value=""
-                    style="border-radius: 2px; height: 26px; font-size: 12px; padding: 2px 5px;"></td>
-                <td style="padding: 4px 8px; border: 1px solid #e7eaec;"><input type="text"
-                    class="form-control input-sm" value=""
-                    style="border-radius: 2px; height: 26px; font-size: 12px; padding: 2px 5px;"></td>
-                <td style="padding: 4px 8px; border: 1px solid #e7eaec;"><input type="text"
-                    class="form-control input-sm" value="U/L"
-                    style="border-radius: 2px; height: 26px; font-size: 12px; padding: 2px 5px;"></td>
-                <td style="padding: 4px 8px; border: 1px solid #e7eaec;"><select
-                    class="form-select form-control input-sm"
-                    style="border-radius: 2px; height: 26px; padding: 0px 5px; font-size: 12px;">
-                    <option value="Value" selected>Value</option>
-                  </select></td>
-                <td style="padding: 4px 8px; border: 1px solid #e7eaec;"><input type="text"
-                    class="form-control input-sm" value=""
-                    style="border-radius: 2px; height: 26px; font-size: 12px; padding: 2px 5px;"></td>
-              </tr>
-              <tr>
-                <td style="text-align: center; vertical-align: middle; padding: 4px 8px; border: 1px solid #e7eaec;">8
+                <td style="padding: 4px 8px; border: 1px solid #e7eaec;">
+                  <input type="text" class="form-control input-sm" [value]="range.maxPanic"
+                    style="border-radius: 2px; height: 26px; font-size: 12px; padding: 2px 5px;">
                 </td>
-                <td style="padding: 4px 8px; border: 1px solid #e7eaec;"><input type="text"
-                    class="form-control input-sm" value="5"
-                    style="border-radius: 2px; height: 26px; font-size: 12px; padding: 2px 5px;"></td>
-                <td style="padding: 4px 8px; border: 1px solid #e7eaec;"><input type="text"
-                    class="form-control input-sm" value="10"
-                    style="border-radius: 2px; height: 26px; font-size: 12px; padding: 2px 5px;"></td>
-                <td style="padding: 4px 8px; border: 1px solid #e7eaec;"><select
-                    class="form-select form-control input-sm"
+                <td style="padding: 4px 8px; border: 1px solid #e7eaec;">
+                  <select class="form-select form-control input-sm" [(ngModel)]="range.unit" [name]="'unit' + i"
                     style="border-radius: 2px; height: 26px; padding: 0px 5px; font-size: 12px;">
-                    <option value="Year" selected>Year</option>
-                  </select></td>
-                <td style="padding: 4px 8px; border: 1px solid #e7eaec;"><select
-                    class="form-select form-control input-sm"
-                    style="border-radius: 2px; height: 26px; padding: 0px 5px; font-size: 12px;">
-                    <option value="Female" selected>Female</option>
-                  </select></td>
-                <td style="padding: 4px 8px; border: 1px solid #e7eaec;"><input type="text"
-                    class="form-control input-sm" value="110"
-                    style="border-radius: 2px; height: 26px; font-size: 12px; padding: 2px 5px;"></td>
-                <td style="padding: 4px 8px; border: 1px solid #e7eaec;"><input type="text"
-                    class="form-control input-sm" value="360"
-                    style="border-radius: 2px; height: 26px; font-size: 12px; padding: 2px 5px;"></td>
-                <td style="padding: 4px 8px; border: 1px solid #e7eaec;"><input type="text"
-                    class="form-control input-sm" value=""
-                    style="border-radius: 2px; height: 26px; font-size: 12px; padding: 2px 5px;"></td>
-                <td style="padding: 4px 8px; border: 1px solid #e7eaec;"><input type="text"
-                    class="form-control input-sm" value=""
-                    style="border-radius: 2px; height: 26px; font-size: 12px; padding: 2px 5px;"></td>
-                <td style="padding: 4px 8px; border: 1px solid #e7eaec;"><input type="text"
-                    class="form-control input-sm" value="U/L"
-                    style="border-radius: 2px; height: 26px; font-size: 12px; padding: 2px 5px;"></td>
-                <td style="padding: 4px 8px; border: 1px solid #e7eaec;"><select
-                    class="form-select form-control input-sm"
-                    style="border-radius: 2px; height: 26px; padding: 0px 5px; font-size: 12px;">
-                    <option value="Value" selected>Value</option>
-                  </select></td>
-                <td style="padding: 4px 8px; border: 1px solid #e7eaec;"><input type="text"
-                    class="form-control input-sm" value=""
-                    style="border-radius: 2px; height: 26px; font-size: 12px; padding: 2px 5px;"></td>
-              </tr>
-              <tr>
-                <td style="text-align: center; vertical-align: middle; padding: 4px 8px; border: 1px solid #e7eaec;">9
+                    <option value="" disabled>Select</option>
+                    <option value="mg/dL">mg/dL</option>
+                    <option value="g/dL">g/dL</option>
+                    <option value="U/L">U/L</option>
+                    <option value="mmol/L">mmol/L</option>
+                    <option value="µg/dL">µg/dL</option>
+                    <option value="%">%</option>
+                    <option value="cells/mcL">cells/mcL</option>
+                  </select>
                 </td>
-                <td style="padding: 4px 8px; border: 1px solid #e7eaec;"><input type="text"
-                    class="form-control input-sm" value="10"
-                    style="border-radius: 2px; height: 26px; font-size: 12px; padding: 2px 5px;"></td>
-                <td style="padding: 4px 8px; border: 1px solid #e7eaec;"><input type="text"
-                    class="form-control input-sm" value="12"
-                    style="border-radius: 2px; height: 26px; font-size: 12px; padding: 2px 5px;"></td>
-                <td style="padding: 4px 8px; border: 1px solid #e7eaec;"><select
-                    class="form-select form-control input-sm"
-                    style="border-radius: 2px; height: 26px; padding: 0px 5px; font-size: 12px;">
-                    <option value="Year" selected>Year</option>
-                  </select></td>
-                <td style="padding: 4px 8px; border: 1px solid #e7eaec;"><select
-                    class="form-select form-control input-sm"
-                    style="border-radius: 2px; height: 26px; padding: 0px 5px; font-size: 12px;">
-                    <option value="Male" selected>Male</option>
-                  </select></td>
-                <td style="padding: 4px 8px; border: 1px solid #e7eaec;"><input type="text"
-                    class="form-control input-sm" value="103"
-                    style="border-radius: 2px; height: 26px; font-size: 12px; padding: 2px 5px;"></td>
-                <td style="padding: 4px 8px; border: 1px solid #e7eaec;"><input type="text"
-                    class="form-control input-sm" value="373"
-                    style="border-radius: 2px; height: 26px; font-size: 12px; padding: 2px 5px;"></td>
-                <td style="padding: 4px 8px; border: 1px solid #e7eaec;"><input type="text"
-                    class="form-control input-sm" value=""
-                    style="border-radius: 2px; height: 26px; font-size: 12px; padding: 2px 5px;"></td>
-                <td style="padding: 4px 8px; border: 1px solid #e7eaec;"><input type="text"
-                    class="form-control input-sm" value=""
-                    style="border-radius: 2px; height: 26px; font-size: 12px; padding: 2px 5px;"></td>
-                <td style="padding: 4px 8px; border: 1px solid #e7eaec;"><input type="text"
-                    class="form-control input-sm" value="U/L"
-                    style="border-radius: 2px; height: 26px; font-size: 12px; padding: 2px 5px;"></td>
-                <td style="padding: 4px 8px; border: 1px solid #e7eaec;"><select
-                    class="form-select form-control input-sm"
-                    style="border-radius: 2px; height: 26px; padding: 0px 5px; font-size: 12px;">
-                    <option value="Value" selected>Value</option>
-                  </select></td>
-                <td style="padding: 4px 8px; border: 1px solid #e7eaec;"><input type="text"
-                    class="form-control input-sm" value=""
-                    style="border-radius: 2px; height: 26px; font-size: 12px; padding: 2px 5px;"></td>
-              </tr>
-              <tr>
-                <td style="text-align: center; vertical-align: middle; padding: 4px 8px; border: 1px solid #e7eaec;">10
+                <td style="padding: 4px 8px; border: 1px solid #e7eaec;">
+                  <select class="form-select form-control input-sm" style="border-radius: 2px; height: 26px; padding: 0px 5px; font-size: 12px;">
+                    <option value="SingleTextLine" [selected]="range.rangeType === 'SingleTextLine'">SingleTextLine</option>
+                    <option value="MultiTextLine" [selected]="range.rangeType === 'MultiTextLine'">MultiTextLine</option>
+                  </select>
                 </td>
-                <td style="padding: 4px 8px; border: 1px solid #e7eaec;"><input type="text"
-                    class="form-control input-sm" value="10"
-                    style="border-radius: 2px; height: 26px; font-size: 12px; padding: 2px 5px;"></td>
-                <td style="padding: 4px 8px; border: 1px solid #e7eaec;"><input type="text"
-                    class="form-control input-sm" value="12"
-                    style="border-radius: 2px; height: 26px; font-size: 12px; padding: 2px 5px;"></td>
-                <td style="padding: 4px 8px; border: 1px solid #e7eaec;"><select
-                    class="form-select form-control input-sm"
-                    style="border-radius: 2px; height: 26px; padding: 0px 5px; font-size: 12px;">
-                    <option value="Year" selected>Year</option>
-                  </select></td>
-                <td style="padding: 4px 8px; border: 1px solid #e7eaec;"><select
-                    class="form-select form-control input-sm"
-                    style="border-radius: 2px; height: 26px; padding: 0px 5px; font-size: 12px;">
-                    <option value="Female" selected>Female</option>
-                  </select></td>
-                <td style="padding: 4px 8px; border: 1px solid #e7eaec;"><input type="text"
-                    class="form-control input-sm" value="103"
-                    style="border-radius: 2px; height: 26px; font-size: 12px; padding: 2px 5px;"></td>
-                <td style="padding: 4px 8px; border: 1px solid #e7eaec;"><input type="text"
-                    class="form-control input-sm" value="373"
-                    style="border-radius: 2px; height: 26px; font-size: 12px; padding: 2px 5px;"></td>
-                <td style="padding: 4px 8px; border: 1px solid #e7eaec;"><input type="text"
-                    class="form-control input-sm" value=""
-                    style="border-radius: 2px; height: 26px; font-size: 12px; padding: 2px 5px;"></td>
-                <td style="padding: 4px 8px; border: 1px solid #e7eaec;"><input type="text"
-                    class="form-control input-sm" value=""
-                    style="border-radius: 2px; height: 26px; font-size: 12px; padding: 2px 5px;"></td>
-                <td style="padding: 4px 8px; border: 1px solid #e7eaec;"><input type="text"
-                    class="form-control input-sm" value="U/L"
-                    style="border-radius: 2px; height: 26px; font-size: 12px; padding: 2px 5px;"></td>
-                <td style="padding: 4px 8px; border: 1px solid #e7eaec;"><select
-                    class="form-select form-control input-sm"
-                    style="border-radius: 2px; height: 26px; padding: 0px 5px; font-size: 12px;">
-                    <option value="Value" selected>Value</option>
-                  </select></td>
-                <td style="padding: 4px 8px; border: 1px solid #e7eaec;"><input type="text"
-                    class="form-control input-sm" value=""
-                    style="border-radius: 2px; height: 26px; font-size: 12px; padding: 2px 5px;"></td>
-              </tr>
-              <tr>
-                <td style="text-align: center; vertical-align: middle; padding: 4px 8px; border: 1px solid #e7eaec;">11
+                <td style="padding: 4px 8px; border: 1px solid #e7eaec;">
+                  <input type="text" class="form-control input-sm" [value]="range.rangeText"
+                    style="border-radius: 2px; height: 26px; font-size: 12px; padding: 2px 5px;">
                 </td>
-                <td style="padding: 4px 8px; border: 1px solid #e7eaec;"><input type="text"
-                    class="form-control input-sm" value="12"
-                    style="border-radius: 2px; height: 26px; font-size: 12px; padding: 2px 5px;"></td>
-                <td style="padding: 4px 8px; border: 1px solid #e7eaec;"><input type="text"
-                    class="form-control input-sm" value="16"
-                    style="border-radius: 2px; height: 26px; font-size: 12px; padding: 2px 5px;"></td>
-                <td style="padding: 4px 8px; border: 1px solid #e7eaec;"><select
-                    class="form-select form-control input-sm"
-                    style="border-radius: 2px; height: 26px; padding: 0px 5px; font-size: 12px;">
-                    <option value="Year" selected>Year</option>
-                  </select></td>
-                <td style="padding: 4px 8px; border: 1px solid #e7eaec;"><select
-                    class="form-select form-control input-sm"
-                    style="border-radius: 2px; height: 26px; padding: 0px 5px; font-size: 12px;">
-                    <option value="Male" selected>Male</option>
-                  </select></td>
-                <td style="padding: 4px 8px; border: 1px solid #e7eaec;"><input type="text"
-                    class="form-control input-sm" value="67"
-                    style="border-radius: 2px; height: 26px; font-size: 12px; padding: 2px 5px;"></td>
-                <td style="padding: 4px 8px; border: 1px solid #e7eaec;"><input type="text"
-                    class="form-control input-sm" value="382"
-                    style="border-radius: 2px; height: 26px; font-size: 12px; padding: 2px 5px;"></td>
-                <td style="padding: 4px 8px; border: 1px solid #e7eaec;"><input type="text"
-                    class="form-control input-sm" value=""
-                    style="border-radius: 2px; height: 26px; font-size: 12px; padding: 2px 5px;"></td>
-                <td style="padding: 4px 8px; border: 1px solid #e7eaec;"><input type="text"
-                    class="form-control input-sm" value=""
-                    style="border-radius: 2px; height: 26px; font-size: 12px; padding: 2px 5px;"></td>
-                <td style="padding: 4px 8px; border: 1px solid #e7eaec;"><input type="text"
-                    class="form-control input-sm" value="U/L"
-                    style="border-radius: 2px; height: 26px; font-size: 12px; padding: 2px 5px;"></td>
-                <td style="padding: 4px 8px; border: 1px solid #e7eaec;"><select
-                    class="form-select form-control input-sm"
-                    style="border-radius: 2px; height: 26px; padding: 0px 5px; font-size: 12px;">
-                    <option value="Value" selected>Value</option>
-                  </select></td>
-                <td style="padding: 4px 8px; border: 1px solid #e7eaec;"><input type="text"
-                    class="form-control input-sm" value=""
-                    style="border-radius: 2px; height: 26px; font-size: 12px; padding: 2px 5px;"></td>
-              </tr>
-              <tr>
-                <td style="text-align: center; vertical-align: middle; padding: 4px 8px; border: 1px solid #e7eaec;">12
-                </td>
-                <td style="padding: 4px 8px; border: 1px solid #e7eaec;"><input type="text"
-                    class="form-control input-sm" value="12"
-                    style="border-radius: 2px; height: 26px; font-size: 12px; padding: 2px 5px;"></td>
-                <td style="padding: 4px 8px; border: 1px solid #e7eaec;"><input type="text"
-                    class="form-control input-sm" value="16"
-                    style="border-radius: 2px; height: 26px; font-size: 12px; padding: 2px 5px;"></td>
-                <td style="padding: 4px 8px; border: 1px solid #e7eaec;"><select
-                    class="form-select form-control input-sm"
-                    style="border-radius: 2px; height: 26px; padding: 0px 5px; font-size: 12px;">
-                    <option value="Year" selected>Year</option>
-                  </select></td>
-                <td style="padding: 4px 8px; border: 1px solid #e7eaec;"><select
-                    class="form-select form-control input-sm"
-                    style="border-radius: 2px; height: 26px; padding: 0px 5px; font-size: 12px;">
-                    <option value="Female" selected>Female</option>
-                  </select></td>
-                <td style="padding: 4px 8px; border: 1px solid #e7eaec;"><input type="text"
-                    class="form-control input-sm" value="67"
-                    style="border-radius: 2px; height: 26px; font-size: 12px; padding: 2px 5px;"></td>
-                <td style="padding: 4px 8px; border: 1px solid #e7eaec;"><input type="text"
-                    class="form-control input-sm" value="382"
-                    style="border-radius: 2px; height: 26px; font-size: 12px; padding: 2px 5px;"></td>
-                <td style="padding: 4px 8px; border: 1px solid #e7eaec;"><input type="text"
-                    class="form-control input-sm" value=""
-                    style="border-radius: 2px; height: 26px; font-size: 12px; padding: 2px 5px;"></td>
-                <td style="padding: 4px 8px; border: 1px solid #e7eaec;"><input type="text"
-                    class="form-control input-sm" value=""
-                    style="border-radius: 2px; height: 26px; font-size: 12px; padding: 2px 5px;"></td>
-                <td style="padding: 4px 8px; border: 1px solid #e7eaec;"><input type="text"
-                    class="form-control input-sm" value="U/L"
-                    style="border-radius: 2px; height: 26px; font-size: 12px; padding: 2px 5px;"></td>
-                <td style="padding: 4px 8px; border: 1px solid #e7eaec;"><select
-                    class="form-select form-control input-sm"
-                    style="border-radius: 2px; height: 26px; padding: 0px 5px; font-size: 12px;">
-                    <option value="Value" selected>Value</option>
-                  </select></td>
-                <td style="padding: 4px 8px; border: 1px solid #e7eaec;"><input type="text"
-                    class="form-control input-sm" value=""
-                    style="border-radius: 2px; height: 26px; font-size: 12px; padding: 2px 5px;"></td>
-              </tr>
-              <tr>
-                <td style="text-align: center; vertical-align: middle; padding: 4px 8px; border: 1px solid #e7eaec;">13
-                </td>
-                <td style="padding: 4px 8px; border: 1px solid #e7eaec;"><input type="text"
-                    class="form-control input-sm" value="16"
-                    style="border-radius: 2px; height: 26px; font-size: 12px; padding: 2px 5px;"></td>
-                <td style="padding: 4px 8px; border: 1px solid #e7eaec;"><input type="text"
-                    class="form-control input-sm" value="20"
-                    style="border-radius: 2px; height: 26px; font-size: 12px; padding: 2px 5px;"></td>
-                <td style="padding: 4px 8px; border: 1px solid #e7eaec;"><select
-                    class="form-select form-control input-sm"
-                    style="border-radius: 2px; height: 26px; padding: 0px 5px; font-size: 12px;">
-                    <option value="Year" selected>Year</option>
-                  </select></td>
-                <td style="padding: 4px 8px; border: 1px solid #e7eaec;"><select
-                    class="form-select form-control input-sm"
-                    style="border-radius: 2px; height: 26px; padding: 0px 5px; font-size: 12px;">
-                    <option value="Male" selected>Male</option>
-                  </select></td>
-                <td style="padding: 4px 8px; border: 1px solid #e7eaec;"><input type="text"
-                    class="form-control input-sm" value="36"
-                    style="border-radius: 2px; height: 26px; font-size: 12px; padding: 2px 5px;"></td>
-                <td style="padding: 4px 8px; border: 1px solid #e7eaec;"><input type="text"
-                    class="form-control input-sm" value="113"
-                    style="border-radius: 2px; height: 26px; font-size: 12px; padding: 2px 5px;"></td>
-                <td style="padding: 4px 8px; border: 1px solid #e7eaec;"><input type="text"
-                    class="form-control input-sm" value=""
-                    style="border-radius: 2px; height: 26px; font-size: 12px; padding: 2px 5px;"></td>
-                <td style="padding: 4px 8px; border: 1px solid #e7eaec;"><input type="text"
-                    class="form-control input-sm" value=""
-                    style="border-radius: 2px; height: 26px; font-size: 12px; padding: 2px 5px;"></td>
-                <td style="padding: 4px 8px; border: 1px solid #e7eaec;"><input type="text"
-                    class="form-control input-sm" value="U/L"
-                    style="border-radius: 2px; height: 26px; font-size: 12px; padding: 2px 5px;"></td>
-                <td style="padding: 4px 8px; border: 1px solid #e7eaec;"><select
-                    class="form-select form-control input-sm"
-                    style="border-radius: 2px; height: 26px; padding: 0px 5px; font-size: 12px;">
-                    <option value="Value" selected>Value</option>
-                  </select></td>
-                <td style="padding: 4px 8px; border: 1px solid #e7eaec;"><input type="text"
-                    class="form-control input-sm" value=""
-                    style="border-radius: 2px; height: 26px; font-size: 12px; padding: 2px 5px;"></td>
-              </tr>
-              <tr>
-                <td style="text-align: center; vertical-align: middle; padding: 4px 8px; border: 1px solid #e7eaec;">14
-                </td>
-                <td style="padding: 4px 8px; border: 1px solid #e7eaec;"><input type="text"
-                    class="form-control input-sm" value="16"
-                    style="border-radius: 2px; height: 26px; font-size: 12px; padding: 2px 5px;"></td>
-                <td style="padding: 4px 8px; border: 1px solid #e7eaec;"><input type="text"
-                    class="form-control input-sm" value="20"
-                    style="border-radius: 2px; height: 26px; font-size: 12px; padding: 2px 5px;"></td>
-                <td style="padding: 4px 8px; border: 1px solid #e7eaec;"><select
-                    class="form-select form-control input-sm"
-                    style="border-radius: 2px; height: 26px; padding: 0px 5px; font-size: 12px;">
-                    <option value="Year" selected>Year</option>
-                  </select></td>
-                <td style="padding: 4px 8px; border: 1px solid #e7eaec;"><select
-                    class="form-select form-control input-sm"
-                    style="border-radius: 2px; height: 26px; padding: 0px 5px; font-size: 12px;">
-                    <option value="Female" selected>Female</option>
-                  </select></td>
-                <td style="padding: 4px 8px; border: 1px solid #e7eaec;"><input type="text"
-                    class="form-control input-sm" value="36"
-                    style="border-radius: 2px; height: 26px; font-size: 12px; padding: 2px 5px;"></td>
-                <td style="padding: 4px 8px; border: 1px solid #e7eaec;"><input type="text"
-                    class="form-control input-sm" value="113"
-                    style="border-radius: 2px; height: 26px; font-size: 12px; padding: 2px 5px;"></td>
-                <td style="padding: 4px 8px; border: 1px solid #e7eaec;"><input type="text"
-                    class="form-control input-sm" value=""
-                    style="border-radius: 2px; height: 26px; font-size: 12px; padding: 2px 5px;"></td>
-                <td style="padding: 4px 8px; border: 1px solid #e7eaec;"><input type="text"
-                    class="form-control input-sm" value=""
-                    style="border-radius: 2px; height: 26px; font-size: 12px; padding: 2px 5px;"></td>
-                <td style="padding: 4px 8px; border: 1px solid #e7eaec;"><input type="text"
-                    class="form-control input-sm" value="U/L"
-                    style="border-radius: 2px; height: 26px; font-size: 12px; padding: 2px 5px;"></td>
-                <td style="padding: 4px 8px; border: 1px solid #e7eaec;"><select
-                    class="form-select form-control input-sm"
-                    style="border-radius: 2px; height: 26px; padding: 0px 5px; font-size: 12px;">
-                    <option value="Value" selected>Value</option>
-                  </select></td>
-                <td style="padding: 4px 8px; border: 1px solid #e7eaec;"><input type="text"
-                    class="form-control input-sm" value=""
-                    style="border-radius: 2px; height: 26px; font-size: 12px; padding: 2px 5px;"></td>
               </tr>
             </tbody>
+
+
+
           </table>
         </div>
       </div>
     </div>
 
     <!-- Section 6: Related Sub Tests (FOR MULTIPLE/PROFILE TESTS) -->
-    <div class="col-lg-12 mb-2" *ngIf="patient?.Type === 'MUL' || patient?.Type === 'PRO'">
+    <div class="col-lg-12 mb-1" *ngIf="patient?.Type === 'MUL' || patient?.Type === 'PRO'">
       <div class="ibox float-e-margins"
         style="background:#fff; box-shadow: 0 2px 4px rgba(0,0,0,0.08); border-radius: 4px; height: 100%; display: flex; flex-direction: column; margin-bottom: 0;">
-        <div class="ibox-title" style="padding: 8px 20px; border-bottom: 1px solid #f0f0f0;">
+        <div class="ibox-title" style="padding: 6px 15px; border-bottom: 1px solid #f0f0f0;">
           <h5 style="font-weight: 600; margin: 0; font-size: 14px; text-transform: uppercase;">Related Sub Tests</h5>
         </div>
-        <div class="ibox-content" style="padding: 10px 15px; flex: 1;">
+        <div class="ibox-content" style="padding: 8px 15px; flex: 1;">
           <table class="table table-bordered table-striped table-hover table-condensed"
             style="margin-bottom: 0; font-size: 13px; border: 1px solid #e7eaec;">
             <thead style="background-color: #f5f5f6;">

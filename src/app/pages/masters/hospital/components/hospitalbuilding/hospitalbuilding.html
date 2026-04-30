@@ -1,0 +1,109 @@
+<div class="container-fluid">
+    <app-page-title title="Hospital Building List" />
+
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header border-light justify-content-between">
+                    <div class="d-flex align-items-center gap-2">
+                        <h5 class="m-0 fw-semibold me-3">Building Directory</h5>
+
+                        <span class="me-2 text-muted-50 fs-xs text-uppercase fw-semibold">Show:</span>
+                        <div>
+                            <select [(ngModel)]="itemsPerPage" (ngModelChange)="currentPage = 1" class="form-select form-control form-control-sm">
+                                <option [ngValue]="5">5</option>
+                                <option [ngValue]="10">10</option>
+                                <option [ngValue]="20">20</option>
+                                <option [ngValue]="50">50</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="d-flex gap-2">
+                        <div class="app-search">
+                            <input [(ngModel)]="searchText" (ngModelChange)="currentPage = 1" type="search"
+                                class="form-control" placeholder="Search Buildings...">
+                            <lucide-angular [img]="LucideSearch" class="app-search-icon text-muted" />
+                        </div>
+
+                        <a [routerLink]="['/building/buildingadd']" class="btn btn-primary d-flex align-items-center gap-2" style="background-color: #1ab394; border-color: #1ab394;">
+                            <ng-icon name="tablerPlus" />
+                            New Building
+                        </a>
+                    </div>
+                </div>
+
+                <div class="table-responsive">
+                    <table class="table table-custom table-centered table-select table-hover w-100 mb-0">
+                        <thead class="bg-light align-middle bg-opacity-25 thead-sm">
+                            <tr class="text-uppercase fs-xxs">
+                                <th style="width: 60px; border-bottom: 1px solid #e7eaec;">SL.No</th>
+                                <th style="border-bottom: 1px solid #e7eaec;">Building Name</th>
+                                <th style="border-bottom: 1px solid #e7eaec;">Short Name</th>
+                                <th style="border-bottom: 1px solid #e7eaec;">Registered Name</th>
+                                <th style="border-bottom: 1px solid #e7eaec;">App Type</th>
+                                <th style="border-bottom: 1px solid #e7eaec;">City/State</th>
+                                <th style="border-bottom: 1px solid #e7eaec;">Email/URL</th>
+                                <th class="text-center" style="width: 100px; border-bottom: 1px solid #e7eaec;">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let building of getPaginatedBuildings(); let i = index">
+                                <td>{{ (currentPage - 1) * itemsPerPage + i + 1 }}</td>
+                                <td><span class="fw-semibold text-muted fs-sm">{{ building.Name }}</span></td>
+                                <td><span class="text-dark fs-sm">{{ building.ShortName }}</span></td>
+                                <td class="text-muted fs-sm">{{ building.RegisteredName }}</td>
+                                <td>
+                                    <span class="text-dark fs-sm text-uppercase">{{ building.ApplicationType }}</span>
+                                </td>
+                                <td>
+                                    <div class="fs-sm text-dark">{{ building.City }}</div>
+                                    <div class="fs-xs text-muted">{{ building.State }}, {{ building.Country }}</div>
+                                </td>
+                                <td>
+                                    <div class="fs-sm text-dark">{{ building.Email }}</div>
+                                    <div class="fs-xs text-muted text-truncate" style="max-width: 150px;">{{ building.URL }}</div>
+                                </td>
+                                <td>
+                                    <div class="d-flex justify-content-center">
+                                        <a [routerLink]="['/building/buildingedit', building.id]"
+                                            class="btn btn-primary btn-icon btn-sm rounded-circle"
+                                            title="Edit Building"
+                                            style="background-color: #1ab394; border-color: #1ab394; cursor: pointer;">
+                                            <ng-icon name="tablerPencil" class="fs-lg" />
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr *ngIf="getFilteredBuildings().length === 0">
+                                <td colspan="8" class="text-center text-muted py-4">
+                                    <div class="py-3">
+                                        <lucide-angular [img]="LucideSearch" class="mb-2 text-muted-50" size="40" />
+                                        <p>No buildings found matching your search.</p>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="card-footer border-0">
+                    <div class="d-flex justify-content-between align-items-center pagination-boxed" *ngIf="getFilteredBuildings().length > 0">
+                        <div class="text-muted">
+                            Showing {{ (currentPage - 1) * itemsPerPage + 1 }} to {{ Math.min(currentPage * itemsPerPage, getFilteredBuildings().length) }} of {{ getFilteredBuildings().length }} buildings
+                        </div>
+                        <ngb-pagination [collectionSize]="getFilteredBuildings().length" [(page)]="currentPage"
+                            [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="false">
+                            <ng-template ngbPaginationPrevious>
+                                <ng-icon name="tablerChevronLeft" />
+                            </ng-template>
+                            <ng-template ngbPaginationNext>
+                                <ng-icon name="tablerChevronRight" />
+                            </ng-template>
+                        </ngb-pagination>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

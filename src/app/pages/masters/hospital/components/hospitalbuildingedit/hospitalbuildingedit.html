@@ -1,0 +1,198 @@
+<div class="container-fluid">
+  <app-page-title title="Edit Hospital Building" />
+
+  <div class="wrapper wrapper-content animated fadeInRight" style="padding-top: 0;">
+    <div class="row">
+      <!-- Section 1: Basic Information -->
+      <div class="col-lg-12 mb-1">
+        <div class="ibox float-e-margins"
+          style="background:#fff; box-shadow: 0 2px 4px rgba(0,0,0,0.08); border-radius: 4px;">
+          <div class="ibox-title" style="border-top: 4px solid #1ab394; padding: 6px 15px; border-bottom: 1px solid #f0f0f0;">
+            <h5 style="font-weight: 600; margin: 0; font-size: 14px; text-transform: uppercase;">Basic Information</h5>
+          </div>
+          <div class="ibox-content" style="padding: 10px 15px;">
+            <form role="form">
+              <div class="row">
+                <div class="col-md-4 col-sm-12">
+                  <div class="form-group row align-items-center" style="margin-bottom: 8px;">
+                    <label class="col-sm-4 text-start col-form-label" style="font-weight: 600;">Building Name <span class="text-danger">*</span></label>
+                    <div class="col-sm-8">
+                      <input type="text" class="form-control" [(ngModel)]="building.Name" name="name" placeholder="Building Name" required style="border-radius: 2px;">
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-4 col-sm-12">
+                  <div class="form-group row align-items-center" style="margin-bottom: 8px;">
+                    <label class="col-sm-4 text-start col-form-label" style="font-weight: 600;">Short Name <span class="text-danger">*</span></label>
+                    <div class="col-sm-8">
+                      <input type="text" class="form-control" [(ngModel)]="building.ShortName" name="shortname" placeholder="Short Name" required style="border-radius: 2px;">
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-4 col-sm-12">
+                  <div class="form-group row align-items-center" style="margin-bottom: 8px;">
+                    <label class="col-sm-4 text-start col-form-label" style="font-weight: 600;">Registered Name</label>
+                    <div class="col-sm-8">
+                      <input type="text" class="form-control" [(ngModel)]="building.RegisteredName" name="registeredname" placeholder="Registered Name" style="border-radius: 2px;">
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-4 col-sm-12">
+                  <div class="form-group row align-items-center" style="margin-bottom: 8px;">
+                    <label class="col-sm-4 text-start col-form-label" style="font-weight: 600;">App Type</label>
+                    <div class="col-sm-8">
+                      <select class="form-select form-control" [(ngModel)]="building.ApplicationType" name="apptype" style="border-radius: 2px;">
+                        <option value="">Select</option>
+                        <option value="Hospital">Hospital</option>
+                        <option value="Clinic">Clinic</option>
+                        <option value="Lab">Lab</option>
+                        <option value="Pharmacy">Pharmacy</option>
+                        <option value="PI-HMS-ADV">PI-HMS-ADV</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-4 col-sm-12">
+                  <div class="form-group row align-items-center" style="margin-bottom: 8px;">
+                    <label class="col-sm-4 text-start col-form-label" style="font-weight: 600;">Display Option</label>
+                    <div class="col-sm-8">
+                      <select class="form-select form-control" [(ngModel)]="building.NameDisplayOption" name="displayoption" style="border-radius: 2px;">
+                        <option value="">Select</option>
+                        <option value="Full Name">Full Name</option>
+                        <option value="Short Name">Short Name</option>
+                        <option value="Registered Name">Registered Name</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <!-- Section 2: Location & Contact -->
+      <div class="col-lg-12 mb-1">
+        <div class="ibox float-e-margins"
+          style="background:#fff; box-shadow: 0 2px 4px rgba(0,0,0,0.08); border-radius: 4px;">
+          <div class="ibox-title" style="border-top: 4px solid #1c84c6; padding: 6px 15px; border-bottom: 1px solid #f0f0f0;">
+            <h5 style="font-weight: 600; margin: 0; font-size: 14px; text-transform: uppercase;">Location & Contact</h5>
+          </div>
+          <div class="ibox-content" style="padding: 10px 15px;">
+            <form role="form">
+              <div class="row">
+                <div class="col-md-8 col-sm-12">
+                  <div class="form-group row align-items-center" style="margin-bottom: 8px;">
+                    <label class="col-sm-2 text-start col-form-label" style="font-weight: 600;">Address</label>
+                    <div class="col-sm-10">
+                      <input type="text" class="form-control" [(ngModel)]="building.Address" name="address" placeholder="Building Address" style="border-radius: 2px;">
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-4 col-sm-12">
+                  <div class="form-group row align-items-center" style="margin-bottom: 8px;">
+                    <label class="col-sm-4 text-start col-form-label" style="font-weight: 600;">City</label>
+                    <div class="col-sm-8">
+                      <input type="text" class="form-control" [(ngModel)]="building.City" name="city" placeholder="City" style="border-radius: 2px;">
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-4 col-sm-12">
+                  <div class="form-group row align-items-center" style="margin-bottom: 8px;">
+                    <label class="col-sm-4 text-start col-form-label" style="font-weight: 600;">State</label>
+                    <div class="col-sm-8">
+                      <input type="text" class="form-control" [(ngModel)]="building.State" name="state" placeholder="State" style="border-radius: 2px;">
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-4 col-sm-12">
+                  <div class="form-group row align-items-center" style="margin-bottom: 8px;">
+                    <label class="col-sm-4 text-start col-form-label" style="font-weight: 600;">Country</label>
+                    <div class="col-sm-8">
+                      <input type="text" class="form-control" [(ngModel)]="building.Country" name="country" placeholder="Country" style="border-radius: 2px;">
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-4 col-sm-12">
+                  <div class="form-group row align-items-center" style="margin-bottom: 8px;">
+                    <label class="col-sm-4 text-start col-form-label" style="font-weight: 600;">Postal Code</label>
+                    <div class="col-sm-8">
+                      <input type="text" class="form-control" [(ngModel)]="building.PostalCode" name="postalcode" placeholder="Postal Code" style="border-radius: 2px;">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <!-- Section 3: Communication Details -->
+      <div class="col-lg-12 mb-1">
+        <div class="ibox float-e-margins"
+          style="background:#fff; box-shadow: 0 2px 4px rgba(0,0,0,0.08); border-radius: 4px;">
+          <div class="ibox-title" style="border-top: 4px solid #f8ac59; padding: 6px 15px; border-bottom: 1px solid #f0f0f0;">
+            <h5 style="font-weight: 600; margin: 0; font-size: 14px; text-transform: uppercase;">Communication Details</h5>
+          </div>
+          <div class="ibox-content" style="padding: 10px 15px;">
+            <form role="form">
+              <div class="row">
+                <div class="col-md-3 col-sm-12">
+                  <div class="form-group row align-items-center" style="margin-bottom: 8px;">
+                    <label class="col-sm-4 text-start col-form-label" style="font-weight: 600;">Primary Phone</label>
+                    <div class="col-sm-8">
+                      <input type="text" class="form-control" [(ngModel)]="building.PhonePrimary" name="phoneprimary" placeholder="Primary Phone" style="border-radius: 2px;">
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-3 col-sm-12">
+                  <div class="form-group row align-items-center" style="margin-bottom: 8px;">
+                    <label class="col-sm-4 text-start col-form-label" style="font-weight: 600;">Secondary Phone</label>
+                    <div class="col-sm-8">
+                      <input type="text" class="form-control" [(ngModel)]="building.PhoneSecondary" name="phonesecondary" placeholder="Secondary Phone" style="border-radius: 2px;">
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-3 col-sm-12">
+                  <div class="form-group row align-items-center" style="margin-bottom: 8px;">
+                    <label class="col-sm-4 text-start col-form-label" style="font-weight: 600;">Email</label>
+                    <div class="col-sm-8">
+                      <input type="email" class="form-control" [(ngModel)]="building.Email" name="email" placeholder="Email Address" style="border-radius: 2px;">
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-3 col-sm-12">
+                  <div class="form-group row align-items-center" style="margin-bottom: 8px;">
+                    <label class="col-sm-4 text-start col-form-label" style="font-weight: 600;">URL</label>
+                    <div class="col-sm-8">
+                      <input type="text" class="form-control" [(ngModel)]="building.URL" name="url" placeholder="Website URL" style="border-radius: 2px;">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Action Buttons -->
+    <div class="row mt-2">
+      <div class="col-lg-12">
+        <div class="hr-line-dashed" style="border-top: 1px dashed #e7eaec; margin: 10px 0;"></div>
+        <div class="text-right d-flex justify-content-end gap-2" style="justify-content: flex-end; margin-bottom: 30px;">
+          <button class="btn btn-white" type="button" [routerLink]="['/building/buildinglist']"
+            style="border: 1px solid #d2d2d2; background: #fff; padding: 8px 20px; font-weight: 600; border-radius: 2px; color: #555; margin-right: 10px;">Cancel</button>
+          <button class="btn btn-primary" type="button" (click)="saveChanges()"
+            style="background: #1ab394; border-color: #1ab394; color: #fff; padding: 8px 20px; font-weight: 600; border-radius: 2px;">Update Building</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

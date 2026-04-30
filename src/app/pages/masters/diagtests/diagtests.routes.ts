@@ -5,15 +5,31 @@ import { DiagTestAddHorizontal } from './components/diagtestadd_horizontal/diagt
 import { DiagTestAddHorizontalNC } from './components/diagtestadd_horizontal_nc/diagtestadd_horizontal_nc';
 import { DiagTestAddND } from './components/diagtestadd_new_design/diagtestadd_new_design';
 import { DiagGroup } from './components/diaggroup/diaggroup';
+import { DiagGroup1 } from './components/diaggroup1/diaggroup1';
+import { DiagGroupEdit } from './components/diaggroupedit/diaggroupedit';
+import { TestUnit } from './components/units/unit';
+import { UnitEdit } from './components/unitedit/unitedit';
+import { UnitAdd } from './components/unitadd/unitadd';
+import { Sample } from './components/samples/sample';
 
 export const DIAGNOSTIC_TESTS_ROUTES: Routes = [
     {
-        path: 'diagtest/diagtest',
+        path: 'sample/samplelist',
+        component: Sample,
+        data: { title: "Sample" },
+    },
+    {
+        path: 'diagtest/diagtestlist',
         component: DiagTest,
         data: {title: "Diagtest"},
     },
     {
-        path: 'diagtestadd/diagtestadd/:id',
+        path: 'diagtest/diagtestadd',
+        component: DiagTestAdd,
+        data: {title: "Diagtest"},
+    },
+    {
+        path: 'diagtest/diagtestadd/:id',
         component: DiagTestAdd,
         data: {title: "Diagtest"},
     },
@@ -23,7 +39,7 @@ export const DIAGNOSTIC_TESTS_ROUTES: Routes = [
         data: {title: "DiagtestHorizontal"},
     },
     {
-        path: 'diagtestadd_horizontal_nc/diagtestadd_horizontal_nc/:id',
+        path: 'diagtest/diagtestedit/:id',
         component: DiagTestAddHorizontalNC,
         data: {title: "DiagtestHorizontalNC"},
     },
@@ -36,5 +52,30 @@ export const DIAGNOSTIC_TESTS_ROUTES: Routes = [
         path: 'diaggroup/diaggroup',
         component: DiagGroup,
         data: {title: "DiagGroup"},
+    },
+    {
+        path: 'diaggroup/diaggrouplist',
+        component: DiagGroup1,
+        data: {title: "DiagGroup1"},
+    },
+    {
+        path: 'diaggroup/diaggroupedit/:id',
+        component: DiagGroupEdit,
+        data: {title: "DiagGroupEdit"},
+    },
+    {
+        path: 'unit/unitlist',
+        component: TestUnit,
+        data: {title: "TestUnit"},
+    },
+    {
+        path: 'unit/unitedit/:id',
+        component: UnitEdit,
+        data: {title: "UnitEdit"},
+    },
+    {
+        path: 'unit/unitadd',
+        component: UnitAdd,
+        data: {title: "UnitAdd"},
     },
 ];

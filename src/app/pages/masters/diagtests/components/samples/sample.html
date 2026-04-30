@@ -1,0 +1,133 @@
+<div class="container-fluid">
+    <app-page-title title="Sample List" />
+
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header border-light justify-content-between">
+
+                    <div class="d-flex align-items-center gap-2">
+                        <span class="me-2 fw-semibold">Filter By:</span>
+
+                        <div class="app-search">
+                            <select [(ngModel)]="dateFilter" (ngModelChange)="applyDateFilter()"
+                                class="form-select form-control">
+
+                                <option value="all">Type</option>
+                                <option value="SNG">Single(SNG)</option>
+                                <option value="MUL">Multiple(MUL)</option>
+                                <option value="PRO">PRO(PRO)</option>
+
+                            </select>
+                            <lucide-angular [img]="LucideBox" class="app-search-icon text-muted" />
+                        </div>
+
+                        <div>
+                            <select [(ngModel)]="tableService.pageSize" class="form-select form-control my-1 my-md-0">
+                                <option [ngValue]="5">5</option>
+                                <option [ngValue]="8">8</option>
+                                <option [ngValue]="10">10</option>
+                                <option [ngValue]="15">15</option>
+                                <option [ngValue]="20">20</option>
+                            </select>
+                        </div>
+
+                    </div>
+
+
+
+                    <div class="d-flex gap-1">
+                        <div class="app-search">
+                            <input [(ngModel)]="tableService.searchTerm" data-table-search type="search"
+                                class="form-control" placeholder="Search Name / Short Name / Type">
+                            <lucide-angular [img]="LucideSearch" class="app-search-icon text-muted" />
+                        </div>
+                        @if (hasSelection) {
+                        <button class="btn btn-danger" (click)="deleteSelected()">Delete</button>
+                        }
+                        <!-- <a routerLink="/ecommerce/products/grid" class="btn btn-soft-primary btn-icon">
+                            <lucide-angular [img]="LucideLayoutGrid" class="fs-lg"/>
+                        </a>
+                        <a routerLink="/ecommerce/products" class="btn btn-primary btn-icon">
+                            <lucide-angular [img]="LucideList" class="fs-lg"/>
+                        </a> -->
+                        <button class="btn btn-success ms-1">
+                            <ng-icon name="tablerPlus" class="fs-sm me-1" />
+                            New Sample
+                        </button>
+                    </div>
+                </div>
+
+                <div class="table-responsive">
+                    <table class="table table-custom table-centered table-select table-hover w-100 mb-0">
+                        <thead class="bg-light align-middle bg-opacity-25 thead-sm">
+                            <tr class="text-uppercase fs-xxs">
+                                <th style="border-bottom: 1px solid #e7eaec;">SL.No</th>
+                                <th style="border-bottom: 1px solid #e7eaec;">Code</th>
+                                <th style="border-bottom: 1px solid #e7eaec;">Full Name</th>
+                                <th style="border-bottom: 1px solid #e7eaec;">Short Name</th>
+                                <th style="border-bottom: 1px solid #e7eaec;">Description</th>
+                                <th style="border-bottom: 1px solid #e7eaec;">Sample Form</th>
+                                <th style="border-bottom: 1px solid #e7eaec;">Container</th>
+                                <th class="text-center" style="width: 1%; border-bottom: 1px solid #e7eaec;">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if ((total$ | async)! > 0) {
+                            @for (sample of this.samples$ | async; track $index; let i = $index) {
+                            <tr>
+                                <td>{{ (tableService.page - 1) * tableService.pageSize + i + 1 }}</td>
+                                <td><span class="fw-semibold">{{ sample.Code }}</span></td>
+                                <td>{{ sample.FullName }}</td>
+                                <td>{{ sample.ShortName }}</td>
+                                <td class="text-muted" style="max-width: 250px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
+                                    {{ sample.Description }}
+                                </td>
+                                <td><span class="badge bg-light text-dark border">{{ sample.SampleForm }}</span></td>
+                                <td>{{ sample.Container }}</td>
+                                <td>
+                                    <div class="d-flex justify-content-center gap-1">
+                                        <a class="btn btn-light btn-icon btn-sm rounded-circle" ngbTooltip="View">
+                                            <ng-icon name="tablerEye" class="fs-lg" />
+                                        </a>
+                                        <a class="btn btn-primary btn-icon btn-sm rounded-circle" 
+                                            style="background-color: #1ab394; border-color: #1ab394;"
+                                            ngbTooltip="Edit">
+                                            <ng-icon name="tablerPencil" class="fs-lg" />
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                            }
+                            } @else {
+                            <tr class="no-results">
+                                <td colspan="8" class="text-center text-muted py-3">Nothing found.</td>
+                            </tr>
+                            }
+                        </tbody>
+                    </table>
+
+                </div>
+                <div class="card-footer border-0">
+                    @if ((total$ | async)! > 0) {
+                    <div class="d-flex justify-content-between align-items-center pagination-boxed">
+                        <div class="text-muted">
+                            {{ tableService.showingRange }} tests
+                        </div>
+                        <ngb-pagination [collectionSize]="(total$ | async)!" [(page)]="tableService.page"
+                            [pageSize]="tableService.pageSize">
+                            <ng-template ngbPaginationPrevious>
+                                <ng-icon name="tablerChevronLeft" />
+                            </ng-template>
+                            <ng-template ngbPaginationNext>
+                                <ng-icon name="tablerChevronRight" />
+                            </ng-template>
+                        </ngb-pagination>
+                    </div>
+                    }
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

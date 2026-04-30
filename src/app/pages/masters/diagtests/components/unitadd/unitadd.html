@@ -1,0 +1,96 @@
+<div class="row wrapper border-bottom white-bg page-heading"
+  style="padding: 8px 20px 10px; margin-bottom: 12px; box-shadow: 0 1px 2px rgba(0,0,0,0.08);">
+  <div class="col-lg-10">
+    <h2 style="margin-top: 5px; margin-bottom: 5px; font-weight: 600; font-size: 18px;">Add New Unit</h2>
+    <ol class="breadcrumb" style="background-color: transparent; padding: 0; margin-bottom: 0; font-size: 11px;">
+      <li class="breadcrumb-item">
+        <a [routerLink]="['/']">Home</a>
+      </li>
+      <li class="breadcrumb-item">
+        <a [routerLink]="['/units/unit']">Units</a>
+      </li>
+      <li class="breadcrumb-item active">
+        <strong style="color: #1ab394;">Add New Unit</strong>
+      </li>
+    </ol>
+  </div>
+</div>
+
+<div class="wrapper wrapper-content animated fadeInRight" style="padding-top: 0;">
+  <div class="row">
+    <!-- Section 1: Unit Information -->
+    <div class="col-lg-12 mb-2">
+      <div class="ibox float-e-margins"
+        style="background:#fff; box-shadow: 0 2px 4px rgba(0,0,0,0.08); border-radius: 4px;">
+        <div class="ibox-title"
+          style="border-top: 4px solid #1ab394; padding: 8px 20px; border-bottom: 1px solid #f0f0f0;">
+          <h5 style="font-weight: 600; margin: 0; font-size: 14px; text-transform: uppercase;">Unit Information</h5>
+        </div>
+        <div class="ibox-content" style="padding: 20px;">
+          <form role="form">
+            <div class="row mb-3">
+              <div class="col-md-6">
+                <div class="form-group row align-items-center">
+                  <label class="col-sm-3 text-start col-form-label" style="font-weight: 600;">Unit Name <span
+                      class="text-danger">*</span></label>
+                  <div class="col-sm-9">
+                    <input type="text" class="form-control" [(ngModel)]="unit.Name" name="unitname"
+                      placeholder="e.g. mg/dL" required style="border-radius: 2px;">
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group row align-items-center">
+                  <label class="col-sm-3 text-start col-form-label" style="font-weight: 600;">Full Name <span
+                      class="text-danger">*</span></label>
+                  <div class="col-sm-9">
+                    <input type="text" class="form-control" [(ngModel)]="unit.FullName" name="unitfullname"
+                      placeholder="e.g. Milligrams per Deciliter" required style="border-radius: 2px;">
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <div class="row mb-3">
+              <div class="col-md-6">
+                <div class="form-group row align-items-center">
+                  <label class="col-sm-3 text-start col-form-label" style="font-weight: 600;">Category <span
+                      class="text-danger">*</span></label>
+                  <div class="col-sm-9">
+                    <select class="form-select form-control" [(ngModel)]="unit.Category" name="unitcategory" required
+                      style="border-radius: 2px; cursor: pointer;">
+                      <option value="" disabled>Select Category</option>
+                      <option *ngFor="let cat of categories" [value]="cat">{{cat}}</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group row align-items-center">
+                  <label class="col-sm-3 text-start col-form-label" style="font-weight: 600;">Status <span
+                      class="text-danger">*</span></label>
+                  <div class="col-sm-9">
+                    <select class="form-select form-control" [(ngModel)]="unit.Status" name="unitstatus" required
+                      style="border-radius: 2px; cursor: pointer;">
+                      <option value="Active">Active</option>
+                      <option value="Inactive">Inactive</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="hr-line-dashed" style="border-top: 1px dashed #e7eaec; margin: 20px 0;"></div>
+            
+            <div class="form-group row">
+              <div class="col-sm-12 text-end">
+                <button class="btn btn-white me-2" type="button" (click)="cancel()" style="border: 1px solid #e7eaec;">Cancel</button>
+                <button class="btn btn-primary" type="submit" (click)="save()" style="background-color: #1ab394; border-color: #1ab394; min-width: 100px;">Save Changes</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

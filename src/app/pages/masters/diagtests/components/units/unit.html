@@ -1,0 +1,101 @@
+<div class="container-fluid">
+    <app-page-title title="Diagnostic Test Units" />
+
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header border-light justify-content-between">
+                    <div class="d-flex align-items-center gap-2">
+                        <h5 class="m-0 fw-semibold me-3">Unit List</h5>
+                        
+                        <span class="me-2 text-muted-50 fs-xs text-uppercase fw-semibold">Show:</span>
+                        <div>
+                            <select [(ngModel)]="itemsPerPage" (ngModelChange)="currentPage = 1" class="form-select form-control form-control-sm">
+                                <option [ngValue]="5">5</option>
+                                <option [ngValue]="10">10</option>
+                                <option [ngValue]="20">20</option>
+                                <option [ngValue]="50">50</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="d-flex gap-2">
+                        <div class="app-search">
+                            <input [(ngModel)]="searchText" (ngModelChange)="currentPage = 1" type="search"
+                                class="form-control" placeholder="Search Units...">
+                            <lucide-angular [img]="LucideSearch" class="app-search-icon text-muted" />
+                        </div>
+                        
+                        <a [routerLink]="['/unit/unitadd']" class="btn btn-primary d-flex align-items-center gap-2" style="background-color: #1ab394; border-color: #1ab394;">
+                            <ng-icon name="tablerPlus" />
+                            New Unit
+                        </a>
+                    </div>
+                </div>
+
+                <div class="table-responsive">
+                    <table class="table table-custom table-centered table-select table-hover w-100 mb-0">
+                        <thead class="bg-light align-middle bg-opacity-25 thead-sm">
+                            <tr class="text-uppercase fs-xxs">
+                                <th style="width: 80px; border-bottom: 1px solid #e7eaec;">SL.No</th>
+                                <th style="border-bottom: 1px solid #e7eaec;">Unit Name</th>
+                                <th style="border-bottom: 1px solid #e7eaec;">Full Description</th>
+                                <th style="border-bottom: 1px solid #e7eaec;">Category</th>
+                                <th class="text-center" style="width: 100px; border-bottom: 1px solid #e7eaec;">Status</th>
+                                <th class="text-center" style="width: 120px; border-bottom: 1px solid #e7eaec;">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let unit of getPaginatedUnits(); let i = index">
+                                <td>{{ (currentPage - 1) * itemsPerPage + i + 1 }}</td>
+                                <td><span class="fw-semibold text-muted fs-sm">{{ unit.Name }}</span></td>
+                                <td class="text-muted fs-sm">{{ unit.FullName }}</td>
+                                <td><span class="text-dark fs-sm">{{ unit.Category }}</span></td>
+                                <td class="text-center">
+                                    <span class="fs-sm fw-medium text-muted">
+                                        {{ unit.Status }}
+                                    </span>
+                                </td>
+                                <td>
+                                    <div class="d-flex justify-content-center">
+                                        <a [routerLink]="['/unit/unitedit', unit.id]"
+                                            class="btn btn-primary btn-icon btn-sm rounded-circle"
+                                            title="Edit Unit"
+                                            style="background-color: #1ab394; border-color: #1ab394; cursor: pointer;">
+                                            <ng-icon name="tablerPencil" class="fs-lg" />
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr *ngIf="getFilteredUnits().length === 0">
+                                <td colspan="6" class="text-center text-muted py-4">
+                                    <div class="py-3">
+                                        <lucide-angular [img]="LucideSearch" class="mb-2 text-muted-50" size="40" />
+                                        <p>No units found matching your search.</p>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="card-footer border-0">
+                    <div class="d-flex justify-content-between align-items-center pagination-boxed" *ngIf="getFilteredUnits().length > 0">
+                        <div class="text-muted">
+                            Showing {{ (currentPage - 1) * itemsPerPage + 1 }} to {{ Math.min(currentPage * itemsPerPage, getFilteredUnits().length) }} of {{ getFilteredUnits().length }} units
+                        </div>
+                        <ngb-pagination [collectionSize]="getFilteredUnits().length" [(page)]="currentPage"
+                            [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="false">
+                            <ng-template ngbPaginationPrevious>
+                                <ng-icon name="tablerChevronLeft" />
+                            </ng-template>
+                            <ng-template ngbPaginationNext>
+                                <ng-icon name="tablerChevronRight" />
+                            </ng-template>
+                        </ngb-pagination>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

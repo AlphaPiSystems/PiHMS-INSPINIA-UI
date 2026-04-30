@@ -1,401 +1,494 @@
-<div class="row wrapper border-bottom white-bg page-heading"
-  style="padding: 15px 20px 20px; margin-bottom: 25px; box-shadow: 0 1px 2px rgba(0,0,0,0.1);">
-  <div class="col-lg-10">
-    <h2 style="margin-top: 10px; font-weight: 600;">{{patient?.ReportName || 'Diagnostic Test Definition'}}</h2>
-    <ol class="breadcrumb" style="background-color: transparent; padding: 0; margin-bottom: 0;">
-      <li class="breadcrumb-item">
-        <a [routerLink]="['/']">Home</a>
-      </li>
-      <li class="breadcrumb-item">
-        <a>Tests & Profiles</a>
-      </li>
-      <li class="breadcrumb-item active">
-        <strong style="color: #1ab394;">Test Configuration</strong>
-      </li>
-    </ol>
-  </div>
-</div>
+<div class="container-fluid">
+  <app-page-title title="Add New Test" />
 
-<div class="wrapper wrapper-content animated fadeInRight" style="padding-top: 0;">
-  <div class="row">
-    <!-- Col 1: General Info & Result Config -->
-    <div class="col-lg-4 col-md-12 mb-4">
-      <div class="ibox float-e-margins"
-        style="background:#fff; box-shadow: 0 2px 4px rgba(0,0,0,0.08); border-radius: 4px;">
-        <div class="ibox-title"
-          style="border-top: 4px solid #1ab394; padding: 15px 20px; border-bottom: 1px solid #f0f0f0;">
-          <h5 style="font-weight: 600; margin: 0; font-size: 14px; text-transform: uppercase;">General Test Information
-          </h5>
-        </div>
-        <div class="ibox-content" style="padding: 20px;">
-          <form role="form">
-            <div class="form-group" style="margin-bottom: 15px;">
-              <label style="font-weight: 600;">Test Name <span class="text-danger">*</span></label>
-              <input type="text" class="form-control" [(ngModel)]="patient.Name" name="testname"
-                placeholder="Enter Test Name" required style="border-radius: 2px;">
-            </div>
-            <div class="form-group" style="margin-bottom: 15px;">
-              <label style="font-weight: 600;">Test Code <span class="text-danger">*</span></label>
-              <input type="text" class="form-control" [(ngModel)]="patient.Code" name="testcode"
-                placeholder="Enter Code" required style="border-radius: 2px;">
-            </div>
-            <div class="form-group" style="margin-bottom: 15px;">
-              <label style="font-weight: 600;">Short Name <span class="text-danger">*</span></label>
-              <input type="text" class="form-control" [(ngModel)]="patient.ShortName" name="testshortname"
-                placeholder="Short Name" required style="border-radius: 2px;">
-            </div>
-            <div class="form-group" style="margin-bottom: 15px;">
-              <label style="font-weight: 600;">Report Name <span class="text-danger">*</span></label>
-              <input type="text" class="form-control" [(ngModel)]="patient.ReportName" name="testreportname"
-                placeholder="Full Report Name" required style="border-radius: 2px;">
-            </div>
-            <div class="form-group" style="margin-bottom: 0;">
-              <label style="font-weight: 600;">Type <span class="text-danger">*</span></label>
-              <select class="form-select form-control" [(ngModel)]="patient.Type" name="testtype" required
-                style="border-radius: 2px; cursor: pointer;">
-                <option value="" disabled>Select Type</option>
-                <option value="SNG">Single Test (SNG)</option>
-                <option value="MUL">Multiple Test (MUL)</option>
-                <option value="PRO">Test Profile (PRO)</option>
-                <option value="PKG">Test Package (PKG)</option>
-              </select>
-            </div>
-          </form>
+  <div class="wrapper wrapper-content animated fadeInRight" style="padding-top: 0;">
+    <div class="row">
+      <!-- Section 1: General Test Information -->
+      <div class="col-lg-12 mb-1">
+        <div class="ibox float-e-margins"
+          style="background:#fff; box-shadow: 0 2px 4px rgba(0,0,0,0.08); border-radius: 4px;">
+          <div class="ibox-title"
+            style="border-top: 4px solid #1ab394; padding: 6px 15px; border-bottom: 1px solid #f0f0f0;">
+            <h5 style="font-weight: 600; margin: 0; font-size: 14px; text-transform: uppercase;">General Test
+              Information
+            </h5>
+          </div>
+          <div class="ibox-content" style="padding: 8px 15px;">
+            <form role="form">
+              <div class="row">
+                <div class="col-md-4 col-sm-12">
+                  <div class="form-group row align-items-center" style="margin-bottom: 8px;">
+                    <label class="col-sm-4 text-start col-form-label" style="font-weight: 600;">Name <span
+                        class="text-danger">*</span></label>
+                    <div class="col-sm-8">
+                      <input type="text" class="form-control" [(ngModel)]="patient.Name" name="testname"
+                        placeholder="Enter Test Name" required style="border-radius: 2px;">
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-4 col-sm-12">
+                  <div class="form-group row align-items-center" style="margin-bottom: 8px;">
+                    <label class="col-sm-4 text-start col-form-label" style="font-weight: 600;">Code <span
+                        class="text-danger">*</span></label>
+                    <div class="col-sm-8">
+                      <input type="text" class="form-control" [(ngModel)]="patient.Code" name="testcode"
+                        placeholder="Enter Code" required style="border-radius: 2px;">
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-4 col-sm-12">
+                  <div class="form-group row align-items-center" style="margin-bottom: 8px;">
+                    <label class="col-sm-4 text-start col-form-label" style="font-weight: 600;">Short Name <span
+                        class="text-danger">*</span></label>
+                    <div class="col-sm-8">
+                      <input type="text" class="form-control" [(ngModel)]="patient.ShortName" name="testshortname"
+                        placeholder="Short Name" required style="border-radius: 2px;">
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-4 col-sm-12">
+                  <div class="form-group row align-items-center" style="margin-bottom: 0;">
+                    <label class="col-sm-4 text-start col-form-label" style="font-weight: 600;">Report Name <span
+                        class="text-danger">*</span></label>
+                    <div class="col-sm-8">
+                      <input type="text" class="form-control" [(ngModel)]="patient.ReportName" name="testreportname"
+                        placeholder="Full Report Name" required style="border-radius: 2px;">
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-4 col-sm-12">
+                  <div class="form-group row align-items-center" style="margin-bottom: 0;">
+                    <label class="col-sm-4 text-start col-form-label" style="font-weight: 600;">Type <span
+                        class="text-danger">*</span></label>
+                    <div class="col-sm-8">
+                      <select class="form-select form-control" [(ngModel)]="patient.Type" name="testtype" required
+                        style="border-radius: 2px; cursor: pointer;">
+                        <option value="" disabled>Select Type</option>
+                        <option value="SNG">Single Test (SNG)</option>
+                        <option value="MUL">Multiple Test (MUL)</option>
+                        <option value="PRO">Test Profile (PRO)</option>
+                        <option value="PKG">Test Package (PKG)</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
         </div>
       </div>
 
+      <!-- Section 2: Laboratory Operations & Equipment -->
+      <div class="col-lg-12 mb-1" *ngIf="patient.Type !== 'MUL' && patient.Type !== 'PRO' && patient.Type !== 'PKG'">
+        <div class="ibox float-e-margins"
+          style="background:#fff; box-shadow: 0 2px 4px rgba(0,0,0,0.08); border-radius: 4px;">
+          <div class="ibox-title"
+            style="border-top: 4px solid #1c84c6; padding: 6px 15px; border-bottom: 1px solid #f0f0f0;">
+            <h5 style="font-weight: 600; margin: 0; font-size: 14px; text-transform: uppercase;">Laboratory Operations &
+              Equipment</h5>
+          </div>
+          <div class="ibox-content" style="padding: 8px 15px;">
+            <form role="form">
+              <div class="row">
+                <div class="col-md-4 col-sm-12">
+                  <div class="form-group row align-items-center" style="margin-bottom: 8px;">
+                    <label class="col-sm-4 text-start col-form-label" style="font-weight: 600;">Investig. Type <span
+                        class="text-danger">*</span></label>
+                    <div class="col-sm-8">
+                      <select class="form-select form-control" [(ngModel)]="patient.InvestigationType"
+                        name="investigationtype" required style="border-radius: 2px; cursor: pointer;">
+                        <option value="" disabled>Select</option>
+                        <option value="Special">Special</option>
+                        <option value="Routine">Routine</option>
+                        <option value="Death">Death</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-4 col-sm-12">
+                  <div class="form-group row align-items-center" style="margin-bottom: 8px;">
+                    <label class="col-sm-4 text-start col-form-label" style="font-weight: 600;">Sample <span
+                        class="text-danger">*</span></label>
+                    <div class="col-sm-8">
+                      <select class="form-select form-control" [(ngModel)]="patient.SampleID" name="sampleid"
+                        required style="border-radius: 2px;">
+                        <option value="">Select Sample</option>
+                        <option *ngFor="let s of samples" [value]="s.FullName">{{ s.FullName }}</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-4 col-sm-12">
+                  <div class="form-group row align-items-center" style="margin-bottom: 8px;">
+                    <label class="col-sm-4 text-start col-form-label" style="font-weight: 600;">Department <span
+                        class="text-danger">*</span></label>
+                    <div class="col-sm-8">
+                      <input class="form-control" [(ngModel)]="patient.DepartmentID" name="testdepartment"
+                        placeholder="Department" required style="border-radius: 2px;">
+                    </div>
+                  </div>
+                </div>
+              </div>
 
-    </div>
+              <div class="row">
+                <div class="col-md-4 col-sm-12">
+                  <div class="form-group row align-items-center" style="margin-bottom: 8px;">
+                    <label class="col-sm-4 text-start col-form-label" style="font-weight: 600;">Instrument <span
+                        class="text-danger">*</span></label>
+                    <div class="col-sm-8">
+                      <input class="form-control" [(ngModel)]="patient.Instrument" name="testinstrument"
+                        placeholder="Instrument" required style="border-radius: 2px;">
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-4 col-sm-12">
+                  <div class="form-group row align-items-center" style="margin-bottom: 8px;">
+                    <label class="col-sm-4 text-start col-form-label" style="font-weight: 600; padding-right: 0;">Name
+                      in
+                      Inst. <span class="text-danger">*</span></label>
+                    <div class="col-sm-8">
+                      <input class="form-control" [(ngModel)]="patient.TestNameInInstrument" name="testnameininstrument"
+                        placeholder="Inst. Name" required style="border-radius: 2px;">
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-4 col-sm-12">
+                  <div class="form-group row align-items-center" style="margin-bottom: 8px;">
+                    <label class="col-sm-4 text-start col-form-label" style="font-weight: 600;">Report. Priority <span
+                        class="text-danger">*</span></label>
+                    <div class="col-sm-8">
+                      <input class="form-control" [(ngModel)]="patient.ReportingPriority" name="testreportingpriority"
+                        placeholder="Priority" required style="border-radius: 2px;">
+                    </div>
+                  </div>
+                </div>
+              </div>
 
-    <!-- Col 2: Laboratory Operations -->
-    <div class="col-lg-5 col-md-12 mb-4">
-      <div class="ibox float-e-margins"
-        style="background:#fff; box-shadow: 0 2px 4px rgba(0,0,0,0.08); border-radius: 4px;">
-        <div class="ibox-title"
-          style="border-top: 4px solid #1c84c6; padding: 15px 20px; border-bottom: 1px solid #f0f0f0;">
-          <h5 style="font-weight: 600; margin: 0; font-size: 14px; text-transform: uppercase;">Laboratory Operations &
-            Equipment</h5>
+              <div class="row">
+                <div class="col-md-4 col-sm-12">
+                  <div class="form-group row align-items-center" style="margin-bottom: 0;">
+                    <label class="col-sm-4 text-start col-form-label" style="font-weight: 600;">Outsourced <span
+                        class="text-danger">*</span></label>
+                    <div class="col-sm-8">
+                      <select class="form-select form-control" [(ngModel)]="patient.IsOutsourced"
+                        name="testisoutsourced" required style="border-radius: 2px; cursor: pointer;">
+                        <option value="" disabled>Select</option>
+                        <option value="Yes">Yes</option>
+                        <option value="No">No</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-4 col-sm-12">
+                  <div class="form-group row align-items-center" style="margin-bottom: 0;">
+                    <label class="col-sm-4 text-start col-form-label" style="font-weight: 600;">NABL Approv. <span
+                        class="text-danger">*</span></label>
+                    <div class="col-sm-8">
+                      <select class="form-select form-control" [(ngModel)]="patient.IsNABLApproved"
+                        name="testisnablapproved" required style="border-radius: 2px; cursor: pointer;">
+                        <option value="" disabled>Select</option>
+                        <option value="Yes">Yes</option>
+                        <option value="No">No</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-4 col-sm-12">
+                  <div class="form-group row align-items-center" style="margin-bottom: 0;">
+                    <label class="col-sm-4 text-start col-form-label" style="font-weight: 600;">Methodology <span
+                        class="text-danger">*</span></label>
+                    <div class="col-sm-8">
+                      <input class="form-control" [(ngModel)]="patient.Methodology" name="testmethodology"
+                        placeholder="Methodology" required style="border-radius: 2px;">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
         </div>
-        <div class="ibox-content" style="padding: 20px;">
-          <form role="form">
-            <div class="row">
-              <div class="col-md-6 col-sm-12">
-                <div class="form-group" style="margin-bottom: 15px;">
-                  <label style="font-weight: 600;">Investigation Type <span class="text-danger">*</span></label>
-                  <select class="form-select form-control" [(ngModel)]="patient.InvestigationType"
-                    name="investigationtype" required style="border-radius: 2px; cursor: pointer;">
-                    <option value="" disabled>Select</option>
-                    <option value="Special">Special</option>
-                    <option value="Routine">Routine</option>
-                    <option value="Death">Death</option>
-                  </select>
-                </div>
-              </div>
-              <div class="col-md-6 col-sm-12">
-                <div class="form-group" style="margin-bottom: 15px;">
-                  <label style="font-weight: 600;">Sample ID <span class="text-danger">*</span></label>
-                  <input class="form-control" [(ngModel)]="patient.SampleID" name="sampleid" placeholder="Sample ID"
-                    required style="border-radius: 2px;">
-                </div>
-              </div>
-            </div>
+      </div>
 
-            <div class="row">
-              <div class="col-sm-12">
-                <div class="form-group" style="margin-bottom: 15px;">
-                  <label style="font-weight: 600;">Methodology <span class="text-danger">*</span></label>
-                  <input class="form-control" [(ngModel)]="patient.Methodology" name="testmethodology"
-                    placeholder="Enter Methodology" required style="border-radius: 2px;">
+      <!-- Section 3: Report Formatting & Output -->
+      <div class="col-lg-12 mb-1" *ngIf="patient.Type !== 'MUL' && patient.Type !== 'PRO' && patient.Type !== 'PKG'">
+        <div class="ibox float-e-margins"
+          style="background:#fff; box-shadow: 0 2px 4px rgba(0,0,0,0.08); border-radius: 4px;">
+          <div class="ibox-title"
+            style="border-top: 4px solid #23c6c8; padding: 6px 15px; border-bottom: 1px solid #f0f0f0;">
+            <h5 style="font-weight: 600; margin: 0; font-size: 14px; text-transform: uppercase;">Report Formatting &
+              Output</h5>
+          </div>
+          <div class="ibox-content" style="padding: 8px 15px; background-color: #fcfcfc;">
+            <form role="form">
+              <div class="row">
+                <div class="col-md-4 col-sm-12">
+                  <div class="form-group row align-items-center" style="margin-bottom: 8px;">
+                    <label class="col-sm-4 text-start col-form-label" style="font-weight: 600;">Report. Type <span
+                        class="text-danger">*</span></label>
+                    <div class="col-sm-8">
+                      <select class="form-select form-control" [(ngModel)]="patient.ReportingType" name="reportingtype"
+                        required style="border-radius: 2px; cursor: pointer;">
+                        <option value="" disabled>Select</option>
+                        <option value="Value">Value</option>
+                        <option value="Text Fixed">Fixed</option>
+                        <option value="Text MultiLine">MultiLine</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-4 col-sm-12">
+                  <div class="form-group row align-items-center" style="margin-bottom: 8px;">
+                    <label class="col-sm-4 text-start col-form-label" style="font-weight: 600;">Report. Align <span
+                        class="text-danger">*</span></label>
+                    <div class="col-sm-8">
+                      <select class="form-select form-control" [(ngModel)]="patient.ReportingAlign"
+                        name="reportingalign" required style="border-radius: 2px; cursor: pointer;">
+                        <option value="" disabled>Select</option>
+                        <option value="LeftAlign">Left</option>
+                        <option value="CenterBold">Bold</option>
+                        <option value="Not Required">None</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-4 col-sm-12">
+                  <div class="form-group row align-items-center" style="margin-bottom: 0px;">
+                    <label class="col-sm-4 text-start col-form-label" style="font-weight: 600; padding-right: 0;">Page
+                      Break<span class="text-danger">*</span></label>
+                    <div class="col-sm-8">
+                      <select class="form-select form-control" [(ngModel)]="patient.ReportingPageBreak"
+                        name="reportingpagebreak" required style="border-radius: 2px; cursor: pointer;">
+                        <option value="" disabled>Select</option>
+                        <option value="Yes">Yes</option>
+                        <option value="No">No</option>
+                      </select>
+                    </div>
+                  </div>
                 </div>
               </div>
-            </div>
+              <div class="row">
+                <div class="col-md-4 col-sm-12">
+                  <div class="form-group row align-items-center" style="margin-bottom: 0;">
+                    <label class="col-sm-4 text-start col-form-label" style="font-weight: 600;">Notes <span
+                        class="text-danger">*</span></label>
+                    <div class="col-sm-8">
+                      <input type="text" class="form-control" [(ngModel)]="patient.Notes" name="testnotes"
+                        placeholder="Notes" required style="border-radius: 2px;">
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-4 col-sm-12">
+                  <div class="form-group row align-items-center" style="margin-bottom: 0;">
+                    <label class="col-sm-4 text-start col-form-label" style="font-weight: 600;">Comments <span
+                        class="text-danger">*</span></label>
+                    <div class="col-sm-8">
+                      <input type="text" class="form-control" [(ngModel)]="patient.Comments" name="testcomments"
+                        placeholder="Comments" required style="border-radius: 2px;">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
 
-            <div class="row">
-              <div class="col-md-6 col-sm-12">
-                <div class="form-group" style="margin-bottom: 15px;">
-                  <label style="font-weight: 600;">Department <span class="text-danger">*</span></label>
-                  <input class="form-control" [(ngModel)]="patient.DepartmentID" name="testdepartment"
-                    placeholder="Department ID" required style="border-radius: 2px;">
+      <!-- Section 4: Result Configuration -->
+      <div class="col-lg-12 mb-1" *ngIf="patient.Type !== 'MUL' && patient.Type !== 'PRO' && patient.Type !== 'PKG'">
+        <div class="ibox float-e-margins"
+          style="background:#fff; box-shadow: 0 2px 4px rgba(0,0,0,0.08); border-radius: 4px; height: 100%; display: flex; flex-direction: column; margin-bottom: 0;">
+          <div class="ibox-title"
+            style="border-top: 4px solid #f8ac59; padding: 6px 15px; border-bottom: 1px solid #f0f0f0;">
+            <h5 style="font-weight: 600; margin: 0; font-size: 14px; text-transform: uppercase;">Result Configuration
+            </h5>
+          </div>
+          <div class="ibox-content" style="padding: 10px 15px; flex: 1;">
+            <form role="form">
+              <div class="row">
+                <div class="col-md-4 col-sm-12">
+                  <div class="form-group row align-items-center" style="margin-bottom: 0;">
+                    <label class="col-sm-4 text-start col-form-label" style="font-weight: 600;">Unit <span
+                        class="text-danger">*</span></label>
+                    <div class="col-sm-8">
+                      <input type="text" class="form-control" [(ngModel)]="patient.Unit" name="testunit"
+                        placeholder="mg/dL" required style="border-radius: 2px;">
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-4 col-sm-12">
+                  <div class="form-group row align-items-center" style="margin-bottom: 0;">
+                    <label class="col-sm-4 text-start col-form-label" style="font-weight: 600;">Has Range <span
+                        class="text-danger">*</span></label>
+                    <div class="col-sm-8">
+                      <select class="form-select form-control" [(ngModel)]="patient.HasRange" name="testhasnormalrange"
+                        required style="border-radius: 2px; cursor: pointer;">
+                        <option value="" disabled>Select</option>
+                        <option value="Yes">Yes</option>
+                        <option value="No">No</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-4 col-sm-12">
+                  <div class="form-group row align-items-center" style="margin-bottom: 0;">
+                    <label class="col-sm-4 text-start col-form-label" style="font-weight: 600; padding-right: 0;">Default Report Data <span
+                        class="text-danger">*</span></label>
+                    <div class="col-sm-8">
+                      <input type="text" class="form-control" [(ngModel)]="patient.Unit" name="testdefaultvalue"
+                        placeholder="Default Report Data" required style="border-radius: 2px;">
+                    </div>
+                  </div>
                 </div>
               </div>
-              <div class="col-md-6 col-sm-12">
-                <div class="form-group" style="margin-bottom: 15px;">
-                  <label style="font-weight: 600;">Instrument <span class="text-danger">*</span></label>
-                  <input class="form-control" [(ngModel)]="patient.Instrument" name="testinstrument"
-                    placeholder="Instrument" required style="border-radius: 2px;">
-                </div>
-              </div>
-            </div>
+            </form>
+          </div>
+        </div>
+      </div>
 
-            <div class="row">
-              <div class="col-md-6 col-sm-12">
-                <div class="form-group" style="margin-bottom: 15px;">
-                  <label style="font-weight: 600;">Name in Instrument <span class="text-danger">*</span></label>
-                  <input class="form-control" [(ngModel)]="patient.TestNameInInstrument" name="testnameininstrument"
-                    placeholder="Instrument Name" required style="border-radius: 2px;">
-                </div>
-              </div>
-              <div class="col-md-6 col-sm-12">
-                <div class="form-group" style="margin-bottom: 15px;">
-                  <label style="font-weight: 600;">Reporting Priority <span class="text-danger">*</span></label>
-                  <input class="form-control" [(ngModel)]="patient.ReportingPriority" name="testreportingpriority"
-                    placeholder="Priority" required style="border-radius: 2px;">
-                </div>
-              </div>
-            </div>
-
-            <div class="row">
-              <div class="col-md-6 col-sm-12">
-                <div class="form-group" style="margin-bottom: 0;">
-                  <label style="font-weight: 600;">Is Outsourced <span class="text-danger">*</span></label>
-                  <select class="form-select form-control" [(ngModel)]="patient.IsOutsourced" name="testisoutsourced"
-                    required style="border-radius: 2px; cursor: pointer;">
-                    <option value="" disabled>Select</option>
-                    <option value="Yes">Yes</option>
-                    <option value="No">No</option>
-                  </select>
-                </div>
-              </div>
-              <div class="col-md-6 col-sm-12">
-                <div class="form-group" style="margin-bottom: 0;">
-                  <label style="font-weight: 600;">Is NABL Approved <span class="text-danger">*</span></label>
-                  <select class="form-select form-control" [(ngModel)]="patient.IsNABLApproved"
-                    name="testisnablapproved" required style="border-radius: 2px; cursor: pointer;">
-                    <option value="" disabled>Select</option>
-                    <option value="Yes">Yes</option>
-                    <option value="No">No</option>
-                  </select>
-                </div>
-              </div>
-            </div>
-
-          </form>
+      <!-- Section 5: Reference Ranges -->
+      <div class="col-lg-12 mb-1" *ngIf="patient.Type !== 'MUL' && patient.Type !== 'PRO' && patient.Type !== 'PKG'">
+        <div class="ibox float-e-margins"
+          style="background:#fff; box-shadow: 0 2px 4px rgba(0,0,0,0.08); border-radius: 4px; height: 100%; display: flex; flex-direction: column; margin-bottom: 0;">
+          <div class="ibox-title"
+            style="border-top: 4px solid #1c84c6; padding: 6px 15px; border-bottom: 1px solid #f0f0f0; display: flex; justify-content: space-between; align-items: center;">
+            <h5 style="font-weight: 600; margin: 0; font-size: 14px; text-transform: uppercase;">Reference Ranges</h5>
+            <button class="btn btn-primary btn-sm" type="button" (click)="addReferenceRange()" style="background-color: #1ab394; border-color: #1ab394; padding: 4px 12px; font-weight: 600; font-size: 12px; border-radius: 2px;">
+              <i class="fa fa-plus"></i> Add Reference Range
+            </button>
+          </div>
+          <div class="ibox-content"
+            style="padding: 0; overflow: auto; max-height: 220px; flex: 1; border: 1px solid #e7eaec; margin: 5px 15px; border-radius: 2px;">
+            <table class="table table-bordered table-striped table-hover table-condensed"
+              style="margin-bottom: 0; font-size: 13px; border: none;">
+              <thead
+                style="background-color: #f5f5f6; position: sticky; top: 0; z-index: 10; box-shadow: 0 1px 2px rgba(0,0,0,0.1);">
+                <tr>
+                  <th
+                    style="font-weight: 600; text-align: center; width: 50px; padding: 6px 8px; border: 1px solid #e7eaec; background-color: #f5f5f6;">
+                    SL #</th>
+                  <th
+                    style="font-weight: 600; min-width: 60px; padding: 6px 8px; border: 1px solid #e7eaec; background-color: #f5f5f6;">
+                    Age Start</th>
+                  <th
+                    style="font-weight: 600; min-width: 60px; padding: 6px 8px; border: 1px solid #e7eaec; background-color: #f5f5f6;">
+                    Age End</th>
+                  <th
+                    style="font-weight: 600; min-width: 90px; padding: 6px 8px; border: 1px solid #e7eaec; background-color: #f5f5f6;">
+                    Age Unit</th>
+                  <th
+                    style="font-weight: 600; min-width: 100px; padding: 6px 8px; border: 1px solid #e7eaec; background-color: #f5f5f6;">
+                    Gender</th>
+                  <th
+                    style="font-weight: 600; min-width: 80px; padding: 6px 8px; border: 1px solid #e7eaec; background-color: #f5f5f6;">
+                    Min Value</th>
+                  <th
+                    style="font-weight: 600; min-width: 80px; padding: 6px 8px; border: 1px solid #e7eaec; background-color: #f5f5f6;">
+                    Max Value</th>
+                  <th
+                    style="font-weight: 600; min-width: 80px; padding: 6px 8px; border: 1px solid #e7eaec; background-color: #f5f5f6;">
+                    Min Panic</th>
+                  <th
+                    style="font-weight: 600; min-width: 80px; padding: 6px 8px; border: 1px solid #e7eaec; background-color: #f5f5f6;">
+                    Max Panic</th>
+                  <th
+                    style="font-weight: 600; min-width: 80px; padding: 6px 8px; border: 1px solid #e7eaec; background-color: #f5f5f6;">
+                    Unit</th>
+                  <th
+                    style="font-weight: 600; min-width: 140px; padding: 6px 8px; border: 1px solid #e7eaec; background-color: #f5f5f6;">
+                    Range Type</th>
+                  <th
+                    style="font-weight: 600; min-width: 200px; padding: 6px 8px; border: 1px solid #e7eaec; background-color: #f5f5f6;">
+                    RangeText</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let range of referenceRanges; let i = index">
+                  <td style="text-align: center; vertical-align: middle; padding: 4px 8px; border: 1px solid #e7eaec;">{{ i + 1 }}</td>
+                  <td style="padding: 4px 8px; border: 1px solid #e7eaec;">
+                    <input type="number" min="0" max="100" class="form-control input-sm" 
+                      [(ngModel)]="range.ageStart" [name]="'ageStart' + i" (ngModelChange)="validateAgeRange(range)"
+                      [ngClass]="{'border-danger': range.ageError}"
+                      style="border-radius: 2px; height: 26px; font-size: 12px; padding: 2px 5px;"
+                      title="{{range.ageError ? 'Age Start must be less than Age End' : ''}}">
+                  </td>
+                  <td style="padding: 4px 8px; border: 1px solid #e7eaec;">
+                    <input type="number" min="0" max="100" class="form-control input-sm" 
+                      [(ngModel)]="range.ageEnd" [name]="'ageEnd' + i" (ngModelChange)="validateAgeRange(range)"
+                      [ngClass]="{'border-danger': range.ageError}"
+                      style="border-radius: 2px; height: 26px; font-size: 12px; padding: 2px 5px;"
+                      title="{{range.ageError ? 'Age Start must be less than Age End' : ''}}">
+                  </td>
+                  <td style="padding: 4px 8px; border: 1px solid #e7eaec;">
+                    <select class="form-select form-control input-sm" style="border-radius: 2px; height: 26px; padding: 0px 5px; font-size: 12px;">
+                      <option value="Year" [selected]="range.ageUnit === 'Year'">Year</option>
+                      <option value="Month" [selected]="range.ageUnit === 'Month'">Month</option>
+                      <option value="Day" [selected]="range.ageUnit === 'Day'">Day</option>
+                    </select>
+                  </td>
+                  <td style="padding: 4px 8px; border: 1px solid #e7eaec;">
+                    <select class="form-select form-control input-sm" style="border-radius: 2px; height: 26px; padding: 0px 5px; font-size: 12px;">
+                      <option value="Female" [selected]="range.gender === 'Female'">Female</option>
+                      <option value="Male" [selected]="range.gender === 'Male'">Male</option>
+                      <option value="Both" [selected]="range.gender === 'Both'">Both</option>
+                    </select>
+                  </td>
+                  <td style="padding: 4px 8px; border: 1px solid #e7eaec;"><input type="text"
+                      class="form-control input-sm" [value]="range.minVal"
+                      style="border-radius: 2px; height: 26px; font-size: 12px; padding: 2px 5px;"></td>
+                  <td style="padding: 4px 8px; border: 1px solid #e7eaec;"><input type="text"
+                      class="form-control input-sm" [value]="range.maxVal"
+                      style="border-radius: 2px; height: 26px; font-size: 12px; padding: 2px 5px;"></td>
+                  <td style="padding: 4px 8px; border: 1px solid #e7eaec;"><input type="text"
+                      class="form-control input-sm" [value]="range.minPanic"
+                      style="border-radius: 2px; height: 26px; font-size: 12px; padding: 2px 5px;"></td>
+                  <td style="padding: 4px 8px; border: 1px solid #e7eaec;"><input type="text"
+                      class="form-control input-sm" [value]="range.maxPanic"
+                      style="border-radius: 2px; height: 26px; font-size: 12px; padding: 2px 5px;"></td>
+                  <td style="padding: 4px 8px; border: 1px solid #e7eaec;">
+                    <select class="form-select form-control input-sm" [(ngModel)]="range.unit" [name]="'unit' + i"
+                      style="border-radius: 2px; height: 26px; padding: 0px 5px; font-size: 12px;">
+                      <option value="" disabled>Select</option>
+                      <option value="mg/dL">mg/dL</option>
+                      <option value="g/dL">g/dL</option>
+                      <option value="U/L">U/L</option>
+                      <option value="mmol/L">mmol/L</option>
+                      <option value="µg/dL">µg/dL</option>
+                      <option value="%">%</option>
+                      <option value="cells/mcL">cells/mcL</option>
+                    </select>
+                  </td>
+                  <td style="padding: 4px 8px; border: 1px solid #e7eaec;">
+                    <select class="form-select form-control input-sm"
+                      style="border-radius: 2px; height: 26px; padding: 0px 5px; font-size: 12px;">
+                      <option value="SingleTextLine" [selected]="range.rangeType === 'SingleTextLine'">SingleTextLine</option>
+                      <option value="MultiTextLine" [selected]="range.rangeType === 'MultiTextLine'">MultiTextLine</option>
+                    </select>
+                  </td>
+                  <td style="padding: 4px 8px; border: 1px solid #e7eaec;"><input type="text"
+                      class="form-control input-sm" [value]="range.rangeText"
+                      style="border-radius: 2px; height: 26px; font-size: 12px; padding: 2px 5px;"></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
     </div>
 
-    <!-- Col 3: Report Formatting & Output -->
-    <div class="col-lg-3 col-md-12 mb-4">
-      <div class="ibox float-e-margins"
-        style="background:#fff; box-shadow: 0 2px 4px rgba(0,0,0,0.08); border-radius: 4px;">
-        <div class="ibox-title"
-          style="border-top: 4px solid #23c6c8; padding: 15px 20px; border-bottom: 1px solid #f0f0f0;">
-          <h5 style="font-weight: 600; margin: 0; font-size: 14px; text-transform: uppercase;">Report Formatting &
-            Output</h5>
+    <!-- Save/Cancel Buttons -->
+    <div class="row mt-2">
+      <div class="col-lg-12">
+        <div class="hr-line-dashed" style="border-top: 1px dashed #e7eaec; margin: 10px 0;"></div>
+        <div class="text-right d-flex justify-content-end gap-2"
+          style="justify-content: flex-end; margin-bottom: 30px;">
+          <button class="btn btn-white" type="button"
+            style="border: 1px solid #d2d2d2; background: #fff; padding: 8px 20px; font-weight: 600; border-radius: 2px; color: #555; margin-right: 10px;">Cancel</button>
+          <button class="btn btn-primary" type="submit"
+            style="background-color: #1ab394; border-color: #1ab394; padding: 8px 24px; font-weight: 600; color: white; border-radius: 2px;">Save
+            Changes</button>
         </div>
-        <div class="ibox-content" style="padding: 20px; background-color: #fcfcfc;">
-          <form role="form">
-            <div class="form-group" style="margin-bottom: 15px;">
-              <label style="font-weight: 600;">Reporting Type <span class="text-danger">*</span></label>
-              <select class="form-select form-control" [(ngModel)]="patient.ReportingType" name="reportingtype" required
-                style="border-radius: 2px; cursor: pointer;">
-                <option value="" disabled>Select Reporting Type</option>
-                <option value="Value">Value</option>
-                <option value="Text Fixed">Text Fixed</option>
-                <option value="Text MultiLine">Text MultiLine</option>
-              </select>
-            </div>
-            <div class="form-group" style="margin-bottom: 15px;">
-              <label style="font-weight: 600;">Reporting Align <span class="text-danger">*</span></label>
-              <select class="form-select form-control" [(ngModel)]="patient.ReportingAlign" name="reportingalign"
-                required style="border-radius: 2px; cursor: pointer;">
-                <option value="" disabled>Select</option>
-                <option value="LeftAlign">LeftAlign</option>
-                <option value="CenterBold">CenterBold</option>
-                <option value="Not Required">Not Required</option>
-              </select>
-            </div>
-
-            <div class="form-group" style="margin-bottom: 0px;">
-              <label style="font-weight: 600;">Reporting Page Break<span class="text-danger">*</span></label>
-              <select class="form-select form-control" [(ngModel)]="patient.ReportingPageBreak"
-                name="reportingpagebreak" required style="border-radius: 2px; cursor: pointer;">
-                <option value="" disabled>Select</option>
-                <option value="Yes">Yes</option>
-                <option value="No">No</option>
-              </select>
-            </div>
-            <div class="form-group" style="margin-bottom: 15px;">
-              <label style="font-weight: 600;">Notes <span class="text-danger">*</span></label>
-              <input type="text" class="form-control" [(ngModel)]="patient.Notes" name="testnotes" placeholder="Notes"
-                required style="border-radius: 2px;">
-            </div>
-            <div class="form-group" style="margin-bottom: 15px;">
-              <label style="font-weight: 600;">Comments <span class="text-danger">*</span></label>
-              <input type="text" class="form-control" [(ngModel)]="patient.Comments" name="testcomments"
-                placeholder="Comments" required style="border-radius: 2px;">
-            </div>
-
-          </form>
-        </div>
-      </div>
-
-      <!-- <div class="ibox float-e-margins"
-        style="background:#fff; box-shadow: 0 2px 4px rgba(0,0,0,0.08); border-radius: 4px; margin-top: 25px;">
-        <div class="ibox-title"
-          style="border-top: 4px solid #ed5565; padding: 15px 20px; border-bottom: 1px solid #f0f0f0;">
-          <h5 style="font-weight: 600; margin: 0; font-size: 14px; text-transform: uppercase;">Additional Information</h5>
-        </div>
-        <div class="ibox-content" style="padding: 20px; background-color: #fcfcfc;">
-          <form role="form">
-            <div class="form-group" style="margin-bottom: 15px;">
-              <label style="font-weight: 600;">Reporting Type <span class="text-danger">*</span></label>
-              <select class="form-select form-control" [(ngModel)]="patient.ReportingType" name="reportingtype" required style="border-radius: 2px; cursor: pointer;">
-                <option value="" disabled>Select Reporting Type</option>
-                <option value="Value">Value</option>
-                <option value="Text Fixed">Text Fixed</option>
-                <option value="Text MultiLine">Text MultiLine</option>
-              </select>
-            </div>
-            <div class="form-group" style="margin-bottom: 0px;">
-              <label style="font-weight: 600;">Reporting Align <span class="text-danger">*</span></label>
-              <select class="form-select form-control" [(ngModel)]="patient.ReportingAlign" name="reportingalign" required style="border-radius: 2px; cursor: pointer;">
-                <option value="" disabled>Select</option>
-                <option value="LeftAlign">LeftAlign</option>
-                <option value="CenterBold">CenterBold</option>
-                <option value="Not Required">Not Required</option>
-              </select>
-            </div>
-          </form>
-        </div>
-      </div> -->
-    </div>
-  </div>
-
-  <!-- Row 2: Diagnostics Sub-Configuration -->
-  <div class="row">
-    <!-- Result Configuration (moved from top row) -->
-    <div class="col-lg-4 col-md-12 mb-4">
-      <div class="ibox float-e-margins"
-        style="background:#fff; box-shadow: 0 2px 4px rgba(0,0,0,0.08); border-radius: 4px; height: 100%; display: flex; flex-direction: column; margin-bottom: 0;">
-        <div class="ibox-title"
-          style="border-top: 4px solid #f8ac59; padding: 15px 20px; border-bottom: 1px solid #f0f0f0;">
-          <h5 style="font-weight: 600; margin: 0; font-size: 14px; text-transform: uppercase;">Result Configuration</h5>
-        </div>
-        <div class="ibox-content" style="padding: 20px; flex: 1;">
-          <form role="form">
-            <div class="form-group" style="margin-bottom: 15px;">
-              <label style="font-weight: 600;">Unit <span class="text-danger">*</span></label>
-              <input type="text" class="form-control" [(ngModel)]="patient.Unit" name="testunit"
-                placeholder="e.g. mg/dL" required style="border-radius: 2px;">
-            </div>
-            <div class="form-group" style="margin-bottom: 15px;">
-              <label style="font-weight: 600;">Has Normal Range <span class="text-danger">*</span></label>
-              <select class="form-select form-control" [(ngModel)]="patient.HasRange" name="testhasnormalrange" required
-                style="border-radius: 2px; cursor: pointer;">
-                <option value="" disabled>Select</option>
-                <option value="Yes">Yes</option>
-                <option value="No">No</option>
-              </select>
-            </div>
-            <div class="form-group" style="margin-bottom: 0px;">
-              <label style="font-weight: 600;">Default Value <span class="text-danger">*</span></label>
-              <input type="text" class="form-control" [(ngModel)]="patient.Unit" name="testdefaultvalue"
-                placeholder="Default" required style="border-radius: 2px;">
-            </div>
-          </form>
-        </div>
-      </div>
-    </div>
-
-    <!-- Reference Ranges (New Section) -->
-    <div class="col-lg-8 col-md-12 mb-4">
-      <div class="ibox float-e-margins" style="background:#fff; box-shadow: 0 2px 4px rgba(0,0,0,0.08); border-radius: 4px; height: 100%; display: flex; flex-direction: column; margin-bottom: 0;">
-        <div class="ibox-title" style="border-top: 4px solid #1c84c6; padding: 15px 20px; border-bottom: 1px solid #f0f0f0; display: flex; justify-content: space-between; align-items: center;">
-          <h5 style="font-weight: 600; margin: 0; font-size: 14px; text-transform: uppercase;">Reference Ranges</h5>
-          <!-- <button class="btn btn-xs btn-primary" type="button" style="border-radius: 2px; padding: 4px 10px;"><i class="fa fa-plus"></i> Add Row</button> -->
-        </div>
-        <div class="ibox-content" style="padding: 15px; overflow-x: auto; flex: 1;">
-          <table class="table table-bordered table-condensed" style="margin-bottom: 0; font-size: 13px;">
-            <thead style="background-color: #f5f5f6;">
-              <tr>
-                <th style="font-weight: 600; text-align: center; width: 50px;">SL #</th>
-                <th style="font-weight: 600; min-width: 80px;">Age Start</th>
-                <th style="font-weight: 600; min-width: 80px;">Age End</th>
-                <th style="font-weight: 600; min-width: 90px;">Age Unit</th>
-                <th style="font-weight: 600; min-width: 100px;">Gender</th>
-                <th style="font-weight: 600; min-width: 80px;">Min Value</th>
-                <th style="font-weight: 600; min-width: 80px;">Max Value</th>
-                <th style="font-weight: 600; min-width: 80px;">Unit</th>
-                <th style="font-weight: 600; min-width: 90px;">Range Type</th>
-                <th style="font-weight: 600; min-width: 200px;">RangeText</th>
-              </tr>
-            </thead>
-            <tbody>
-               <tr>
-                 <td style="text-align: center; vertical-align: middle;">1</td>
-                 <td><input type="text" class="form-control input-sm" value="0" style="border-radius: 2px; height: 30px; font-size: 13px;"></td>
-                 <td><input type="text" class="form-control input-sm" value="100" style="border-radius: 2px; height: 30px; font-size: 13px;"></td>
-                 <td>
-                   <select class="form-select form-control input-sm" style="border-radius: 2px; height: 30px; padding: 4px 8px; font-size: 13px;">
-                     <option value="Year" selected>Year</option>
-                     <option value="Month">Month</option>
-                     <option value="Day">Day</option>
-                   </select>
-                 </td>
-                 <td>
-                   <select class="form-select form-control input-sm" style="border-radius: 2px; height: 30px; padding: 4px 8px; font-size: 13px;">
-                     <option value="Female" selected>Female</option>
-                     <option value="Male">Male</option>
-                     <option value="Both">Both</option>
-                   </select>
-                 </td>
-                 <td><input type="text" class="form-control input-sm" value="0" style="border-radius: 2px; height: 30px; font-size: 13px;"></td>
-                 <td><input type="text" class="form-control input-sm" value="32" style="border-radius: 2px; height: 30px; font-size: 13px;"></td>
-                 <td><input type="text" class="form-control input-sm" value="" style="border-radius: 2px; height: 30px; font-size: 13px;"></td>
-                 <td>
-                   <select class="form-select form-control input-sm" style="border-radius: 2px; height: 30px; padding: 4px 8px; font-size: 13px;">
-                     <option value="Value" selected>Value</option>
-                     <option value="Text">Text</option>
-                   </select>
-                 </td>
-                 <td><input type="text" class="form-control input-sm" value="Women Upto 32Men Upto 42" title="Women Upto 32Men Upto 42" style="border-radius: 2px; height: 30px; font-size: 13px;"></td>
-               </tr>
-               <tr>
-                 <td style="text-align: center; vertical-align: middle;">2</td>
-                 <td><input type="text" class="form-control input-sm" value="0" style="border-radius: 2px; height: 30px; font-size: 13px;"></td>
-                 <td><input type="text" class="form-control input-sm" value="100" style="border-radius: 2px; height: 30px; font-size: 13px;"></td>
-                 <td>
-                   <select class="form-select form-control input-sm" style="border-radius: 2px; height: 30px; padding: 4px 8px; font-size: 13px;">
-                     <option value="Year" selected>Year</option>
-                     <option value="Month">Month</option>
-                     <option value="Day">Day</option>
-                   </select>
-                 </td>
-                 <td>
-                   <select class="form-select form-control input-sm" style="border-radius: 2px; height: 30px; padding: 4px 8px; font-size: 13px;">
-                     <option value="Female">Female</option>
-                     <option value="Male" selected>Male</option>
-                     <option value="Both">Both</option>
-                   </select>
-                 </td>
-                 <td><input type="text" class="form-control input-sm" value="0" style="border-radius: 2px; height: 30px; font-size: 13px;"></td>
-                 <td><input type="text" class="form-control input-sm" value="42" style="border-radius: 2px; height: 30px; font-size: 13px;"></td>
-                 <td><input type="text" class="form-control input-sm" value="" style="border-radius: 2px; height: 30px; font-size: 13px;"></td>
-                 <td>
-                   <select class="form-select form-control input-sm" style="border-radius: 2px; height: 30px; padding: 4px 8px; font-size: 13px;">
-                     <option value="Value" selected>Value</option>
-                     <option value="Text">Text</option>
-                   </select>
-                 </td>
-                 <td><input type="text" class="form-control input-sm" value="" style="border-radius: 2px; height: 30px; font-size: 13px;"></td>
-               </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="row mt-0">
-    <div class="col-lg-12">
-      <div class="hr-line-dashed" style="border-top: 1px dashed #e7eaec; margin: 10px 0;"></div>
-      <div class="text-right d-flex justify-content-end gap-2" style="justify-content: flex-end; margin-bottom: 30px;">
-        <button class="btn btn-white" type="button"
-          style="border: 1px solid #d2d2d2; background: #fff; padding: 8px 20px; font-weight: 600; border-radius: 2px; color: #555; margin-right: 10px;">Cancel</button>
-        <button class="btn btn-primary" type="submit"
-          style="background-color: #1ab394; border-color: #1ab394; padding: 8px 24px; font-weight: 600; color: white; border-radius: 2px;">Save
-          Changes</button>
       </div>
     </div>
   </div>
