@@ -17,7 +17,6 @@ import { TableService } from '@core/services/table.service';
 import { currency } from '@/app/constants';
 import { NgIcon } from '@ng-icons/core';
 import { toTitleCase } from '@/app/utils/string-utils';
-import { RatingComponent } from '@app/components/rating.component';
 import { FormsModule } from '@angular/forms';
 import {
     NgbPagination,
@@ -37,7 +36,6 @@ import patientdata from '../../patientdata.json';
         LucideAngularModule,
         RouterLink,
         NgIcon,
-        RatingComponent,
         FormsModule,
         NgbPagination,
 
@@ -50,8 +48,8 @@ import patientdata from '../../patientdata.json';
     styleUrl: './lab.scss',
     providers: [TableService],
 })
-export class Lab implements OnInit{
-     protected readonly LucideSearch = LucideSearch;
+export class Lab implements OnInit {
+    protected readonly LucideSearch = LucideSearch;
     protected readonly LucideLayoutGrid = LucideLayoutGrid;
     protected readonly LucideList = LucideList;
     protected readonly LucidePlus = LucidePlus;
@@ -93,7 +91,7 @@ export class Lab implements OnInit{
         const data: any[] = labdata as any[];
 
         const patientLabs = data.filter((l: any) => l.patientId == patientId);
-        
+
         this.alllab = patientLabs.map((v: any) => ({
             id: v.labId,
             date: v.date,
@@ -106,7 +104,7 @@ export class Lab implements OnInit{
             results: v.results,
             file: v.file
         }));
-        
+
         console.log("Lab Data:", data);
 
         this.tableService.setItems(this.alllab, 8);
@@ -225,6 +223,6 @@ export class Lab implements OnInit{
         this.tableService.setItems(this.alllab, this.tableService.pageSize);
     }
     applyDateFilter() {
-  this.applyFilters();
-}
+        this.applyFilters();
+    }
 }

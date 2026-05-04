@@ -1,22 +1,22 @@
-import {Component} from '@angular/core';
+import { Component } from '@angular/core';
 
-import {RouterLink} from '@angular/router';
-import {NgIcon} from '@ng-icons/core';
-import {LayoutStoreService} from '@core/services/layout-store.service';
-import {LucideAngularModule, Search} from 'lucide-angular';
+import { RouterLink } from '@angular/router';
+import { NgIcon } from '@ng-icons/core';
+import { LayoutStoreService } from '@core/services/layout-store.service';
+import { LucideAngularModule, Search } from 'lucide-angular';
 
-import {MegaMenuComponent} from '@layouts/components/topbar/components/mega-menu/mega-menu.component';
+import { MegaMenuComponent } from '@layouts/components/topbar/components/mega-menu/mega-menu.component';
 import {
     LanguageDropdownComponent
 } from '@layouts/components/topbar/components/language-dropdown/language-dropdown.component';
 import {
     MessagesDropdownComponent
 } from '@layouts/components/topbar/components/messages-dropdown/messages-dropdown.component';
-import {ThemeTogglerComponent} from '@layouts/components/topbar/components/theme-toggler/theme-toggler.component';
+import { ThemeTogglerComponent } from '@layouts/components/topbar/components/theme-toggler/theme-toggler.component';
 import {
     CustomizerTogglerComponent
 } from '@layouts/components/topbar/components/customizer-toggler/customizer-toggler.component';
-import {UserProfileComponent} from '@layouts/components/topbar/components/user-profile/user-profile.component';
+import { UserProfileComponent } from '@layouts/components/topbar/components/user-profile/user-profile.component';
 import {
     NotificationDropdownComponent
 } from '@layouts/components/topbar/components/notification-dropdown/notification-dropdown.component';
@@ -24,17 +24,17 @@ import {
 @Component({
     selector: 'app-topbar',
     imports: [
-    NgIcon,
-    RouterLink,
-    LucideAngularModule,
-    MegaMenuComponent,
-    LanguageDropdownComponent,
-    MessagesDropdownComponent,
-    CustomizerTogglerComponent,
-    ThemeTogglerComponent,
-    UserProfileComponent,
-    NotificationDropdownComponent
-],
+        NgIcon,
+        RouterLink,
+        LucideAngularModule,
+        //MegaMenuComponent,
+        //LanguageDropdownComponent,
+        //MessagesDropdownComponent,
+        CustomizerTogglerComponent,
+        //ThemeTogglerComponent,
+        UserProfileComponent,
+        //NotificationDropdownComponent
+    ],
     templateUrl: './topbar.component.html'
 })
 export class TopbarComponent {

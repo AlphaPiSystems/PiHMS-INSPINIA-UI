@@ -12,9 +12,5 @@ export const PAGES_ROUTES: Routes = [
     {
         path: 'patients',
         loadChildren: () => import('./patients/patients.routes').then((mod) => mod.PATIENTS_ROUTES)
-    },
-    {
-        path: '',
-        loadChildren: () => import('./masters/masters.routes').then((mod) => mod.MASTER_ROUTES)
-    },
+    }
 ];

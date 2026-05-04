@@ -29,8 +29,7 @@
                 "silenceDeprecations": [
                   "color-functions",
                   "global-builtin",
-                  "import",
-                  "mixed-decls"
+                  "import"
                 ]
               }
             },
@@ -47,7 +46,7 @@
               "src/styles.scss"
             ],
             "scripts": [
-                "node_modules/jsvectormap/dist/js/jsvectormap.min.js"
+              "node_modules/jsvectormap/dist/js/jsvectormap.min.js"
             ]
           },
           "configurations": {
@@ -114,6 +113,6 @@
     }
   },
   "cli": {
-    "analytics": "9485c36a-7226-4414-9069-c99f2fba6214"
+    "analytics": false
   }
 }
