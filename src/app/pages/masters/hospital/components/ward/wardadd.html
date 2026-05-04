@@ -47,7 +47,7 @@
                   <div class="form-group row align-items-center" style="margin-bottom: 8px;">
                     <label class="col-sm-4 text-start col-form-label" style="font-weight: 600;">Floor <span class="text-danger">*</span></label>
                     <div class="col-sm-8">
-                      <select class="form-select form-control" [(ngModel)]="ward.FloorID" name="floor" required style="border-radius: 2px;">
+                      <select class="form-select form-control" [(ngModel)]="ward.FloorID" (ngModelChange)="onFloorChange()" name="floor" required style="border-radius: 2px;">
                         <option value="">Select Floor</option>
                         <option *ngFor="let floor of floors" [value]="floor.id">{{floor.FloorName}} ({{floor.FloorNumber}})</option>
                       </select>
@@ -60,7 +60,7 @@
                     <div class="col-sm-8">
                       <select class="form-select form-control" [(ngModel)]="ward.DepartmentID" name="department" required style="border-radius: 2px;">
                         <option value="">Select Department</option>
-                        <option *ngFor="let dept of departments" [value]="dept">{{dept}}</option>
+                        <option *ngFor="let dept of departments" [value]="dept.id">{{dept.Name}}</option>
                       </select>
                     </div>
                   </div>

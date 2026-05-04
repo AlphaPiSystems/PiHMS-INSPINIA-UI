@@ -9,7 +9,7 @@ export const STAFF_LIST = [
     FrontDeskNumber: '101',
     FrontDeskStaffName: 'Meera Iyer',
     BranchName: 'Main Branch',
-    Department: 'Pathology'
+    Department: 'Clinical Pathology'
   },
   {
     id: 'FLR002',
@@ -21,7 +21,7 @@ export const STAFF_LIST = [
     FrontDeskNumber: '201',
     FrontDeskStaffName: 'Deepa Menon',
     BranchName: 'Main Branch',
-    Department: 'Biochemistry'
+    Department: 'Bio Chemistry'
   },
   {
     id: 'FLR003',
@@ -58,5 +58,65 @@ export const STAFF_LIST = [
     FrontDeskStaffName: '',
     BranchName: 'Main Branch',
     Department: 'Maintenance'
+  },
+  {
+    id: 'FLR006',
+    FloorNumber: 'F04',
+    FloorName: 'Fourth Floor',
+    HospitalBuildingName: 'Main Block',
+    Accessibility: 'Standard',
+    FrontDeskPresent: 'Y',
+    FrontDeskNumber: '401',
+    FrontDeskStaffName: 'Anjali Sharma',
+    BranchName: 'Main Branch',
+    Department: 'Cardiology'
+  },
+  {
+    id: 'FLR007',
+    FloorNumber: 'F05',
+    FloorName: 'Fifth Floor',
+    HospitalBuildingName: 'Main Block',
+    Accessibility: 'Standard',
+    FrontDeskPresent: 'Y',
+    FrontDeskNumber: '501',
+    FrontDeskStaffName: 'Rahul Verma',
+    BranchName: 'Main Branch',
+    Department: 'Neurology'
+  },
+  {
+    id: 'FLR008',
+    FloorNumber: 'F06',
+    FloorName: 'Sixth Floor',
+    HospitalBuildingName: 'Specialty Wing',
+    Accessibility: 'Restricted',
+    FrontDeskPresent: 'N',
+    FrontDeskNumber: '',
+    FrontDeskStaffName: '',
+    BranchName: 'Main Branch',
+    Department: 'Oncology'
+  },
+  {
+    id: 'FLR009',
+    FloorNumber: 'G02',
+    FloorName: 'Ground Floor B',
+    HospitalBuildingName: 'Annex Building',
+    Accessibility: 'Full Access',
+    FrontDeskPresent: 'Y',
+    FrontDeskNumber: 'G02',
+    FrontDeskStaffName: 'Priya Das',
+    BranchName: 'City Center Branch',
+    Department: 'Physiotherapy'
+  },
+  {
+    id: 'FLR010',
+    FloorNumber: 'B02',
+    FloorName: 'Lower Basement',
+    HospitalBuildingName: 'Main Block',
+    Accessibility: 'Staff Only',
+    FrontDeskPresent: 'N',
+    FrontDeskNumber: '',
+    FrontDeskStaffName: '',
+    BranchName: 'Main Branch',
+    Department: 'Housekeeping'
   }
 ];

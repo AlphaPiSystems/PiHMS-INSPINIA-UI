@@ -42,4 +42,30 @@ export const HOSPITAL_ROUTES: Routes = [
         path: 'ward/wardedit/:id',
         loadComponent: () => import('./components/ward/wardedit').then(c => c.WardEdit)
     },
+    {
+        path: 'wardbed/wardbedlist',
+        loadComponent: () => import('./components/wardbed/wardbed').then(c => c.WardBed),
+        data: {title: "Ward Bed"},
+    },
+    {
+        path: 'wardbed/wardbedadd',
+        loadComponent: () => import('./components/wardbedadd/wardbedadd').then(c => c.WardBedAdd)
+    },
+    {
+        path: 'wardbed/wardbededit/:id',
+        loadComponent: () => import('./components/wardbededit/wardbededit').then(c => c.WardBedEdit)
+    },
+    {
+        path: 'wardtype/wardtypelist',
+        loadComponent: () => import('./components/wardtype/wardtype').then(c => c.WardType),
+        data: {title: "Ward Type"},
+    },
+    {
+        path: 'wardtype/wardtypeadd',
+        loadComponent: () => import('./components/wardtypeadd/wardtypeadd').then(c => c.WardTypeAdd)
+    },
+    {
+        path: 'wardtype/wardtypeedit/:id',
+        loadComponent: () => import('./components/wardtypeedit/wardtypeedit').then(c => c.WardTypeEdit)
+    },
 ];

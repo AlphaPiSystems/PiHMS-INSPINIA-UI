@@ -7,6 +7,7 @@ import { PageTitleComponent } from '../../../../../components/page-title.compone
 import { LucideAngularModule } from 'lucide-angular';
 
 import { STAFF_LIST } from '../floor/hospital-data';
+import { DEPARTMENT_LIST } from '../../../../masters/departments/components/department/department-data';
 
 @Component({
   selector: 'app-flooredit',
@@ -16,6 +17,7 @@ import { STAFF_LIST } from '../floor/hospital-data';
 })
 export class FloorEdit implements OnInit {
   floor: any = {};
+  departmentList = DEPARTMENT_LIST;
 
   constructor(private route: ActivatedRoute) {}
 

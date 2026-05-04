@@ -5,7 +5,7 @@ import { LandingComponent } from './pages/landing/landing.component';
 export const routes: Routes = [
     {
         path: '',
-        redirectTo: 'dashboard',
+        redirectTo: 'department/departmentlist',
         pathMatch: 'full',
     },
     {

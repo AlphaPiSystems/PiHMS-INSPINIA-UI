@@ -6,6 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { PageTitleComponent } from '../../../../../components/page-title.component';
 import { LucideAngularModule, LucideSearch } from 'lucide-angular';
 import { NgbPagination, NgbPaginationNext, NgbPaginationPrevious } from '@ng-bootstrap/ng-bootstrap';
+import { DEPARTMENT_LIST } from '../../../../masters/departments/components/department/department-data';
 
 
 @Component({
@@ -16,6 +17,7 @@ import { NgbPagination, NgbPaginationNext, NgbPaginationPrevious } from '@ng-boo
 })
 export class FloorAdd implements OnInit {
   floor: any = {};
+  departmentList = DEPARTMENT_LIST;
 
   constructor(private route: ActivatedRoute) {}
 

@@ -73,6 +73,17 @@ export const menuItems: MenuItemType[] = [
         isCollapsed: true,
         children: [
             {
+                label: 'Hospital',
+                isCollapsed: true,
+                children: [
+                    { label: 'Building', url: '/building/buildinglist' },
+                    { label: 'Floor', url: '/floor/floorlist' },
+                    { label: 'Ward Type', url: '/wardtype/wardtypelist' },
+                    { label: 'Ward', url: '/ward/wardlist' },
+                    { label: 'Ward Bed', url: '/wardbed/wardbedlist' },
+                ]
+            },
+            {
                 label: 'Diagnostic Lab',
                 isCollapsed: true,
                 children: [
@@ -96,13 +107,8 @@ export const menuItems: MenuItemType[] = [
                 ]
             },
             {
-                label: 'Hospital',
-                isCollapsed: true,
-                children: [
-                    { label: 'Building', url: '/building/buildinglist' },
-                    { label: 'Floor', url: '/floor/floorlist' },
-                    { label: 'Ward', url: '/ward/wardlist' },
-                ]
+                label: 'Department',
+                url: '/department/departmentlist'
             },
         ]
     },

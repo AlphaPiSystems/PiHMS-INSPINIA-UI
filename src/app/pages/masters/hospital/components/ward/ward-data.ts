@@ -1,3 +1,5 @@
+import { WARDTYPE_LIST } from '../wardtype/hospital-data';
+
 export const WARD_LIST = [
   {
     id: 'WRD001',
@@ -11,8 +13,8 @@ export const WARD_LIST = [
     ExtensionNumber: '101',
     BranchID: 1,
     BranchName: 'Main Branch',
-    DepartmentID: 1,
-    Department: 'General Medicine',
+    DepartmentID: 'DPT004',
+    Department: 'Clinical Pathology',
     Status: 'Active'
   },
   {
@@ -27,8 +29,8 @@ export const WARD_LIST = [
     ExtensionNumber: '201',
     BranchID: 1,
     BranchName: 'Main Branch',
-    DepartmentID: 2,
-    Department: 'Critical Care',
+    DepartmentID: 'DPT002',
+    Department: 'Bio Chemistry',
     Status: 'Active'
   },
   {
@@ -43,11 +45,91 @@ export const WARD_LIST = [
     ExtensionNumber: '301',
     BranchID: 1,
     BranchName: 'Main Branch',
-    DepartmentID: 3,
-    Department: 'Pediatrics',
+    DepartmentID: 'DPT009',
+    Department: 'Microbiology',
     Status: 'Inactive'
+  },
+  {
+    id: 'WRD004',
+    WardNumber: 'W-401',
+    Name: 'Cardiac Care Unit',
+    Description: 'Specialized Cardiology Ward',
+    FloorID: 'FLR006',
+    FloorName: 'Fourth Floor',
+    WardTypeID: 'ICU',
+    PhoneNumber: '080-4567890',
+    ExtensionNumber: '401',
+    BranchID: 1,
+    BranchName: 'Main Branch',
+    DepartmentID: 'DPT003',
+    Department: 'Cardiology',
+    Status: 'Active'
+  },
+  {
+    id: 'WRD005',
+    WardNumber: 'W-501',
+    Name: 'Neurology Ward',
+    Description: 'Brain and Nerve Care',
+    FloorID: 'FLR007',
+    FloorName: 'Fifth Floor',
+    WardTypeID: 'Private',
+    PhoneNumber: '080-5678901',
+    ExtensionNumber: '501',
+    BranchID: 1,
+    BranchName: 'Main Branch',
+    DepartmentID: 'DPT018',
+    Department: 'Neurology',
+    Status: 'Active'
+  },
+  {
+    id: 'WRD006',
+    WardNumber: 'W-601',
+    Name: 'Oncology Unit',
+    Description: 'Cancer Care Center',
+    FloorID: 'FLR008',
+    FloorName: 'Sixth Floor',
+    WardTypeID: 'Semi-Private',
+    PhoneNumber: '080-6789012',
+    ExtensionNumber: '601',
+    BranchID: 1,
+    BranchName: 'Main Branch',
+    DepartmentID: 'DPT021',
+    Department: 'Oncology',
+    Status: 'Active'
+  },
+  {
+    id: 'WRD007',
+    WardNumber: 'W-G02',
+    Name: 'Rehab Center',
+    Description: 'Physiotherapy and Rehab',
+    FloorID: 'FLR009',
+    FloorName: 'Ground Floor B',
+    WardTypeID: 'General',
+    PhoneNumber: '080-7890123',
+    ExtensionNumber: '701',
+    BranchID: 1,
+    BranchName: 'City Center Branch',
+    DepartmentID: 'DPT024',
+    Department: 'Physiotherapy',
+    Status: 'Active'
+  },
+  {
+    id: 'WRD008',
+    WardNumber: 'W-102',
+    Name: 'General Ward - Female',
+    Description: 'Female General Ward',
+    FloorID: 'FLR001',
+    FloorName: 'First Floor',
+    WardTypeID: 'General',
+    PhoneNumber: '080-1234568',
+    ExtensionNumber: '102',
+    BranchID: 1,
+    BranchName: 'Main Branch',
+    DepartmentID: 'DPT004',
+    Department: 'Clinical Pathology',
+    Status: 'Active'
   }
 ];
 
-export const WARD_TYPES = ['General', 'ICU', 'Semi-Private', 'Private', 'Pediatric', 'Maternity'];
+export const WARD_TYPES = WARDTYPE_LIST.map(wt => wt.Type);
 export const STATUS_LIST = ['Active', 'Inactive'];

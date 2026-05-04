@@ -122,7 +122,10 @@
                   <div class="form-group row align-items-center" style="margin-bottom: 8px;">
                     <label class="col-sm-4 text-start col-form-label" style="font-weight: 600;">Department</label>
                     <div class="col-sm-8">
-                      <input type="text" class="form-control" [(ngModel)]="floor.Department" name="department" placeholder="Department" style="border-radius: 2px;">
+                      <select class="form-select form-control" [(ngModel)]="floor.Department" name="department" style="border-radius: 2px;">
+                        <option value="">Select Department</option>
+                        <option *ngFor="let dept of departmentList" [value]="dept.Name">{{ dept.Name }}</option>
+                      </select>
                     </div>
                   </div>
                 </div>

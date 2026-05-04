@@ -9,7 +9,7 @@ import { LucideAngularModule } from 'lucide-angular';
 import { WARD_TYPES, STATUS_LIST } from '../ward/ward-data';
 import { STAFF_LIST as FLOOR_LIST } from '../floor/hospital-data';
 import { BUILDING_LIST } from '../hospitalbuilding/hospitalbuilding-data';
-import { DEPARTMENT_LIST } from '../../../staffs/components/staff/staff-data';
+import { DEPARTMENT_LIST } from '../../../departments/components/department/department-data';
 
 @Component({
   selector: 'app-wardadd',
@@ -45,5 +45,17 @@ export class WardAdd implements OnInit {
 
   saveChanges() {
     console.log('Saving ward data:', this.ward);
+  }
+
+  onFloorChange() {
+    const selectedFloor = this.floors.find(f => f.id === this.ward.FloorID);
+    if (selectedFloor && selectedFloor.Department) {
+      this.ward.Department = selectedFloor.Department;
+      // Also try to find matching DepartmentID if possible
+      const dept = this.departments.find(d => d.Name === selectedFloor.Department);
+      if (dept) {
+        this.ward.DepartmentID = dept.id;
+      }
+    }
   }
 }

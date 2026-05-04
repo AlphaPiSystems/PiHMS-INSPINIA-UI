@@ -18,4 +18,8 @@ export const MASTER_ROUTES: Routes = [
         path: '',
         loadChildren: () => import('./hospital/hospital.routes').then((mod) => mod.HOSPITAL_ROUTES)
     },
+    {
+        path: '',
+        loadChildren: () => import('./departments/departments.routes').then((mod) => mod.DEPARTMENTS_ROUTES)
+    },
 ];
