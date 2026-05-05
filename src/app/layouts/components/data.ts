@@ -1,4 +1,5 @@
 import { MenuItemType } from '@/app/types/layout';
+import { DIAGNOSTIC_LAB_ROUTES } from '@/app/pages/master/diagnostic-lab/diagnostic-lab.routes';
 
 type UserDropdownItemType = {
     label?: string;
@@ -72,12 +73,10 @@ export const menuItems: MenuItemType[] = [
         label: 'Diagnostic-Lab',
         icon: 'tablerSettings3',
         isCollapsed: true,
-        children: [
-            { label: 'Test', url: '/master/diagnostic-lab/test' },
-            { label: 'Test Groups', url: '/master/diagnostic-lab/test-groups' },
-            { label: 'Samples', url: '/master/diagnostic-lab/samples' },
-            { label: 'Units', url: '/master/diagnostic-lab/units' },
-        ]
+        children: DIAGNOSTIC_LAB_ROUTES.map(route => ({
+            label: route.data?.['title'] as string,
+            url: `/master/diagnostic-lab/${route.path}`
+        }))
     },
     // },
     // {

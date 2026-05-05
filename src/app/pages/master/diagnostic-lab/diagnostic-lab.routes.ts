@@ -1,28 +1,28 @@
-import {Routes} from '@angular/router';
-import {TestComponent} from './test/test.component';
-import {TestGroupsComponent} from './test-groups/test-groups.component';
-import {SamplesComponent} from './samples/samples.component';
-import {UnitsComponent} from './units/units.component';
+import { Routes } from '@angular/router';
+import { TestComponent } from './test/test.component';
+import { TestGroupsComponent } from './test-groups/test-groups.component';
+import { SamplesComponent } from './samples/samples.component';
+import { UnitsComponent } from './units/units.component';
 
 export const DIAGNOSTIC_LAB_ROUTES: Routes = [
     {
-        path: 'test',
+        path: 'test-list',
         component: TestComponent,
-        data: {title: "Test"},
+        data: { title: "Test" },
     },
     {
-        path: 'test-groups',
+        path: 'test-groups-list',
         component: TestGroupsComponent,
-        data: {title: "Test Groups"},
+        data: { title: "Test Groups" },
     },
     {
-        path: 'samples',
+        path: 'samples-list',
         component: SamplesComponent,
-        data: {title: "Samples"},
+        data: { title: "Samples" },
     },
     {
-        path: 'units',
+        path: 'units-list',
         component: UnitsComponent,
-        data: {title: "Units"},
+        data: { title: "Units" },
     }
 ];

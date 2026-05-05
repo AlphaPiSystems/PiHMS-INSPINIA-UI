@@ -1,11 +1,11 @@
-import {Routes} from '@angular/router';
-import {MainLayoutComponent} from '@layouts/main-layout/main-layout.component';
+import { Routes } from '@angular/router';
+import { MainLayoutComponent } from '@layouts/main-layout/main-layout.component';
 import { LandingComponent } from './pages/landing/landing.component';
 
 export const routes: Routes = [
     {
         path: '',
-        redirectTo: 'dashboard',
+        redirectTo: 'auth/sign-in',
         pathMatch: 'full',
     },
     {
