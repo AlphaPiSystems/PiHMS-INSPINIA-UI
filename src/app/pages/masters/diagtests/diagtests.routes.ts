@@ -1,11 +1,8 @@
 import {Routes} from '@angular/router';
 import { DiagTest } from './components/diagtest/diagtest';
 import { DiagTestAdd } from './components/diagtestadd/diagtestadd';
-import { DiagTestAddHorizontal } from './components/diagtestadd_horizontal/diagtestadd_horizontal';
-import { DiagTestAddHorizontalNC } from './components/diagtestadd_horizontal_nc/diagtestadd_horizontal_nc';
-import { DiagTestAddND } from './components/diagtestadd_new_design/diagtestadd_new_design';
+import { DiagTestEdit } from './components/diagtestedit/diagtestedit';
 import { DiagGroup } from './components/diaggroup/diaggroup';
-import { DiagGroup1 } from './components/diaggroup1/diaggroup1';
 import { DiagGroupEdit } from './components/diaggroupedit/diaggroupedit';
 import { TestUnit } from './components/units/unit';
 import { UnitEdit } from './components/unitedit/unitedit';
@@ -34,29 +31,14 @@ export const DIAGNOSTIC_TESTS_ROUTES: Routes = [
         data: {title: "Diagtest"},
     },
     {
-        path: 'diagtestadd_horizontal/diagtestadd_horizontal/:id',
-        component: DiagTestAddHorizontal,
-        data: {title: "DiagtestHorizontal"},
-    },
-    {
         path: 'diagtest/diagtestedit/:id',
-        component: DiagTestAddHorizontalNC,
-        data: {title: "DiagtestHorizontalNC"},
-    },
-    {
-        path: 'diagtestadd_new_design/diagtestadd_new_design/:id',
-        component: DiagTestAddND,
-        data: {title: "DiagTestAddND"},
-    },
-    {
-        path: 'diaggroup/diaggroup',
-        component: DiagGroup,
-        data: {title: "DiagGroup"},
+        component: DiagTestEdit,
+        data: {title: "DiagtestEdit"},
     },
     {
         path: 'diaggroup/diaggrouplist',
-        component: DiagGroup1,
-        data: {title: "DiagGroup1"},
+        component: DiagGroup,
+        data: {title: "DiagGroup"},
     },
     {
         path: 'diaggroup/diaggroupedit/:id',

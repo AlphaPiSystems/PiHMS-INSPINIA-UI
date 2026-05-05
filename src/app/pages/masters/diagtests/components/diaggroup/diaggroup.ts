@@ -4,14 +4,28 @@ import { NgIcon } from '@ng-icons/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import diagTestData from '../../diagtestdata.json';
+import { PageTitleComponent } from '../../../../../components/page-title.component';
+import { LucideAngularModule, LucideSearch } from 'lucide-angular';
+import { NgbPagination, NgbPaginationNext, NgbPaginationPrevious } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-diaggroup',
   standalone: true,
-  imports: [CommonModule, NgIcon, RouterLink, FormsModule],
+  imports: [
+    CommonModule,
+    NgIcon,
+    RouterLink,
+    FormsModule,
+    PageTitleComponent,
+    LucideAngularModule,
+    NgbPagination,
+    NgbPaginationNext,
+    NgbPaginationPrevious
+  ],
   templateUrl: './diaggroup.html',
 })
 export class DiagGroup implements OnInit {
+  protected readonly LucideSearch = LucideSearch;
   allTests: any[] = diagTestData;
   groupableTests: any[] = [];
   singleTests: any[] = [];
@@ -19,15 +33,20 @@ export class DiagGroup implements OnInit {
   linkedTests: any[] = [];
   searchText: string = '';
   groupSearchText: string = '';
+  currentPage: number = 1;
+  itemsPerPage: number = 10;
+  Math = Math;
 
   constructor(private route: ActivatedRoute) {}
 
   ngOnInit() {
     // Filter tests into Groups (PRO, MUL, PKG) and Singles (SNG)
     this.groupableTests = this.allTests.filter(t => 
-      t.Type === 'PRO' || t.Type === 'MUL' || t.Type === 'PKG'
+      t.Type?.toUpperCase() === 'PRO' || 
+      t.Type?.toUpperCase() === 'MUL' || 
+      t.Type?.toUpperCase() === 'PKG'
     );
-    this.singleTests = this.allTests.filter(t => t.Type === 'SNG');
+    this.singleTests = this.allTests.filter(t => t.Type?.toUpperCase() === 'SNG');
 
     // Default to the first group if it exists
     if (this.groupableTests.length > 0) {
@@ -70,13 +89,43 @@ export class DiagGroup implements OnInit {
   }
 
   getFilteredGroups() {
-    if (!this.groupSearchText.trim()) {
-      return this.groupableTests;
+    let filtered = this.groupableTests;
+    if (this.groupSearchText.trim()) {
+      const search = this.groupSearchText.toLowerCase();
+      filtered = this.groupableTests.filter(t => 
+        t.Name.toLowerCase().includes(search) || 
+        t.Code.toLowerCase().includes(search)
+      );
     }
-    const search = this.groupSearchText.toLowerCase();
-    return this.groupableTests.filter(t => 
-      t.Name.toLowerCase().includes(search) || 
-      t.Code.toLowerCase().includes(search)
-    );
+    return filtered;
+  }
+
+  getPaginatedGroups() {
+    const filtered = this.getFilteredGroups();
+    const startIndex = (this.currentPage - 1) * this.itemsPerPage;
+    return filtered.slice(startIndex, startIndex + this.itemsPerPage);
+  }
+
+  get totalPages() {
+    return Math.ceil(this.getFilteredGroups().length / this.itemsPerPage);
+  }
+
+  get pages(): number[] {
+    const total = this.totalPages;
+    return Array.from({ length: total }, (_, i) => i + 1);
+  }
+
+  setPage(page: number) {
+    if (page >= 1 && page <= this.totalPages) {
+      this.currentPage = page;
+    }
+  }
+
+  editGroup(group: any) {
+    console.log('Edit group:', group);
+  }
+
+  deleteGroup(group: any) {
+    console.log('Delete group:', group);
   }
 }

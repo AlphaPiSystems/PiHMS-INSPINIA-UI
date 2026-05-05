@@ -7,17 +7,17 @@ import { CountUpModule } from 'ngx-countup';
 import { FormsModule } from '@angular/forms';
 import { NgxDaterangepickerBootstrapDirective } from 'ngx-daterangepicker-bootstrap';
 
-import { PageTitleComponent } from '@app/components/page-title.component';
+import { PageTitleComponent } from '../../../../../components/page-title.component';
 import { SAMPLE_LIST } from '../samples/sample-data';
 
 @Component({
-    selector: 'app-diagtestadd_horizontal_nc',
+    selector: 'app-diagtestedit',
     standalone: true,
     imports: [CommonModule, NgIcon,RouterLink,CountUpModule,FormsModule, NgxDaterangepickerBootstrapDirective, PageTitleComponent],
-    templateUrl: './diagtestadd_horizontal_nc.html',
-    styleUrls: ['./diagtestadd_horizontal_nc.scss']
+    templateUrl: './diagtestedit.html',
+    styleUrls: ['./diagtestedit.scss']
 })
-export class DiagTestAddHorizontalNC implements OnInit {
+export class DiagTestEdit implements OnInit {
 
   lastVisit: any = null;
   patient: any = null;

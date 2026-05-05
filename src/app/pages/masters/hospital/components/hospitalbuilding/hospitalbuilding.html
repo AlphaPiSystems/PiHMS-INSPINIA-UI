@@ -92,7 +92,7 @@
                             Showing {{ (currentPage - 1) * itemsPerPage + 1 }} to {{ Math.min(currentPage * itemsPerPage, getFilteredBuildings().length) }} of {{ getFilteredBuildings().length }} buildings
                         </div>
                         <ngb-pagination [collectionSize]="getFilteredBuildings().length" [(page)]="currentPage"
-                            [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="false">
+                            [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true">
                             <ng-template ngbPaginationPrevious>
                                 <ng-icon name="tablerChevronLeft" />
                             </ng-template>

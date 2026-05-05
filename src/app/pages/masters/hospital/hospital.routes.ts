@@ -36,11 +36,11 @@ export const HOSPITAL_ROUTES: Routes = [
     },
     {
         path: 'ward/wardadd',
-        loadComponent: () => import('./components/ward/wardadd').then(c => c.WardAdd)
+        loadComponent: () => import('./components/wardadd/wardadd').then(c => c.WardAdd)
     },
     {
         path: 'ward/wardedit/:id',
-        loadComponent: () => import('./components/ward/wardedit').then(c => c.WardEdit)
+        loadComponent: () => import('./components/wardedit/wardedit').then(c => c.WardEdit)
     },
     {
         path: 'wardbed/wardbedlist',

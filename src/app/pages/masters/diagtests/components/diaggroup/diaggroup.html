@@ -1,214 +1,80 @@
-<div class="row wrapper border-bottom white-bg page-heading"
-  style="padding: 10px 20px 10px; margin-bottom: 20px; box-shadow: 0 1px 2px rgba(0,0,0,0.1);">
-  <div class="col-lg-10">
-    <h2 style="margin-top: 5px; font-weight: 600; font-size: 18px;">Diagnostic Group Management</h2>
-    <ol class="breadcrumb" style="background-color: transparent; padding: 0; margin-bottom: 0; font-size: 12px;">
-      <li class="breadcrumb-item">
-        <a [routerLink]="['/']">Home</a>
-      </li>
-      <li class="breadcrumb-item">
-        <a>Masters</a>
-      </li>
-      <li class="breadcrumb-item active">
-        <strong style="color: #1ab394;">Diagnostic Group</strong>
-      </li>
-    </ol>
-  </div>
-</div>
+<div class="container-fluid">
+    <app-page-title title="Diagnostic Group List" />
 
-<div class="wrapper wrapper-content animated fadeInRight" style="padding: 0 20px;">
-  <div class="row" style="display: flex; align-items: stretch;">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header border-light justify-content-between">
+                    <div class="d-flex align-items-center gap-2">
+                        <span class="me-2 text-muted-50 fs-xs text-uppercase fw-semibold">Show:</span>
+                        <div>
+                            <select [(ngModel)]="itemsPerPage" (ngModelChange)="currentPage = 1" class="form-select form-control form-control-sm">
+                                <option [ngValue]="5">5</option>
+                                <option [ngValue]="10">10</option>
+                                <option [ngValue]="20">20</option>
+                                <option [ngValue]="50">50</option>
+                            </select>
+                        </div>
+                    </div>
 
-    <!-- Column 1: Searchable Diagnostic Group List -->
-    <div class="col-lg-3" style="display: flex;">
-      <div class="ibox float-e-margins"
-        style="background:#fff; box-shadow: 0 2px 4px rgba(0,0,0,0.08); border-radius: 4px; margin-bottom: 20px; width: 100%;">
-        <div class="ibox-title"
-          style="padding: 10px 15px; border-bottom: 1px solid #f0f0f0;">
-          <div class="input-group">
-            <input type="text" placeholder="Search Groups..." class="form-control input-sm"
-              [(ngModel)]="groupSearchText" style="font-size: 12px; height: 26px; border-radius: 2px;">
-          </div>
+                    <div class="d-flex gap-1">
+                        <div class="app-search">
+                            <input [(ngModel)]="groupSearchText" (ngModelChange)="currentPage = 1" type="search"
+                                class="form-control" placeholder="Search Groups...">
+                            <lucide-angular [img]="LucideSearch" class="app-search-icon text-muted" />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="table-responsive">
+                    <table class="table table-custom table-centered table-select table-hover w-100 mb-0">
+                        <thead class="bg-light align-middle bg-opacity-25 thead-sm">
+                            <tr class="text-uppercase fs-md fw-bold text-dark">
+                                <th style="width: 80px; border-bottom: 1px solid #e7eaec;">SL.No</th>
+                                <th style="border-bottom: 1px solid #e7eaec;">Code</th>
+                                <th style="border-bottom: 1px solid #e7eaec;">Name</th>
+                                <th class="text-center" style="width: 10%; border-bottom: 1px solid #e7eaec;">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let group of getPaginatedGroups(); let i = index">
+                                <td>{{ (currentPage - 1) * itemsPerPage + i + 1 }}</td>
+                                <td class="text-dark fs-sm">{{ group.Code }}</td>
+                                <td class="fw-semibold text-dark fs-sm">{{ group.Name }}</td>
+                                <td>
+                                    <div class="d-flex justify-content-center gap-1">
+                                        <a [routerLink]="['/diaggroup/diaggroupedit', group.id]"
+                                            class="btn btn-primary btn-icon btn-sm rounded-circle"
+                                            style="background-color: #1ab394; border-color: #1ab394;">
+                                            <ng-icon name="tablerPencil" class="fs-lg" />
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr *ngIf="getFilteredGroups().length === 0">
+                                <td colspan="5" class="text-center text-muted py-3">Nothing found.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="card-footer border-0">
+                    <div class="d-flex justify-content-between align-items-center pagination-boxed" *ngIf="getFilteredGroups().length > 0">
+                        <div class="text-muted">
+                            Showing {{ (currentPage - 1) * itemsPerPage + 1 }} to {{ Math.min(currentPage * itemsPerPage, getFilteredGroups().length) }} of {{ getFilteredGroups().length }} groups
+                        </div>
+                        <ngb-pagination [collectionSize]="getFilteredGroups().length" [(page)]="currentPage"
+                            [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true">
+                            <ng-template ngbPaginationPrevious>
+                                <ng-icon name="tablerChevronLeft" />
+                            </ng-template>
+                            <ng-template ngbPaginationNext>
+                                <ng-icon name="tablerChevronRight" />
+                            </ng-template>
+                        </ngb-pagination>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="ibox-content" style="padding: 0; height: calc(85vh - 70px); overflow-y: auto;">
-          <div class="list-group" style="margin-bottom: 0;">
-            <button *ngFor="let group of getFilteredGroups()" (click)="selectGroup(group)"
-              class="list-group-item list-group-item-action" [class.active]="selectedGroup?.id === group.id"
-              style="border-left: none; border-right: none; border-radius: 0; padding: 10px 15px; font-size: 13px; border-color: #f0f0f0;">
-              <div class="d-flex justify-content-between align-items-center">
-                <span>{{group.Name}}</span>
-                <span class="badge" [class.badge-primary]="group.Type==='PRO'" [class.badge-info]="group.Type==='MUL'"
-                  [class.badge-warning]="group.Type==='PKG'" style="font-size: 10px;">{{group.Type}}</span>
-              </div>
-            </button>
-          </div>
-        </div>
-      </div>
     </div>
-
-    <!-- Column 2: Management Sections (Middle) -->
-    <div class="col-lg-5" style="display: flex; flex-direction: column; height: 85vh;">
-      <!-- Top Section: Tests Linked with: -->
-      <div class="ibox float-e-margins"
-        style="background:#fff; box-shadow: 0 2px 4px rgba(0,0,0,0.08); border-radius: 4px; margin-bottom: 20px; flex: 1; display: flex; flex-direction: column;">
-        <div class="ibox-title"
-          style="border-top: 4px solid #1c84c6; padding: 10px 15px; border-bottom: 1px solid #f0f0f0; display: flex; justify-content: space-between; align-items: center;">
-          <h5 style="font-weight: 600; margin: 0; font-size: 13px; text-transform: uppercase;">Tests Linked with:
-            {{selectedGroup?.Name}}</h5>
-          <span class="label label-primary" style="font-size: 10px;">{{linkedTests.length}} Linked</span>
-        </div>
-        <div class="ibox-content" style="padding: 0; flex: 1; overflow-y: auto;">
-          <table class="table table-bordered table-striped table-hover table-condensed"
-            style="margin-bottom: 0; font-size: 13px; border: none; table-layout: fixed;">
-            <thead
-              style="background-color: #f5f5f6; position: sticky; top: 0; z-index: 10; box-shadow: 0 1px 2px rgba(0,0,0,0.05);">
-              <tr>
-                <th style="width: 70px; text-align: center; padding: 8px; border: 1px solid #e7eaec;">Pri#</th>
-                <th style="padding: 8px; border: 1px solid #e7eaec;">Test Name</th>
-                <th style="width: 100px; text-align: center; padding: 8px; border: 1px solid #e7eaec;">Action</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr *ngFor="let test of linkedTests">
-                <td style="text-align: center; vertical-align: middle; padding: 6px; border: 1px solid #f0f0f0;">
-                  {{test.Priority}}</td>
-                <td
-                  style="vertical-align: middle; padding: 6px 10px; border: 1px solid #f0f0f0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"
-                  [title]="test.Name">{{test.Name}}</td>
-                <td style="text-align: center; vertical-align: middle; padding: 6px; border: 1px solid #f0f0f0;">
-                  <button class="btn btn-xs btn-danger" (click)="removeTestFromGroup(test.id)"
-                    style="padding: 3px 10px; border-radius: 2px; font-weight: 600;">
-                    Delete
-                  </button>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-
-      <!-- Bottom Section: Search and Add -->
-      <div class="ibox float-e-margins"
-        style="background:#fff; box-shadow: 0 2px 4px rgba(0,0,0,0.08); border-radius: 4px; margin-bottom: 0;">
-        <div class="ibox-title"
-          style="border-top: 4px solid #23c6c8; padding: 10px 15px; border-bottom: 1px solid #f0f0f0;">
-          <h5 style="font-weight: 600; margin-bottom: 8px; font-size: 13px; text-transform: uppercase;">Search Test and
-            Add to Group</h5>
-          <div class="input-group">
-            <input type="text" placeholder="Filter available tests..." class="form-control input-sm"
-              [(ngModel)]="searchText" style="font-size: 13px; height: 26px; border-radius: 2px;">
-          </div>
-        </div>
-        <div class="ibox-content" style="padding: 0; max-height: 25vh; overflow-y: auto;">
-          <table class="table table-bordered table-striped table-hover table-condensed"
-            style="margin-bottom: 0; font-size: 13px; border: none; table-layout: fixed;">
-            <thead
-              style="background-color: #f5f5f6; position: sticky; top: 0; z-index: 10; box-shadow: 0 1px 2px rgba(0,0,0,0.05);">
-              <tr>
-                <th style="width: 100px; text-align: center; padding: 8px; border: 1px solid #e7eaec;">Code</th>
-                <th style="padding: 8px; border: 1px solid #e7eaec;">Test Name</th>
-                <th style="width: 100px; text-align: center; padding: 8px; border: 1px solid #e7eaec;">Action</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr *ngFor="let test of getFilteredAvailableTests()">
-                <td
-                  style="text-align: center; vertical-align: middle; padding: 6px; border: 1px solid #f0f0f0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
-                  {{test.Code}}</td>
-                <td
-                  style="vertical-align: middle; padding: 6px 10px; border: 1px solid #f0f0f0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"
-                  [title]="test.Name">{{test.Name}}</td>
-                <td style="text-align: center; vertical-align: middle; padding: 6px; border: 1px solid #f0f0f0;">
-                  <button class="btn btn-xs btn-primary" (click)="addTestToGroup(test)"
-                    style="padding: 3px 10px; border-radius: 2px; font-weight: 600;">
-                    Add
-                  </button>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </div>
-
-    <!-- Column 3: Full Test Structure for (Right - Full Height) -->
-    <div class="col-lg-4" style="display: flex;">
-      <div class="ibox float-e-margins"
-        style="background:#fff; box-shadow: 0 2px 4px rgba(0,0,0,0.08); border-radius: 4px; margin-bottom: 20px; width: 100%; display: flex; flex-direction: column; border: 1px solid #e7eaec;">
-        <div class="ibox-title"
-          style="border-top: 4px solid #2f4050; padding: 10px 15px; border-bottom: 1px solid #f0f0f0; background: #fafafa;">
-          <h5 style="font-weight: 600; margin: 0; font-size: 13px; text-transform: uppercase;">Full Test Structure for
-            {{selectedGroup?.Name}}</h5>
-        </div>
-        <div class="ibox-content" style="padding: 20px; flex: 1; overflow-y: auto;">
-          <div *ngIf="selectedGroup" class="report-display">
-            <!-- Report Header -->
-            <div style="text-align: center; border-bottom: 2px solid #333; padding-bottom: 10px; margin-bottom: 20px;">
-              <h4 style="text-transform: uppercase; font-weight: 700; margin: 0; font-size: 14px; letter-spacing: 1px;">
-                Diagnostic Structure Report</h4>
-              <small class="text-muted" style="font-size: 10px;">Internal Systematic Representation</small>
-            </div>
-
-            <!-- Root Context -->
-            <div style="margin-bottom: 25px;">
-              <div style="display: flex; justify-content: space-between; margin-bottom: 4px;">
-                <span style="font-weight: 600; font-size: 12px; color: #676a6c;">Root Name:</span>
-                <span style="font-weight: 700; font-size: 13px; color: #2f4050;">{{selectedGroup?.Name}}</span>
-              </div>
-              <div style="display: flex; justify-content: space-between; margin-bottom: 4px;">
-                <span style="font-weight: 600; font-size: 12px; color: #676a6c;">Test Code:</span>
-                <span style="font-weight: 700; font-size: 13px; color: #2f4050;">{{selectedGroup?.Code}}</span>
-              </div>
-              <div style="display: flex; justify-content: space-between;">
-                <span style="font-weight: 600; font-size: 12px; color: #676a6c;">Category:</span>
-                <span class="label label-primary" style="font-size: 10px;">{{selectedGroup?.Type}}</span>
-              </div>
-            </div>
-
-            <!-- Components Table -->
-            <div
-              style="background: #f5f5f6; padding: 6px 10px; border: 1px solid #e7eaec; border-left: 3px solid #2f4050; margin-bottom: 12px;">
-              <h6 style="font-weight: 700; margin: 0; font-size: 12px; color: #333;">LINKED COMPONENTS</h6>
-            </div>
-
-            <table style="width: 100%; border-collapse: collapse; font-size: 12px;">
-              <thead>
-                <tr style="border-bottom: 2px solid #e7eaec;">
-                  <th style="text-align: left; padding: 6px 4px; color: #676a6c; width: 40px;">SL#</th>
-                  <th style="padding: 6px 4px; color: #676a6c; text-align: left;">Component Name</th>
-                  <th style="text-align: right; padding: 6px 4px; color: #676a6c; width: 60px;">Type</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr *ngFor="let child of linkedTests; let i = index" style="border-bottom: 1px solid #f0f0f0;">
-                  <td style="padding: 8px 4px; color: #333;">{{i + 1}}</td>
-                  <td style="padding: 8px 4px; font-weight: 600; color: #333;">{{child.Name}}</td>
-                  <td style="padding: 8px 4px; text-align: right;">
-                    <span class="label label-default" style="font-size: 9px;">{{child.Type}}</span>
-                  </td>
-                </tr>
-                <tr *ngIf="linkedTests.length === 0">
-                  <td colspan="3" style="text-align: center; padding: 30px 0; color: #999; font-style: italic;">No
-                    sub-components linked</td>
-                </tr>
-              </tbody>
-            </table>
-
-            <!-- Summary -->
-            <div style="margin-top: 40px; border-top: 1px dotted #aaa; padding-top: 10px; text-align: right;">
-              <span style="font-size: 11px; color: #676a6c;">Total Sub-components:
-                <strong>{{linkedTests.length}}</strong></span>
-            </div>
-          </div>
-
-          <div *ngIf="!selectedGroup" class="text-center" style="padding: 100px 10px;">
-            <i class="fa fa-file-text-o"
-              style="font-size: 40px; color: #e7eaec; margin-bottom: 15px; display: block;"></i>
-            <span class="text-muted" style="font-size: 13px;">Select a test to generate structure report.</span>
-          </div>
-        </div>
-      </div>
-    </div>
-
-  </div>
 </div>
