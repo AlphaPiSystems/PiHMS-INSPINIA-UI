@@ -58,21 +58,19 @@
                 </div>
                 <div class="col-md-4 col-sm-12">
                   <div class="form-group row align-items-center" style="margin-bottom: 8px;">
-                    <label class="col-sm-4 text-start col-form-label" style="font-weight: 600;">Parent Department</label>
+                    <label class="col-sm-4 text-start col-form-label" style="font-weight: 600;">Report Priority</label>
                     <div class="col-sm-8">
-                      <select class="form-select form-control" [(ngModel)]="department.ParentDepartment" name="parentdepartment" style="border-radius: 2px;">
-                        <option value="">None</option>
-                        <option *ngFor="let dept of departments" [value]="dept">{{dept}}</option>
-                      </select>
+                      <input type="number" class="form-control" [(ngModel)]="department.ReportPriority" name="reportpriority" placeholder="e.g. 1" style="border-radius: 2px;">
                     </div>
                   </div>
                 </div>
                 <div class="col-md-4 col-sm-12">
                   <div class="form-group row align-items-center" style="margin-bottom: 8px;">
-                    <label class="col-sm-4 text-start col-form-label" style="font-weight: 600;">Report Priority</label>
+                    <label class="col-sm-4 text-start col-form-label" style="font-weight: 600;">Status</label>
                     <div class="col-sm-8">
-                      <select class="form-select form-control" [(ngModel)]="department.ReportPriority" name="reportpriority" style="border-radius: 2px;">
-                        <option *ngFor="let prio of priorities" [value]="prio">{{prio}}</option>
+                      <select class="form-select form-control" [(ngModel)]="department.IsRowDeleted" name="status" style="border-radius: 2px;">
+                        <option value="N">Active</option>
+                        <option value="Y">Inactive</option>
                       </select>
                     </div>
                   </div>

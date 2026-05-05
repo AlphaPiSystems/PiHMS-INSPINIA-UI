@@ -47,11 +47,11 @@ $theme-modern-colors: (
         --#{$prefix}sidenav-item-gap:                        12px;
         --#{$prefix}sidenav-item-padding-x:                  10px;
         --#{$prefix}sidenav-item-padding-y:                  10px;
-        --#{$prefix}sidenav-item-font-size:                  0.8125rem;
+        --#{$prefix}sidenav-item-font-size:                  1rem;
         --#{$prefix}sidenav-item-font-weight:                500;
 
         // Sub Menu Items
-        --#{$prefix}sidenav-sub-item-font-size:              0.8125rem;
+        --#{$prefix}sidenav-sub-item-font-size:              0.95rem;
         --#{$prefix}sidenav-sub-item-font-weight:            500;
         --#{$prefix}sidenav-sub-item-gap:                    4px;
         --#{$prefix}sidenav-sub-item-padding-x:              10px;

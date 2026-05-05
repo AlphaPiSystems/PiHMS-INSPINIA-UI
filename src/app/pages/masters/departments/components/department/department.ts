@@ -7,7 +7,8 @@ import { PageTitleComponent } from '../../../../../components/page-title.compone
 import { LucideAngularModule, LucideSearch } from 'lucide-angular';
 import { NgbPagination, NgbPaginationNext, NgbPaginationPrevious } from '@ng-bootstrap/ng-bootstrap';
 
-import { DEPARTMENT_LIST } from './department-data';
+import { DepartmentService } from '../../../../../core/services/department.service';
+import { Department as DepartmentType } from '../../../../../types/department';
 
 @Component({
   selector: 'app-department',
@@ -18,16 +19,28 @@ import { DEPARTMENT_LIST } from './department-data';
 export class Department implements OnInit {
   protected readonly LucideSearch = LucideSearch;
   
-  departmentList: any[] = DEPARTMENT_LIST;
+  departmentList: DepartmentType[] = [];
 
   searchText: string = '';
   currentPage: number = 1;
   itemsPerPage: number = 10;
   Math = Math;
 
-  constructor(private route: ActivatedRoute) {}
+  constructor(private route: ActivatedRoute, private departmentService: DepartmentService) {}
 
   ngOnInit() {
+    this.loadDepartments();
+  }
+
+  loadDepartments() {
+    this.departmentService.getDepartments().subscribe({
+      next: (data) => {
+        this.departmentList = data;
+      },
+      error: (err) => {
+        console.error('Error loading departments:', err);
+      }
+    });
   }
   
   getFilteredDepartments() {
@@ -37,9 +50,9 @@ export class Department implements OnInit {
       filtered = this.departmentList.filter(d => 
         (d.Name && d.Name.toLowerCase().includes(search)) ||
         (d.Description && d.Description.toLowerCase().includes(search)) ||
-        (d.BranchName && d.BranchName.toLowerCase().includes(search)) ||
-        (d.ParentDepartment && d.ParentDepartment.toLowerCase().includes(search)) ||
-        (d.ReportPriority && d.ReportPriority.toLowerCase().includes(search))
+        (d.BranchID && d.BranchID.toString().toLowerCase().includes(search)) ||
+        (d.ReportPriority && d.ReportPriority.toString().toLowerCase().includes(search)) ||
+        (d.IsRowDeleted === 'N' ? 'active' : 'inactive').includes(search)
       );
     }
     return filtered;

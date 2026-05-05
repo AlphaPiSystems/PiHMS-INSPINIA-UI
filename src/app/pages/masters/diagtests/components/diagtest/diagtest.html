@@ -62,7 +62,7 @@
                 <div class="table-responsive">
                     <table class="table table-custom table-centered table-select table-hover w-100 mb-0">
                         <thead class="bg-light align-middle bg-opacity-25 thead-sm">
-                            <tr class="text-uppercase fs-xxs">
+                            <tr class="text-uppercase fs-md fw-bold text-dark">
                                 <th style="border-bottom: 1px solid #e7eaec;">SL.No</th>
                                 <th style="border-bottom: 1px solid #e7eaec;">Code</th>
                                 <th style="border-bottom: 1px solid #e7eaec;">Name</th>
@@ -78,18 +78,18 @@
                             @for (test of this.tests$ | async; track $index; let i = $index) {
                             <tr>
                                 <td>{{ (tableService.page - 1) * tableService.pageSize + i + 1 }}</td>
-                                <td>
+                                <td class="text-dark fs-sm">
                                     {{ test.Code }}</td>
 
-                                <td>{{ test.Name }}</td>
-                                <td>{{ test.ShortName }}</td>
-                                <td>
+                                <td class="text-dark fs-sm">{{ test.Name }}</td>
+                                <td class="text-dark fs-sm">{{ test.ShortName }}</td>
+                                <td class="text-dark fs-sm">
                                     {{ test.ReportName }}
                                 </td>
-                                <td>
+                                <td class="text-dark fs-sm">
                                     {{ test.Type }}
                                 </td>
-                                <td>{{ test.IsOutsourced }}</td>
+                                <td class="text-dark fs-sm">{{ test.IsOutsourced }}</td>
                                 <td>
                                     <div class="d-flex justify-content-center gap-1">
 

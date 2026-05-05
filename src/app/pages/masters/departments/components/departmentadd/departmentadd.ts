@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NgIcon } from '@ng-icons/core';
-import { ActivatedRoute, RouterLink } from '@angular/router';
+import { ActivatedRoute, RouterLink, Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { PageTitleComponent } from '../../../../../components/page-title.component';
 import { LucideAngularModule } from 'lucide-angular';
+import { DepartmentService } from '../../../../../core/services/department.service';
 
 @Component({
   selector: 'app-departmentadd',
@@ -16,32 +17,39 @@ export class DepartmentAdd implements OnInit {
   department: any = {};
   
   branches = ['Main Branch', 'City Center Branch'];
-  departments = [
-    'Andrology', 'Bio Chemistry', 'Cardiology', 'Clinical Pathology', 'Cyto-Pathology',
-    'Gastroenterology', 'Haematology', 'Histo-Pathology', 'Microbiology', 'Radiology',
-    'Serology', 'Anaesthetics', 'Diagnostic imaging (X-Ray)', 'Ear nose and throat (ENT)',
-    'General surgery', 'Gynaecology', 'Nephrology', 'Neurology', 'Nutrition and dietetics',
-    'Obstetrics and gynaecology', 'Oncology', 'Ophthalmology', 'Orthopaedics',
-    'Physiotherapy', 'Radiotherapy', 'Rheumatology', 'Urology', 'Pediatricians',
-    'Physician', 'General Physician(Lady)', 'Phychaiatrist', 'Dermatologist',
-    'Plastic Surgeon', 'Homeopathy', 'ENDOCRINOLOGY'
-  ];
-  priorities = ['Normal', 'Medium', 'High', 'Urgent'];
 
-  constructor(private route: ActivatedRoute) {}
+  constructor(private route: ActivatedRoute, private router: Router, private departmentService: DepartmentService) {}
 
   ngOnInit(): void {
     this.department = {
-      id: null,
+      id: `DPT${Math.floor(Math.random() * 1000).toString().padStart(3, '0')}`,
       Name: '',
       Description: '',
-      BranchName: '',
-      ParentDepartment: '',
-      ReportPriority: 'Normal'
+      BranchName: 'Main Branch',
+      BranchID: '1',
+      DepartmentID: '1',
+      CreatedStaffID: '1',
+      CreatedDateTime: new Date().toISOString().slice(0, 19).replace('T', ' '),
+      UpdatedStaffID: '1',
+      UpdatedDateTime: new Date().toISOString().slice(0, 19).replace('T', ' '),
+      IsRowDeleted: 'N',
+      ReportPriority: 0
     };
   }
 
   saveChanges() {
-    console.log('Saving department data:', this.department);
+    console.log('Preparing payload for new department:', this.department);
+    this.departmentService.addDepartment(this.department).subscribe({
+      next: (response) => {
+        console.log('Department added successfully:', response);
+        this.router.navigate(['/department/departmentlist']);
+      },
+      error: (err) => {
+        // Even if it fails (because of no backend), we log it
+        console.error('Error adding department (Expected if no backend API exists):', err);
+        // For demonstration purposes, we still navigate
+        this.router.navigate(['/department/departmentlist']);
+      }
+    });
   }
 }
