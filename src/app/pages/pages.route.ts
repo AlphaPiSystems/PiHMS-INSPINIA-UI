@@ -12,5 +12,9 @@ export const PAGES_ROUTES: Routes = [
     {
         path: 'patients',
         loadChildren: () => import('./patients/patients.routes').then((mod) => mod.PATIENTS_ROUTES)
+    },
+    {
+        path: 'master',
+        loadChildren: () => import('./master/master.routes').then((mod) => mod.MASTER_ROUTES)
     }
 ];
