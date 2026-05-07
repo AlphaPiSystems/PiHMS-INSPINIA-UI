@@ -1,0 +1,324 @@
+<div class="container-fluid pt-3">
+    <div class="row">
+        <div class="col-12">
+            <div class="card border-0 shadow-sm">
+                <div class="card-body">
+                    <form>
+                        <div class="row mb-4">
+                            <div class="col-md-3 mb-3">
+                                <label class="form-label fw-semibold mb-1">Name <span
+                                        class="text-danger">*</span></label>
+                                <input type="text" class="form-control form-control-sm border-light bg-light-op-10"
+                                    placeholder="Enter Test Name">
+                            </div>
+                            <div class="col-md-3 mb-3">
+                                <label class="form-label fw-semibold mb-1">Code <span
+                                        class="text-danger">*</span></label>
+                                <input type="text" class="form-control form-control-sm border-light bg-light-op-10"
+                                    placeholder="Enter Code">
+                            </div>
+                            <div class="col-md-3 mb-3">
+                                <label class="form-label fw-semibold mb-1">Short Name <span
+                                        class="text-danger">*</span></label>
+                                <input type="text" class="form-control form-control-sm border-light bg-light-op-10"
+                                    placeholder="Short Name">
+                            </div>
+                            <div class="col-md-3 mb-3">
+                                <label class="form-label fw-semibold mb-1">Report Name <span
+                                        class="text-danger">*</span></label>
+                                <input type="text" class="form-control form-control-sm border-light bg-light-op-10"
+                                    placeholder="Full Report Name">
+                            </div>
+                            <div class="col-md-3 mb-3">
+                                <label class="form-label fw-semibold mb-1">Type <span
+                                        class="text-danger">*</span></label>
+                                <select class="form-select form-select-sm border-light bg-light-op-10" [(ngModel)]="patient.Type" name="type">
+                                    <option value="SNG">Single (SNG)</option>
+                                    <option value="MUL">Multiple (MUL)</option>
+                                    <option value="PRO">PRO (PRO)</option>
+                                    <option value="PKG">Package (PKG)</option>
+                                </select>
+                            </div>
+                            <div class="col-md-3 mb-3">
+                                <label class="form-label fw-semibold mb-1">Investig. Type
+                                    <span class="text-danger">*</span></label>
+                                <select class="form-select form-select-sm border-light bg-light-op-10">
+                                    <option value=""></option>
+                                </select>
+                            </div>
+                            <div class="col-md-3 mb-3">
+                                <label class="form-label fw-semibold  mb-1">Sample <span
+                                        class="text-danger">*</span></label>
+                                <select class="form-select form-select-sm border-light bg-light-op-10">
+                                    <option value=""></option>
+                                </select>
+                            </div>
+                            <div class="col-md-3 mb-3">
+                                <label class="form-label fw-semibold mb-1">Department <span
+                                        class="text-danger">*</span></label>
+                                <input type="text" class="form-control form-control-sm border-light bg-light-op-10"
+                                    placeholder="Department">
+                            </div>
+                            <div class="col-md-3 mb-3">
+                                <label class="form-label fw-semibold mb-1">Instrument <span
+                                        class="text-danger">*</span></label>
+                                <input type="text" class="form-control form-control-sm border-light bg-light-op-10"
+                                    placeholder="Instrument">
+                            </div>
+                            <div class="col-md-3 mb-3">
+                                <label class="form-label fw-semibold mb-1">Name in Inst.
+                                    <span class="text-danger">*</span></label>
+                                <input type="text" class="form-control form-control-sm border-light bg-light-op-10"
+                                    placeholder="Inst. Name">
+                            </div>
+                            <div class="col-md-3 mb-3">
+                                <label class="form-label fw-semibold mb-1">Report. Priority
+                                    <span class="text-danger">*</span></label>
+                                <input type="text" class="form-control form-control-sm border-light bg-light-op-10"
+                                    placeholder="Priority">
+                            </div>
+                            <div class="col-md-3 mb-3">
+                                <label class="form-label fw-semibold mb-1">Outsourced <span
+                                        class="text-danger">*</span></label>
+                                <select class="form-select form-select-sm border-light bg-light-op-10">
+                                    <option value="Y">Yes</option>
+                                    <option value="N">No</option>
+                                </select>
+                            </div>
+                            <div class="col-md-3 mb-3">
+                                <label class="form-label fw-semibold mb-1">NABL Approv.
+                                    <span class="text-danger">*</span></label>
+                                <select class="form-select form-select-sm border-light bg-light-op-10">
+                                    <option value="Y">Yes</option>
+                                    <option value="N">No</option>
+                                </select>
+                            </div>
+                            <div class="col-md-3 mb-3">
+                                <label class="form-label fw-semibold mb-1">Methodology <span
+                                        class="text-danger">*</span></label>
+                                <input type="text" class="form-control form-control-sm border-light bg-light-op-10"
+                                    placeholder="Methodology">
+                            </div>
+                            <div class="col-md-3 mb-3">
+                                <label class="form-label fw-semibold mb-1">Report. Type
+                                    <span class="text-danger">*</span></label>
+                                <select class="form-select form-select-sm border-light bg-light-op-10">
+                                    <option value=""></option>
+                                </select>
+                            </div>
+                            <div class="col-md-3 mb-3">
+                                <label class="form-label fw-semibold mb-1">Report. Align
+                                    <span class="text-danger">*</span></label>
+                                <select class="form-select form-select-sm border-light bg-light-op-10">
+                                    <option value=""></option>
+                                </select>
+                            </div>
+                            <div class="col-md-3 mb-3">
+                                <label class="form-label fw-semibold mb-1">Page Break <span
+                                        class="text-danger">*</span></label>
+                                <select class="form-select form-select-sm border-light bg-light-op-10">
+                                    <option value="Y">Yes</option>
+                                    <option value="N">No</option>
+                                </select>
+                            </div>
+                            <div class="col-md-3 mb-3">
+                                <label class="form-label fw-semibold mb-1">Notes <span
+                                        class="text-danger">*</span></label>
+                                <input type="text" class="form-control form-control-sm border-light bg-light-op-10"
+                                    placeholder="Notes">
+                            </div>
+                            <div class="col-md-3 mb-3">
+                                <label class="form-label fw-semibold mb-1">Comments <span
+                                        class="text-danger">*</span></label>
+                                <input type="text" class="form-control form-control-sm border-light bg-light-op-10"
+                                    placeholder="Comments">
+                            </div>
+                            <div class="col-md-3 mb-3">
+                                <label class="form-label fw-semibold mb-1">Unit <span
+                                        class="text-danger">*</span></label>
+                                <input type="text" class="form-control form-control-sm border-light bg-light-op-10"
+                                    placeholder="mg/dL">
+                            </div>
+                            <div class="col-md-3 mb-3">
+                                <label class="form-label fw-semibold mb-1">Has Range <span
+                                        class="text-danger">*</span></label>
+                                <select class="form-select form-select-sm border-light bg-light-op-10">
+                                    <option value="Y">Yes</option>
+                                    <option value="N">No</option>
+                                </select>
+                            </div>
+                            <div class="col-md-3 mb-3">
+                                <label class="form-label fw-semibold mb-1">Default Report Data <span
+                                        class="text-danger">*</span></label>
+                                <input type="text" class="form-control form-control-sm border-light bg-light-op-10"
+                                    placeholder="Default Report Data">
+                            </div>
+                        </div>
+                        <!-- REFERENCE RANGES INSPINIA FORMAT -->
+                        <div class="row">
+                            <div class="col-lg-12 mb-1"
+                                *ngIf="patient.Type !== 'MUL' && patient.Type !== 'PRO' && patient.Type !== 'PKG'">
+                                <div class="ibox float-e-margins"
+                                    style="background:#fff; box-shadow: 0 2px 4px rgba(0,0,0,0.08); border-radius: 4px; height: 100%; display: flex; flex-direction: column; margin-bottom: 0;">
+                                    <div class="ibox-title"
+                                        style="border-top: 4px solid #1c84c6; padding: 6px 15px; border-bottom: 1px solid #f0f0f0; display: flex; justify-content: space-between; align-items: center;">
+                                        <h5 style="font-weight: 600; margin: 0; font-size: 14px; text-transform: uppercase;">
+                                            Reference Ranges</h5>
+                                        <button class="btn btn-primary btn-sm" type="button"
+                                            (click)="addReferenceRange()"
+                                            style="background-color: #1ab394; border-color: #1ab394; padding: 4px 12px; font-weight: 600; font-size: 12px; border-radius: 2px;">
+                                            <i class="fa fa-plus"></i> Add Reference Range
+                                        </button>
+                                    </div>
+                                    <div class="ibox-content"
+                                        style="padding: 0; overflow: auto; max-height: 220px; flex: 1; border: 1px solid #e7eaec; margin: 5px 15px; border-radius: 2px;">
+                                        <table class="table table-bordered table-striped table-hover table-condensed"
+                                            style="margin-bottom: 0; font-size: 13px; border: none;">
+                                            <thead
+                                                style="background-color: #f5f5f6; position: sticky; top: 0; z-index: 10; box-shadow: 0 1px 2px rgba(0,0,0,0.1);">
+                                                <tr>
+                                                    <th
+                                                        style="font-weight: 600; text-align: center; width: 50px; padding: 6px 8px; border: 1px solid #e7eaec; background-color: #f5f5f6;">
+                                                        SL #</th>
+                                                    <th
+                                                        style="font-weight: 600; min-width: 60px; padding: 6px 8px; border: 1px solid #e7eaec; background-color: #f5f5f6;">
+                                                        Age Start</th>
+                                                    <th
+                                                        style="font-weight: 600; min-width: 60px; padding: 6px 8px; border: 1px solid #e7eaec; background-color: #f5f5f6;">
+                                                        Age End</th>
+                                                    <th
+                                                        style="font-weight: 600; min-width: 90px; padding: 6px 8px; border: 1px solid #e7eaec; background-color: #f5f5f6;">
+                                                        Age Unit</th>
+                                                    <th
+                                                        style="font-weight: 600; min-width: 100px; padding: 6px 8px; border: 1px solid #e7eaec; background-color: #f5f5f6;">
+                                                        Gender</th>
+                                                    <th
+                                                        style="font-weight: 600; min-width: 80px; padding: 6px 8px; border: 1px solid #e7eaec; background-color: #f5f5f6;">
+                                                        Min Value</th>
+                                                    <th
+                                                        style="font-weight: 600; min-width: 80px; padding: 6px 8px; border: 1px solid #e7eaec; background-color: #f5f5f6;">
+                                                        Max Value</th>
+                                                    <th
+                                                        style="font-weight: 600; min-width: 80px; padding: 6px 8px; border: 1px solid #e7eaec; background-color: #f5f5f6;">
+                                                        Min Panic</th>
+                                                    <th
+                                                        style="font-weight: 600; min-width: 80px; padding: 6px 8px; border: 1px solid #e7eaec; background-color: #f5f5f6;">
+                                                        Max Panic</th>
+                                                    <th
+                                                        style="font-weight: 600; min-width: 80px; padding: 6px 8px; border: 1px solid #e7eaec; background-color: #f5f5f6;">
+                                                        Unit</th>
+                                                    <th
+                                                        style="font-weight: 600; min-width: 140px; padding: 6px 8px; border: 1px solid #e7eaec; background-color: #f5f5f6;">
+                                                        Range Type</th>
+                                                    <th
+                                                        style="font-weight: 600; min-width: 200px; padding: 6px 8px; border: 1px solid #e7eaec; background-color: #f5f5f6;">
+                                                        RangeText</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr *ngFor="let range of referenceRanges; let i = index">
+                                                    <td
+                                                        style="text-align: center; vertical-align: middle; padding: 4px 8px; border: 1px solid #e7eaec;">
+                                                        {{ i + 1 }}</td>
+                                                    <td style="padding: 4px 8px; border: 1px solid #e7eaec;">
+                                                        <input type="number" min="0" max="100"
+                                                            class="form-control input-sm" [(ngModel)]="range.ageStart"
+                                                            [name]="'ageStart' + i"
+                                                            (ngModelChange)="validateAgeRange(range)"
+                                                            [ngClass]="{'border-danger': range.ageError}"
+                                                            style="border-radius: 2px; height: 26px; font-size: 12px; padding: 2px 5px;"
+                                                            title="{{range.ageError ? 'Age Start must be less than Age End' : ''}}">
+                                                    </td>
+                                                    <td style="padding: 4px 8px; border: 1px solid #e7eaec;">
+                                                        <input type="number" min="0" max="100"
+                                                            class="form-control input-sm" [(ngModel)]="range.ageEnd"
+                                                            [name]="'ageEnd' + i"
+                                                            (ngModelChange)="validateAgeRange(range)"
+                                                            [ngClass]="{'border-danger': range.ageError}"
+                                                            style="border-radius: 2px; height: 26px; font-size: 12px; padding: 2px 5px;"
+                                                            title="{{range.ageError ? 'Age Start must be less than Age End' : ''}}">
+                                                    </td>
+                                                    <td style="padding: 4px 8px; border: 1px solid #e7eaec;">
+                                                        <select class="form-select form-control input-sm"
+                                                            [(ngModel)]="range.ageUnit" [name]="'ageUnit' + i"
+                                                            style="border-radius: 2px; height: 26px; padding: 0px 5px; font-size: 12px;">
+                                                            <option value="Year">Year</option>
+                                                            <option value="Month">Month</option>
+                                                            <option value="Day">Day</option>
+                                                        </select>
+                                                    </td>
+                                                    <td style="padding: 4px 8px; border: 1px solid #e7eaec;">
+                                                        <select class="form-select form-control input-sm"
+                                                            [(ngModel)]="range.gender" [name]="'gender' + i"
+                                                            style="border-radius: 2px; height: 26px; padding: 0px 5px; font-size: 12px;">
+                                                            <option value="Female">Female</option>
+                                                            <option value="Male">Male</option>
+                                                            <option value="Both">Both</option>
+                                                        </select>
+                                                    </td>
+                                                    <td style="padding: 4px 8px; border: 1px solid #e7eaec;"><input
+                                                            type="text" class="form-control input-sm"
+                                                            [(ngModel)]="range.minVal" [name]="'minVal' + i"
+                                                            style="border-radius: 2px; height: 26px; font-size: 12px; padding: 2px 5px;">
+                                                    </td>
+                                                    <td style="padding: 4px 8px; border: 1px solid #e7eaec;"><input
+                                                            type="text" class="form-control input-sm"
+                                                            [(ngModel)]="range.maxVal" [name]="'maxVal' + i"
+                                                            style="border-radius: 2px; height: 26px; font-size: 12px; padding: 2px 5px;">
+                                                    </td>
+                                                    <td style="padding: 4px 8px; border: 1px solid #e7eaec;"><input
+                                                            type="text" class="form-control input-sm"
+                                                            [(ngModel)]="range.minPanic" [name]="'minPanic' + i"
+                                                            style="border-radius: 2px; height: 26px; font-size: 12px; padding: 2px 5px;">
+                                                    </td>
+                                                    <td style="padding: 4px 8px; border: 1px solid #e7eaec;"><input
+                                                            type="text" class="form-control input-sm"
+                                                            [(ngModel)]="range.maxPanic" [name]="'maxPanic' + i"
+                                                            style="border-radius: 2px; height: 26px; font-size: 12px; padding: 2px 5px;">
+                                                    </td>
+                                                    <td style="padding: 4px 8px; border: 1px solid #e7eaec;">
+                                                        <select class="form-select form-control input-sm"
+                                                            [(ngModel)]="range.unit" [name]="'unit' + i"
+                                                            style="border-radius: 2px; height: 26px; padding: 0px 5px; font-size: 12px;">
+                                                            <option value="" disabled>Select</option>
+                                                            <option value="mg/dL">mg/dL</option>
+                                                            <option value="g/dL">g/dL</option>
+                                                            <option value="U/L">U/L</option>
+                                                            <option value="mmol/L">mmol/L</option>
+                                                            <option value="µg/dL">µg/dL</option>
+                                                            <option value="%">%</option>
+                                                            <option value="cells/mcL">cells/mcL</option>
+                                                        </select>
+                                                    </td>
+                                                    <td style="padding: 4px 8px; border: 1px solid #e7eaec;">
+                                                        <select class="form-select form-control input-sm"
+                                                            [(ngModel)]="range.rangeType" [name]="'rangeType' + i"
+                                                            style="border-radius: 2px; height: 26px; padding: 0px 5px; font-size: 12px;">
+                                                            <option value="SingleTextLine">SingleTextLine</option>
+                                                            <option value="MultiTextLine">MultiTextLine</option>
+                                                        </select>
+                                                    </td>
+                                                    <td style="padding: 4px 8px; border: 1px solid #e7eaec;"><input
+                                                            type="text" class="form-control input-sm"
+                                                            [(ngModel)]="range.rangeText" [name]="'rangeText' + i"
+                                                            style="border-radius: 2px; height: 26px; font-size: 12px; padding: 2px 5px;">
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="d-flex justify-content-end gap-2 mt-5">
+                            <button type="button" class="btn btn-light btn-sm px-4 border"
+                                routerLink="/master/diagnostic-lab/test-list">Cancel</button>
+                            <button type="submit" class="btn btn-success btn-sm px-4">Save Changes</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

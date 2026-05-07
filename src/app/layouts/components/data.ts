@@ -57,7 +57,6 @@ export const userDropdownItems: UserDropdownItemType[] = [
 ];
 
 export const menuItems: MenuItemType[] = [
-    { label: 'Menu', isTitle: true },
     // {
     //     label: 'Dashboard',
     //     icon: 'tablerLayoutDashboard',
@@ -73,10 +72,12 @@ export const menuItems: MenuItemType[] = [
         label: 'Diagnostic-Lab',
         icon: 'tablerSettings3',
         isCollapsed: true,
-        children: DIAGNOSTIC_LAB_ROUTES.map(route => ({
-            label: route.data?.['title'] as string,
-            url: `/master/diagnostic-lab/${route.path}`
-        }))
+        children: [
+            { label: 'Test-list', icon: 'tablerSettings3', url: '/master/diagnostic-lab/test-list' },
+            { label: 'Test-groups-list', icon: 'tablerSettings3', url: '/master/diagnostic-lab/test-groups-list' },
+            { label: 'Samples-list', icon: 'tablerSettings3', url: '/master/diagnostic-lab/samples-list' },
+            { label: 'Units-list', icon: 'tablerSettings3', url: '/master/diagnostic-lab/units-list' }
+        ]
     },
     // },
     // {
