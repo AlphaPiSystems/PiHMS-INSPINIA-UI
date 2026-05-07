@@ -7,7 +7,7 @@ import { PageTitleComponent } from '../../../../../components/page-title.compone
 import { LucideAngularModule, LucideSearch } from 'lucide-angular';
 import { NgbPagination, NgbPaginationNext, NgbPaginationPrevious } from '@ng-bootstrap/ng-bootstrap';
 
-import { WARDTYPE_LIST } from './hospital-data';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-wardtype',
@@ -18,16 +18,26 @@ import { WARDTYPE_LIST } from './hospital-data';
 export class WardType implements OnInit {
   protected readonly LucideSearch = LucideSearch;
   
-  wardTypeList: any[] = WARDTYPE_LIST;
+  wardTypeList: any[] = [];
 
   searchText: string = '';
   currentPage: number = 1;
   itemsPerPage: number = 10;
   Math = Math;
 
-  constructor(private route: ActivatedRoute) {}
+  constructor(private route: ActivatedRoute, private http: HttpClient) {}
 
   ngOnInit() {
+    this.http.get<{wardtype: any[]}>('assets/data/db.json').subscribe({
+      next: (data) => {
+        if (data && data.wardtype) {
+          this.wardTypeList = data.wardtype;
+        }
+      },
+      error: (err) => {
+        console.error('Error loading ward types from JSON:', err);
+      }
+    });
   }
   
   getFilteredWardTypes() {

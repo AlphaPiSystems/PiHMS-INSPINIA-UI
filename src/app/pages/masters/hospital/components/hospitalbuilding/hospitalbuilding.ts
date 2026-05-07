@@ -7,7 +7,7 @@ import { PageTitleComponent } from '../../../../../components/page-title.compone
 import { LucideAngularModule, LucideSearch } from 'lucide-angular';
 import { NgbPagination, NgbPaginationNext, NgbPaginationPrevious } from '@ng-bootstrap/ng-bootstrap';
 
-import { BUILDING_LIST } from './hospitalbuilding-data';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-hospitalbuilding',
@@ -18,16 +18,26 @@ import { BUILDING_LIST } from './hospitalbuilding-data';
 export class HospitalBuilding implements OnInit {
   protected readonly LucideSearch = LucideSearch;
   
-  buildingList: any[] = BUILDING_LIST;
+  buildingList: any[] = [];
 
   searchText: string = '';
   currentPage: number = 1;
   itemsPerPage: number = 10;
   Math = Math;
 
-  constructor() {}
+  constructor(private http: HttpClient) {}
 
   ngOnInit() {
+    this.http.get<{hospitalbuilding: any[]}>('assets/data/db.json').subscribe({
+      next: (data) => {
+        if (data && data.hospitalbuilding) {
+          this.buildingList = data.hospitalbuilding;
+        }
+      },
+      error: (err) => {
+        console.error('Error loading hospital buildings from JSON:', err);
+      }
+    });
   }
   
   getFilteredBuildings() {

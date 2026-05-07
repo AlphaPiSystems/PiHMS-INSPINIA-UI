@@ -22,25 +22,12 @@ export class DepartmentEdit implements OnInit {
   constructor(private route: ActivatedRoute, private router: Router, private departmentService: DepartmentService) {}
 
   ngOnInit(): void {
-    this.route.paramMap.subscribe(params => {
-      const id = params.get('id');
-      if (id) {
-        this.departmentService.getDepartments().subscribe({
-          next: (data) => {
-            const found = data.find(d => d.id === id);
-            if (found) {
-              this.department = { ...found };
-            } else {
-              this.router.navigate(['/department/departmentlist']);
-            }
-          },
-          error: (err) => {
-            console.error('Error loading departments for edit:', err);
-            this.router.navigate(['/department/departmentlist']);
-          }
-        });
-      }
-    });
+    const stateDept = history.state.department;
+    if (stateDept) {
+      this.department = { ...stateDept };
+    } else {
+      this.router.navigate(['/department/departmentlist']);
+    }
   }
 
   saveChanges() {

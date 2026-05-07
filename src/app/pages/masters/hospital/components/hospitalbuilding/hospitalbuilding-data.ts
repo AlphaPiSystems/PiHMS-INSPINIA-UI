@@ -4,7 +4,7 @@ export const BUILDING_LIST = [
     Name: 'Main Block',
     ShortName: 'MB',
     RegisteredName: 'Main Medical Block',
-    ApplicationType: 'PI-HMS-ADV',
+    ApplicationType: 'PI - LIMS',
     NameDisplayOption: 'Full Name',
     Address: '123 Health Ave',
     City: 'Bangalore',

@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, inject} from '@angular/core';
 import {PageTitleComponent} from '@app/components/page-title.component';
 import {
     LucideAngularModule,
@@ -21,8 +21,7 @@ import {RatingComponent} from '@app/components/rating.component';
 import {FormsModule} from '@angular/forms';
 import {NgbPagination, NgbPaginationNext, NgbPaginationPrevious} from '@ng-bootstrap/ng-bootstrap';
 import {NgbdSortableHeader} from '@core/directive/sortable.directive';
-// import { TestUnit } from '../../types'
-import { SAMPLE_LIST } from './sample-data';
+import { HttpClient } from '@angular/common/http';
 import { AsyncPipe, CommonModule } from '@angular/common';
 
 @Component({
@@ -63,6 +62,7 @@ export class Sample implements OnInit {
 
   // ✅ STORE ORIGINAL DATA
   allSamples: any[] = [];
+  private http = inject(HttpClient);
 
   constructor(public tableService: TableService<any>) {
     this.samples$ = this.tableService.items$;
@@ -70,8 +70,17 @@ export class Sample implements OnInit {
   }
 
 ngOnInit(): void {
-  this.allSamples = SAMPLE_LIST;
-  this.tableService.setItems(this.allSamples, this.tableService.pageSize);
+  this.http.get<{sample: any[]}>('assets/data/db.json').subscribe({
+    next: (data) => {
+      if (data && data.sample) {
+        this.allSamples = data.sample;
+        this.tableService.setItems(this.allSamples, this.tableService.pageSize);
+      }
+    },
+    error: (err) => {
+      console.error('Error loading samples from JSON:', err);
+    }
+  });
 }
   
   // -------------------------

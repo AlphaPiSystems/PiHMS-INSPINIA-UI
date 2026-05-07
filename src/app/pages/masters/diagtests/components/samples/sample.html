@@ -51,10 +51,10 @@
                         <a routerLink="/ecommerce/products" class="btn btn-primary btn-icon">
                             <lucide-angular [img]="LucideList" class="fs-lg"/>
                         </a> -->
-                        <button class="btn btn-success ms-1">
+                        <a [routerLink]="['/sample/sampleadd']" class="btn btn-success ms-1">
                             <ng-icon name="tablerPlus" class="fs-sm me-1" />
                             New Sample
-                        </button>
+                        </a>
                     </div>
                 </div>
 
@@ -67,6 +67,8 @@
                                 <th style="border-bottom: 1px solid #e7eaec;">Full Name</th>
                                 <th style="border-bottom: 1px solid #e7eaec;">Short Name</th>
                                 <th style="border-bottom: 1px solid #e7eaec;">Description</th>
+                                <th style="border-bottom: 1px solid #e7eaec;">Branch Name</th>
+                                <th style="border-bottom: 1px solid #e7eaec;">Department Name</th>
                                 <th style="border-bottom: 1px solid #e7eaec;">Sample Form</th>
                                 <th style="border-bottom: 1px solid #e7eaec;">Container</th>
                                 <th class="text-center" style="width: 1%; border-bottom: 1px solid #e7eaec;">Actions</th>
@@ -83,14 +85,17 @@
                                 <td class="text-dark fs-sm" style="max-width: 250px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
                                     {{ sample.Description }}
                                 </td>
-                                <td><span class="badge bg-light text-dark border">{{ sample.SampleForm }}</span></td>
+                                <td class="text-dark fs-sm">{{ sample.BranchName }}</td>
+                                <td class="text-dark fs-sm">{{ sample.DepartmentName }}</td>
+                                <td class="text-dark fs-sm">{{ sample.SampleForm }}</td>
                                 <td class="text-dark fs-sm">{{ sample.Container }}</td>
                                 <td>
                                     <div class="d-flex justify-content-center gap-1">
                                         <a class="btn btn-light btn-icon btn-sm rounded-circle" ngbTooltip="View">
                                             <ng-icon name="tablerEye" class="fs-lg" />
                                         </a>
-                                        <a class="btn btn-primary btn-icon btn-sm rounded-circle" 
+                                        <a [routerLink]="['/sample/sampleedit', sample.id]"
+                                            class="btn btn-primary btn-icon btn-sm rounded-circle" 
                                             style="background-color: #1ab394; border-color: #1ab394;"
                                             ngbTooltip="Edit">
                                             <ng-icon name="tablerPencil" class="fs-lg" />

@@ -41,9 +41,6 @@
                                 <th style="border-bottom: 1px solid #e7eaec;">Floor Name</th>
                                 <th style="border-bottom: 1px solid #e7eaec;">Building</th>
                                 <th style="border-bottom: 1px solid #e7eaec;">Accessibility</th>
-                                <th style="border-bottom: 1px solid #e7eaec;">Front Desk</th>
-                                <th style="border-bottom: 1px solid #e7eaec;">Desk No</th>
-                                <th style="border-bottom: 1px solid #e7eaec;">Staff</th>
                                 <th style="border-bottom: 1px solid #e7eaec;">Branch</th>
                                 <th style="border-bottom: 1px solid #e7eaec;">Department</th>
                                 <th class="text-center" style="width: 100px; border-bottom: 1px solid #e7eaec;">Actions</th>
@@ -56,11 +53,6 @@
                                 <td><span class="text-dark fs-sm">{{ floor.FloorName }}</span></td>
                                 <td class="text-dark fs-sm">{{ floor.HospitalBuildingName }}</td>
                                 <td class="text-dark fs-sm">{{ floor.Accessibility }}</td>
-                                <td class="text-center text-dark fs-sm">
-                                    {{ floor.FrontDeskPresent === 'Y' ? 'Yes' : 'No' }}
-                                </td>
-                                <td class="text-dark fs-sm">{{ floor.FrontDeskNumber }}</td>
-                                <td class="text-dark fs-sm">{{ floor.FrontDeskStaffName }}</td>
                                 <td class="text-dark fs-sm">{{ floor.BranchName }}</td>
                                 <td class="text-dark fs-sm">{{ floor.Department }}</td>
                                 <td>
@@ -75,7 +67,7 @@
                                 </td>
                             </tr>
                             <tr *ngIf="getFilteredFloors().length === 0">
-                                <td colspan="11" class="text-center text-muted py-4">
+                                <td colspan="8" class="text-center text-muted py-4">
                                     <div class="py-3">
                                         <lucide-angular [img]="LucideSearch" class="mb-2 text-muted-50" size="40" />
                                         <p>No floors found matching your search.</p>

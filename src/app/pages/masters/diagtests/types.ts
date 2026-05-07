@@ -31,7 +31,19 @@ export type TestType = {
   UpdatedDateTime: string;
   IsRowDeleted: string;
   InstrumentID: number;
-  selected?: boolean,
+  selected?: boolean;
+}
+
+export type InstrumentType = {
+  id: string;
+  InstrumentationName: string;
+  BranchName: string;
+  DepartmentName: string;
+  CreatedStaffID: string;
+  CreatedDateTime: string | null;
+  UpdatedStaffID: string | null;
+  UpdatedDateTime: string | null;
+  IsRowDeleted: string;
 }
 
 // export type TestType = {

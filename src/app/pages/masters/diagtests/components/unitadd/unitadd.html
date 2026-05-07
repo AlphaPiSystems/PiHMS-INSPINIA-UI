@@ -41,11 +41,35 @@
               </div>
               <div class="col-md-6">
                 <div class="form-group row align-items-center">
-                  <label class="col-sm-3 text-start col-form-label" style="font-weight: 600;">Full Name <span
+                  <label class="col-sm-3 text-start col-form-label" style="font-weight: 600;">Display Name <span
                       class="text-danger">*</span></label>
                   <div class="col-sm-9">
-                    <input type="text" class="form-control" [(ngModel)]="unit.FullName" name="unitfullname"
-                      placeholder="e.g. Milligrams per Deciliter" required style="border-radius: 2px;">
+                    <input type="text" class="form-control" [(ngModel)]="unit.DisplayName" name="unitdisplayname"
+                      placeholder="e.g. mg/dL" required style="border-radius: 2px;">
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="row mb-3">
+              <div class="col-md-6">
+                <div class="form-group row align-items-center">
+                  <label class="col-sm-3 text-start col-form-label" style="font-weight: 600;">Description</label>
+                  <div class="col-sm-9">
+                    <input type="text" class="form-control" [(ngModel)]="unit.Description" name="unitdescription"
+                      placeholder="Enter description..." style="border-radius: 2px;">
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group row align-items-center">
+                  <label class="col-sm-3 text-start col-form-label" style="font-weight: 600;">Branch <span
+                      class="text-danger">*</span></label>
+                  <div class="col-sm-9">
+                    <select class="form-select form-control" [(ngModel)]="unit.BranchName" name="unitbranch" required
+                      style="border-radius: 2px; cursor: pointer;">
+                      <option *ngFor="let branch of branches" [value]="branch.Name">{{branch.Name}}</option>
+                    </select>
                   </div>
                 </div>
               </div>
@@ -54,13 +78,12 @@
             <div class="row mb-3">
               <div class="col-md-6">
                 <div class="form-group row align-items-center">
-                  <label class="col-sm-3 text-start col-form-label" style="font-weight: 600;">Category <span
+                  <label class="col-sm-3 text-start col-form-label" style="font-weight: 600;">Department <span
                       class="text-danger">*</span></label>
                   <div class="col-sm-9">
-                    <select class="form-select form-control" [(ngModel)]="unit.Category" name="unitcategory" required
+                    <select class="form-select form-control" [(ngModel)]="unit.DepartmentName" name="unitdepartment" required
                       style="border-radius: 2px; cursor: pointer;">
-                      <option value="" disabled>Select Category</option>
-                      <option *ngFor="let cat of categories" [value]="cat">{{cat}}</option>
+                      <option *ngFor="let dept of departments" [value]="dept.Name">{{dept.Name}}</option>
                     </select>
                   </div>
                 </div>

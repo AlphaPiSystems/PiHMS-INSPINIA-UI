@@ -1,0 +1,102 @@
+<div class="container-fluid">
+    <app-page-title title="Country List" />
+
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header border-light justify-content-between">
+                    <div class="d-flex align-items-center gap-2">
+                        <div class="app-search">
+                            <input [(ngModel)]="tableService.searchTerm" data-table-search type="search"
+                                class="form-control" placeholder="Search Country Name">
+                            <lucide-angular [img]="LucideSearch" class="app-search-icon text-muted" />
+                        </div>
+                        <div>
+                            <select [(ngModel)]="tableService.pageSize" class="form-select form-control my-1 my-md-0">
+                                <option [ngValue]="5">5</option>
+                                <option [ngValue]="10">10</option>
+                                <option [ngValue]="20">20</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="d-flex gap-1">
+                        <a [routerLink]="['/misc/country/countryadd']" class="btn btn-success ms-1">
+                            <ng-icon name="tablerPlus" class="fs-sm me-1" />
+                            New Country
+                        </a>
+                    </div>
+                </div>
+
+                <div class="table-responsive">
+                    <table class="table table-custom table-centered table-select table-hover w-100 mb-0">
+                        <thead class="bg-light align-middle bg-opacity-25 thead-sm">
+                            <tr class="text-uppercase fs-md fw-bold text-dark">
+                                <th style="border-bottom: 1px solid #e7eaec;">SL.No</th>
+                                <th style="border-bottom: 1px solid #e7eaec;">Country Name</th>
+                                <th style="border-bottom: 1px solid #e7eaec;">Is Supported</th>
+                                <th style="border-bottom: 1px solid #e7eaec;">Branch</th>
+                                <th style="border-bottom: 1px solid #e7eaec;">Department</th>
+                                <th class="text-center" style="width: 1%; border-bottom: 1px solid #e7eaec;">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if ((total$ | async)! > 0) {
+                            @for (country of this.countries$ | async; track $index; let i = $index) {
+                            <tr>
+                                <td>{{ (tableService.page - 1) * tableService.pageSize + i + 1 }}</td>
+                                <td class="fw-semibold text-dark fs-sm">{{ country.Name }}</td>
+                                <td class="text-dark fs-sm">
+                                    <span class="badge" [ngClass]="country.IsSupported === 'Y' ? 'bg-success' : 'bg-danger'">
+                                        {{ country.IsSupported === 'Y' ? 'Supported' : 'Not Supported' }}
+                                    </span>
+                                </td>
+                                <td class="text-dark fs-sm">{{ country.BranchName }}</td>
+                                <td class="text-dark fs-sm">{{ country.DepartmentName }}</td>
+                                <td>
+                                    <div class="d-flex justify-content-center gap-1">
+                                        <a [routerLink]="['/misc/country/countryedit', country.id]"
+                                            class="btn btn-primary btn-icon btn-sm rounded-circle" 
+                                            style="background-color: #1ab394; border-color: #1ab394;"
+                                            ngbTooltip="Edit">
+                                            <ng-icon name="tablerPencil" class="fs-lg" />
+                                        </a>
+                                        <a class="btn btn-danger btn-icon btn-sm rounded-circle" 
+                                            (click)="deleteItem(country.id)"
+                                            ngbTooltip="Delete">
+                                            <ng-icon name="tablerTrash" class="fs-lg" />
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                            }
+                            } @else {
+                            <tr class="no-results">
+                                <td colspan="6" class="text-center text-muted py-3">Nothing found.</td>
+                            </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+                <div class="card-footer border-0">
+                    @if ((total$ | async)! > 0) {
+                    <div class="d-flex justify-content-between align-items-center pagination-boxed">
+                        <div class="text-muted">
+                            {{ tableService.showingRange }} countries
+                        </div>
+                        <ngb-pagination [collectionSize]="(total$ | async)!" [(page)]="tableService.page"
+                            [pageSize]="tableService.pageSize">
+                            <ng-template ngbPaginationPrevious>
+                                <ng-icon name="tablerChevronLeft" />
+                            </ng-template>
+                            <ng-template ngbPaginationNext>
+                                <ng-icon name="tablerChevronRight" />
+                            </ng-template>
+                        </ngb-pagination>
+                    </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

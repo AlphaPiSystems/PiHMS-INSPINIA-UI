@@ -1,0 +1,44 @@
+<div class="container-fluid">
+    <app-page-title title="Add Diagnostic Instrument" />
+
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header border-light">
+                    <h5 class="card-title mb-0">Instrument Details</h5>
+                </div>
+                <div class="card-body">
+                    <form (ngSubmit)="save()" #instrumentForm="ngForm">
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label class="form-label fw-semibold">Instrument Name</label>
+                                <input type="text" class="form-control" [(ngModel)]="instrument.InstrumentationName" name="InstrumentationName" required>
+                            </div>
+                            <div class="col-md-3">
+                                <label class="form-label fw-semibold">Branch Name</label>
+                                <select class="form-select" [(ngModel)]="instrument.BranchName" name="BranchName">
+                                    <option *ngFor="let branch of branches" [value]="branch.Name">{{ branch.Name }}</option>
+                                </select>
+                            </div>
+                            <div class="col-md-3">
+                                <label class="form-label fw-semibold">Department Name</label>
+                                <select class="form-select" [(ngModel)]="instrument.DepartmentName" name="DepartmentName">
+                                    <option *ngFor="let dept of departments" [value]="dept.Name">{{ dept.Name }}</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="d-flex gap-2">
+                            <button type="submit" class="btn btn-primary" [disabled]="!instrumentForm.form.valid" style="background-color: #1ab394; border-color: #1ab394;">
+                                Save Instrument
+                            </button>
+                            <button type="button" class="btn btn-light" (click)="cancel()">
+                                Cancel
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

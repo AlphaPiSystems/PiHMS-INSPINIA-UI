@@ -11,7 +11,7 @@ export const DEPARTMENTS_ROUTES: Routes = [
         loadComponent: () => import('./components/departmentadd/departmentadd').then(c => c.DepartmentAdd)
     },
     {
-        path: 'department/departmentedit/:id',
+        path: 'department/departmentedit',
         loadComponent: () => import('./components/departmentedit/departmentedit').then(c => c.DepartmentEdit)
     },
 ];

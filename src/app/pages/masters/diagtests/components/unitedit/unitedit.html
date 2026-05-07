@@ -1,18 +1,7 @@
 <div class="row wrapper border-bottom white-bg page-heading"
   style="padding: 8px 20px 10px; margin-bottom: 12px; box-shadow: 0 1px 2px rgba(0,0,0,0.08);">
   <div class="col-lg-10">
-    <h2 style="margin-top: 5px; margin-bottom: 5px; font-weight: 600; font-size: 18px;">{{unit?.Name || 'Edit Unit'}}</h2>
-    <ol class="breadcrumb" style="background-color: transparent; padding: 0; margin-bottom: 0; font-size: 11px;">
-      <li class="breadcrumb-item">
-        <a [routerLink]="['/']">Home</a>
-      </li>
-      <li class="breadcrumb-item">
-        <a [routerLink]="['/units/unit']">Units</a>
-      </li>
-      <li class="breadcrumb-item active">
-        <strong style="color: #1ab394;">Edit Unit</strong>
-      </li>
-    </ol>
+    <h2 style="margin-top: 5px; margin-bottom: 5px; font-weight: 600; font-size: 18px;">EDIT UNIT</h2>
   </div>
 </div>
 
@@ -28,7 +17,7 @@
         </div>
         <div class="ibox-content" style="padding: 20px;">
           <form role="form">
-            <div class="row mb-3">
+            <div class="row mb-3" *ngIf="unit">
               <div class="col-md-6">
                 <div class="form-group row align-items-center">
                   <label class="col-sm-3 text-start col-form-label" style="font-weight: 600;">Unit Name <span
@@ -41,26 +30,49 @@
               </div>
               <div class="col-md-6">
                 <div class="form-group row align-items-center">
-                  <label class="col-sm-3 text-start col-form-label" style="font-weight: 600;">Full Name <span
+                  <label class="col-sm-3 text-start col-form-label" style="font-weight: 600;">Display Name <span
                       class="text-danger">*</span></label>
                   <div class="col-sm-9">
-                    <input type="text" class="form-control" [(ngModel)]="unit.FullName" name="unitfullname"
-                      placeholder="e.g. Milligrams per Deciliter" required style="border-radius: 2px;">
+                    <input type="text" class="form-control" [(ngModel)]="unit.DisplayName" name="unitdisplayname"
+                      placeholder="e.g. mg/dL" required style="border-radius: 2px;">
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="row mb-3" *ngIf="unit">
+              <div class="col-md-6">
+                <div class="form-group row align-items-center">
+                  <label class="col-sm-3 text-start col-form-label" style="font-weight: 600;">Description</label>
+                  <div class="col-sm-9">
+                    <input type="text" class="form-control" [(ngModel)]="unit.Description" name="unitdescription"
+                      placeholder="Enter description..." style="border-radius: 2px;">
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group row align-items-center">
+                  <label class="col-sm-3 text-start col-form-label" style="font-weight: 600;">Branch <span
+                      class="text-danger">*</span></label>
+                  <div class="col-sm-9">
+                    <select class="form-select form-control" [(ngModel)]="unit.BranchName" name="unitbranch" required
+                      style="border-radius: 2px; cursor: pointer;">
+                      <option *ngFor="let branch of branches" [value]="branch.Name">{{branch.Name}}</option>
+                    </select>
                   </div>
                 </div>
               </div>
             </div>
             
-            <div class="row mb-3">
+            <div class="row mb-3" *ngIf="unit">
               <div class="col-md-6">
                 <div class="form-group row align-items-center">
-                  <label class="col-sm-3 text-start col-form-label" style="font-weight: 600;">Category <span
+                  <label class="col-sm-3 text-start col-form-label" style="font-weight: 600;">Department <span
                       class="text-danger">*</span></label>
                   <div class="col-sm-9">
-                    <select class="form-select form-control" [(ngModel)]="unit.Category" name="unitcategory" required
+                    <select class="form-select form-control" [(ngModel)]="unit.DepartmentName" name="unitdepartment" required
                       style="border-radius: 2px; cursor: pointer;">
-                      <option value="" disabled>Select Category</option>
-                      <option *ngFor="let cat of categories" [value]="cat">{{cat}}</option>
+                      <option *ngFor="let dept of departments" [value]="dept.Name">{{dept.Name}}</option>
                     </select>
                   </div>
                 </div>

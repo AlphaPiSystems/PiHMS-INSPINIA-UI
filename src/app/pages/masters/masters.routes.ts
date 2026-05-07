@@ -22,4 +22,8 @@ export const MASTER_ROUTES: Routes = [
         path: '',
         loadChildren: () => import('./departments/departments.routes').then((mod) => mod.DEPARTMENTS_ROUTES)
     },
+    {
+        path: '',
+        loadChildren: () => import('./Misc/misc.routes').then((mod) => mod.MISC_ROUTES)
+    },
 ];

@@ -38,8 +38,10 @@
                             <tr class="text-uppercase fs-md fw-bold text-dark">
                                 <th style="width: 80px; border-bottom: 1px solid #e7eaec;">SL.No</th>
                                 <th style="border-bottom: 1px solid #e7eaec;">Unit Name</th>
-                                <th style="border-bottom: 1px solid #e7eaec;">Full Description</th>
-                                <th style="border-bottom: 1px solid #e7eaec;">Category</th>
+                                <th style="border-bottom: 1px solid #e7eaec;">Display Name</th>
+                                <th style="border-bottom: 1px solid #e7eaec;">Description</th>
+                                <th style="border-bottom: 1px solid #e7eaec;">Branch Name</th>
+                                <th style="border-bottom: 1px solid #e7eaec;">Department Name</th>
                                 <th class="text-center" style="width: 100px; border-bottom: 1px solid #e7eaec;">Status</th>
                                 <th class="text-center" style="width: 120px; border-bottom: 1px solid #e7eaec;">Actions</th>
                             </tr>
@@ -48,8 +50,10 @@
                             <tr *ngFor="let unit of getPaginatedUnits(); let i = index">
                                 <td>{{ (currentPage - 1) * itemsPerPage + i + 1 }}</td>
                                 <td><span class="fw-semibold text-dark fs-sm">{{ unit.Name }}</span></td>
-                                <td class="text-dark fs-sm">{{ unit.FullName }}</td>
-                                <td><span class="text-dark fs-sm">{{ unit.Category }}</span></td>
+                                <td class="text-dark fs-sm">{{ unit.DisplayName }}</td>
+                                <td class="text-dark fs-sm">{{ unit.Description }}</td>
+                                <td class="text-dark fs-sm">{{ unit.BranchName }}</td>
+                                <td class="text-dark fs-sm">{{ unit.DepartmentName }}</td>
                                 <td class="text-center">
                                     <span class="fs-sm fw-medium text-dark">
                                         {{ unit.Status }}

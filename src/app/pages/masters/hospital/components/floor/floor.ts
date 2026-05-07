@@ -7,7 +7,7 @@ import { PageTitleComponent } from '../../../../../components/page-title.compone
 import { LucideAngularModule, LucideSearch } from 'lucide-angular';
 import { NgbPagination, NgbPaginationNext, NgbPaginationPrevious } from '@ng-bootstrap/ng-bootstrap';
 
-import { STAFF_LIST } from './hospital-data';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-floor',
@@ -18,16 +18,35 @@ import { STAFF_LIST } from './hospital-data';
 export class Floor implements OnInit {
   protected readonly LucideSearch = LucideSearch;
   
-  floorList: any[] = STAFF_LIST;
+  floorList: any[] = [];
 
   searchText: string = '';
   currentPage: number = 1;
   itemsPerPage: number = 10;
   Math = Math;
 
-  constructor(private route: ActivatedRoute) {}
+  constructor(private route: ActivatedRoute, private http: HttpClient) {}
 
   ngOnInit() {
+    this.http.get<{floors: any[], hospitalbuilding: any[]}>('assets/data/db.json').subscribe({
+      next: (data) => {
+        if (data && data.floors && data.hospitalbuilding) {
+          const buildings = data.hospitalbuilding;
+          this.floorList = data.floors.map(floor => {
+            const building = buildings.find(b => b.id === floor.HospitalBuildingID);
+            if (building) {
+              floor.HospitalBuildingName = building.Name;
+            }
+            return floor;
+          });
+        } else if (data && data.floors) {
+          this.floorList = data.floors;
+        }
+      },
+      error: (err) => {
+        console.error('Error loading floors from JSON:', err);
+      }
+    });
   }
   
   getFilteredFloors() {

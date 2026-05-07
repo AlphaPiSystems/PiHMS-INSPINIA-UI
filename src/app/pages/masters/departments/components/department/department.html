@@ -59,7 +59,8 @@
                                 </td>
                                 <td>
                                     <div class="d-flex justify-content-center">
-                                        <a [routerLink]="['/department/departmentedit', d.id]"
+                                        <a [routerLink]="['/department/departmentedit']"
+                                            [state]="{ department: d }"
                                             class="btn btn-primary btn-icon btn-sm rounded-circle"
                                             title="Edit Department"
                                             style="background-color: #1ab394; border-color: #1ab394; cursor: pointer;">

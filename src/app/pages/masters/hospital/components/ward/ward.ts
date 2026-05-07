@@ -7,7 +7,7 @@ import { PageTitleComponent } from '../../../../../components/page-title.compone
 import { LucideAngularModule, LucideSearch } from 'lucide-angular';
 import { NgbPagination, NgbPaginationNext, NgbPaginationPrevious } from '@ng-bootstrap/ng-bootstrap';
 
-import { WARD_LIST } from './ward-data';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-ward',
@@ -18,16 +18,26 @@ import { WARD_LIST } from './ward-data';
 export class Ward implements OnInit {
   protected readonly LucideSearch = LucideSearch;
   
-  wardList: any[] = WARD_LIST;
+  wardList: any[] = [];
 
   searchText: string = '';
   currentPage: number = 1;
   itemsPerPage: number = 10;
   Math = Math;
 
-  constructor(private route: ActivatedRoute) {}
+  constructor(private route: ActivatedRoute, private http: HttpClient) {}
 
   ngOnInit() {
+    this.http.get<{ward: any[]}>('assets/data/db.json').subscribe({
+      next: (data) => {
+        if (data && data.ward) {
+          this.wardList = data.ward;
+        }
+      },
+      error: (err) => {
+        console.error('Error loading wards from JSON:', err);
+      }
+    });
   }
   
   getFilteredWards() {

@@ -7,7 +7,7 @@ import { PageTitleComponent } from '@app/components/page-title.component';
 import { LucideAngularModule, LucideSearch } from 'lucide-angular';
 import { NgbPagination, NgbPaginationNext, NgbPaginationPrevious } from '@ng-bootstrap/ng-bootstrap';
 
-import { STAFF_LIST } from './staff-data';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-staff',
@@ -18,16 +18,26 @@ import { STAFF_LIST } from './staff-data';
 export class Staff implements OnInit {
   protected readonly LucideSearch = LucideSearch;
   
-  staffList: any[] = STAFF_LIST;
+  staffList: any[] = [];
 
   searchText: string = '';
   currentPage: number = 1;
   itemsPerPage: number = 10;
   Math = Math;
 
-  constructor(private route: ActivatedRoute) {}
+  constructor(private route: ActivatedRoute, private http: HttpClient) {}
 
   ngOnInit() {
+    this.http.get<{staff: any[]}>('assets/data/db.json').subscribe({
+      next: (data) => {
+        if (data && data.staff) {
+          this.staffList = data.staff;
+        }
+      },
+      error: (err) => {
+        console.error('Error loading staff from JSON:', err);
+      }
+    });
   }
 
   getFilteredStaff() {

@@ -3,8 +3,7 @@ import { CommonModule } from '@angular/common';
 import { NgIcon } from '@ng-icons/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
-import diagTestData from '../../diagtestdata.json';
-import diagTestGroupsData from '../../diagtestgroups.json';
+import { HttpClient } from '@angular/common/http';
 import { PageTitleComponent } from '@app/components/page-title.component';
 import { LucideAngularModule, LucideSearch } from 'lucide-angular';
 import { NgbPagination, NgbPaginationNext, NgbPaginationPrevious } from '@ng-bootstrap/ng-bootstrap';
@@ -17,7 +16,8 @@ import { NgbPagination, NgbPaginationNext, NgbPaginationPrevious } from '@ng-boo
 })
 export class DiagGroupEdit implements OnInit {
   protected readonly LucideSearch = LucideSearch;
-  allTests: any[] = diagTestData;
+  allTests: any[] = [];
+  allDiagGroups: any[] = [];
   groupableTests: any[] = [];
   singleTests: any[] = [];
   selectedGroup: any = null;
@@ -34,26 +34,38 @@ export class DiagGroupEdit implements OnInit {
 
   Math = Math;
 
-  constructor(private route: ActivatedRoute) {}
+  constructor(private route: ActivatedRoute, private http: HttpClient) {}
 
   ngOnInit() {
-    // Filter tests into Groups (PRO, MUL, PKG) and Singles (SNG)
-    this.groupableTests = this.allTests.filter(t => 
-      t.Type === 'PRO' || t.Type === 'MUL' || t.Type === 'PKG'
-    );
-    this.singleTests = this.allTests.filter(t => t.Type === 'SNG');
+    this.http.get<{diagtest: any[], diaggroup: any[]}>('assets/data/db.json').subscribe({
+      next: (data) => {
+        if (data && data.diagtest) {
+          this.allTests = data.diagtest;
+          this.allDiagGroups = data.diaggroup || [];
+          
+          // Filter tests into Groups (PRO, MUL, PKG) and Singles (SNG)
+          this.groupableTests = this.allTests.filter(t => 
+            t.Type === 'PRO' || t.Type === 'MUL' || t.Type === 'PKG'
+          );
+          this.singleTests = this.allTests.filter(t => t.Type === 'SNG');
 
-    // Load group based on ID parameter
-    this.route.params.subscribe(params => {
-      const id = +params['id'];
-      if (id) {
-        const group = this.groupableTests.find(g => g.id === id);
-        if (group) {
-          this.selectGroup(group);
+          // Load group based on ID parameter
+          this.route.params.subscribe(params => {
+            const id = +params['id'];
+            if (id) {
+              const group = this.groupableTests.find(g => g.id === id);
+              if (group) {
+                this.selectGroup(group);
+              }
+            } else if (this.groupableTests.length > 0) {
+              // Fallback to the first group if no ID
+              this.selectGroup(this.groupableTests[0]);
+            }
+          });
         }
-      } else if (this.groupableTests.length > 0) {
-        // Fallback to the first group if no ID
-        this.selectGroup(this.groupableTests[0]);
+      },
+      error: (err) => {
+        console.error('Error loading data from JSON:', err);
       }
     });
   }
@@ -61,7 +73,7 @@ export class DiagGroupEdit implements OnInit {
   selectGroup(group: any) {
     this.selectedGroup = group;
     // Load actual linked tests from the new JSON data
-    const linked = (diagTestGroupsData as any[]).filter(g => g.DiagGroupID === group.id);
+    const linked = this.allDiagGroups.filter(g => g.DiagGroupID === group.id);
     this.linkedTests = linked.map(l => {
       // Find the actual test in allTests to get the verified Type
       const actualTest = this.allTests.find(t => t.id === l.DiagTestID);
@@ -102,7 +114,7 @@ export class DiagGroupEdit implements OnInit {
          ReportingPriority: t.Priority
        }));
     } else {
-       directChildren = (diagTestGroupsData as any[]).filter(g => g.DiagGroupID === groupId);
+       directChildren = this.allDiagGroups.filter(g => g.DiagGroupID === groupId);
     }
 
     let results: any[] = [];

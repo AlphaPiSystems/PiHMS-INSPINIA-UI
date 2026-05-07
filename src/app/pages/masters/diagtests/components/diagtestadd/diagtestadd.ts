@@ -2,14 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NgIcon } from '@ng-icons/core';
 import { ActivatedRoute ,RouterLink} from '@angular/router';
-import patientData from '../../diagtestdata.json'
 import { CountUpModule } from 'ngx-countup';
 import { FormsModule } from '@angular/forms';
 import { NgxDaterangepickerBootstrapDirective } from 'ngx-daterangepicker-bootstrap';
 
 import { PageTitleComponent } from '@app/components/page-title.component';
-import { SAMPLE_LIST } from '../samples/sample-data';
-
+import { HttpClient } from '@angular/common/http';
 @Component({
     selector: 'app-diagtestadd',
     standalone: true,
@@ -20,8 +18,8 @@ import { SAMPLE_LIST } from '../samples/sample-data';
 export class DiagTestAdd implements OnInit {
 
   lastVisit: any = null;
-  patient: any = null;
-  samples = SAMPLE_LIST;
+  patient: any = {};
+  samples: any[] = [];
 
   totalVisits: number = 0;
   pendingBill: number = 0;
@@ -76,36 +74,44 @@ export class DiagTestAdd implements OnInit {
     }
   }
 
-  constructor(private route: ActivatedRoute) {}
+  constructor(private route: ActivatedRoute, private http: HttpClient) {}
 
   hover: string = '';
 
   ngOnInit() {
-    const id = Number(this.route.snapshot.paramMap.get('id'));
-    const data: any[] = patientData;
+    this.http.get<{diagtest: any[], sample: any[]}>('assets/data/db.json').subscribe({
+      next: (data) => {
+        if (data) {
+          if (data.sample) {
+            this.samples = data.sample;
+          }
+          
+          const id = Number(this.route.snapshot.paramMap.get('id'));
+          if (id && data.diagtest) {
+            this.patient = data.diagtest.find(p => p.id === id) || {};
+          } else {
+            this.patient = {};
+          }
 
-    this.patient = data.find(p => p.id === id);
-
-    // Initialize patient object if not found (for Add functionality)
-    if (!this.patient) {
-      this.patient = {};
-    }
-
-    // Example mock assignment (IMPORTANT)
-    if (this.patient) {
-      this.totalVisits = this.patient.visits?.length || 0;
-      this.pendingBill = this.patient.pendingBill || 0;
-      this.unpaidInvoices = this.patient.unpaidInvoices || 0;
-      this.upcomingVisits = this.patient.upcomingVisits || 0;
-      this.totalLabReports = this.patient.labReports || 0;
-      this.newLabReports = this.patient.newLabReports || 0;
-      this.totalScans = this.patient.scans || 0;
-      this.activePrescriptions = this.patient.prescriptions || 0;
-      this.insurance = this.patient.insurance || null;
-      this.lastVisit = this.patient.lastVisit || null;
-    }
-
-    console.log(this.patient);
+          // Mock assignment based on template requirements
+          if (this.patient) {
+            this.totalVisits = this.patient.visits?.length || 0;
+            this.pendingBill = this.patient.pendingBill || 0;
+            this.unpaidInvoices = this.patient.unpaidInvoices || 0;
+            this.upcomingVisits = this.patient.upcomingVisits || 0;
+            this.totalLabReports = this.patient.labReports || 0;
+            this.newLabReports = this.patient.newLabReports || 0;
+            this.totalScans = this.patient.scans || 0;
+            this.activePrescriptions = this.patient.prescriptions || 0;
+            this.insurance = this.patient.insurance || null;
+            this.lastVisit = this.patient.lastVisit || null;
+          }
+        }
+      },
+      error: (err) => {
+        console.error('Error fetching data for diagtestadd:', err);
+      }
+    });
   }
   alerts: string[] = [
   'Penicillin allergy',

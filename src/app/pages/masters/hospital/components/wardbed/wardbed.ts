@@ -7,7 +7,7 @@ import { PageTitleComponent } from '../../../../../components/page-title.compone
 import { LucideAngularModule, LucideSearch } from 'lucide-angular';
 import { NgbPagination, NgbPaginationNext, NgbPaginationPrevious } from '@ng-bootstrap/ng-bootstrap';
 
-import { WARDBED_LIST } from './hospital-data';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-wardbed',
@@ -18,16 +18,26 @@ import { WARDBED_LIST } from './hospital-data';
 export class WardBed implements OnInit {
   protected readonly LucideSearch = LucideSearch;
   
-  wardBedList: any[] = WARDBED_LIST;
+  wardBedList: any[] = [];
 
   searchText: string = '';
   currentPage: number = 1;
   itemsPerPage: number = 10;
   Math = Math;
 
-  constructor(private route: ActivatedRoute) {}
+  constructor(private route: ActivatedRoute, private http: HttpClient) {}
 
   ngOnInit() {
+    this.http.get<{wardbed: any[]}>('assets/data/db.json').subscribe({
+      next: (data) => {
+        if (data && data.wardbed) {
+          this.wardBedList = data.wardbed;
+        }
+      },
+      error: (err) => {
+        console.error('Error loading ward beds from JSON:', err);
+      }
+    });
   }
   
   getFilteredWardBeds() {

@@ -22,7 +22,7 @@ import {FormsModule} from '@angular/forms';
 import {NgbPagination, NgbPaginationNext, NgbPaginationPrevious} from '@ng-bootstrap/ng-bootstrap';
 import {NgbdSortableHeader} from '@core/directive/sortable.directive';
 import {TestType} from '../../types'
-import diagtestData from '../../diagtestdata.json';
+import { HttpClient } from '@angular/common/http';
 import { AsyncPipe, CommonModule } from '@angular/common';
 
 @Component({
@@ -63,20 +63,25 @@ export class DiagTest implements OnInit {
   // ✅ STORE ORIGINAL DATA
   allTests: any[] = [];
 
-  constructor(public tableService: TableService<TestType>) {
+  constructor(public tableService: TableService<TestType>, private http: HttpClient) {
     this.tests$ = this.tableService.items$;
     this.total$ = this.tableService.total$;
   }
 
-ngOnInit(): void {
-  const data: TestType[] = diagtestData;
-
-  this.allTests = data;
-
-  console.log('Loaded Data:', this.allTests); // ✅ debug
-
-  this.tableService.setItems(this.allTests, this.tableService.pageSize);
-}
+  ngOnInit(): void {
+    this.http.get<{diagtest: TestType[]}>('assets/data/db.json').subscribe({
+      next: (data) => {
+        if (data && data.diagtest) {
+          this.allTests = data.diagtest;
+          console.log('Loaded Data:', this.allTests); // ✅ debug
+          this.tableService.setItems(this.allTests, this.tableService.pageSize);
+        }
+      },
+      error: (err) => {
+        console.error('Error loading tests from JSON:', err);
+      }
+    });
+  }
   
   // -------------------------
   // ACTIONS

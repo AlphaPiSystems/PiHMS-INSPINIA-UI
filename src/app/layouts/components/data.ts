@@ -94,6 +94,7 @@ export const menuItems: MenuItemType[] = [
                     { label: 'Test Groups', url: '/diaggroup/diaggrouplist' },
                     { label: 'Samples', url: '/sample/samplelist' },
                     { label: 'Units', url: '/unit/unitlist' },
+                    { label: 'Instruments', url: '/instrument/instrumentlist' },
                     // { label: 'Test Instrumentation', url: '/diagtest/testrange' },
                     // { label: 'Diagnostic Test Template', url: '/diagtest/testrange' },
                 ]
@@ -110,6 +111,14 @@ export const menuItems: MenuItemType[] = [
                 label: 'Department',
                 url: '/department/departmentlist'
             },
+            {
+                label: 'Misc',
+                isCollapsed: true,
+                children: [
+                    { label: 'Cities', url: '/misc/city/citylist' },
+                    { label: 'Countries', url: '/misc/country/countrylist' }
+                ]
+            }
         ]
     },
     // {

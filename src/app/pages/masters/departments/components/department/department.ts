@@ -6,6 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { PageTitleComponent } from '../../../../../components/page-title.component';
 import { LucideAngularModule, LucideSearch } from 'lucide-angular';
 import { NgbPagination, NgbPaginationNext, NgbPaginationPrevious } from '@ng-bootstrap/ng-bootstrap';
+import { HttpClient } from '@angular/common/http';
 
 import { DepartmentService } from '../../../../../core/services/department.service';
 import { Department as DepartmentType } from '../../../../../types/department';
@@ -26,19 +27,27 @@ export class Department implements OnInit {
   itemsPerPage: number = 10;
   Math = Math;
 
-  constructor(private route: ActivatedRoute, private departmentService: DepartmentService) {}
+  constructor(private route: ActivatedRoute, private departmentService: DepartmentService, private http: HttpClient) {}
 
   ngOnInit() {
     this.loadDepartments();
   }
 
   loadDepartments() {
-    this.departmentService.getDepartments().subscribe({
+    // this.departmentService.getDepartments().subscribe({
+    //   next: (data) => {
+    //     this.departmentList = data;
+    //   },
+    //   error: (err) => {
+    //     console.error('Error loading departments:', err);
+    //   }
+    // });
+    this.http.get<{departments: DepartmentType[]}>('assets/data/db.json').subscribe({
       next: (data) => {
-        this.departmentList = data;
+        this.departmentList = data.departments;
       },
       error: (err) => {
-        console.error('Error loading departments:', err);
+        console.error('Error loading departments from JSON:', err);
       }
     });
   }

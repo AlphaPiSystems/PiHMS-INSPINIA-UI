@@ -1,0 +1,82 @@
+<div class="container-fluid">
+  <app-page-title title="Edit Sample" />
+
+  <div class="row">
+    <div class="col-12">
+      <div class="card border-0 shadow-sm">
+        <div class="card-header bg-white border-bottom-0 pt-4 px-4">
+          <h5 class="card-title mb-0 text-dark fw-bold">Sample Information</h5>
+          <p class="text-muted mb-0 fs-xs">Modify the details of the laboratory sample type below.</p>
+        </div>
+
+        <div class="card-body p-4">
+          <form (ngSubmit)="saveChanges()">
+            <div class="row g-3">
+              <!-- Full Name -->
+              <div class="col-md-6">
+                <label class="form-label text-dark fw-semibold fs-xs text-uppercase">Full Name <span class="text-danger">*</span></label>
+                <input type="text" [(ngModel)]="sample.FullName" name="FullName" class="form-control form-control-sm border-light-subtle shadow-none" placeholder="e.g. Blood, Urine" required>
+              </div>
+
+              <!-- Short Name -->
+              <div class="col-md-6">
+                <label class="form-label text-dark fw-semibold fs-xs text-uppercase">Short Name</label>
+                <input type="text" [(ngModel)]="sample.ShortName" name="ShortName" class="form-control form-control-sm border-light-subtle shadow-none" placeholder="e.g. BLD">
+              </div>
+
+              <!-- Code -->
+              <div class="col-md-6">
+                <label class="form-label text-dark fw-semibold fs-xs text-uppercase">Sample Code <span class="text-danger">*</span></label>
+                <input type="text" [(ngModel)]="sample.Code" name="Code" class="form-control form-control-sm border-light-subtle shadow-none" placeholder="e.g. SMP001" required disabled>
+              </div>
+
+              <!-- Sample Form -->
+              <div class="col-md-6">
+                <label class="form-label text-dark fw-semibold fs-xs text-uppercase">Sample Form</label>
+                <select [(ngModel)]="sample.SampleForm" name="SampleForm" class="form-select form-select-sm border-light-subtle shadow-none">
+                  <option *ngFor="let form of sampleForms" [value]="form">{{form}}</option>
+                </select>
+              </div>
+
+              <!-- Container -->
+              <div class="col-md-6">
+                <label class="form-label text-dark fw-semibold fs-xs text-uppercase">Container Type</label>
+                <select [(ngModel)]="sample.Container" name="Container" class="form-select form-select-sm border-light-subtle shadow-none">
+                  <option value="">Select Container</option>
+                  <option *ngFor="let container of containers" [value]="container">{{container}}</option>
+                </select>
+              </div>
+
+              <!-- Branch -->
+              <div class="col-md-6">
+                <label class="form-label text-dark fw-semibold fs-xs text-uppercase">Branch Name</label>
+                <select class="form-select form-select-sm border-light-subtle shadow-none" [(ngModel)]="sample.BranchName" name="BranchName">
+                    <option *ngFor="let branch of branches" [value]="branch.Name">{{ branch.Name }}</option>
+                </select>
+              </div>
+
+              <!-- Department -->
+              <div class="col-md-6">
+                <label class="form-label text-dark fw-semibold fs-xs text-uppercase">Department Name</label>
+                <select class="form-select form-select-sm border-light-subtle shadow-none" [(ngModel)]="sample.DepartmentName" name="DepartmentName">
+                    <option *ngFor="let dept of departments" [value]="dept.Name">{{ dept.Name }}</option>
+                </select>
+              </div>
+
+              <!-- Description -->
+              <div class="col-md-6">
+                <label class="form-label text-dark fw-semibold fs-xs text-uppercase">Description</label>
+                <input type="text" [(ngModel)]="sample.Description" name="Description" class="form-control form-control-sm border-light-subtle shadow-none" placeholder="Additional notes about the sample type...">
+              </div>
+            </div>
+
+            <div class="d-flex justify-content-end gap-2 mt-4 pt-3 border-top">
+              <button type="button" routerLink="/sample/samplelist" class="btn btn-light btn-sm px-4 fw-semibold border">Cancel</button>
+              <button type="submit" class="btn btn-primary btn-sm px-4 fw-semibold" style="background-color: #1ab394; border-color: #1ab394;">Update Sample</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

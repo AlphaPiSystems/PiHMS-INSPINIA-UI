@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { NgIcon } from '@ng-icons/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
-import diagTestData from '../../diagtestdata.json';
+import { HttpClient } from '@angular/common/http';
 import { PageTitleComponent } from '../../../../../components/page-title.component';
 import { LucideAngularModule, LucideSearch } from 'lucide-angular';
 import { NgbPagination, NgbPaginationNext, NgbPaginationPrevious } from '@ng-bootstrap/ng-bootstrap';
@@ -26,7 +26,7 @@ import { NgbPagination, NgbPaginationNext, NgbPaginationPrevious } from '@ng-boo
 })
 export class DiagGroup implements OnInit {
   protected readonly LucideSearch = LucideSearch;
-  allTests: any[] = diagTestData;
+  allTests: any[] = [];
   groupableTests: any[] = [];
   singleTests: any[] = [];
   selectedGroup: any = null;
@@ -37,21 +37,31 @@ export class DiagGroup implements OnInit {
   itemsPerPage: number = 10;
   Math = Math;
 
-  constructor(private route: ActivatedRoute) {}
+  constructor(private route: ActivatedRoute, private http: HttpClient) {}
 
   ngOnInit() {
-    // Filter tests into Groups (PRO, MUL, PKG) and Singles (SNG)
-    this.groupableTests = this.allTests.filter(t => 
-      t.Type?.toUpperCase() === 'PRO' || 
-      t.Type?.toUpperCase() === 'MUL' || 
-      t.Type?.toUpperCase() === 'PKG'
-    );
-    this.singleTests = this.allTests.filter(t => t.Type?.toUpperCase() === 'SNG');
+    this.http.get<{diagtest: any[]}>('assets/data/db.json').subscribe({
+      next: (data) => {
+        if (data && data.diagtest) {
+          this.allTests = data.diagtest;
+          // Filter tests into Groups (PRO, MUL, PKG) and Singles (SNG)
+          this.groupableTests = this.allTests.filter(t => 
+            t.Type?.toUpperCase() === 'PRO' || 
+            t.Type?.toUpperCase() === 'MUL' || 
+            t.Type?.toUpperCase() === 'PKG'
+          );
+          this.singleTests = this.allTests.filter(t => t.Type?.toUpperCase() === 'SNG');
 
-    // Default to the first group if it exists
-    if (this.groupableTests.length > 0) {
-      this.selectGroup(this.groupableTests[0]);
-    }
+          // Default to the first group if it exists
+          if (this.groupableTests.length > 0) {
+            this.selectGroup(this.groupableTests[0]);
+          }
+        }
+      },
+      error: (err) => {
+        console.error('Error loading diagtests from JSON:', err);
+      }
+    });
   }
 
   selectGroup(group: any) {
