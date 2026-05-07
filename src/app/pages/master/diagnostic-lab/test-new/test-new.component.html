@@ -4,6 +4,11 @@
             <div class="card border-0 shadow-sm">
                 <div class="card-body">
                     <form>
+                        <div class="row">
+                            <div class="col-12 mb-2">
+                                <h5 class="text-primary mb-0 fw-semibold">Add New Test</h5>
+                            </div>
+                        </div>
                         <div class="row mb-4">
                             <div class="col-md-3 mb-3">
                                 <label class="form-label fw-semibold mb-1">Name <span
@@ -32,7 +37,8 @@
                             <div class="col-md-3 mb-3">
                                 <label class="form-label fw-semibold mb-1">Type <span
                                         class="text-danger">*</span></label>
-                                <select class="form-select form-select-sm border-light bg-light-op-10" [(ngModel)]="patient.Type" name="type">
+                                <select class="form-select form-select-sm border-light bg-light-op-10"
+                                    [(ngModel)]="patient.Type" name="type">
                                     <option value="SNG">Single (SNG)</option>
                                     <option value="MUL">Multiple (MUL)</option>
                                     <option value="PRO">PRO (PRO)</option>
@@ -43,14 +49,18 @@
                                 <label class="form-label fw-semibold mb-1">Investig. Type
                                     <span class="text-danger">*</span></label>
                                 <select class="form-select form-select-sm border-light bg-light-op-10">
-                                    <option value=""></option>
+                                    <option value="Special">Special</option>
+                                    <option value="Routine">Routine</option>
+                                    <option value="Death">Death</option>
                                 </select>
                             </div>
                             <div class="col-md-3 mb-3">
                                 <label class="form-label fw-semibold  mb-1">Sample <span
                                         class="text-danger">*</span></label>
                                 <select class="form-select form-select-sm border-light bg-light-op-10">
-                                    <option value=""></option>
+                                    <option value="">Select Sample</option>
+                                    <option *ngFor="let sample of samples" [value]="sample.id">{{ sample.FullName }}
+                                    </option>
                                 </select>
                             </div>
                             <div class="col-md-3 mb-3">
@@ -162,7 +172,8 @@
                                     style="background:#fff; box-shadow: 0 2px 4px rgba(0,0,0,0.08); border-radius: 4px; height: 100%; display: flex; flex-direction: column; margin-bottom: 0;">
                                     <div class="ibox-title"
                                         style="border-top: 4px solid #1c84c6; padding: 6px 15px; border-bottom: 1px solid #f0f0f0; display: flex; justify-content: space-between; align-items: center;">
-                                        <h5 style="font-weight: 600; margin: 0; font-size: 14px; text-transform: uppercase;">
+                                        <h5
+                                            style="font-weight: 600; margin: 0; font-size: 14px; text-transform: uppercase;">
                                             Reference Ranges</h5>
                                         <button class="btn btn-primary btn-sm" type="button"
                                             (click)="addReferenceRange()"
