@@ -1,0 +1,59 @@
+<div class="container-fluid">
+    <app-page-title title="Add Insurance" />
+
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header border-light">
+                    <h5 class="card-title mb-0">Insurance Details</h5>
+                </div>
+                <div class="card-body">
+                    <form (ngSubmit)="save()" #insForm="ngForm">
+                        <div class="row mb-3">
+                            <div class="col-md-12">
+                                <label class="form-label fw-semibold">Insurance Name</label>
+                                <input type="text" class="form-control" [(ngModel)]="insurance.Name" name="Name" required placeholder="Enter Insurance Name">
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col-md-12">
+                                <label class="form-label fw-semibold">Description</label>
+                                <textarea class="form-control" [(ngModel)]="insurance.Description" name="Description" rows="3" placeholder="Enter Description"></textarea>
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col-md-12">
+                                <label class="form-label fw-semibold">Department</label>
+                                <select class="form-select" [(ngModel)]="insurance.DepartmentID" name="DepartmentID" required>
+                                    <option [ngValue]="null" disabled selected>Select Department</option>
+                                    <option *ngFor="let dept of departments" [ngValue]="dept.id">{{ dept.Name }}</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col-md-12">
+                                <label class="form-label fw-semibold">Branch</label>
+                                <select class="form-select" [(ngModel)]="insurance.BranchID" name="BranchID" required>
+                                    <option [ngValue]="null" disabled selected>Select Branch</option>
+                                    <option *ngFor="let branch of branches" [ngValue]="branch.id">{{ branch.Name }}</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="d-flex gap-2">
+                            <button type="submit" class="btn btn-primary" [disabled]="!insForm.form.valid" style="background-color: #1ab394; border-color: #1ab394;">
+                                Save Insurance
+                            </button>
+                            <button type="button" class="btn btn-light" (click)="cancel()">
+                                Cancel
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

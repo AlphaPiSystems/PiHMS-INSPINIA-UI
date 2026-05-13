@@ -39,6 +39,7 @@
                                 <th style="border-bottom: 1px solid #e7eaec;">Country</th>
                                 <th style="border-bottom: 1px solid #e7eaec;">Type</th>
                                 <th style="border-bottom: 1px solid #e7eaec;">Branch</th>
+                                <th style="border-bottom: 1px solid #e7eaec;">Status</th>
                                 <th class="text-center" style="width: 1%; border-bottom: 1px solid #e7eaec;">Actions</th>
                             </tr>
                         </thead>
@@ -48,12 +49,13 @@
                             <tr>
                                 <td>{{ (tableService.page - 1) * tableService.pageSize + i + 1 }}</td>
                                 <td class="fw-semibold text-dark fs-sm">{{ city.Name }}</td>
-                                <td class="text-dark fs-sm">{{ city.DistrictName }}</td>
-                                <td class="text-dark fs-sm">{{ city.StateName }}</td>
-                                <td class="text-dark fs-sm">{{ city.CountryName }}</td>
-                                <td class="text-dark fs-sm">{{ city.Type }}</td>
-                                <td class="text-dark fs-sm">{{ city.BranchName }}</td>
-                                <td>
+                                <td class="fw-semibold text-dark fs-sm">{{ city.DistrictName }}</td>
+                                <td class="fw-semibold text-dark fs-sm">{{ city.StateName }}</td>
+                                <td class="fw-semibold text-dark fs-sm">{{ city.CountryName }}</td>
+                                <td class="fw-semibold text-dark fs-sm">{{ city.Type }}</td>
+                                <td class="fw-semibold text-dark fs-sm">{{ city.BranchName }}</td>
+                                <td class="fw-semibold text-dark fs-sm">{{ city.Status || 'Active' }}</td>
+                                <td class="text-center">
                                     <div class="d-flex justify-content-center gap-1">
                                         <a [routerLink]="['/misc/city/cityedit', city.id]"
                                             class="btn btn-primary btn-icon btn-sm rounded-circle" 
@@ -61,18 +63,13 @@
                                             ngbTooltip="Edit">
                                             <ng-icon name="tablerPencil" class="fs-lg" />
                                         </a>
-                                        <a class="btn btn-danger btn-icon btn-sm rounded-circle" 
-                                            (click)="deleteItem(city.id)"
-                                            ngbTooltip="Delete">
-                                            <ng-icon name="tablerTrash" class="fs-lg" />
-                                        </a>
                                     </div>
                                 </td>
                             </tr>
                             }
                             } @else {
                             <tr class="no-results">
-                                <td colspan="8" class="text-center text-muted py-3">Nothing found.</td>
+                                <td colspan="9" class="text-center text-muted py-3">Nothing found.</td>
                             </tr>
                             }
                         </tbody>

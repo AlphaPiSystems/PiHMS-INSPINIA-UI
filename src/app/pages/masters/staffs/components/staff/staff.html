@@ -41,22 +41,16 @@
                                 <th style="border-bottom: 1px solid #e7eaec;">Designation</th>
                                 <th style="border-bottom: 1px solid #e7eaec;">Department</th>
                                 <th style="border-bottom: 1px solid #e7eaec;">Date of Birth</th>
-                                <th class="text-center" style="width: 100px; border-bottom: 1px solid #e7eaec;">Status</th>
                                 <th class="text-center" style="width: 120px; border-bottom: 1px solid #e7eaec;">Actions</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr *ngFor="let staff of getPaginatedStaff(); let i = index">
-                                <td>{{ (currentPage - 1) * itemsPerPage + i + 1 }}</td>
+                                <td><span class="fw-semibold text-dark fs-sm">{{ (currentPage - 1) * itemsPerPage + i + 1 }}</span></td>
                                 <td><span class="fw-semibold text-dark fs-sm">{{ staff.Name }}</span></td>
-                                <td class="text-dark fs-sm">{{ staff.Designation }}</td>
-                                <td><span class="text-dark fs-sm">{{ staff.Department }}</span></td>
-                                <td><span class="text-dark fs-sm">{{ staff.DOB | date:'dd/MM/yyyy' }}</span></td>
-                                <td class="text-center">
-                                    <span class="fs-sm fw-medium text-dark">
-                                        {{ staff.Status }}
-                                    </span>
-                                </td>
+                                <td><span class="fw-semibold text-dark fs-sm">{{ staff.Designation }}</span></td>
+                                <td><span class="fw-semibold text-dark fs-sm">{{ staff.Department }}</span></td>
+                                <td><span class="fw-semibold text-dark fs-sm">{{ staff.DOB | date:'dd/MM/yyyy' }}</span></td>
                                 <td>
                                     <div class="d-flex justify-content-center">
                                         <a [routerLink]="['/staff/staffedit', staff.id]"

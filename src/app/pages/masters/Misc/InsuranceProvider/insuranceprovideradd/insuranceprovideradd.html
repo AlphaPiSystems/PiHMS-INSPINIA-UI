@@ -1,0 +1,85 @@
+<div class="container-fluid">
+  <app-page-title title="Add New Insurance Provider" />
+
+  <div class="wrapper wrapper-content animated fadeInRight" style="padding-top: 0;">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="ibox float-e-margins" style="background:#fff; box-shadow: 0 2px 4px rgba(0,0,0,0.08); border-radius: 4px;">
+          <div class="ibox-title" style="border-top: 4px solid #1ab394; padding: 6px 15px; border-bottom: 1px solid #f0f0f0;">
+            <h5 style="font-weight: 600; margin: 0; font-size: 14px; text-transform: uppercase;">Provider Information</h5>
+          </div>
+          <div class="ibox-content" style="padding: 10px 15px;">
+            <form (ngSubmit)="saveChanges()">
+              <div class="row">
+                <!-- Provider Name -->
+                <div class="col-md-6 col-sm-12">
+                  <div class="form-group row align-items-center" style="margin-bottom: 8px;">
+                    <label class="col-sm-4 text-start col-form-label" style="font-weight: 600;">Provider Name <span class="text-danger">*</span></label>
+                    <div class="col-sm-8">
+                      <input type="text" [(ngModel)]="provider.Name" name="Name" class="form-control" placeholder="e.g. Star Health Insurance" required style="border-radius: 2px;">
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Branch (Internal) -->
+                <div class="col-md-6 col-sm-12">
+                  <div class="form-group row align-items-center" style="margin-bottom: 8px;">
+                    <label class="col-sm-4 text-start col-form-label" style="font-weight: 600;">Internal Branch</label>
+                    <div class="col-sm-8">
+                      <select [(ngModel)]="provider.BranchName" name="BranchName" class="form-select form-control" style="border-radius: 2px;">
+                        <option value="">Select Branch</option>
+                        <option *ngFor="let b of branches" [value]="b.Name">{{b.Name}}</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Department -->
+                <div class="col-md-6 col-sm-12">
+                  <div class="form-group row align-items-center" style="margin-bottom: 8px;">
+                    <label class="col-sm-4 text-start col-form-label" style="font-weight: 600;">Department</label>
+                    <div class="col-sm-8">
+                      <select [(ngModel)]="provider.DepartmentName" name="DepartmentName" class="form-select form-control" style="border-radius: 2px;">
+                        <option value="">Select Department</option>
+                        <option *ngFor="let d of departments" [value]="d.Name">{{d.Name}}</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Address -->
+                <div class="col-md-12 col-sm-12">
+                  <div class="form-group row align-items-start" style="margin-bottom: 8px;">
+                    <label class="col-sm-2 text-start col-form-label" style="font-weight: 600;">Office Address</label>
+                    <div class="col-sm-10">
+                      <textarea [(ngModel)]="provider.Address" name="Address" class="form-control" rows="3" placeholder="Enter full office address..." style="border-radius: 2px;"></textarea>
+                    </div>
+                  </div>
+                </div>
+                <!-- Status -->
+                <div class="col-md-6 col-sm-12">
+                  <div class="form-group row align-items-center" style="margin-bottom: 8px;">
+                    <label class="col-sm-4 text-start col-form-label" style="font-weight: 600;">Status</label>
+                    <div class="col-sm-8">
+                      <select [(ngModel)]="provider.Status" name="Status" class="form-select form-control" style="border-radius: 2px;">
+                        <option value="Active">Active</option>
+                        <option value="Inactive">Inactive</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="hr-line-dashed" style="border-top: 1px dashed #e7eaec; margin: 15px 0;"></div>
+              
+              <div class="d-flex justify-content-end gap-2">
+                <button type="button" routerLink="/misc/insuranceprovider/insuranceproviderlist" class="btn btn-white" style="border: 1px solid #d2d2d2; background: #fff; padding: 8px 20px; font-weight: 600; border-radius: 2px; color: #555;">Cancel</button>
+                <button type="submit" class="btn btn-primary" style="background: #1ab394; border-color: #1ab394; color: #fff; padding: 8px 20px; font-weight: 600; border-radius: 2px;">Save Provider</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

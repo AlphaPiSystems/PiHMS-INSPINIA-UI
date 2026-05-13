@@ -10,15 +10,15 @@
       }
       <!-- menu item with child -->
       @if (hasSubMenu(item)) {
-        <ng-container *ngTemplateOutlet="MenuItemWithChildren;context:{item}"/>
+        <ng-container *ngTemplateOutlet="MenuItemWithChildren;context:{item, siblings: menuItems}"/>
       }
     }
   }
 </ul>
 
-<ng-template #MenuItemWithChildren let-item="item">
+<ng-template #MenuItemWithChildren let-item="item" let-siblings="siblings">
   <li class="side-nav-item" [ngClass]="{'active': isChildActive(item)}">
-    <button (click)="item.isCollapsed = !item.isCollapsed" class="side-nav-link"
+    <button (click)="toggleMenuItem(item, siblings)" class="side-nav-link"
       [attr.aria-expanded]="!item.isCollapsed">
       @if (item.icon) {
         <span class="menu-icon">
@@ -44,7 +44,7 @@
           }
           <!-- menu item with child -->
           @if (hasSubMenu(child)) {
-            <ng-container *ngTemplateOutlet="MenuItemWithChildren;context:{item:child}"/>
+            <ng-container *ngTemplateOutlet="MenuItemWithChildren;context:{item:child, siblings: item.children}"/>
           }
         }
       </ul>

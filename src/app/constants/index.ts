@@ -2,7 +2,7 @@ type CurrencyType = '₹' | '$' | '€'
 
 export const colorVariants = ["primary", "secondary", "success", "danger", "warning", "info", "purple", "light", 'dark']
 
-export const currency: CurrencyType = '$'
+export const currency: CurrencyType | string = ''
 
 export const currentYear = new Date().getFullYear()
 

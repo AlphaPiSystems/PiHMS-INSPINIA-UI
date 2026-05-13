@@ -30,7 +30,7 @@ export const statistics: StatisticsWidgetType[] = [
         title: 'Total Sales',
         badge: {text: 'Monthly', variant: 'success'},
         value: 250,
-        prefix: '$',
+        prefix: '',
         suffix: 'K',
         description: 'Monthly Total Sales',
         chartOptions: () => ({
@@ -116,7 +116,7 @@ export const statistics: StatisticsWidgetType[] = [
         title: 'Revenue',
         badge: {text: 'Monthly', variant: 'warning'},
         value: 50.33,
-        prefix: '$',
+        prefix: '',
         suffix: 'K',
         description: 'Monthly Revenue',
         chartOptions: () => ({
@@ -301,7 +301,7 @@ export const orderStatistics: OrderStatisticsWidgetType[] = [
     {
         title: 'Total Sales',
         value: 24500,
-        prefix: '$',
+        prefix: '',
         growth: 18.45,
         variant: 'success',
         icon: 'tablerArrowUp',
@@ -326,8 +326,8 @@ export const orderStatistics: OrderStatisticsWidgetType[] = [
     {
         title: 'Avg. Order Value',
         value: 65.49,
-        prefix: '$',
-        suffix: 'USD',
+        prefix: '',
+        suffix: '',
         growth: 5.92,
         variant: 'success',
         icon: 'tablerArrowUp',

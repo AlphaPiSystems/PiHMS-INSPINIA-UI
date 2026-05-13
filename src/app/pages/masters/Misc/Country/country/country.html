@@ -37,6 +37,7 @@
                                 <th style="border-bottom: 1px solid #e7eaec;">Is Supported</th>
                                 <th style="border-bottom: 1px solid #e7eaec;">Branch</th>
                                 <th style="border-bottom: 1px solid #e7eaec;">Department</th>
+                                <th style="border-bottom: 1px solid #e7eaec;">Status</th>
                                 <th class="text-center" style="width: 1%; border-bottom: 1px solid #e7eaec;">Actions</th>
                             </tr>
                         </thead>
@@ -46,14 +47,13 @@
                             <tr>
                                 <td>{{ (tableService.page - 1) * tableService.pageSize + i + 1 }}</td>
                                 <td class="fw-semibold text-dark fs-sm">{{ country.Name }}</td>
-                                <td class="text-dark fs-sm">
-                                    <span class="badge" [ngClass]="country.IsSupported === 'Y' ? 'bg-success' : 'bg-danger'">
-                                        {{ country.IsSupported === 'Y' ? 'Supported' : 'Not Supported' }}
-                                    </span>
+                                <td class="fw-semibold text-dark fs-sm">
+                                    {{ country.IsSupported === 'Y' ? 'Supported' : 'Not Supported' }}
                                 </td>
-                                <td class="text-dark fs-sm">{{ country.BranchName }}</td>
-                                <td class="text-dark fs-sm">{{ country.DepartmentName }}</td>
-                                <td>
+                                <td class="fw-semibold text-dark fs-sm">{{ country.BranchName }}</td>
+                                <td class="fw-semibold text-dark fs-sm">{{ country.DepartmentName }}</td>
+                                <td class="fw-semibold text-dark fs-sm">{{ country.Status || 'Active' }}</td>
+                                <td class="text-center">
                                     <div class="d-flex justify-content-center gap-1">
                                         <a [routerLink]="['/misc/country/countryedit', country.id]"
                                             class="btn btn-primary btn-icon btn-sm rounded-circle" 
@@ -61,18 +61,13 @@
                                             ngbTooltip="Edit">
                                             <ng-icon name="tablerPencil" class="fs-lg" />
                                         </a>
-                                        <a class="btn btn-danger btn-icon btn-sm rounded-circle" 
-                                            (click)="deleteItem(country.id)"
-                                            ngbTooltip="Delete">
-                                            <ng-icon name="tablerTrash" class="fs-lg" />
-                                        </a>
                                     </div>
                                 </td>
                             </tr>
                             }
                             } @else {
                             <tr class="no-results">
-                                <td colspan="6" class="text-center text-muted py-3">Nothing found.</td>
+                                <td colspan="7" class="text-center text-muted py-3">Nothing found.</td>
                             </tr>
                             }
                         </tbody>

@@ -1,0 +1,46 @@
+<div class="container-fluid">
+    <app-page-title title="Edit Scan" />
+
+    <div class="row" *ngIf="scan">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header border-light">
+                    <h5 class="card-title mb-0">Scan Details</h5>
+                </div>
+                <div class="card-body">
+                    <form (ngSubmit)="save()" #scanForm="ngForm">
+                        <div class="row mb-3">
+                            <div class="col-md-4">
+                                <label class="form-label fw-semibold">Scan Name</label>
+                                <input type="text" class="form-control" [(ngModel)]="scan.Name" name="Name" required placeholder="Enter Scan Name">
+                            </div>
+                            <div class="col-md-8">
+                                <label class="form-label fw-semibold">Description</label>
+                                <input type="text" class="form-control" [(ngModel)]="scan.Description" name="Description" placeholder="Enter Scan Description">
+                            </div>
+                        </div>
+
+                        <div class="d-flex gap-2">
+                            <button type="submit" class="btn btn-primary" [disabled]="!scanForm.form.valid" style="background-color: #1ab394; border-color: #1ab394;">
+                                Save Changes
+                            </button>
+                            <button type="button" class="btn btn-light" (click)="cancel()">
+                                Cancel
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="row" *ngIf="!scan">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body text-center py-5">
+                    <p class="text-muted">Loading scan data...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

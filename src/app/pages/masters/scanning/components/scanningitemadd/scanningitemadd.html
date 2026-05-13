@@ -1,0 +1,71 @@
+<div class="container-fluid">
+    <app-page-title title="Add Scanning Item" />
+
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header border-light">
+                    <h5 class="card-title mb-0">Item Details</h5>
+                </div>
+                <div class="card-body">
+                    <form (ngSubmit)="save()" #itemForm="ngForm">
+                        <div class="row mb-3">
+                            <div class="col-md-4">
+                                <label class="form-label fw-semibold">Scan Name</label>
+                                <select class="form-select" [(ngModel)]="item.ScanName" name="ScanName" (change)="onScanChange()" required>
+                                    <option value="" disabled selected>Select Scan</option>
+                                    <option *ngFor="let s of scans" [value]="s.Name">{{ s.Name }}</option>
+                                </select>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label fw-semibold">Title</label>
+                                <input type="text" class="form-control" [(ngModel)]="item.Title" name="Title" required placeholder="Enter Title">
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label fw-semibold">Priority</label>
+                                <input type="number" class="form-control" [(ngModel)]="item.Priority" name="Priority" placeholder="Enter Priority">
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label class="form-label fw-semibold">Alignment</label>
+                                <select class="form-select" [(ngModel)]="item.Alignment" name="Alignment">
+                                    <option value="LeftAlign">LeftAlign</option>
+                                    <option value="LeftBold">LeftBold</option>
+                                    <option value="AllBold">AllBold</option>
+                                    <option value="LeftBoldWithUnderLine">LeftBoldWithUnderLine</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label fw-semibold">Value Type</label>
+                                <select class="form-select" [(ngModel)]="item.ValueType" name="ValueType">
+                                    <option value="Text SingleLine">Text SingleLine</option>
+                                    <option value="Text Value">Text Value</option>
+                                    <option value="Number">Number</option>
+                                    <option value="Date">Date</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col-md-12">
+                                <label class="form-label fw-semibold">Description</label>
+                                <textarea class="form-control" [(ngModel)]="item.Description" name="Description" rows="4" placeholder="Enter Description"></textarea>
+                            </div>
+                        </div>
+
+                        <div class="d-flex gap-2">
+                            <button type="submit" class="btn btn-primary" [disabled]="!itemForm.form.valid" style="background-color: #1ab394; border-color: #1ab394;">
+                                Save Item
+                            </button>
+                            <button type="button" class="btn btn-light" (click)="cancel()">
+                                Cancel
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

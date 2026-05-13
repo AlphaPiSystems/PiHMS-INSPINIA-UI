@@ -60,11 +60,4 @@ export class Country implements OnInit {
       }
     });
   }
-
-  deleteItem(id: any) {
-    if (confirm('Are you sure you want to delete this country?')) {
-        this.allCountries = this.allCountries.filter(c => c.id !== id);
-        this.tableService.setItems(this.allCountries, this.tableService.pageSize);
-    }
-  }
 }

@@ -1,0 +1,168 @@
+<div class="container-fluid">
+  <app-page-title [title]="item.id ? 'Edit Inventory Item' : 'Add New Inventory Item'" />
+
+  <div class="wrapper wrapper-content animated fadeInRight" style="padding-top: 0;">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="ibox float-e-margins" style="background:#fff; box-shadow: 0 2px 4px rgba(0,0,0,0.08); border-radius: 4px;">
+          <div class="ibox-title" style="border-top: 4px solid #1ab394; padding: 6px 15px; border-bottom: 1px solid #f0f0f0;">
+            <h5 style="font-weight: 600; margin: 0; font-size: 14px; text-transform: uppercase;">Item Information</h5>
+          </div>
+          <div class="ibox-content" style="padding: 15px 20px;">
+            <form (ngSubmit)="saveChanges()">
+              <div class="row">
+
+                <!-- Item Name -->
+                <div class="col-md-3 col-sm-12">
+                  <div class="form-group mb-3">
+                    <label class="form-label fw-bold">Item Name <span class="text-danger">*</span></label>
+                    <input type="text" [(ngModel)]="item.Name" name="Name" class="form-control" placeholder="e.g. Paracetamol" required>
+                  </div>
+                </div>
+
+                <!-- Category -->
+                <div class="col-md-3 col-sm-12">
+                  <div class="form-group mb-3">
+                    <label class="form-label fw-bold">Category</label>
+                    <input type="text" [(ngModel)]="item.Category" name="Category" class="form-control" placeholder="e.g. Medicine">
+                  </div>
+                </div>
+
+                <!-- Description -->
+                <div class="col-md-3 col-sm-12">
+                  <div class="form-group mb-3">
+                    <label class="form-label fw-bold">Description</label>
+                    <textarea [(ngModel)]="item.Description" name="Description" class="form-control" rows="2" placeholder="Item description..."></textarea>
+                  </div>
+                </div>
+
+                <!-- Type & Form -->
+                <div class="col-md-3 col-sm-12">
+                  <div class="form-group mb-3">
+                    <label class="form-label fw-bold">Type</label>
+                    <input type="text" [(ngModel)]="item.TypeName" name="TypeName" class="form-control" placeholder="e.g. Tablet">
+                  </div>
+                </div>
+                <div class="col-md-3 col-sm-12">
+                  <div class="form-group mb-3">
+                    <label class="form-label fw-bold">Physical Form</label>
+                    <input type="text" [(ngModel)]="item.PhysicalFormName" name="PhysicalFormName" class="form-control" placeholder="e.g. Solid">
+                  </div>
+                </div>
+                <div class="col-md-3 col-sm-12">
+                  <div class="form-group mb-3">
+                    <label class="form-label fw-bold">Storage Form</label>
+                    <input type="text" [(ngModel)]="item.StorageFormName" name="StorageFormName" class="form-control" placeholder="e.g. Strip">
+                  </div>
+                </div>
+                <div class="col-md-3 col-sm-12">
+                  <div class="form-group mb-3">
+                    <label class="form-label fw-bold">Measuring Unit</label>
+                    <input type="text" [(ngModel)]="item.BuyConsumeMeasuringUnitName" name="BuyConsumeMeasuringUnitName" class="form-control" placeholder="e.g. Number">
+                  </div>
+                </div>
+
+                <!-- Units -->
+                <div class="col-md-3 col-sm-12">
+                  <div class="form-group mb-3">
+                    <label class="form-label fw-bold">Stock Unit</label>
+                    <input type="text" [(ngModel)]="item.StockUnit" name="StockUnit" class="form-control">
+                  </div>
+                </div>
+                <div class="col-md-3 col-sm-12">
+                  <div class="form-group mb-3">
+                    <label class="form-label fw-bold">Purchase Unit</label>
+                    <input type="text" [(ngModel)]="item.PurchaseUnit" name="PurchaseUnit" class="form-control">
+                  </div>
+                </div>
+                <div class="col-md-3 col-sm-12">
+                  <div class="form-group mb-3">
+                    <label class="form-label fw-bold">Issue Unit</label>
+                    <input type="text" [(ngModel)]="item.IssueUnit" name="IssueUnit" class="form-control">
+                  </div>
+                </div>
+
+                <!-- Alert & Staff -->
+                <div class="col-md-3 col-sm-12">
+                  <div class="form-group mb-3">
+                    <label class="form-label fw-bold">Min Stock Alert</label>
+                    <input type="text" [(ngModel)]="item.MinStockForAlert" name="MinStockForAlert" class="form-control">
+                  </div>
+                </div>
+                <div class="col-md-3 col-sm-12">
+                  <div class="form-group mb-3">
+                    <label class="form-label fw-bold">Alert Staff</label>
+                    <select [(ngModel)]="item.AlertStaffName" name="AlertStaffName" class="form-select form-control">
+                      <option value="">Select Staff</option>
+                      <option *ngFor="let s of staffs" [value]="s.Name">{{s.Name}}</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="col-md-3 col-sm-12">
+                  <div class="form-group mb-3">
+                    <label class="form-label fw-bold">Item Type</label>
+                    <select [(ngModel)]="item.ItemType" name="ItemType" class="form-select form-control">
+                      <option value="">Select Item Type</option>
+                      <option value="Asset Fixed">Asset Fixed</option>
+                      <option value="Asset Movable">Asset Movable</option>
+                      <option value="Consumable">Consumable</option>
+                    </select>
+                  </div>
+                </div>
+
+                <!-- Branch & Department -->
+                <div class="col-md-3 col-sm-12">
+                  <div class="form-group mb-3">
+                    <label class="form-label fw-bold">Branch</label>
+                    <select [(ngModel)]="item.BranchID" name="BranchID" class="form-select form-control">
+                      <option value="">Select Branch</option>
+                      <option *ngFor="let b of branches" [value]="b.id">{{b.Name}}</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="col-md-3 col-sm-12">
+                  <div class="form-group mb-3">
+                    <label class="form-label fw-bold">Department</label>
+                    <select [(ngModel)]="item.DepartmentID" name="DepartmentID" class="form-select form-control">
+                      <option value="">Select Department</option>
+                      <option *ngFor="let d of departments" [value]="d.id">{{d.Name}}</option>
+                    </select>
+                  </div>
+                </div>
+
+                <!-- Pack Size & Conversion -->
+                <div class="col-md-3 col-sm-12">
+                  <div class="form-group mb-3">
+                    <label class="form-label fw-bold">Pack Size</label>
+                    <input type="number" [(ngModel)]="item.PackSize" name="PackSize" class="form-control" placeholder="e.g. 10">
+                  </div>
+                </div>
+                <div class="col-md-3 col-sm-12">
+                  <div class="form-group mb-3">
+                    <label class="form-label fw-bold">Quantity (per pack)</label>
+                    <input type="number" [(ngModel)]="item.Qty" name="Qty" class="form-control" placeholder="e.g. 1">
+                  </div>
+                </div>
+                <div class="col-md-3 col-sm-12">
+                  <div class="form-group mb-3">
+                    <label class="form-label fw-bold">Conversion Logic</label>
+                    <input type="text" [(ngModel)]="item.ConversionLogic" name="ConversionLogic" class="form-control" placeholder="e.g. default">
+                  </div>
+                </div>
+              </div>
+
+              <div class="hr-line-dashed" style="border-top: 1px dashed #e7eaec; margin: 20px 0;"></div>
+              
+              <div class="d-flex justify-content-end gap-2">
+                <button type="button" routerLink="/inventory/item/itemlist" class="btn btn-white" style="border: 1px solid #d2d2d2; background: #fff; padding: 8px 25px; font-weight: 600; border-radius: 2px; color: #555;">Cancel</button>
+                <button type="submit" class="btn btn-primary" style="background: #1ab394; border-color: #1ab394; color: #fff; padding: 8px 25px; font-weight: 600; border-radius: 2px;">
+                  {{ item.id ? 'Update Item' : 'Save Item' }}
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

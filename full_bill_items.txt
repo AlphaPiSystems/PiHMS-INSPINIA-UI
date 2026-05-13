@@ -1,0 +1,5 @@
+'3', '1 Time GRBS (Glucometer RBS)', '1 Time GRBS', 'TST2335', '1 Time GRBS (Glucometer RBS)', 'Diagnostic', '2', '1', 'N', 'Y', '50.00', '1', '1', '1', '2013-07-01 09:00:00', '957', '2014-12-25 16:26:22', 'Y'
+'4', '17 hydroxy Progesterone', '', 'TST2257', '17 hydroxy Progesterone,', 'Diagnostic', '2', '1', 'N', 'Y', '1600.00', '1', '1', '1', '2013-07-01 09:00:00', '757', '2019-08-26 16:26:48', 'Y'
+'5', 'Dr. Sarfaraz', 'ICU Dr.\'s Consultation', '02', 'Consultation', 'Procedure', '5', '1', 'N', 'Y', '350.00', '1', '1', '1', '2013-07-01 09:00:00', '757', '2020-07-29 18:53:38', 'Y'
+'6', '2 Time GRBS (Glucometer RBS)', '2 Time GRBS', 'TST2336', '2 Time GRBS (Glucometer RBS)', 'Diagnostic', '2', '1', 'N', 'Y', '100.00', '1', '1', '1', '2013-07-01 09:00:00', '757', '2014-11-26 16:08:46', 'Y'
+<truncated 126010 bytes>

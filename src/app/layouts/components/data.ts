@@ -104,7 +104,7 @@ export const menuItems: MenuItemType[] = [
                 isCollapsed: true,
                 children: [
                     { label: 'Staff', url: '/staff/stafflist' },
-                    // { label: 'Staff Login', url: '/auth-2/sign-up' },
+                    { label: 'Earning', url: '/staff/earning/earninglist' },
                 ]
             },
             {
@@ -115,8 +115,68 @@ export const menuItems: MenuItemType[] = [
                 label: 'Misc',
                 isCollapsed: true,
                 children: [
+                    { label: 'Countries', url: '/misc/country/countrylist' },
+                    { label: 'States', url: '/misc/state/statelist' },
+                    { label: 'Districts', url: '/misc/district/districtlist' },
                     { label: 'Cities', url: '/misc/city/citylist' },
-                    { label: 'Countries', url: '/misc/country/countrylist' }
+                    { label: 'Postal Codes', url: '/misc/postalcode/postalcodelist' },
+                    { label: 'Banks', url: '/misc/bank/banklist' }
+                ]
+            },
+            {
+                label: 'Scanning',
+                isCollapsed: true,
+                children: [
+                    { label: 'Scan', url: '/scanning/scanlist' },
+                    { label: 'Scanning Items', url: '/scanning/scanningitemlist' }
+                ]
+            },
+            {
+                label: 'Clinical / Surgery',
+                isCollapsed: true,
+                children: [
+                    { label: 'Surgery', url: '/clinical/surgerylist' }
+                ]
+            },
+            {
+                label: 'Housekeeping',
+                isCollapsed: true,
+                children: [
+                    { label: 'Task', url: '/housekeeping/housekeepinglist' }
+                ]
+            },
+            {
+                label: 'Billing',
+                isCollapsed: true,
+                children: [
+                    {
+                        label: 'Bill Domain',
+                        url: '/bill-domain/bill-domainlist',
+                    },
+                    {
+                        label: 'Bill Items',
+                        url: '/bill-item/bill-itemlist',
+                    }
+                ]
+            },
+            {
+                label: 'Insurance',
+                url: '/insurance/insurancelist'
+            },
+            {
+                label: 'Patient',
+                isCollapsed: true,
+                children: [
+                    { label: 'Patient Insurance', url: '/patient/patientinsurancelist' }
+                ]
+            },
+            {
+                label: 'Inventory',
+                isCollapsed: true,
+                children: [
+                    { label: 'Item', url: '/inventory/item/itemlist' },
+                    { label: 'Vendor', url: '/inventory/vendor/vendorlist' },
+                    { label: 'Department', url: '/inventory/invdepartment/invdepartmentlist' }
                 ]
             }
         ]

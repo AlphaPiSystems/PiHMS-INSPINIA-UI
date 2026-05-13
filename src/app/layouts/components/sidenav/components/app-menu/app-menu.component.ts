@@ -76,6 +76,19 @@ export class AppMenuComponent implements OnInit {
         }
     }
 
+    toggleMenuItem(item: MenuItemType, siblings: MenuItemType[]): void {
+        const isOpening = item.isCollapsed;
+        if (isOpening) {
+            // Collapse all sibling items that have children (accordion behavior)
+            for (const sibling of siblings) {
+                if (sibling !== item && this.hasSubMenu(sibling)) {
+                    sibling.isCollapsed = true;
+                }
+            }
+        }
+        item.isCollapsed = !item.isCollapsed;
+    }
+
     hideBackDrop(url: string): void {
         if (this.layout.sidenavSize === 'offcanvas' && this.router.url !== url) {
             this.layout.hideBackdrop();
