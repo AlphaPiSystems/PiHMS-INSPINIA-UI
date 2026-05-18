@@ -172,129 +172,82 @@
                         <div class="row">
                             <div class="col-lg-12 mb-1"
                                 *ngIf="patient.Type !== 'MUL' && patient.Type !== 'PRO' && patient.Type !== 'PKG'">
-                                <div class="ibox float-e-margins"
-                                    style="background:#fff; box-shadow: 0 2px 4px rgba(0,0,0,0.08); border-radius: 4px; height: 100%; display: flex; flex-direction: column; margin-bottom: 0;">
-                                    <div class="ibox-title"
-                                        style="border-top: 4px solid #1c84c6; padding: 6px 15px; border-bottom: 1px solid #f0f0f0; display: flex; justify-content: space-between; align-items: center;">
-                                        <h5
-                                            style="font-weight: 600; margin: 0; font-size: 14px; text-transform: uppercase;">
-                                            Reference Ranges</h5>
-                                        <button class="btn btn-primary btn-sm" type="button"
-                                            (click)="addReferenceRange()"
-                                            style="background-color: #1ab394; border-color: #1ab394; padding: 4px 12px; font-weight: 600; font-size: 12px; border-radius: 2px;">
+                                <div class="ibox float-e-margins reference-range-ibox">
+                                    <div class="ibox-title">
+                                        <h5>Reference Ranges</h5>
+                                        <button class="btn btn-primary btn-sm btn-add-range" type="button"
+                                            (click)="addReferenceRange()">
                                             <i class="fa fa-plus"></i> Add Reference Range
                                         </button>
                                     </div>
-                                    <div class="ibox-content"
-                                        style="padding: 0; overflow: auto; max-height: 220px; flex: 1; border: 1px solid #e7eaec; margin: 5px 15px; border-radius: 2px;">
-                                        <table class="table table-bordered table-striped table-hover table-condensed"
-                                            style="margin-bottom: 0; font-size: 13px; border: none;">
-                                            <thead
-                                                style="background-color: #f5f5f6; position: sticky; top: 0; z-index: 10; box-shadow: 0 1px 2px rgba(0,0,0,0.1);">
+                                    <div class="ibox-content">
+                                        <table class="table table-bordered table-striped table-hover table-condensed reference-range-table">
+                                            <thead>
                                                 <tr>
-                                                    <th
-                                                        style="font-weight: 600; text-align: center; width: 50px; padding: 6px 8px; border: 1px solid #e7eaec; background-color: #f5f5f6;">
-                                                        SL #</th>
-                                                    <th
-                                                        style="font-weight: 600; min-width: 60px; padding: 6px 8px; border: 1px solid #e7eaec; background-color: #f5f5f6;">
-                                                        Age Start</th>
-                                                    <th
-                                                        style="font-weight: 600; min-width: 60px; padding: 6px 8px; border: 1px solid #e7eaec; background-color: #f5f5f6;">
-                                                        Age End</th>
-                                                    <th
-                                                        style="font-weight: 600; min-width: 90px; padding: 6px 8px; border: 1px solid #e7eaec; background-color: #f5f5f6;">
-                                                        Age Unit</th>
-                                                    <th
-                                                        style="font-weight: 600; min-width: 100px; padding: 6px 8px; border: 1px solid #e7eaec; background-color: #f5f5f6;">
-                                                        Gender</th>
-                                                    <th
-                                                        style="font-weight: 600; min-width: 80px; padding: 6px 8px; border: 1px solid #e7eaec; background-color: #f5f5f6;">
-                                                        Min Value</th>
-                                                    <th
-                                                        style="font-weight: 600; min-width: 80px; padding: 6px 8px; border: 1px solid #e7eaec; background-color: #f5f5f6;">
-                                                        Max Value</th>
-                                                    <th
-                                                        style="font-weight: 600; min-width: 80px; padding: 6px 8px; border: 1px solid #e7eaec; background-color: #f5f5f6;">
-                                                        Min Panic</th>
-                                                    <th
-                                                        style="font-weight: 600; min-width: 80px; padding: 6px 8px; border: 1px solid #e7eaec; background-color: #f5f5f6;">
-                                                        Max Panic</th>
-                                                    <th
-                                                        style="font-weight: 600; min-width: 80px; padding: 6px 8px; border: 1px solid #e7eaec; background-color: #f5f5f6;">
-                                                        Unit</th>
-                                                    <th
-                                                        style="font-weight: 600; min-width: 140px; padding: 6px 8px; border: 1px solid #e7eaec; background-color: #f5f5f6;">
-                                                        Range Type</th>
-                                                    <th
-                                                        style="font-weight: 600; min-width: 200px; padding: 6px 8px; border: 1px solid #e7eaec; background-color: #f5f5f6;">
-                                                        RangeText</th>
+                                                    <th class="sl-col">SL #</th>
+                                                    <th class="min-w-60">Age Start</th>
+                                                    <th class="min-w-60">Age End</th>
+                                                    <th class="min-w-90">Age Unit</th>
+                                                    <th class="min-w-100">Gender</th>
+                                                    <th class="min-w-80">Min Value</th>
+                                                    <th class="min-w-80">Max Value</th>
+                                                    <th class="min-w-80">Min Panic</th>
+                                                    <th class="min-w-80">Max Panic</th>
+                                                    <th class="min-w-80">Unit</th>
+                                                    <th class="min-w-140">Range Type</th>
+                                                    <th class="min-w-200">RangeText</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
                                                 <tr *ngFor="let range of referenceRanges; let i = index">
-                                                    <td
-                                                        style="text-align: center; vertical-align: middle; padding: 4px 8px; border: 1px solid #e7eaec;">
-                                                        {{ i + 1 }}</td>
-                                                    <td style="padding: 4px 8px; border: 1px solid #e7eaec;">
+                                                    <td class="text-center">{{ i + 1 }}</td>
+                                                    <td>
                                                         <input type="number" min="0" max="100"
                                                             class="form-control input-sm" [(ngModel)]="range.ageStart"
                                                             [name]="'ageStart' + i"
                                                             (ngModelChange)="validateAgeRange(range)"
                                                             [ngClass]="{'border-danger': range.ageError}"
-                                                            style="border-radius: 2px; height: 26px; font-size: 12px; padding: 2px 5px;"
                                                             title="{{range.ageError ? 'Age Start must be less than Age End' : ''}}">
                                                     </td>
-                                                    <td style="padding: 4px 8px; border: 1px solid #e7eaec;">
+                                                    <td>
                                                         <input type="number" min="0" max="100"
                                                             class="form-control input-sm" [(ngModel)]="range.ageEnd"
                                                             [name]="'ageEnd' + i"
                                                             (ngModelChange)="validateAgeRange(range)"
                                                             [ngClass]="{'border-danger': range.ageError}"
-                                                            style="border-radius: 2px; height: 26px; font-size: 12px; padding: 2px 5px;"
                                                             title="{{range.ageError ? 'Age Start must be less than Age End' : ''}}">
                                                     </td>
-                                                    <td style="padding: 4px 8px; border: 1px solid #e7eaec;">
+                                                    <td>
                                                         <select class="form-select form-control input-sm"
-                                                            [(ngModel)]="range.ageUnit" [name]="'ageUnit' + i"
-                                                            style="border-radius: 2px; height: 26px; padding: 0px 5px; font-size: 12px;">
+                                                            [(ngModel)]="range.ageUnit" [name]="'ageUnit' + i">
                                                             <option value="Year">Year</option>
                                                             <option value="Month">Month</option>
                                                             <option value="Day">Day</option>
                                                         </select>
                                                     </td>
-                                                    <td style="padding: 4px 8px; border: 1px solid #e7eaec;">
+                                                    <td>
                                                         <select class="form-select form-control input-sm"
-                                                            [(ngModel)]="range.gender" [name]="'gender' + i"
-                                                            style="border-radius: 2px; height: 26px; padding: 0px 5px; font-size: 12px;">
+                                                            [(ngModel)]="range.gender" [name]="'gender' + i">
                                                             <option value="Female">Female</option>
                                                             <option value="Male">Male</option>
                                                             <option value="Both">Both</option>
                                                         </select>
                                                     </td>
-                                                    <td style="padding: 4px 8px; border: 1px solid #e7eaec;"><input
-                                                            type="text" class="form-control input-sm"
-                                                            [(ngModel)]="range.minVal" [name]="'minVal' + i"
-                                                            style="border-radius: 2px; height: 26px; font-size: 12px; padding: 2px 5px;">
+                                                    <td><input type="text" class="form-control input-sm"
+                                                            [(ngModel)]="range.minVal" [name]="'minVal' + i">
                                                     </td>
-                                                    <td style="padding: 4px 8px; border: 1px solid #e7eaec;"><input
-                                                            type="text" class="form-control input-sm"
-                                                            [(ngModel)]="range.maxVal" [name]="'maxVal' + i"
-                                                            style="border-radius: 2px; height: 26px; font-size: 12px; padding: 2px 5px;">
+                                                    <td><input type="text" class="form-control input-sm"
+                                                            [(ngModel)]="range.maxVal" [name]="'maxVal' + i">
                                                     </td>
-                                                    <td style="padding: 4px 8px; border: 1px solid #e7eaec;"><input
-                                                            type="text" class="form-control input-sm"
-                                                            [(ngModel)]="range.minPanic" [name]="'minPanic' + i"
-                                                            style="border-radius: 2px; height: 26px; font-size: 12px; padding: 2px 5px;">
+                                                    <td><input type="text" class="form-control input-sm"
+                                                            [(ngModel)]="range.minPanic" [name]="'minPanic' + i">
                                                     </td>
-                                                    <td style="padding: 4px 8px; border: 1px solid #e7eaec;"><input
-                                                            type="text" class="form-control input-sm"
-                                                            [(ngModel)]="range.maxPanic" [name]="'maxPanic' + i"
-                                                            style="border-radius: 2px; height: 26px; font-size: 12px; padding: 2px 5px;">
+                                                    <td><input type="text" class="form-control input-sm"
+                                                            [(ngModel)]="range.maxPanic" [name]="'maxPanic' + i">
                                                     </td>
-                                                    <td style="padding: 4px 8px; border: 1px solid #e7eaec;">
+                                                    <td>
                                                         <select class="form-select form-control input-sm"
-                                                            [(ngModel)]="range.unit" [name]="'unit' + i"
-                                                            style="border-radius: 2px; height: 26px; padding: 0px 5px; font-size: 12px;">
+                                                            [(ngModel)]="range.unit" [name]="'unit' + i">
                                                             <option value="" disabled>Select</option>
                                                             <option value="mg/dL">mg/dL</option>
                                                             <option value="g/dL">g/dL</option>
@@ -305,18 +258,15 @@
                                                             <option value="cells/mcL">cells/mcL</option>
                                                         </select>
                                                     </td>
-                                                    <td style="padding: 4px 8px; border: 1px solid #e7eaec;">
+                                                    <td>
                                                         <select class="form-select form-control input-sm"
-                                                            [(ngModel)]="range.rangeType" [name]="'rangeType' + i"
-                                                            style="border-radius: 2px; height: 26px; padding: 0px 5px; font-size: 12px;">
+                                                            [(ngModel)]="range.rangeType" [name]="'rangeType' + i">
                                                             <option value="SingleTextLine">SingleTextLine</option>
                                                             <option value="MultiTextLine">MultiTextLine</option>
                                                         </select>
                                                     </td>
-                                                    <td style="padding: 4px 8px; border: 1px solid #e7eaec;"><input
-                                                            type="text" class="form-control input-sm"
-                                                            [(ngModel)]="range.rangeText" [name]="'rangeText' + i"
-                                                            style="border-radius: 2px; height: 26px; font-size: 12px; padding: 2px 5px;">
+                                                    <td><input type="text" class="form-control input-sm"
+                                                            [(ngModel)]="range.rangeText" [name]="'rangeText' + i">
                                                     </td>
                                                 </tr>
                                             </tbody>

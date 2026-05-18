@@ -1,0 +1,117 @@
+.reference-range-ibox {
+  background: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+  border-radius: 4px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 0;
+
+  .ibox-title {
+    border-top: 4px solid #1c84c6;
+    padding: 6px 15px;
+    border-bottom: 1px solid #f0f0f0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    h5 {
+      font-weight: 600;
+      margin: 0;
+      font-size: 14px;
+      text-transform: uppercase;
+    }
+
+    .btn-add-range {
+      background-color: #1ab394;
+      border-color: #1ab394;
+      padding: 4px 12px;
+      font-weight: 600;
+      font-size: 12px;
+      border-radius: 2px;
+      color: #fff;
+
+      &:hover {
+        background-color: darken(#1ab394, 5%);
+        border-color: darken(#1ab394, 5%);
+      }
+    }
+  }
+
+  .ibox-content {
+    padding: 0;
+    overflow: auto;
+    max-height: 220px;
+    flex: 1;
+    border: 1px solid #e7eaec;
+    margin: 5px 15px;
+    border-radius: 2px;
+
+    .table {
+      margin-bottom: 0;
+      font-size: 13px;
+      border: none;
+
+      thead {
+        background-color: #f5f5f6;
+        position: sticky;
+        top: 0;
+        z-index: 10;
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+
+        th {
+          font-weight: 600;
+          padding: 6px 8px;
+          border: 1px solid #e7eaec;
+          background-color: #f5f5f6;
+          white-space: nowrap;
+
+          &.sl-col {
+            text-align: center;
+            width: 50px;
+          }
+
+          &.min-w-60 { min-width: 60px; }
+          &.min-w-80 { min-width: 80px; }
+          &.min-w-90 { min-width: 90px; }
+          &.min-w-100 { min-width: 100px; }
+          &.min-w-140 { min-width: 140px; }
+          &.min-w-200 { min-width: 200px; }
+        }
+      }
+
+      tbody {
+        td {
+          vertical-align: middle;
+          padding: 4px 8px;
+          border: 1px solid #e7eaec;
+
+          &.text-center {
+            text-align: center;
+          }
+
+          .form-control, .form-select {
+            border-radius: 2px;
+            height: 26px;
+            font-size: 12px;
+            padding: 2px 5px;
+            border: 1px solid #e7eaec;
+
+            &:focus {
+              border-color: #1ab394;
+              box-shadow: none;
+            }
+
+            &.border-danger {
+              border-color: #ed5565 !important;
+            }
+          }
+
+          select.form-select {
+            padding: 0 5px;
+          }
+        }
+      }
+    }
+  }
+}

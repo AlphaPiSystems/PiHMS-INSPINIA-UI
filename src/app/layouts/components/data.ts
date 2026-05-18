@@ -67,16 +67,21 @@ export const menuItems: MenuItemType[] = [
         icon: 'tablerUserCircle',
         url: '/patients'
     },
-    { label: 'Master', isTitle: true },
     {
-        label: 'Diagnostic-Lab',
-        icon: 'tablerSettings3',
+        label: 'Master',
+        icon: 'tablerLock',
         isCollapsed: true,
         children: [
-            { label: 'Test-list', icon: 'tablerSettings3', url: '/master/diagnostic-lab/test-list' },
-            { label: 'Test-groups-list', icon: 'tablerSettings3', url: '/master/diagnostic-lab/test-groups-list' },
-            { label: 'Samples-list', icon: 'tablerSettings3', url: '/master/diagnostic-lab/samples-list' },
-            { label: 'Units-list', icon: 'tablerSettings3', url: '/master/diagnostic-lab/units-list' }
+            {
+                label: 'Diagnostic-Lab',
+                isCollapsed: true,
+                children: [
+                    { label: 'Test-list', url: '/master/diagnostic-lab/test-list' },
+                    { label: 'Test-groups-list', url: '/master/diagnostic-lab/test-groups-list' },
+                    { label: 'Samples-list', url: '/master/diagnostic-lab/samples-list' },
+                    { label: 'Units-list', url: '/master/diagnostic-lab/units-list' }
+                ]
+            }
         ]
     },
     // },
