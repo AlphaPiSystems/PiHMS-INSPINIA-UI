@@ -1,0 +1,240 @@
+import json
+import re
+
+data_text = """
+'114', 'ABD-M-Normal', 'ABD-M-Normal - Dr.Subodh', ?, 'N', '739', '2017-04-18 16:08:08', '1000', '2022-04-18 17:11:27'
+'115', 'ABD-F-Normal', 'ABD-F-Normal - Dr. Subodh', ?, 'N', '762', '2017-03-27 17:06:09', '1000', '2022-04-18 17:11:44'
+'117', 'DM-16', 'DM-16', ?, 'N', '739', '2017-05-04 18:05:03', '1000', '2020-06-25 18:42:57'
+'118', 'DF-16', 'DF-16', ?, 'N', '739', '2017-03-27 18:36:36', '1000', '2020-06-25 18:42:35'
+'119', 'DFA-16', 'DFA-16', ?, 'N', '739', '2017-03-27 18:43:49', '1000', '2018-09-21 19:53:24'
+'120', 'CHEST SCAN-15', 'CHEST SCAN-15- Diwakar', ?, 'N', '739', '2017-03-27 18:59:48', '1000', '2022-04-05 19:59:46'
+'121', 'CHEST SCAN-15- Nagesh', 'CHEST SCAN-15 - Dr. Nagesh', ?, 'N', '739', '2017-03-27 19:00:32', '1000', '2021-09-15 18:00:02'
+'122', 'DFP-16', 'DFP-16', ?, 'N', '739', '2017-03-27 19:06:59', '1000', '2020-06-25 18:42:06'
+'123', 'TERM SCAN(Twins)-16', 'TERM SCAN(Twins)-16-Dr.Diwakar', ?, 'N', '739', '1970-01-01 05:30:00', '1000', '2022-04-05 20:00:21'
+'124', 'Ankle-16', 'Ankle-16 - Dr.Diwakar', ?, 'N', '739', '2017-03-28 11:51:14', '1000', '2020-07-07 13:43:25'
+'125', 'Arterial-Normal-16', 'Arteria-Normal-16- Diwakar', ?, 'N', '739', '2017-03-28 11:56:49', '1000', '2022-04-05 20:00:43'
+'126', NULL, NULL, ?, 'N', '739', '2017-03-28 13:06:11', '1000', '2018-09-21 19:56:33'
+'127', 'Scrotum-16', 'Scrotum-16- Dr. Diwakar', ?, 'N', '739', '2017-03-28 13:10:28', '1000', '2022-04-05 20:00:31'
+'128', 'Soft Tissue Scan', 'Soft Tissue Scan- Dr. Diwakar', ?, 'N', '739', '2017-03-28 13:14:59', '1000', '2020-07-07 13:46:10'
+'129', 'Renal Doppler-16', 'Renal Doppler-16- Diwakar', ?, 'N', '739', '2017-03-28 15:18:53', '1000', '2022-04-05 20:01:10'
+'130', 'NT SCAN (TWINS)16', 'NT SCAN (TWINS)16-Dr.Diwakar', ?, 'N', '739', '2017-03-28 15:35:03', '1000', '2022-04-05 20:01:36'
+'131', 'Breast Axillary-16', 'Breast Axillary-16', ?, 'N', '739', '2017-03-28 15:35:03', '1000', '2019-05-09 14:16:42'
+'132', 'Breast Scan-16', 'Breast Scan-16- Dr. Diwakar', ?, 'N', '739', '2017-03-28 15:38:43', '1000', '2022-04-05 20:01:51'
+'133', 'CAROTID DOPPLER-Normal-16', 'CAROTID DOPPLER-Normal-Dr.Suhas', ?, 'N', '739', '2017-03-30 14:08:06', '1000', '2022-02-25 18:21:51'
+'134', NULL, NULL, ?, 'N', '739', '1970-01-01 05:30:00', '1000', '2018-09-21 20:35:27'
+'135', 'Gestational Sac-Early Format-16', 'Gestational Sac-Early- Dr.Diwakar', ?, 'N', '739', '2017-03-30 14:21:45', '1000', '2022-04-05 20:02:25'
+'136', 'INCOMPLETE ABROTION-16', 'INCOMPLETE ABROTION-', ?, 'N', '739', '2017-03-30 14:33:09', '1000', '2019-03-26 17:42:03'
+'137', 'Missed Format-15', 'Missed Format-15', ?, 'N', '739', '2017-03-30 15:01:37', '1000', '2020-05-26 14:30:14'
+'138', 'NECK-16', 'NECK-16 -', ?, 'N', '739', '2017-03-30 15:13:08', '1000', '2018-09-21 20:35:03'
+'139', 'Thigh-16', 'Thigh-16 - Dr.', ?, 'N', '739', '2017-03-30 15:25:07', '1000', '2018-09-21 20:34:52'
+'140', 'NEUROSONOGRAM-16', 'NEUROSONOGRAM-16 -', ?, 'N', '739', '2017-03-30 15:30:40', '1000', '2018-09-21 20:36:01'
+'141', 'NT SCAN-17', 'NT SCAN -17 -Dr.Suhas', ?, 'N', '739', '1970-01-01 05:30:00', '1000', '2022-02-22 13:58:37'
+'142', 'Pelvic-16', 'Pelvic-16 - Dr.Diwakar', ?, 'N', '739', '2017-03-30 15:47:53', '1000', '2022-04-05 20:02:45'
+'143', 'ABD-M- Dr. Diwakar', 'ABD-M- Normal-Dr. Diwakar', ?, 'N', '739', '2017-03-30 16:05:07', '1000', '2021-12-11 16:31:12'
+'144', 'AVF-Dr.Diwakar', 'AVF - Dr.Diwakar', ?, 'N', '739', '2017-04-03 11:48:30', '1000', '2022-01-04 16:33:07'
+'145', 'DVT Venous -16 single', 'DVT Venous -16 single -', ?, 'N', '739', '2017-04-03 11:56:46', '1000', '2018-09-21 20:41:35'
+'146', 'Knee Joint-16', 'Knee Joint-16 - Dr. Diwakar', ?, 'N', '739', '2017-04-03 12:02:26', '1000', '2021-06-17 18:11:34'
+'147', 'Venous Single Doppler', 'Venous single Doppler- Diwakar', ?, 'N', '0', '2017-04-03 12:24:51', '1000', '2022-04-05 20:02:55'
+'148', 'NT-Scan-15', 'NT-Scan-15 - Dr. Venkatesh M P', ?, 'N', '739', '2017-04-18 16:08:08', '1000', '2022-03-19 13:25:26'
+'149', 'CRL SCAN - Dr.vasudev', 'CRL SCAN - Dr.vasudev', ?, 'N', '739', '1970-01-01 05:30:00', '1000', '2019-04-26 16:50:53'
+'150', 'Anomaly- OBSTETRIC- II  FORMAT', 'Anomaly- OBSTETRIC- II  FORMAT - Dr.Venkatesh M P', ?, 'N', '739', '2017-04-18 16:08:08', '1000', '2022-03-19 13:26:21'
+'151', 'ABD-M-Normal', 'ABD-M-Normal - Dr.Nandakumar K', ?, 'N', '739', '2017-04-18 16:08:08', '1000', '2020-01-28 21:46:50'
+'152', 'ABD-F-Normal', 'ABD-F-Normal - Dr.Nandakumar K', ?, 'N', '739', '2017-04-18 16:08:08', '1000', '2020-01-28 21:47:28'
+'153', 'Anamaly- OBSTETRIC- II  FORMAT', 'Anamaly- OBSTETRIC- II  FORMAT - Dr.Suhas B', ?, 'N', '739', '2017-04-18 16:08:08', '1000', '2022-03-04 17:26:51'
+'154', 'CRL-16', 'CRL-16 - Dr.Venkatesh M P', ?, 'N', '739', '2017-04-03 18:43:19', '1828', '2020-06-29 19:48:06'
+'155', 'Pelvic-Scan', 'Pelvic-Scan - Dr.Nandakumar K', ?, 'N', '739', '2017-04-03 18:49:30', '1000', '2020-03-02 17:23:41'
+'156', 'OB -I LESS THAN 5 weeks', 'OB -I LESS THAN 5 weeks - Dr. Raghavendra Temkar V', ?, 'N', '739', '2017-04-18 16:08:08', '1000', '2017-07-13 17:58:29'
+'157', 'Pelvic-Scan', 'Pelvic-Scan - Dr. Bharath Kumar', ?, 'N', '739', '2017-04-18 16:08:08', '1000', '2018-11-28 15:08:37'
+'158', 'FOLLICULAR SCAN', 'FOLLICULAR SCAN - Dr. Nagesh', ?, 'N', '739', '2017-04-05 14:52:27', '1000', '2021-09-03 20:43:53'
+'159', 'FOLLICULAR SCAN', 'FOLLICULAR SCAN - Dr. Vasudev', ?, 'N', '739', '2017-04-18 16:08:08', '1000', '2019-02-23 18:13:25'
+'160', 'CRL Format -15', 'CRL Format -15- Dr. Diwakar', ?, 'N', '739', '1970-01-01 05:30:00', '1000', '2021-01-27 15:37:59'
+'161', 'TERM SCAN', 'TERM SCAN - Dr. Nandakumar', ?, 'N', '1000', '1970-01-01 05:30:00', '1000', '2019-02-19 13:12:56'
+'162', 'Thyroid - Normal-15', 'Thyroid - Normal-15 - Dr.Venkatesh', ?, 'N', '1000', '1970-01-01 05:30:00', '1000', '2022-03-19 13:26:44'
+'163', 'P N S X -RAY VIEW', 'P N S X -RAY VIEW', ?, 'N', '1000', '2017-04-15 16:27:10', '1000', '2021-12-20 20:43:03'
+'164', 'CHEST X - RAY  - 17', 'CHEST X - RAY', ?, 'N', '1000', '2017-04-15 16:28:00', '1000', '2017-04-15 16:30:25'
+'165', 'HIP Doppler- 17', 'HIP Doppler- 17 Dr. Raghavendra Temkar V', ?, 'N', '1000', '2017-04-18 16:08:08', '1000', '2017-04-15 17:43:19'
+'166', 'ANAMALY SCAN', 'ANAMALY SCAN - Dr. Raghavendra Temkar V', ?, 'N', '1000', '2017-04-15 17:17:16', '1000', '2017-11-21 16:07:47'
+'167', 'Breas scan', 'Breas scan- Dr. Venkatesh M P', ?, 'N', '1000', '2017-04-18 16:08:08', '1000', '2022-03-19 13:27:07'
+'168', 'Both Axillary', 'Both Axillary- Dr. Venkatesh M P', ?, 'N', '1000', '2017-04-15 17:35:05', '1000', '2022-03-19 13:27:24'
+'169', 'Shoulder -17', 'Shoulder -17- Dr. ANITHA K', ?, 'N', '1000', '2017-04-15 17:50:25', '1000', '2018-06-01 19:44:12'
+'170', 'TERM WITH BPP', 'TERM WITH BPP- Dr. Venkatesh M P', ?, 'N', '1000', '2017-04-15 17:56:26', '1000', '2022-03-19 13:28:29'
+'171', 'VENOUS - DOPPLER', 'VENOUS - DOPPLER -Dr. Nandakumar K', ?, 'N', '1000', '2017-04-15 18:01:46', '1000', '2018-05-14 18:16:05'
+'172', 'Thyroid - Normal', 'Thyroid - Normal', ?, 'N', '1000', '2017-04-15 18:11:27', '1000', '2022-04-05 20:03:39'
+'173', 'CRL (TWINS )-20', 'CRL (TWINS )- Dr.Diwakar', ?, 'N', '1000', '2017-04-18 16:08:08', '1000', '2020-07-07 13:31:36'
+'174', 'Anomaly Sscan (Twins)', 'Anomaly Sscan (Twins)-Dr.Diwakar', ?, 'N', '1000', '1970-01-01 05:30:00', '1000', '2022-04-05 20:04:32'
+'175', NULL, NULL, ?, 'N', '1000', '2017-03-28 15:35:03', '1000', '2018-09-21 19:59:11'
+'176', 'Venous Doopler-', 'Venous Doopler-', ?, 'N', '1000', '2017-04-18 16:08:08', '1000', '2018-09-21 19:59:57'
+'177', 'SOFT TISSUE SCAN', 'SOFT TISSUE SCAN - Dr. Venkatesh', ?, 'N', '1000', '2017-04-18 16:08:08', '1000', '2022-03-19 13:28:56'
+'178', 'CAROTID Doppler', 'CAROTID Doppler- Dr. Nandakumar K', ?, 'N', '1000', '2017-04-18 17:11:01', '1134', '2021-12-02 16:38:03'
+'179', 'KUB SCAN', 'KUB SCAN -MALE Dr. Venkatesh', ?, 'N', '1000', '2017-04-19 13:12:39', '1000', '2019-12-05 14:17:32'
+'180', 'KUB SCAN', 'KUB SCAN -MALE - Dr. Diwakar N', ?, 'N', '1000', '2017-04-19 13:12:48', '1000', '2022-04-05 20:05:08'
+'181', 'KUB - X - RAY', 'KUB - X - RAY', ?, 'N', '1000', '2017-04-19 17:05:16', '1000', '2017-04-19 17:05:16'
+'182', 'BOTH MASTOIDS', 'BOTH MASTOIDS', ?, 'N', '1000', '2017-04-19 17:11:26', '1000', '2017-04-19 17:11:26'
+'183', 'SHOULDER AP/ LAT', 'SHOULDER AP/ LAT', ?, 'N', '1000', '2017-04-20 17:51:31', '1000', '2017-04-20 17:51:31'
+'184', 'CRL-17', 'CRL-17- Dr. Nandakumar K', ?, 'N', '1000', '2017-04-20 17:58:48', '1000', '2018-04-05 17:07:51'
+'185', 'NT SCAN -17', 'NT SCAN -17 Dr. Venkatesh M P', ?, 'N', '1000', '2017-04-20 18:02:03', '1000', '2022-03-19 13:29:07'
+'186', 'Pelvic- Scan', 'Pelvic- Scan- Dr. Venkatesh M P', ?, 'N', '1000', '2017-04-20 19:04:21', '1000', '2022-03-19 13:29:24'
+'187', 'ABD -M-Normal', 'ABD -M-Normal- Dr. Venkatesh M P', ?, 'N', '1000', '1970-01-01 05:30:00', '1000', '2022-03-19 13:29:35'
+'188', 'Abd-F-Normal', 'Abd-F-Normal - Dr. Venkatesh M P', ?, 'N', '1000', '2017-04-21 16:54:12', '1000', '2022-03-19 13:29:51'
+'189', 'CRL - 16', 'CRL -16 Dr. Venkatesh M P', ?, 'N', '1000', '2017-04-21 17:02:14', '1000', '2022-03-19 13:30:02'
+'190', 'OB -I LESS THAN 5 weeks', 'OB -I LESS THAN 5 weeks - Dr.Venkatesh', ?, 'N', '1000', '1970-01-01 05:30:00', '1000', '2022-03-19 13:30:23'
+'191', 'CERVICAL SPINE AP AND LATERAL VIEWS', 'CERVICAL SPINE AP AND LATERAL VIEWS', ?, 'N', '1000', '2017-04-21 17:18:35', '1000', '2017-04-21 17:18:35'
+'192', 'ANKLE AP /LAT VIEW', 'ANKLE AP /LAT VIEW', ?, 'N', '1000', '2017-04-21 17:20:10', '1000', '2017-04-21 17:25:33'
+'193', 'BOTH HEEL S LAT VIEW', 'BOTH HEEL S LAT VIEW', ?, 'N', '1000', '2017-04-21 17:20:35', '1000', '2017-04-21 17:24:44'
+'194', 'ERECT ABDOMEN', 'ERECT ABDOMEN', ?, 'N', '1000', '2017-04-21 17:28:55', '1000', '2017-04-21 17:28:55'
+'195', 'LEG AP /LAT VIEW', 'LEG AP /LAT VIEW', ?, 'N', '1000', '2017-04-21 17:31:54', '1000', '2017-04-21 17:33:25'
+'196', 'Varicous veins -Single 17', 'Varicous veins -Single 17 -', ?, 'N', '1828', '2017-04-26 16:23:12', '1000', '2020-06-23 14:18:18'
+'197', 'ECHO -17', 'ECHO-17', ?, 'N', '1828', '1970-01-01 05:30:00', '1000', '2017-07-12 18:35:28'
+'198', 'Venous single Doopler-17', 'Venous single Doopler-17', ?, 'N', '1828', '2017-04-26 17:02:48', '1000', '2018-09-21 20:00:26'
+'199', 'Venous single Doopler-17', 'Venous single Doopler-', ?, 'N', '1828', '2017-04-26 17:03:11', '1000', '2018-09-21 20:00:39'
+'200', 'SCROTUM (N)', 'SCROTUM (N)- Dr. Venkatesh M P', ?, 'N', '1828', '2017-04-26 17:09:55', '1000', '2022-03-19 13:30:40'
+'201', 'SHOULDER USG-17', 'SHOULDER USG -17-DIwakar', ?, 'N', '1000', '2017-04-28 19:05:45', '1000', '2021-07-27 13:14:10'
+'202', 'TERM SCAN -17', 'TERM SCAN -17 Dr. Diwkar', ?, 'N', '1000', '2017-05-08 16:12:12', '1000', '2022-04-05 20:05:59'
+'203', 'TERM WITH BPP', 'TERM WITH BPP -17 Dr. Diwakar', ?, 'N', '1000', '2017-05-08 16:15:38', '1000', '2022-04-05 20:05:42'
+'204', 'DM (PROST)-17', 'DM (PROST)-17-', ?, 'N', '1000', '2017-05-11 12:58:50', '1000', '2018-09-21 20:01:40'
+'205', 'PELVIS - AP- LAT X- RAY', 'PELVIS AP LAT X - RAY', ?, 'N', '1000', '2017-05-11 13:00:13', '1000', '2017-05-13 12:56:21'
+'206', 'L S Spine AP - LAT- X - RAY', 'L S Spine AP - LAT X - RAY -17', ?, 'N', '1000', '2017-05-11 13:00:39', '1000', '2017-05-13 12:52:25'
+'207', 'HSG -17', 'HSG-17', ?, 'N', '1000', '2017-05-11 13:19:12', '1000', '2017-11-27 13:35:21'
+'208', '16 weeks - 21', '16 - weeks -21-Dr.Diwakar', ?, 'N', '1000', '1970-01-01 05:30:00', '1000', '2022-04-05 20:06:15'
+'209', 'Chest Scan -17', 'Chest Scan -17. Dr. Diwakar', ?, 'N', '1000', '2017-05-12 16:25:49', '1000', '2020-06-23 14:29:20'
+'210', 'SACCRUM AP/LAT', 'SACCRUM AP/LAT X - RAY', ?, 'N', '1000', '2017-05-13 13:00:01', '1000', '2017-05-13 13:00:01'
+'211', 'FOOT AP - LAT X RAY', 'FOOT AP - LAT X RAY', ?, 'N', '1000', '2017-05-13 13:04:43', '1000', '2017-05-13 13:04:43'
+'212', 'HIP - AP /LAT X - RAY', 'HIP - AP /LAT X - RAY', ?, 'N', '1000', '2017-05-13 13:07:56', '1000', '2017-05-13 13:07:56'
+'213', 'NASOPHARYNX .LAT', 'NASOPHARYNX .LAT', ?, 'N', '1000', '2017-05-13 13:08:22', '1000', '2017-05-13 13:16:36'
+'214', 'FOLLICULAR SCAN', 'FOLLICULAR SCAN- DR. Diwakar', ?, 'N', '1000', '2017-05-15 13:14:10', '1000', '2022-04-05 20:06:34'
+'215', 'FOLLICULAR SCAN', 'FOLLICULAR SCAN - Dr.Srinivas', ?, 'N', '1000', '1970-01-01 05:30:00', '1000', '2021-07-06 13:32:44'
+'216', 'EARLY PREGNANCY SCAN', 'EARLY PREGNANCY SCAN -Dr.srinivas', ?, 'N', '1000', '2017-05-15 16:15:34', '1000', '2017-05-15 16:15:34'
+'217', 'EARLY PREGNANCY SCAN', 'EARLY PREGNANCY SCAN-Dr.Aruna', ?, 'N', '1000', '2017-05-15 16:20:21', '1000', '2017-05-15 16:20:21'
+'218', 'Thyroid Scan -17', 'Thyroid Scan - Dr.Diwakar', ?, 'N', '1000', '2017-05-16 19:07:37', '1000', '2021-03-08 17:15:25'
+'219', 'CAROTID DOPPLER -17', 'CAROTID DOPPLER - Dr. Diwkar', ?, 'N', '1000', '2017-05-16 19:09:51', '1000', '2022-02-25 18:16:37'
+'220', 'Hernia -17 DM', 'Hernia -17 DM-Dr. Deepak-17', ?, 'N', '1000', '2017-05-22 16:18:43', '1000', '2018-04-27 12:48:13'
+'221', 'Polycystic ovaries format-17', 'Polycystic ovaries format-', ?, 'N', '1000', '2017-05-22 16:19:19', '1000', '2018-09-21 20:40:11'
+'222', 'Hernia -17 Df', 'Hernia -17 Df-Dr.', ?, 'N', '1000', '2017-05-22 16:30:31', '1000', '2018-09-21 20:39:42'
+'223', 'Dengue - Male Format', 'Dengue - Male Format - Dr.Deepak', ?, 'N', '1000', '2017-05-24 17:37:52', '1000', '2018-04-27 12:48:20'
+'224', 'Dengue - Female Format', 'Dengue - Female - Dr. Deepak', ?, 'N', '1000', '2017-05-24 17:42:25', '1000', '2018-04-27 12:48:31'
+'225', 'Term Scan -17', 'Term Scan -17 Dr. venkatesh M P', ?, 'N', '1000', '2017-06-17 18:00:32', '1000', '2022-03-19 13:31:02'
+'226', 'HAEMORRHAGIC CYST', 'HAEMORRHAGIC CYST -17 Dr.Deepak', ?, 'N', '1000', '2017-06-24 19:34:25', '1000', '2018-04-27 12:48:40'
+'227', 'Pelvic Scan -17', 'Pelvic Scan - Dr. Aruna', ?, 'N', '1000', '2017-06-26 13:17:59', '1000', '2017-06-26 13:17:59'
+'228', 'UPPER LIMB -17', 'UPPER LIMB -Dr. Diwakar', ?, 'N', '1000', '2017-06-29 17:30:28', '1000', '2022-04-05 20:06:51'
+'229', 'LIVER DISEASE', 'LIVER DISEASE - Dr. Deepak', ?, 'N', '1000', '2017-06-29 18:22:48', '1000', '2018-04-27 12:49:18'
+'230', 'Thyroiditis-17', 'Thyroiditis-17-Dr.Raghavendra Temkar', ?, 'N', '1000', '2017-07-04 17:31:57', '1000', '2017-09-23 17:47:46'
+'231', 'Thyroiditis-17', 'Thyroiditis-17-Dr.Raghavendra Temkar', ?, 'N', '1000', '2017-07-04 17:32:35', '1000', '2017-09-23 17:47:27'
+'232', 'Bilateral Calculi - MALE 17', 'Bilateral calculi -MALE 17 Dr.Raghavendra', ?, 'N', '1000', '1970-01-01 05:30:00', '1000', '2018-01-12 13:24:41'
+'233', 'Bilateral Calculi - FEMALE 17', 'Bilateral calculi - FEAMLE17 Dr.Raghavendra', ?, 'N', '1000', '2017-08-04 17:46:47', '1000', '2018-01-12 13:24:13'
+'234', 'POLYCYSTIC -17', 'POLYCYSTIC FORMAT -17Dr.Raghavendra', ?, 'N', '1000', '1970-01-01 05:30:00', '1000', '2018-01-12 13:23:43'
+'235', 'Arterial Doppler - 17', 'Arterial Doppler - 17- Dr.Venkatesh M P', ?, 'N', '1000', '2017-08-30 15:55:47', '1000', '2022-03-19 13:31:27'
+'236', 'KUB SCAN -17FEMALE', 'KUB SCAN -17-FEMALE- Diwakar', ?, 'N', '1000', '2017-09-12 15:47:55', '1000', '2020-06-23 14:30:27'
+'237', 'KUB SCAN - MALE -17', 'KUB SCAN - MALE -17Dr.Deepak', ?, 'N', '1000', '1970-01-01 05:30:00', '1000', '2017-11-14 13:14:35'
+'238', 'OB DOPPLER - 17', 'OB FETAL DOPPLER-17 Dr.Venkatesh M P', ?, 'N', '1000', '2017-09-23 17:45:30', '1000', '2022-03-19 13:31:53'
+'239', 'TERM SCAN WITH DOPPLER-17', 'TERM SCAN WITH DOPPLER-17-', ?, 'N', '1000', '2017-12-22 18:02:53', '1000', '2020-06-24 13:52:20'
+'240', 'TERM SCAN WITH DOPPLER-17', 'TERM SCAN WITH DOPPLER-17-Dr.Diwakar', ?, 'N', '1000', '2017-12-22 18:03:32', '1000', '2022-04-05 20:07:20'
+'241', 'Venous Doppler Single - 18', 'Venous Doppler Single - 18Single -Dr. NAgesh', ?, 'N', '1000', '2018-02-20 16:00:05', '1000', '2021-06-17 18:14:13'
+'242', 'Venous Doppler BOTH  -18', 'Venous doppler Both -18 Dr.Nagesh', ?, 'N', '1000', '2018-02-20 16:04:38', '1000', '2021-06-17 18:13:23'
+'243', 'Venous Doppler -', 'Venous both Doppler-Diwakar', ?, 'N', '1000', '2018-09-24 17:14:02', '1000', '2022-04-05 20:07:44'
+'244', 'Pelvic Scan -18', 'Pelvic Scan -18 -Nagesh', ?, 'N', '1000', '2018-09-26 19:35:31', '1000', '2021-06-17 18:14:01'
+'245', 'ABD - M Normal -', 'ABD - M Normal - DrBharath', ?, 'N', '1000', '2018-11-28 15:12:26', '1000', '2021-09-15 16:31:56'
+'246', 'ABD- F-Normal - Dr.Bharath Kumar', 'ABD- F-Normal - Dr.Bharath', ?, 'N', '1000', '2018-11-28 15:15:38', '1000', '2021-09-15 16:32:06'
+'247', 'CHEST SCAN - Dr.Bharath', NULL, ?, 'N', '1000', '2018-11-28 15:19:55', '1000', '2018-11-28 15:19:55'
+'248', 'CHEST SCAN - Dr.Bharath Kumar', NULL, ?, 'N', '1000', '2018-11-28 15:22:23', '1000', '2018-11-28 15:22:23'
+'249', 'Venous Doppler-Dr.Bharath Kumar', 'Venous Doppler - Dr.Bharath Kumar', ?, 'N', '1000', '2018-11-30 18:08:28', '1000', '2018-11-30 18:08:28'
+'250', 'Venous Doppler Both - Dr. Bharath Kumar', 'Venous Doppler Both - Dr.Bharath Kumar', ?, 'N', '1000', '2018-11-30 18:12:00', '1000', '2018-11-30 18:12:20'
+'251', 'SOFT TISSUE SCAN', 'SOFT TISSUE SCAN- Dr.Diwakar', ?, 'N', '1000', '2018-12-31 19:44:51', '1000', '2020-06-23 14:27:18'
+'252', 'ABD - FEMALE - Dr.Vasudeva', 'ABD - FEMALE - Dr.Vasudeva', ?, 'N', '1000', '2019-02-11 18:11:10', '1000', '2020-06-23 14:17:11'
+'253', 'ABD - MALE - Dr.Vsudeva', 'ABD - MALE - Dr.Vsudeva', ?, 'N', '1000', '2019-02-11 18:14:56', '1000', '2019-06-06 19:39:39'
+'254', 'PELVIC - Dr. Vasudeva', 'PELVIC - Dr. Vasudeva', ?, 'N', '1000', '2019-02-11 18:20:11', '1000', '2019-05-22 19:23:48'
+'255', 'Breast  Scan - Dr. Vasudev', 'Breast Scan - Dr.Vasudev', ?, 'N', '1000', '2019-04-26 16:20:39', '1000', '2019-05-22 19:24:00'
+'256', 'NT Scan - Dr. Vasudev', 'NT Scan - Dr. Vasudev', ?, 'N', '1000', '2019-04-26 16:25:18', '1000', '2019-05-22 19:24:14'
+'257', 'Arterial Doppler  - Dr.Vasudev', 'Arterial Doppler  - Dr.Vasudev', ?, 'N', '1000', '2019-04-26 16:27:31', '1000', '2019-05-22 19:24:21'
+'258', 'Venous Doppler - Vasudev', 'Venous Doppler - Vasudev', ?, 'N', '1000', '2019-04-26 16:32:10', '1000', '2019-04-26 16:32:10'
+'259', 'Scrotal Scan - Dr.Vasudev', 'Scrotal scan - Dr.Vasudev', ?, 'N', '1000', '2019-04-26 16:39:22', '1000', '2019-04-26 16:39:22'
+'260', 'Thyroid- Dr.Vasudev', 'Thyroid- Dr.Vasudev', ?, 'N', '1000', '2019-04-26 16:42:14', '1000', '2019-05-22 19:24:29'
+'261', 'Early Preg - Dr.vasudeva', 'Early Preg - Dr.vasudeva', ?, 'N', '1000', '2019-04-26 16:47:57', '1000', '2019-05-22 19:24:41'
+'262', 'ANAMOLY SCAN - Dr.Vasudev', 'ANAMOLY SCAN - Dr.Vasudev', ?, 'N', '1000', '2019-05-07 14:03:19', '1000', '2019-05-07 14:03:19'
+'263', 'EEHO - 19', 'ECHO -19- Dr.Gnanadev', ?, 'N', '1000', '2019-06-03 20:08:55', '1000', '2020-06-25 18:39:23'
+'264', 'EARLY PREG- 19', NULL, ?, 'N', '1000', '2019-06-06 19:38:33', '1000', '2019-06-06 19:38:33'
+'265', 'Doppler-19-', 'Doppler -19', ?, 'N', '1000', '2019-11-16 16:47:14', '1000', '2019-11-16 16:49:52'
+'266', 'TIFFA -20', 'TIFFA-20', ?, 'N', '1000', '2020-01-20 15:14:59', '1000', '2021-07-14 15:29:13'
+'267', 'ECHO-19 Dr.Balaraju D', 'ECHO-19 Dr.Balaraju D', ?, 'N', '757', '2020-02-20 15:49:25', '1000', '2021-01-16 14:10:26'
+'268', 'ECHO-19 Dr.Amith R', 'ECHO-19 Dr.Amith R', ?, 'N', '757', '2020-02-20 15:51:17', '1000', '2022-03-14 17:45:50'
+'269', 'NT Scan', 'N T Scan -Dr.Diwakar', ?, 'N', '1000', '2020-06-17 15:30:15', '1000', '2020-06-17 15:30:15'
+'270', 'TERM WITH DOPPLER-20', 'TERM WITH DOPPLER-20-Dr.Venkatesh M P', ?, 'N', '1000', '2020-09-07 18:15:53', '1000', '2022-03-19 13:32:26'
+'271', 'FOLLICULAR SCN', 'FOLLICULAR SCN- Dr.Hema', ?, 'N', '1000', '2020-10-16 13:52:10', '1000', '2020-10-16 13:52:10'
+'272', 'Fetal Doppler -21', 'Fetal Doppler -21- Dr.Diwakar', ?, 'N', '1000', '2021-02-17 15:35:15', '1000', '2021-02-17 15:42:10'
+'273', 'ABDOMEN AORTIC DOPPLER -21', 'ABDOMEN AORTIC DOPPLER -21- Dr.Diwakar', ?, 'N', '1000', '2021-02-26 14:13:11', '1000', '2021-02-26 14:15:44'
+'274', 'Pelvic Scan - 21', 'Pelvic Scan - Dr.Rashmi', ?, 'N', '1000', '2021-03-02 16:48:51', '1000', '2021-12-11 16:28:39'
+'275', 'Tiffa (TWIN -21)', 'Tiffa (TWIN-21)- Dr.Diwakar', ?, 'N', '1000', '2021-03-08 16:27:35', '1000', '2021-07-30 16:00:24'
+'276', 'ABD-M-Normal', 'ABD-M-Normal - Dr.Suhas', ?, 'N', '1000', '2021-03-09 17:32:28', '1000', '2022-03-26 20:07:56'
+'277', 'ABD-F-Normal', 'ABD-F-Normal- Dr.Suhas', ?, 'N', '1000', '2021-03-09 17:33:40', '1000', '2022-03-26 20:08:14'
+'278', 'CRL-21', 'CRL-21-Dr.Suhas', ?, 'N', '1000', '2021-03-09 17:34:52', '1000', '2021-03-09 17:34:52'
+'279', 'Gestational Sac -21', 'Gestational Sac-21Dr.Suhas', ?, 'N', '1000', '2021-03-09 17:36:33', '1000', '2021-03-09 17:36:33'
+'280', 'Early -21', 'Early Scan -Dr.Rashmi T N', ?, 'N', '1000', '2021-03-16 19:06:35', '1000', '2021-12-11 16:28:07'
+'281', 'CRL-21', 'CRL-21-Dr.Rashmi T N', ?, 'N', '1000', '2021-03-16 19:09:17', '1000', '2022-02-03 18:13:17'
+'282', 'FINGER SCAN - 21', 'FiNGER SCAN-Dr.Diwakar', ?, 'N', '1000', '2021-03-24 19:34:08', '1000', '2021-03-24 19:34:08'
+'283', 'CRL -', 'CRL - Dr. HEma', ?, 'N', '1000', '2021-04-14 20:17:32', '1000', '2021-11-09 14:35:50'
+'284', 'Early Pre- 21', 'Early -Scan- Dr.Hema V', ?, 'N', '1000', '2021-04-14 20:18:40', '1000', '2021-04-14 20:18:40'
+'285', 'Pelvic-21', 'Pelvic Scan-Dr.Hema V', ?, 'N', '1000', '2021-04-14 20:20:35', '1000', '2021-04-14 20:20:35'
+'286', 'CAROTID DOPPLER-21', 'CAROTID DOPPLER-21- Dr.Nagesh', ?, 'N', '1000', '2021-06-17 18:18:04', '1000', '2021-06-17 18:18:04'
+'287', 'Follicular - 21', 'Follicular - 21- Dr.Latha N', ?, 'N', '1000', '2021-07-06 13:35:48', '1000', '2021-07-06 13:35:48'
+'288', 'Ankle Joint -21', 'Ankle joint - Dr.Diwakar', ?, 'N', '1000', '2021-07-08 13:39:08', '1000', '2021-07-08 13:39:08'
+'289', 'TIFFA - TWINS-21', 'TIFFA TWINS-21', ?, 'N', '1000', '2021-07-30 15:18:33', '1000', '2021-07-30 15:21:35'
+'290', 'ABD-M-Normal- Dr.Negesh', 'ABD-M-Normal -Dr.Nagesh', ?, 'N', '1000', '2021-09-03 20:45:06', '1000', '2021-09-15 16:33:28'
+'291', 'ABD-F-Normal- Dr.Nagesh', 'ABD-F-Normal - Dr.nagesh', ?, 'N', '1000', '2021-09-03 20:45:47', '1000', '2021-09-15 16:33:37'
+'292', 'CHEST- 21-', 'Chest -21-', ?, 'N', '1000', '2021-09-15 18:00:36', '1000', '2021-09-15 18:00:36'
+'293', 'ABD- F- Dr.Sowmya', 'ABD- F- Dr.Sowmya', ?, 'N', '1000', '2021-12-04 15:11:56', '1000', '2021-12-04 15:11:56'
+'294', 'ABD-Male -Dr.Sowmya', 'ABD-Male -Dr.Sowmya', ?, 'N', '1000', '2021-12-04 15:19:11', '1000', '2021-12-04 15:19:11'
+'295', 'Carotid Doppler', 'Carotid Doppler - Dr. Subodh', ?, 'N', '1000', '2022-02-25 18:17:34', '1000', '2022-03-09 15:02:01'
+'296', 'Renal Doppler', 'Renal doppler- Dr.Subodh', ?, 'N', '1000', '2022-02-28 13:19:21', '1000', '2022-02-28 13:20:09'
+'297', 'Test1', 'Test11', ?, 'N', '0', '2025-03-14 14:46:40', '0', '2025-03-14 14:46:40'
+"""
+
+lines = data_text.strip().split('\n')
+json_data = []
+
+for line in lines:
+    # Use regex to find all strings between single quotes
+    matches = re.findall(r"'([^']*)'", line)
+    # The '?' or NULL are not between single quotes
+    # Let's split by comma and clean up
+    parts = [p.strip() for p in line.split(',')]
+    
+    # ID is the first part
+    item_id = int(parts[0].strip("'"))
+    
+    # ScanName is second
+    scan_name = parts[1].strip("'") if parts[1] != 'NULL' else ""
+    
+    # ScanTemplateName is third
+    template_name = parts[2].strip("'") if parts[2] != 'NULL' else ""
+    
+    # ScanTemplateData is fourth (often ?)
+    template_data = "" # Assuming ? means empty for now or keep existing if updating, but here we are populating
+    
+    # IsRowDeleted is fifth
+    is_deleted = parts[4].strip("'")
+    
+    # CreatedBy is sixth
+    created_by = parts[5].strip("'")
+    
+    # CreatedDateTime is seventh
+    created_dt = parts[6].strip("'")
+    
+    # UpdatedBy is eighth
+    updated_by = parts[7].strip("'") if parts[7] != 'NULL' else None
+    
+    # UpdatedDateTime is ninth
+    updated_dt = parts[8].strip("'") if parts[8] != 'NULL' else None
+    
+    json_data.append({
+        "id": item_id,
+        "Name": scan_name,
+        "Description": template_name,
+        "ScanTemplateData": template_data,
+        "IsRowDeleted": is_deleted,
+        "CreatedBy": created_by,
+        "CreatedDateTime": created_dt,
+        "UpdatedBy": updated_by,
+        "UpdatedDateTime": updated_dt,
+        "Status": "Active"
+    })
+
+print(json.dumps(json_data, indent=2))

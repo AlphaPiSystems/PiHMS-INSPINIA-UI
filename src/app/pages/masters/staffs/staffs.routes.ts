@@ -15,20 +15,20 @@ export const STAFFS_ROUTES: Routes = [
         path: 'staff/staffedit/:id',
         loadComponent: () => import('./components/staffedit/staffedit').then(c => c.StaffEdit)
     },
-    // Earning Routes
+    // Payroll Routes
     {
-        path: 'staff/earning/earninglist',
-        loadComponent: () => import('./components/earning/earning').then(c => c.StaffEarningList),
-        data: { title: 'Staff Earnings' }
+        path: 'staff/payroll/payrolllist',
+        loadComponent: () => import('./components/payroll/payroll').then(c => c.StaffPayrollList),
+        data: { title: 'Staff Payroll Details' }
     },
     {
-        path: 'staff/earning/earningadd',
-        loadComponent: () => import('./components/earningadd/earningadd').then(c => c.StaffEarningAdd),
-        data: { title: 'Add Staff Earning' }
+        path: 'staff/payroll/payrolladd',
+        loadComponent: () => import('./components/payrolladd/payrolladd').then(c => c.StaffPayrollAdd),
+        data: { title: 'Add Staff Payroll Details' }
     },
     {
-        path: 'staff/earning/earningedit/:id',
-        loadComponent: () => import('./components/earningedit/earningedit').then(c => c.StaffEarningEdit),
-        data: { title: 'Edit Staff Earning' }
+        path: 'staff/payroll/payrolledit/:id',
+        loadComponent: () => import('./components/payrolledit/payrolledit').then(c => c.StaffPayrollEdit),
+        data: { title: 'Edit Staff Payroll Details' }
     }
 ];

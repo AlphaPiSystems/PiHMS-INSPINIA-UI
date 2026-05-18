@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { NgIcon } from '@ng-icons/core';
-import { ActivatedRoute, RouterLink } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { PageTitleComponent } from '@app/components/page-title.component';
 import { LucideAngularModule } from 'lucide-angular';
@@ -12,7 +11,7 @@ import { ScanningItemType, ScanType } from '../../types';
 @Component({
   selector: 'app-scanningitemedit',
   standalone: true,
-  imports: [CommonModule, NgIcon, RouterLink, FormsModule, PageTitleComponent, LucideAngularModule],
+  imports: [CommonModule, FormsModule, PageTitleComponent, LucideAngularModule],
   templateUrl: './scanningitemedit.html',
 })
 export class ScanningItemEdit implements OnInit {

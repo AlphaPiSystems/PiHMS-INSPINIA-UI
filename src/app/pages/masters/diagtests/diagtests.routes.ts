@@ -13,6 +13,10 @@ import { SampleEdit } from './components/sampleedit/sampleedit';
 import { Instrument } from './components/instruments/instrument';
 import { InstrumentAdd } from './components/instrumentadd/instrumentadd';
 import { InstrumentEdit } from './components/instrumentedit/instrumentedit';
+import { TestTemplate } from './components/testtemplate/testtemplate';
+import { TestTemplateAdd } from './components/testtemplateadd/testtemplateadd';
+import { TestTemplateEdit } from './components/testtemplateedit/testtemplateedit';
+
 
 export const DIAGNOSTIC_TESTS_ROUTES: Routes = [
     {
@@ -90,4 +94,24 @@ export const DIAGNOSTIC_TESTS_ROUTES: Routes = [
         component: InstrumentEdit,
         data: {title: "InstrumentEdit"},
     },
+    {
+        path: 'testtemplate/testtemplatelist',
+        component: TestTemplate,
+        data: {title: "TestTemplate"},
+    },
+    {
+        path: 'testtemplate/testtemplateadd',
+        component: TestTemplateAdd,
+        data: {title: "TestTemplateAdd"},
+    },
+    {
+        path: 'testtemplate/testtemplateedit/:id',
+        component: TestTemplateEdit,
+        data: {title: "TestTemplateEdit"},
+    },
+    {
+        path: 'testtemplate',
+        redirectTo: 'testtemplate/testtemplatelist',
+        pathMatch: 'full'
+    }
 ];

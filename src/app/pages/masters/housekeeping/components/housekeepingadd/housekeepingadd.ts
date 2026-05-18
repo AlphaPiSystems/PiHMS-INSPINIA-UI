@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { NgIcon } from '@ng-icons/core';
-import { RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { PageTitleComponent } from '@app/components/page-title.component';
 import { LucideAngularModule } from 'lucide-angular';
@@ -12,7 +10,7 @@ import { HousekeepingTaskType } from '../../types';
 @Component({
   selector: 'app-housekeepingadd',
   standalone: true,
-  imports: [CommonModule, NgIcon, RouterLink, FormsModule, PageTitleComponent, LucideAngularModule],
+  imports: [CommonModule, FormsModule, PageTitleComponent, LucideAngularModule],
   templateUrl: './housekeepingadd.html',
 })
 export class HousekeepingAdd implements OnInit {

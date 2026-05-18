@@ -95,8 +95,7 @@ export const menuItems: MenuItemType[] = [
                     { label: 'Samples', url: '/sample/samplelist' },
                     { label: 'Units', url: '/unit/unitlist' },
                     { label: 'Instruments', url: '/instrument/instrumentlist' },
-                    // { label: 'Test Instrumentation', url: '/diagtest/testrange' },
-                    // { label: 'Diagnostic Test Template', url: '/diagtest/testrange' },
+                    { label: 'Test Template', url: '/testtemplate/testtemplatelist' },
                 ]
             },
             {
@@ -104,7 +103,7 @@ export const menuItems: MenuItemType[] = [
                 isCollapsed: true,
                 children: [
                     { label: 'Staff', url: '/staff/stafflist' },
-                    { label: 'Earning', url: '/staff/earning/earninglist' },
+                    { label: 'Payroll Details', url: '/staff/payroll/payrolllist' },
                 ]
             },
             {
@@ -124,11 +123,20 @@ export const menuItems: MenuItemType[] = [
                 ]
             },
             {
+                label: 'In Patient',
+                isCollapsed: true,
+                children: [
+                    { label: 'Admitted For', url: '/admittedfor/admittedforlist' },
+                    { label: 'Doctor Price', url: '/inpatient/doctorprice/list' }
+                ]
+            },
+            {
                 label: 'Scanning',
                 isCollapsed: true,
                 children: [
                     { label: 'Scan', url: '/scanning/scanlist' },
-                    { label: 'Scanning Items', url: '/scanning/scanningitemlist' }
+                    { label: 'Scanning Items', url: '/scanning/scanningitemlist' },
+                    { label: 'Scanning Template', url: '/scanning/scanningtemplatelist' }
                 ]
             },
             {

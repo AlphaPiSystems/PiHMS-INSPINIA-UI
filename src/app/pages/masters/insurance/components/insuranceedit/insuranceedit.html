@@ -1,67 +1,75 @@
 <div class="container-fluid">
     <app-page-title title="Edit Insurance" />
 
-    <div class="row" *ngIf="insurance.id !== 0">
-        <div class="col-12">
-            <div class="card">
-                <div class="card-header border-light">
-                    <h5 class="card-title mb-0">Insurance Details</h5>
-                </div>
-                <div class="card-body">
-                    <form (ngSubmit)="save()" #insForm="ngForm">
-                        <div class="row mb-3">
-                            <div class="col-md-12">
-                                <label class="form-label fw-semibold">Insurance Name</label>
-                                <input type="text" class="form-control" [(ngModel)]="insurance.Name" name="Name" required placeholder="Enter Insurance Name">
+    <div class="wrapper wrapper-content animated fadeInRight" style="padding-top: 0;" *ngIf="insurance.id !== 0">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="ibox float-e-margins" style="background:#fff; box-shadow: 0 2px 4px rgba(0,0,0,0.08); border-radius: 4px;">
+                    <div class="ibox-title" style="border-top: 4px solid #1ab394; padding: 6px 15px; border-bottom: 1px solid #f0f0f0;">
+                        <h5 style="font-weight: 600; margin: 0; font-size: 14px; text-transform: uppercase;">Insurance Details</h5>
+                    </div>
+                    <div class="ibox-content" style="padding: 15px;">
+                        <form (ngSubmit)="save()" #insForm="ngForm">
+                            <div class="row">
+                                <div class="col-md-4 col-sm-12">
+                                    <div class="form-group mb-3">
+                                        <label style="font-weight: 600; margin-bottom: 5px;">Insurance Name</label>
+                                        <input type="text" class="form-control" [(ngModel)]="insurance.Name" name="Name" required placeholder="Enter Insurance Name" style="border-radius: 2px;">
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-sm-12">
+                                    <div class="form-group mb-3">
+                                        <label style="font-weight: 600; margin-bottom: 5px;">Department</label>
+                                        <select class="form-select form-control" [(ngModel)]="insurance.DepartmentID" name="DepartmentID" required style="border-radius: 2px;">
+                                            <option [ngValue]="null" disabled>Select Department</option>
+                                            <option *ngFor="let dept of departments" [ngValue]="dept.id">{{ dept.Name }}</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-sm-12">
+                                    <div class="form-group mb-3">
+                                        <label style="font-weight: 600; margin-bottom: 5px;">Branch</label>
+                                        <select class="form-select form-control" [(ngModel)]="insurance.BranchID" name="BranchID" required style="border-radius: 2px;">
+                                            <option [ngValue]="null" disabled>Select Branch</option>
+                                            <option *ngFor="let branch of branches" [ngValue]="branch.id">{{ branch.Name }}</option>
+                                        </select>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
 
-                        <div class="row mb-3">
-                            <div class="col-md-12">
-                                <label class="form-label fw-semibold">Description</label>
-                                <textarea class="form-control" [(ngModel)]="insurance.Description" name="Description" rows="3" placeholder="Enter Description"></textarea>
+                            <div class="row">
+                                <div class="col-md-4 col-sm-12">
+                                    <div class="form-group mb-3">
+                                        <label style="font-weight: 600; margin-bottom: 5px;">Description</label>
+                                        <input type="text" class="form-control" [(ngModel)]="insurance.Description" name="Description" placeholder="Enter Description" style="border-radius: 2px;">
+                                    </div>
+                                </div>
                             </div>
-                        </div>
 
-                        <div class="row mb-3">
-                            <div class="col-md-12">
-                                <label class="form-label fw-semibold">Department</label>
-                                <select class="form-select" [(ngModel)]="insurance.DepartmentID" name="DepartmentID" required>
-                                    <option [ngValue]="null" disabled>Select Department</option>
-                                    <option *ngFor="let dept of departments" [ngValue]="dept.id">{{ dept.Name }}</option>
-                                </select>
+                            <div class="hr-line-dashed" style="border-top: 1px dashed #e7eaec; margin: 15px 0;"></div>
+
+                            <div class="d-flex justify-content-end gap-2">
+                                <button type="button" class="btn btn-white" (click)="cancel()" style="border: 1px solid #d2d2d2; background: #fff; padding: 8px 20px; font-weight: 600; border-radius: 2px; color: #555;">
+                                    Cancel
+                                </button>
+                                <button type="submit" class="btn btn-primary" [disabled]="!insForm.form.valid" style="background-color: #1ab394; border-color: #1ab394; padding: 8px 24px; font-weight: 600; color: white; border-radius: 2px;">
+                                    Update Insurance
+                                </button>
                             </div>
-                        </div>
-
-                        <div class="row mb-3">
-                            <div class="col-md-12">
-                                <label class="form-label fw-semibold">Branch</label>
-                                <select class="form-select" [(ngModel)]="insurance.BranchID" name="BranchID" required>
-                                    <option [ngValue]="null" disabled>Select Branch</option>
-                                    <option *ngFor="let branch of branches" [ngValue]="branch.id">{{ branch.Name }}</option>
-                                </select>
-                            </div>
-                        </div>
-
-                        <div class="d-flex gap-2">
-                            <button type="submit" class="btn btn-primary" [disabled]="!insForm.form.valid" style="background-color: #1ab394; border-color: #1ab394;">
-                                Save Changes
-                            </button>
-                            <button type="button" class="btn btn-light" (click)="cancel()">
-                                Cancel
-                            </button>
-                        </div>
-                    </form>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <div class="row" *ngIf="insurance.id === 0">
-        <div class="col-12">
-            <div class="card">
-                <div class="card-body text-center py-5">
-                    <p class="text-muted">Loading insurance data...</p>
+    <div class="wrapper wrapper-content animated fadeInRight" style="padding-top: 0;" *ngIf="insurance.id === 0">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="ibox float-e-margins" style="background:#fff; box-shadow: 0 2px 4px rgba(0,0,0,0.08); border-radius: 4px;">
+                    <div class="ibox-content text-center py-5">
+                        <p class="text-muted">Loading insurance data...</p>
+                    </div>
                 </div>
             </div>
         </div>

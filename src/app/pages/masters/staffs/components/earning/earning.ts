@@ -7,7 +7,6 @@ import { TableService } from '../../../../../core/services/table.service';
 import { NgIcon } from '@ng-icons/core';
 import { FormsModule } from '@angular/forms';
 import { NgbPagination, NgbPaginationNext, NgbPaginationPrevious, NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
-import { NgbdSortableHeader } from '../../../../../core/directive/sortable.directive';
 import { HttpClient } from '@angular/common/http';
 import { AsyncPipe, CommonModule } from '@angular/common';
 
@@ -25,7 +24,6 @@ import { AsyncPipe, CommonModule } from '@angular/common';
     NgbPaginationNext,
     NgbPaginationPrevious,
     NgbTooltipModule,
-    NgbdSortableHeader,
     AsyncPipe
   ],
   templateUrl: './earning.html',

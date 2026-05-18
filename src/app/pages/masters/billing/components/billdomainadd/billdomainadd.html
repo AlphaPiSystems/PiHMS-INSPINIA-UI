@@ -18,18 +18,18 @@
                                 <label class="form-label">Code <span class="text-danger">*</span></label>
                                 <input type="text" class="form-control" [(ngModel)]="billDomain.Code" name="Code" required placeholder="Enter domain code">
                             </div>
-                            <div class="col-md-12">
+                            <div class="col-md-6">
                                 <label class="form-label">Description</label>
-                                <textarea class="form-control" [(ngModel)]="billDomain.Description" name="Description" rows="3" placeholder="Enter description"></textarea>
+                                <textarea class="form-control" [(ngModel)]="billDomain.Description" name="Description" rows="1" placeholder="Enter description"></textarea>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-6">
                                 <label class="form-label">Domain Type</label>
                                 <select class="form-select" [(ngModel)]="billDomain.DomainType" name="DomainType">
                                     <option value="General">General</option>
                                     <option value="Specific">Specific</option>
                                 </select>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-6">
                                 <label class="form-label">Paper Size</label>
                                 <select class="form-select" [(ngModel)]="billDomain.PaperSize" name="PaperSize">
                                     <option value="A4">A4</option>
@@ -38,7 +38,7 @@
                                     <option value="Legal">Legal</option>
                                 </select>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-6">
                                 <label class="form-label">Priority</label>
                                 <input type="text" class="form-control" [(ngModel)]="billDomain.DomainPriority" name="DomainPriority" placeholder="Enter priority">
                             </div>
@@ -62,7 +62,7 @@
                                 <label class="form-label">Footer Image</label>
                                 <input type="file" class="form-control" name="FooterImage">
                             </div>
-                            <div class="col-md-12">
+                            <div class="col-md-6">
                                 <label class="form-label">Domain Config</label>
                                 <input type="text" class="form-control" [(ngModel)]="billDomain.DomainConfig" name="DomainConfig" placeholder="Enter domain config">
                             </div>

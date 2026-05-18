@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { NgIcon } from '@ng-icons/core';
 import { ActivatedRoute, RouterLink, Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { PageTitleComponent } from '../../../../../components/page-title.component';
@@ -11,7 +10,7 @@ import { DEPARTMENT_LIST } from '../../../departments/components/department/depa
 @Component({
   selector: 'app-wardtypeedit',
   standalone: true,
-  imports: [CommonModule, NgIcon, RouterLink, FormsModule, PageTitleComponent, LucideAngularModule],
+  imports: [CommonModule, RouterLink, FormsModule, PageTitleComponent, LucideAngularModule],
   templateUrl: './wardtypeedit.html',
 })
 export class WardTypeEdit implements OnInit {

@@ -2,3 +2,6 @@
 @use "simplebar/dist/simplebar.min.css";
 @use "jsvectormap/dist/css/jsvectormap.css";
 @use "./assets/scss/app.scss";
+@import "quill/dist/quill.core.css";
+@import "quill/dist/quill.snow.css";
+@import "quill/dist/quill.bubble.css";

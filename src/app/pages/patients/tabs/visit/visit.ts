@@ -17,14 +17,12 @@ import { TableService } from '@core/services/table.service';
 import { currency } from '@/app/constants';
 import { NgIcon } from '@ng-icons/core';
 import { toTitleCase } from '@/app/utils/string-utils';
-import { RatingComponent } from '@app/components/rating.component';
 import { FormsModule } from '@angular/forms';
 import {
     NgbPagination,
     NgbPaginationNext,
     NgbPaginationPrevious,
 } from '@ng-bootstrap/ng-bootstrap';
-import { NgbdSortableHeader } from '@core/directive/sortable.directive';
 import { PatientType } from '../../types';
 import visitdata from '../../visit.json';
 import { AsyncPipe, CommonModule } from '@angular/common';
@@ -37,10 +35,8 @@ import { TemplateRef, ViewChild } from '@angular/core';
         LucideAngularModule,
         RouterLink,
         NgIcon,
-        RatingComponent,
         FormsModule,
         NgbPagination,
-        NgbdSortableHeader,
         NgbPaginationNext,
         NgbPaginationPrevious,
         AsyncPipe,

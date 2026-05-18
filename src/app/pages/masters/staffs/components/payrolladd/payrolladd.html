@@ -1,0 +1,296 @@
+<div class="container-fluid">
+  <app-page-title [title]="payroll.id ? 'Edit Staff Payroll Details' : 'Add New Staff Payroll Details'" />
+
+  <div class="wrapper wrapper-content animated fadeInRight" style="padding-top: 0;">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="ibox float-e-margins"
+          style="background:#fff; box-shadow: 0 2px 4px rgba(0,0,0,0.08); border-radius: 4px;">
+          <div class="ibox-title"
+            style="border-top: 4px solid #1ab394; padding: 6px 15px; border-bottom: 1px solid #f0f0f0;">
+            <h5 style="font-weight: 600; margin: 0; font-size: 14px; text-transform: uppercase;">&nbsp;</h5>
+          </div>
+          <div class="ibox-content" style="padding: 15px 20px;">
+            <ul ngbNav #nav="ngbNav" class="nav-tabs">
+              <li ngbNavItem>
+                <a ngbNavLink>General Information</a>
+                <ng-template ngbNavContent>
+                  <form (ngSubmit)="saveChanges()" class="mt-3">
+                    <div class="row">
+                      <!-- Staff Selection -->
+                      <div class="col-md-4 col-sm-12">
+                        <div class="form-group mb-3">
+                          <label class="form-label fw-bold">Staff <span class="text-danger">*</span></label>
+                          <select [(ngModel)]="payroll.StaffID" name="StaffID" class="form-select form-control" required
+                            [disabled]="payroll.id">
+                            <option value="">Select Staff</option>
+                            <option *ngFor="let s of staffs" [value]="s.id">{{s.Name}}</option>
+                          </select>
+                        </div>
+                      </div>
+
+                      <!-- Employer -->
+                      <div class="col-md-4 col-sm-12">
+                        <div class="form-group mb-3">
+                          <label class="form-label fw-bold">Employer</label>
+                          <input type="text" [(ngModel)]="payroll.Employer" name="Employer" class="form-control"
+                            placeholder="Employer Name">
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="row mt-2">
+                      <!-- Working Period From -->
+                      <div class="col-md-4 col-sm-6">
+                        <div class="form-group mb-3">
+                          <label class="form-label fw-bold">Working Period From</label>
+                          <input type="date" [(ngModel)]="payroll.WorkingPeriodFrom" name="WorkingPeriodFrom"
+                            class="form-control">
+                        </div>
+                      </div>
+
+                      <!-- Working Period To -->
+                      <div class="col-md-4 col-sm-6">
+                        <div class="form-group mb-3">
+                          <label class="form-label fw-bold">Working Period To</label>
+                          <input type="date" [(ngModel)]="payroll.WorkingPeriodTo" name="WorkingPeriodTo"
+                            class="form-control">
+                        </div>
+                      </div>
+
+                      <!-- Position Held -->
+                      <div class="col-md-4 col-sm-12">
+                        <div class="form-group mb-3">
+                          <label class="form-label fw-bold">Position Held</label>
+                          <input type="text" [(ngModel)]="payroll.PositionHeld" name="PositionHeld" class="form-control"
+                            placeholder="Position held in company">
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="row mt-2">
+                      <!-- Department -->
+                      <div class="col-md-4 col-sm-12">
+                        <div class="form-group mb-3">
+                          <label class="form-label fw-bold">Department</label>
+                          <select [(ngModel)]="payroll.Department" name="Department" class="form-select form-control">
+                            <option value="">Select Department</option>
+                            <option *ngFor="let d of departments" [value]="d.Name">{{d.Name}}</option>
+                          </select>
+                        </div>
+                      </div>
+
+                      <!-- Speciality -->
+                      <div class="col-md-4 col-sm-12">
+                        <div class="form-group mb-3">
+                          <label class="form-label fw-bold">Speciality</label>
+                          <input type="text" [(ngModel)]="payroll.Speciality" name="Speciality" class="form-control"
+                            placeholder="Speciality">
+                        </div>
+                      </div>
+
+                      <!-- Discipline -->
+                      <div class="col-md-4 col-sm-12">
+                        <div class="form-group mb-3">
+                          <label class="form-label fw-bold">Discipline</label>
+                          <input type="text" [(ngModel)]="payroll.Discipline" name="Discipline" class="form-control"
+                            placeholder="Discipline">
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="hr-line-dashed" style="border-top: 1px dashed #e7eaec; margin: 20px 0;"></div>
+
+                    <div class="d-flex justify-content-end gap-2">
+                      <button type="button" routerLink="/staff/payroll/payrolllist" class="btn btn-white"
+                        style="border: 1px solid #d2d2d2; background: #fff; padding: 8px 25px; font-weight: 600; border-radius: 2px; color: #555;">Cancel</button>
+                      <button type="submit" class="btn btn-primary"
+                        style="background: #1ab394; border-color: #1ab394; color: #fff; padding: 8px 25px; font-weight: 600; border-radius: 2px;">
+                        {{ payroll.id ? 'Update Details' : 'Save Details' }}
+                      </button>
+                    </div>
+                  </form>
+                </ng-template>
+              </li>
+              <li ngbNavItem>
+                <a ngbNavLink>Earning</a>
+                <ng-template ngbNavContent>
+                  <form (ngSubmit)="saveChanges()" class="mt-3">
+                    <div class="row">
+                      <!-- Staff Selection (ReadOnly) -->
+                      <div class="col-md-4 col-sm-12">
+                        <div class="form-group mb-3">
+                          <label class="form-label fw-bold">Staff ID</label>
+                          <input type="text" [value]="payroll.StaffID" class="form-control" readonly>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="row mt-2">
+                      <!-- BASIC -->
+                      <div class="col-md-2 col-sm-6">
+                        <div class="form-group mb-3">
+                          <label class="form-label fw-bold">BASIC</label>
+                          <input type="number" [(ngModel)]="payroll.BASIC" name="BASIC" class="form-control"
+                            placeholder="0.00" step="0.01">
+                        </div>
+                      </div>
+
+                      <!-- HRA -->
+                      <div class="col-md-2 col-sm-6">
+                        <div class="form-group mb-3">
+                          <label class="form-label fw-bold">HRA</label>
+                          <input type="number" [(ngModel)]="payroll.HRA" name="HRA" class="form-control"
+                            placeholder="0.00" step="0.01">
+                        </div>
+                      </div>
+
+                      <!-- CA -->
+                      <div class="col-md-2 col-sm-6">
+                        <div class="form-group mb-3">
+                          <label class="form-label fw-bold">CA</label>
+                          <input type="number" [(ngModel)]="payroll.CA" name="CA" class="form-control"
+                            placeholder="0.00" step="0.01">
+                        </div>
+                      </div>
+
+                      <!-- MA -->
+                      <div class="col-md-2 col-sm-6">
+                        <div class="form-group mb-3">
+                          <label class="form-label fw-bold">MA</label>
+                          <input type="number" [(ngModel)]="payroll.MA" name="MA" class="form-control"
+                            placeholder="0.00" step="0.01">
+                        </div>
+                      </div>
+
+                      <!-- VA -->
+                      <div class="col-md-2 col-sm-6">
+                        <div class="form-group mb-3">
+                          <label class="form-label fw-bold">VA</label>
+                          <input type="number" [(ngModel)]="payroll.VA" name="VA" class="form-control"
+                            placeholder="0.00" step="0.01">
+                        </div>
+                      </div>
+
+                      <!-- PB -->
+                      <div class="col-md-2 col-sm-6">
+                        <div class="form-group mb-3">
+                          <label class="form-label fw-bold">PB</label>
+                          <input type="number" [(ngModel)]="payroll.PB" name="PB" class="form-control"
+                            placeholder="0.00" step="0.01">
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="row">
+                      <div class="col-12 text-end">
+                        <h4 class="mt-2">Total Earnings: <span>{{ (payroll.BASIC + payroll.HRA + payroll.CA + payroll.MA
+                            + payroll.VA + payroll.PB) | number: '1.2-2' }}</span></h4>
+                      </div>
+                    </div>
+
+                    <div class="hr-line-dashed" style="border-top: 1px dashed #e7eaec; margin: 20px 0;"></div>
+
+                    <div class="d-flex justify-content-end gap-2">
+                      <button type="button" routerLink="/staff/payroll/payrolllist" class="btn btn-white"
+                        style="border: 1px solid #d2d2d2; background: #fff; padding: 8px 25px; font-weight: 600; border-radius: 2px; color: #555;">Cancel</button>
+                      <button type="submit" class="btn btn-primary"
+                        style="background: #1ab394; border-color: #1ab394; color: #fff; padding: 8px 25px; font-weight: 600; border-radius: 2px;">
+                        {{ payroll.id ? 'Update Earnings' : 'Save Earnings' }}
+                      </button>
+                    </div>
+                  </form>
+                </ng-template>
+              </li>
+              <li ngbNavItem>
+                <a ngbNavLink>Deduction</a>
+                <ng-template ngbNavContent>
+                  <form (ngSubmit)="saveChanges()" class="mt-3">
+                    <div class="row">
+                      <!-- Staff Selection (ReadOnly) -->
+                      <div class="col-md-4 col-sm-12">
+                        <div class="form-group mb-3">
+                          <label class="form-label fw-bold">Staff ID</label>
+                          <input type="text" [value]="payroll.StaffID" class="form-control" readonly>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="row mt-2">
+                      <!-- PF -->
+                      <div class="col-md-2 col-sm-6">
+                        <div class="form-group mb-3">
+                          <label class="form-label fw-bold">PF</label>
+                          <input type="number" [(ngModel)]="payroll.PF" name="PF" class="form-control"
+                            placeholder="0.00" step="0.01">
+                        </div>
+                      </div>
+
+                      <!-- PT -->
+                      <div class="col-md-2 col-sm-6">
+                        <div class="form-group mb-3">
+                          <label class="form-label fw-bold">PT</label>
+                          <input type="number" [(ngModel)]="payroll.PT" name="PT" class="form-control"
+                            placeholder="0.00" step="0.01">
+                        </div>
+                      </div>
+
+                      <!-- TDS -->
+                      <div class="col-md-2 col-sm-6">
+                        <div class="form-group mb-3">
+                          <label class="form-label fw-bold">TDS</label>
+                          <input type="number" [(ngModel)]="payroll.TDS" name="TDS" class="form-control"
+                            placeholder="0.00" step="0.01">
+                        </div>
+                      </div>
+
+                      <!-- ESI -->
+                      <div class="col-md-2 col-sm-6">
+                        <div class="form-group mb-3">
+                          <label class="form-label fw-bold">ESI</label>
+                          <input type="number" [(ngModel)]="payroll.ESI" name="ESI" class="form-control"
+                            placeholder="0.00" step="0.01">
+                        </div>
+                      </div>
+
+                      <!-- ADV -->
+                      <div class="col-md-2 col-sm-6">
+                        <div class="form-group mb-3">
+                          <label class="form-label fw-bold">ADV</label>
+                          <input type="number" [(ngModel)]="payroll.ADV" name="ADV" class="form-control"
+                            placeholder="0.00" step="0.01">
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="row">
+                      <div class="col-12 text-end">
+                        <h4 class="mt-2">Total Deductions: <span>{{ (payroll.PF + payroll.PT + payroll.TDS + payroll.ESI
+                            + payroll.ADV) | number: '1.2-2' }}</span></h4>
+                        <h3 class="mt-4">Net Salary: <span>{{ ((payroll.BASIC + payroll.HRA + payroll.CA + payroll.MA +
+                            payroll.VA + payroll.PB) - (payroll.PF + payroll.PT + payroll.TDS + payroll.ESI +
+                            payroll.ADV)) | number: '1.2-2' }}</span></h3>
+                      </div>
+                    </div>
+
+                    <div class="hr-line-dashed" style="border-top: 1px dashed #e7eaec; margin: 20px 0;"></div>
+
+                    <div class="d-flex justify-content-end gap-2">
+                      <button type="button" routerLink="/staff/payroll/payrolllist" class="btn btn-white"
+                        style="border: 1px solid #d2d2d2; background: #fff; padding: 8px 25px; font-weight: 600; border-radius: 2px; color: #555;">Cancel</button>
+                      <button type="submit" class="btn btn-primary"
+                        style="background: #1ab394; border-color: #1ab394; color: #fff; padding: 8px 25px; font-weight: 600; border-radius: 2px;">
+                        {{ payroll.id ? 'Update Deductions' : 'Save Deductions' }}
+                      </button>
+                    </div>
+                  </form>
+                </ng-template>
+              </li>
+            </ul>
+            <div [ngbNavOutlet]="nav" class="mt-2"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

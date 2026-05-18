@@ -55,4 +55,12 @@ export const MASTER_ROUTES: Routes = [
         path: '',
         loadChildren: () => import('./inventory/inventory.routes').then((mod) => mod.INVENTORY_ROUTES)
     },
+    {
+        path: '',
+        loadChildren: () => import('./admittedfor/admittedfor.routes').then((mod) => mod.ADMITTED_FOR_ROUTES)
+    },
+    {
+        path: '',
+        loadChildren: () => import('./inpatient/inpatient.routes').then((mod) => mod.INPATIENT_ROUTES)
+    },
 ];

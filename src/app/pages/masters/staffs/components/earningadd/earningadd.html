@@ -4,9 +4,12 @@
   <div class="wrapper wrapper-content animated fadeInRight" style="padding-top: 0;">
     <div class="row">
       <div class="col-lg-12">
-        <div class="ibox float-e-margins" style="background:#fff; box-shadow: 0 2px 4px rgba(0,0,0,0.08); border-radius: 4px;">
-          <div class="ibox-title" style="border-top: 4px solid #1ab394; padding: 6px 15px; border-bottom: 1px solid #f0f0f0;">
-            <h5 style="font-weight: 600; margin: 0; font-size: 14px; text-transform: uppercase;">Salary Breakup Information</h5>
+        <div class="ibox float-e-margins"
+          style="background:#fff; box-shadow: 0 2px 4px rgba(0,0,0,0.08); border-radius: 4px;">
+          <div class="ibox-title"
+            style="border-top: 4px solid #1ab394; padding: 6px 15px; border-bottom: 1px solid #f0f0f0;">
+            <h5 style="font-weight: 600; margin: 0; font-size: 14px; text-transform: uppercase;">Salary Breakup
+              Information</h5>
           </div>
           <div class="ibox-content" style="padding: 15px 20px;">
             <form (ngSubmit)="saveChanges()">
@@ -15,7 +18,8 @@
                 <div class="col-md-4 col-sm-12">
                   <div class="form-group mb-3">
                     <label class="form-label fw-bold">Staff <span class="text-danger">*</span></label>
-                    <select [(ngModel)]="earning.StaffID" name="StaffID" class="form-select form-control" required [disabled]="earning.id">
+                    <select [(ngModel)]="earning.StaffID" name="StaffID" class="form-select form-control" required
+                      [disabled]="earning.id">
                       <option value="">Select Staff</option>
                       <option *ngFor="let s of staffs" [value]="s.id">{{s.Name}}</option>
                     </select>
@@ -28,7 +32,8 @@
                 <div class="col-md-2 col-sm-6">
                   <div class="form-group mb-3">
                     <label class="form-label fw-bold text-success">BASIC</label>
-                    <input type="number" [(ngModel)]="earning.BASIC" name="BASIC" class="form-control" placeholder="0.00" step="0.01">
+                    <input type="number" [(ngModel)]="earning.BASIC" name="BASIC" class="form-control"
+                      placeholder="0.00" step="0.01">
                   </div>
                 </div>
 
@@ -36,7 +41,8 @@
                 <div class="col-md-2 col-sm-6">
                   <div class="form-group mb-3">
                     <label class="form-label fw-bold text-success">HRA</label>
-                    <input type="number" [(ngModel)]="earning.HRA" name="HRA" class="form-control" placeholder="0.00" step="0.01">
+                    <input type="number" [(ngModel)]="earning.HRA" name="HRA" class="form-control" placeholder="0.00"
+                      step="0.01">
                   </div>
                 </div>
 
@@ -44,7 +50,8 @@
                 <div class="col-md-2 col-sm-6">
                   <div class="form-group mb-3">
                     <label class="form-label fw-bold text-success">CA</label>
-                    <input type="number" [(ngModel)]="earning.CA" name="CA" class="form-control" placeholder="0.00" step="0.01">
+                    <input type="number" [(ngModel)]="earning.CA" name="CA" class="form-control" placeholder="0.00"
+                      step="0.01">
                   </div>
                 </div>
 
@@ -52,7 +59,8 @@
                 <div class="col-md-2 col-sm-6">
                   <div class="form-group mb-3">
                     <label class="form-label fw-bold text-success">MA</label>
-                    <input type="number" [(ngModel)]="earning.MA" name="MA" class="form-control" placeholder="0.00" step="0.01">
+                    <input type="number" [(ngModel)]="earning.MA" name="MA" class="form-control" placeholder="0.00"
+                      step="0.01">
                   </div>
                 </div>
 
@@ -60,7 +68,8 @@
                 <div class="col-md-2 col-sm-6">
                   <div class="form-group mb-3">
                     <label class="form-label fw-bold text-success">VA</label>
-                    <input type="number" [(ngModel)]="earning.VA" name="VA" class="form-control" placeholder="0.00" step="0.01">
+                    <input type="number" [(ngModel)]="earning.VA" name="VA" class="form-control" placeholder="0.00"
+                      step="0.01">
                   </div>
                 </div>
 
@@ -68,22 +77,26 @@
                 <div class="col-md-2 col-sm-6">
                   <div class="form-group mb-3">
                     <label class="form-label fw-bold text-success">PB</label>
-                    <input type="number" [(ngModel)]="earning.PB" name="PB" class="form-control" placeholder="0.00" step="0.01">
+                    <input type="number" [(ngModel)]="earning.PB" name="PB" class="form-control" placeholder="0.00"
+                      step="0.01">
                   </div>
                 </div>
               </div>
 
               <div class="row">
-                 <div class="col-12 text-end">
-                    <h4 class="mt-2">Total: <span class="text-primary">{{ (earning.BASIC + earning.HRA + earning.CA + earning.MA + earning.VA + earning.PB) | number: '1.2-2' }}</span></h4>
-                 </div>
+                <div class="col-12 text-end">
+                  <h4 class="mt-2">Total: <span class="text-primary">{{ (earning.BASIC + earning.HRA + earning.CA +
+                      earning.MA + earning.VA + earning.PB) | number: '1.2-2' }}</span></h4>
+                </div>
               </div>
 
               <div class="hr-line-dashed" style="border-top: 1px dashed #e7eaec; margin: 20px 0;"></div>
-              
+
               <div class="d-flex justify-content-end gap-2">
-                <button type="button" routerLink="/staff/earning/earninglist" class="btn btn-white" style="border: 1px solid #d2d2d2; background: #fff; padding: 8px 25px; font-weight: 600; border-radius: 2px; color: #555;">Cancel</button>
-                <button type="submit" class="btn btn-primary" style="background: #1ab394; border-color: #1ab394; color: #fff; padding: 8px 25px; font-weight: 600; border-radius: 2px;">
+                <button type="button" routerLink="/staff/earning/earninglist" class="btn btn-white"
+                  style="border: 1px solid #d2d2d2; background: #fff; padding: 8px 25px; font-weight: 600; border-radius: 2px; color: #555;">Cancel</button>
+                <button type="submit" class="btn btn-primary"
+                  style="background: #1ab394; border-color: #1ab394; color: #fff; padding: 8px 25px; font-weight: 600; border-radius: 2px;">
                   {{ earning.id ? 'Update Earnings' : 'Save Earnings' }}
                 </button>
               </div>

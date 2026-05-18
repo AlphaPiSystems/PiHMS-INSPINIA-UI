@@ -41,7 +41,8 @@
                                 <th style="border-bottom: 1px solid #e7eaec;">VA</th>
                                 <th style="border-bottom: 1px solid #e7eaec;">PB</th>
                                 <th style="border-bottom: 1px solid #e7eaec;">Total</th>
-                                <th class="text-center" style="width: 1%; border-bottom: 1px solid #e7eaec;">Actions</th>
+                                <th class="text-center" style="width: 1%; border-bottom: 1px solid #e7eaec;">Actions
+                                </th>
                             </tr>
                         </thead>
                         <tbody>
@@ -57,14 +58,14 @@
                                 <td class="fs-sm">{{ earning.VA | number: '1.2-2' }}</td>
                                 <td class="fs-sm">{{ earning.PB | number: '1.2-2' }}</td>
                                 <td class="fw-bold text-primary fs-sm">
-                                    {{ (earning.BASIC + earning.HRA + earning.CA + earning.MA + earning.VA + earning.PB) | number: '1.2-2' }}
+                                    {{ (earning.BASIC + earning.HRA + earning.CA + earning.MA + earning.VA + earning.PB)
+                                    | number: '1.2-2' }}
                                 </td>
                                 <td class="text-center">
                                     <div class="d-flex justify-content-center gap-1">
                                         <a [routerLink]="['/staff/earning/earningedit', earning.id]"
-                                            class="btn btn-primary btn-icon btn-sm rounded-circle" 
-                                            style="background-color: #1ab394; border-color: #1ab394;"
-                                            ngbTooltip="Edit">
+                                            class="btn btn-primary btn-icon btn-sm rounded-circle"
+                                            style="background-color: #1ab394; border-color: #1ab394;" ngbTooltip="Edit">
                                             <ng-icon name="tablerPencil" class="fs-lg" />
                                         </a>
                                     </div>

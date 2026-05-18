@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, Location } from '@angular/common';
 import { NgIcon } from '@ng-icons/core';
 import { ActivatedRoute, RouterLink, Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { PageTitleComponent } from '../../../../../components/page-title.component';
 import { LucideAngularModule } from 'lucide-angular';
 import { DepartmentService } from '../../../../../core/services/department.service';
-import { Department as DepartmentType } from '../../../../../types/department';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-departmentedit',
@@ -16,12 +16,24 @@ import { Department as DepartmentType } from '../../../../../types/department';
 })
 export class DepartmentEdit implements OnInit {
   department: any = {};
-  
-  branches = ['Main Branch', 'City Center Branch'];
+  branches: any[] = [];
 
-  constructor(private route: ActivatedRoute, private router: Router, private departmentService: DepartmentService) {}
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router,
+    private departmentService: DepartmentService,
+    private http: HttpClient,
+    private location: Location
+  ) {}
 
   ngOnInit(): void {
+    // Load branches from master data
+    this.http.get<any>('assets/data/db.json').subscribe(data => {
+      if (data && data.hospitalbuilding) {
+        this.branches = data.hospitalbuilding;
+      }
+    });
+
     const stateDept = history.state.department;
     if (stateDept) {
       this.department = { ...stateDept };
@@ -34,17 +46,11 @@ export class DepartmentEdit implements OnInit {
     this.department.UpdatedDateTime = new Date().toISOString().slice(0, 19).replace('T', ' ');
     console.log('Preparing payload for updating department:', this.department);
     
-    this.departmentService.updateDepartment(this.department).subscribe({
-      next: (response) => {
-        console.log('Department updated successfully:', response);
-        this.router.navigate(['/department/departmentlist']);
-      },
-      error: (err) => {
-        // Even if it fails (because of no backend), we log it
-        console.error('Error updating department (Expected if no backend API exists):', err);
-        // For demonstration purposes, we still navigate
-        this.router.navigate(['/department/departmentlist']);
-      }
-    });
+    // For now, we'll just go back as we're using a static store
+    this.location.back();
+  }
+
+  cancel() {
+    this.location.back();
   }
 }

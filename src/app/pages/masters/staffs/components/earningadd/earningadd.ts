@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { NgIcon } from '@ng-icons/core';
 import { RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { PageTitleComponent } from '../../../../../components/page-title.component';
@@ -9,7 +8,7 @@ import { HttpClient } from '@angular/common/http';
 @Component({
   selector: 'app-staff-earningadd',
   standalone: true,
-  imports: [CommonModule, NgIcon, RouterLink, FormsModule, PageTitleComponent],
+  imports: [CommonModule, RouterLink, FormsModule, PageTitleComponent],
   templateUrl: './earningadd.html',
 })
 export class StaffEarningAdd implements OnInit {

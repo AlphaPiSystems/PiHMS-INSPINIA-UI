@@ -1,0 +1,49 @@
+<div class="container-fluid">
+    <app-page-title title="Add Scanning Template" />
+
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header border-light">
+                    <h5 class="card-title mb-0">Template Details</h5>
+                </div>
+                <div class="card-body">
+                    <form (ngSubmit)="save()" #itemForm="ngForm">
+                        <div class="row mb-3">
+                            <div class="col-md-4">
+                                <label class="form-label fw-semibold">Name</label>
+                                <input type="text" class="form-control" [(ngModel)]="item.Name" name="Name" required placeholder="Enter Template Name">
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label fw-semibold">Scan Template Name</label>
+                                <input type="text" class="form-control" [(ngModel)]="item.Description" name="Description" placeholder="Enter Scan Template Name">
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label fw-semibold">Status</label>
+                                <select class="form-select" [(ngModel)]="item.Status" name="Status">
+                                    <option value="Active">Active</option>
+                                    <option value="Inactive">Inactive</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col-md-12">
+                                <quill-editor [(ngModel)]="item.ScanTemplateData" name="ScanTemplateData" [modules]="quillConfig" [placeholder]="'Enter Template Data...'" [styles]="{height: '500px'}"></quill-editor>
+                            </div>
+                        </div>
+
+                        <div class="d-flex gap-2">
+                            <button type="submit" class="btn btn-primary" [disabled]="!itemForm.form.valid" style="background-color: #1ab394; border-color: #1ab394;">
+                                Save Template
+                            </button>
+                            <button type="button" class="btn btn-light" (click)="cancel()">
+                                Cancel
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

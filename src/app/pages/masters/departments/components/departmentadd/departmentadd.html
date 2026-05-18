@@ -49,9 +49,9 @@
                   <div class="form-group row align-items-center" style="margin-bottom: 8px;">
                     <label class="col-sm-4 text-start col-form-label" style="font-weight: 600;">Branch Name</label>
                     <div class="col-sm-8">
-                      <select class="form-select form-control" [(ngModel)]="department.BranchName" name="branchname" style="border-radius: 2px;">
-                        <option value="">Select Branch</option>
-                        <option *ngFor="let branch of branches" [value]="branch">{{branch}}</option>
+                      <select class="form-select form-control" [(ngModel)]="department.BranchID" name="branchid" style="border-radius: 2px;">
+                        <option [ngValue]="null">Select Branch</option>
+                        <option *ngFor="let branch of branches" [ngValue]="branch.id">{{branch.Name}}</option>
                       </select>
                     </div>
                   </div>

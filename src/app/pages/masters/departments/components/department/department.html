@@ -50,7 +50,7 @@
                                 <td>{{ (currentPage - 1) * itemsPerPage + i + 1 }}</td>
                                 <td><span class="text-dark fs-sm">{{ d.Name }}</span></td>
                                 <td><span class="text-dark fs-sm">{{ d.Description }}</span></td>
-                                <td><span class="text-dark fs-sm">Main Branch</span></td>
+                                <td><span class="text-dark fs-sm">{{ getBranchName(d.BranchID) }}</span></td>
                                 <td><span class="text-dark fs-sm">{{ d.ReportPriority || '-' }}</span></td>
                                 <td>
                                     <span class="text-dark fs-sm">

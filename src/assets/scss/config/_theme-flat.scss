@@ -54,6 +54,26 @@ $theme-flat-colors: (
         --#{$prefix}sidenav-sub-item-padding-x:              10px;
         --#{$prefix}sidenav-sub-item-padding-y:              7px;
 
+        @each $name, $value in $theme-flat-colors {
+            --#{$prefix}#{$name}: #{$value};
+        }
+
+        @each $name, $value in $theme-flat-colors {
+            --#{$prefix}#{$name}-rgb: #{to-rgb($value)};
+        }
+
+        @each $name, $value in $theme-flat-colors {
+            --#{$prefix}#{$name}-bg-subtle: #{rgba($value, 0.15)};
+        }
+
+        @each $name, $value in $theme-flat-colors {
+            --#{$prefix}#{$name}-border-subtle: #{rgba($value, 0.3)};
+        }
+
+        @each $name, $value in $theme-flat-colors {
+            --#{$prefix}#{$name}-text-emphasis: #{shade-color($value, 25%)};
+        }
+
         // Background Light left-sidebar
         &[data-menu-color="light"] {
             --#{$prefix}sidenav-bg:                       #{$white};
@@ -169,25 +189,6 @@ $theme-flat-colors: (
             --#{$prefix}topbar-search-border:           #2d2e3c;
         }
 
-        @each $name, $value in $theme-flat-colors {
-            --#{$prefix}#{$name}: #{$value};
-        }
-
-        @each $name, $value in $theme-flat-colors {
-            --#{$prefix}#{$name}-rgb: #{to-rgb($value)};
-        }
-
-        @each $name, $value in $theme-flat-colors {
-            --#{$prefix}#{$name}-bg-subtle: #{rgba($value, 0.15)};
-        }
-
-        @each $name, $value in $theme-flat-colors {
-            --#{$prefix}#{$name}-border-subtle: #{rgba($value, 0.3)};
-        }
-
-        @each $name, $value in $theme-flat-colors {
-            --#{$prefix}#{$name}-text-emphasis: #{shade-color($value, 25%)};
-        }
     }
 
     @if $enable-dark-mode {

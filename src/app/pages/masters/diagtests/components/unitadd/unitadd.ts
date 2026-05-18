@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { NgIcon } from '@ng-icons/core';
+
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
-import { PageTitleComponent } from '@app/components/page-title.component';
+
 import { LucideAngularModule, LucideSearch } from 'lucide-angular';
 import { NgbPagination, NgbPaginationNext, NgbPaginationPrevious } from '@ng-bootstrap/ng-bootstrap';
 
@@ -13,7 +13,7 @@ import { HttpClient } from '@angular/common/http';
 @Component({
   selector: 'app-unitadd',
   standalone: true,
-  imports: [CommonModule, NgIcon, RouterLink, FormsModule, PageTitleComponent, LucideAngularModule],
+  imports: [CommonModule, RouterLink, FormsModule, LucideAngularModule],
   templateUrl: './unitadd.html',
 })
 export class UnitAdd implements OnInit {

@@ -9,23 +9,20 @@
                 </div>
                 <div class="card-body">
                     <form (ngSubmit)="onSubmit()" #billItemForm="ngForm">
-                        <div class="row mb-3">
-                            <div class="col-md-4">
+                        <div class="row g-3">
+                            <div class="col-md-6">
                                 <label class="form-label">Name <span class="text-danger">*</span></label>
                                 <input type="text" class="form-control" name="Name" [(ngModel)]="billItem.Name" required>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-6">
                                 <label class="form-label">Short Name</label>
                                 <input type="text" class="form-control" name="ShortName" [(ngModel)]="billItem.ShortName">
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-6">
                                 <label class="form-label">Code</label>
                                 <input type="text" class="form-control" name="Code" [(ngModel)]="billItem.Code">
                             </div>
-                        </div>
-
-                        <div class="row mb-3">
-                            <div class="col-md-4">
+                            <div class="col-md-6">
                                 <label class="form-label">Type</label>
                                 <select class="form-select" name="Type" [(ngModel)]="billItem.Type">
                                     <option value="">Select Type</option>
@@ -34,11 +31,11 @@
                                     <option value="Consultation">Consultation</option>
                                 </select>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-6">
                                 <label class="form-label">Default Price</label>
                                 <input type="number" class="form-control" name="DefaultPrice" [(ngModel)]="billItem.DefaultPrice">
                             </div>
-                            <div class="col-md-2">
+                            <div class="col-md-6">
                                 <label class="form-label">Is Depricated?</label>
                                 <div class="form-check form-switch mt-2">
                                     <input class="form-check-input" type="checkbox" name="IsDepricated" 
@@ -46,7 +43,7 @@
                                            (change)="billItem.IsDepricated = billItem.IsDepricated === 'Y' ? 'N' : 'Y'">
                                 </div>
                             </div>
-                            <div class="col-md-2">
+                            <div class="col-md-6">
                                 <label class="form-label">Varied Price?</label>
                                 <div class="form-check form-switch mt-2">
                                     <input class="form-check-input" type="checkbox" name="IsVariedPrice" 
@@ -54,12 +51,9 @@
                                            (change)="billItem.IsVariedPrice = billItem.IsVariedPrice === 'Y' ? 'N' : 'Y'">
                                 </div>
                             </div>
-                        </div>
-
-                        <div class="row mb-3">
-                            <div class="col-md-12">
+                            <div class="col-md-6">
                                 <label class="form-label">Description</label>
-                                <textarea class="form-control" name="Description" rows="3" [(ngModel)]="billItem.Description"></textarea>
+                                <textarea class="form-control" name="Description" rows="1" [(ngModel)]="billItem.Description"></textarea>
                             </div>
                         </div>
 

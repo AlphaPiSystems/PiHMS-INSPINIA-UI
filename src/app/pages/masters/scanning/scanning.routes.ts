@@ -5,6 +5,9 @@ import { ScanEdit } from './components/scanedit/scanedit';
 import { ScanningItem } from './components/scanningitem/scanningitem';
 import { ScanningItemAdd } from './components/scanningitemadd/scanningitemadd';
 import { ScanningItemEdit } from './components/scanningitemedit/scanningitemedit';
+import { ScanningTemplate } from './components/scanningtemplate/scanningtemplate';
+import { ScanningTemplateAdd } from './components/scanningtemplateadd/scanningtemplateadd';
+import { ScanningTemplateEdit } from './components/scanningtemplateedit/scanningtemplateedit';
 
 export const SCANNING_ROUTES: Routes = [
     {
@@ -36,5 +39,20 @@ export const SCANNING_ROUTES: Routes = [
         path: 'scanning/scanningitemedit/:id',
         component: ScanningItemEdit,
         data: { title: "ScanningItemEdit" },
+    },
+    {
+        path: 'scanning/scanningtemplatelist',
+        component: ScanningTemplate,
+        data: { title: "ScanningTemplate" },
+    },
+    {
+        path: 'scanning/scanningtemplateadd',
+        component: ScanningTemplateAdd,
+        data: { title: "ScanningTemplateAdd" },
+    },
+    {
+        path: 'scanning/scanningtemplateedit/:id',
+        component: ScanningTemplateEdit,
+        data: { title: "ScanningTemplateEdit" },
     },
 ];

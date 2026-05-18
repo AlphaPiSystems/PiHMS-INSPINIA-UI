@@ -44,6 +44,7 @@ export type InstrumentType = {
   UpdatedStaffID: string | null;
   UpdatedDateTime: string | null;
   IsRowDeleted: string;
+  selected?: boolean;
 }
 
 // export type TestType = {
@@ -68,3 +69,23 @@ export type PatientType = {
   lastVisit: string;
   status: 'OP' | 'IP';
 }
+
+export interface TestTemplateType {
+  id: number;
+  DiagTestID: number | null;
+  DiagTestCode: string;
+  DiagTestName: string;
+  DoctorStaffID: number | null;
+  DoctorStaffName: string;
+  TemplateName: string;
+  TemplateData: string;
+  TemplateDataStr: string;
+  BranchID: number | null;
+  DepartmentID: number | null;
+  CreatedStaffID: number | null;
+  CreatedDateTime: string | null;
+  UpdatedStaffID: number | null;
+  UpdatedDateTime: string | null;
+  IsRowDeleted: string;
+  selected?: boolean;
+}

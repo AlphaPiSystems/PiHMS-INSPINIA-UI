@@ -26,3 +26,16 @@ export type ScanningItemType = {
     ValueType: string;
     Status: string; // Including Status for consistency
 }
+
+export type ScanningTemplateType = {
+    id: number;
+    Name: string;
+    Description: string;
+    IsRowDeleted: string;
+    CreatedBy: string;
+    CreatedDateTime: string | null;
+    UpdatedBy: string | null;
+    UpdatedDateTime: string | null;
+    Status: string;
+    ScanTemplateData: any;
+}

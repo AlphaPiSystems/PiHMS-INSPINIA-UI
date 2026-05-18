@@ -1,13 +1,13 @@
 export interface Department {
-  id: string;
+  id: number;
   Name: string;
   Description: string;
-  BranchID: string;
-  DepartmentID: string;
+  BranchID: number;
+  DepartmentID: number;
   CreatedStaffID: string;
   CreatedDateTime: string;
   UpdatedStaffID: string;
   UpdatedDateTime: string;
   IsRowDeleted: string;
-  ReportPriority: string | null;
+  ReportPriority: number | null;
 }

@@ -21,6 +21,7 @@ export class Department implements OnInit {
   protected readonly LucideSearch = LucideSearch;
   
   departmentList: DepartmentType[] = [];
+  branches: any[] = [];
 
   searchText: string = '';
   currentPage: number = 1;
@@ -34,22 +35,20 @@ export class Department implements OnInit {
   }
 
   loadDepartments() {
-    // this.departmentService.getDepartments().subscribe({
-    //   next: (data) => {
-    //     this.departmentList = data;
-    //   },
-    //   error: (err) => {
-    //     console.error('Error loading departments:', err);
-    //   }
-    // });
-    this.http.get<{departments: DepartmentType[]}>('assets/data/db.json').subscribe({
+    this.http.get<any>('assets/data/db.json').subscribe({
       next: (data) => {
         this.departmentList = data.departments;
+        this.branches = data.hospitalbuilding || [];
       },
       error: (err) => {
         console.error('Error loading departments from JSON:', err);
       }
     });
+  }
+
+  getBranchName(id: any) {
+    const branch = this.branches.find(b => b.id === id);
+    return branch ? branch.Name : 'Main Branch';
   }
   
   getFilteredDepartments() {

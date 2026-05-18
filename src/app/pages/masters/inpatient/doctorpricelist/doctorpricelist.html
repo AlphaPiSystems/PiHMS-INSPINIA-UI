@@ -1,0 +1,88 @@
+<div class="container-fluid">
+    <app-page-title title="Doctor Price List" />
+
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header border-light justify-content-between">
+                    <div class="d-flex align-items-center gap-2">
+                        <div class="app-search">
+                            <input [(ngModel)]="tableService.searchTerm" data-table-search type="search"
+                                class="form-control" placeholder="Search...">
+                            <lucide-angular [img]="LucideSearch" class="app-search-icon text-muted" />
+                        </div>
+                        <div>
+                            <select [(ngModel)]="tableService.pageSize" class="form-select form-control my-1 my-md-0">
+                                <option [ngValue]="5">5</option>
+                                <option [ngValue]="10">10</option>
+                                <option [ngValue]="20">20</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="d-flex gap-1">
+                        <a [routerLink]="['/inpatient/doctorprice/add']" class="btn btn-success ms-1">
+                            <ng-icon name="tablerPlus" class="fs-sm me-1" />
+                            New Entry
+                        </a>
+                    </div>
+                </div>
+
+                <div class="table-responsive">
+                    <table class="table table-custom table-centered table-select table-hover w-100 mb-0">
+                        <thead class="bg-light align-middle bg-opacity-25 thead-sm">
+                            <tr class="text-uppercase fs-md fw-bold text-dark">
+                                <th style="border-bottom: 1px solid #e7eaec;">SL.No</th>
+                                <th style="border-bottom: 1px solid #e7eaec;">Doctor Name</th>
+                                <th style="border-bottom: 1px solid #e7eaec;">Specialization</th>
+                                <th style="border-bottom: 1px solid #e7eaec;">Price</th>
+                                <th class="text-center" style="width: 1%; border-bottom: 1px solid #e7eaec;">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (((total$ | async) || 0) > 0) {
+                            @for (item of this.items$ | async; track $index; let i = $index) {
+                            <tr>
+                                <td>{{ (tableService.page - 1) * tableService.pageSize + i + 1 }}</td>
+                                <td class="fw-semibold text-dark fs-sm">{{ getDoctorName(item.DoctorID) }}</td>
+                                <td class="fs-sm">{{ item.Specialization }}</td>
+                                <td class="fs-sm fw-bold text-primary">{{ item.Price | currency:'INR':'symbol':'1.2-2' }}</td>
+                                <td class="text-center">
+                                    <div class="d-flex justify-content-center gap-1">
+                                        <a [routerLink]="['/inpatient/doctorprice/edit', item.id]"
+                                            class="btn btn-primary btn-icon btn-sm rounded-circle" 
+                                            style="background-color: #1ab394; border-color: #1ab394;"
+                                            ngbTooltip="Edit">
+                                            <ng-icon name="tablerPencil" class="fs-lg" />
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                            }
+                            } @else {
+                            <tr>
+                                <td colspan="5" class="text-center py-4">
+                                    <div class="text-muted">No doctor prices found</div>
+                                </td>
+                            </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="card-footer border-light bg-light bg-opacity-25">
+                    <div class="d-flex align-items-center justify-content-between">
+                        <div class="fs-sm text-muted">
+                            Showing {{ (tableService.page - 1) * tableService.pageSize + 1 }} to
+                            {{ Math.min(tableService.page * tableService.pageSize, (total$ | async) || 0) }} of
+                            {{ total$ | async }} entries
+                        </div>
+                        <ngb-pagination [collectionSize]="(total$ | async) || 0" [(page)]="tableService.page"
+                            [pageSize]="tableService.pageSize" [maxSize]="3"
+                            class="pagination-sm mb-0 pagination-custom" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
