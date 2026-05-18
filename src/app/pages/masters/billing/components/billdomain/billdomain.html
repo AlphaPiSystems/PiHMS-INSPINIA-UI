@@ -64,16 +64,16 @@
                         <tbody>
                             @if ((total$ | async)! > 0) {
                             @for (item of this.billDomains$ | async; track $index; let i = $index) {
-                            <tr>
-                                <td class="text-dark fs-sm">{{ (tableService.page - 1) * tableService.pageSize + i + 1 }}</td>
-                                <td class="text-dark fs-sm">{{ item.Code }}</td>
-                                <td class="text-dark fs-sm">{{ item.Name }}</td>
-                                <td class="text-dark fs-sm">{{ item.DomainType }}</td>
-                                <td class="text-dark fs-sm">{{ item.PaperSize }}</td>
-                                <td class="text-dark fs-sm" style="max-width: 250px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
+                             <tr>
+                                <td class="fw-semibold text-dark fs-sm">{{ (tableService.page - 1) * tableService.pageSize + i + 1 }}</td>
+                                <td class="fw-semibold text-dark fs-sm">{{ item.Code }}</td>
+                                <td class="fw-semibold text-dark fs-sm">{{ item.Name }}</td>
+                                <td class="fw-semibold text-dark fs-sm">{{ item.DomainType }}</td>
+                                <td class="fw-semibold text-dark fs-sm">{{ item.PaperSize }}</td>
+                                <td class="fw-semibold text-dark fs-sm" style="max-width: 250px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
                                     {{ item.Description }}
                                 </td>
-                                <td class="text-dark fs-sm">{{ item.DomainPriority }}</td>
+                                <td class="fw-semibold text-dark fs-sm">{{ item.DomainPriority }}</td>
                                 <td>
                                     <div class="d-flex justify-content-center gap-1">
                                         <a [routerLink]="['/bill-domain/bill-domainedit', item.id]"

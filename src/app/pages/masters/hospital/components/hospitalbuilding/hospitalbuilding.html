@@ -41,28 +41,22 @@
                                 <th style="border-bottom: 1px solid #e7eaec;">Short Name</th>
                                 <th style="border-bottom: 1px solid #e7eaec;">Registered Name</th>
                                 <th style="border-bottom: 1px solid #e7eaec;">App Type</th>
-                                <th style="border-bottom: 1px solid #e7eaec;">City/State</th>
-                                <th style="border-bottom: 1px solid #e7eaec;">Email/URL</th>
+                                <th style="border-bottom: 1px solid #e7eaec;">City</th>
+                                <th style="border-bottom: 1px solid #e7eaec;">Email</th>
                                 <th class="text-center" style="width: 100px; border-bottom: 1px solid #e7eaec;">Actions</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr *ngFor="let building of getPaginatedBuildings(); let i = index">
-                                <td>{{ (currentPage - 1) * itemsPerPage + i + 1 }}</td>
-                                <td><span class="fw-semibold text-dark fs-sm">{{ building.Name }}</span></td>
-                                <td><span class="text-dark fs-sm">{{ building.ShortName }}</span></td>
-                                <td class="text-dark fs-sm">{{ building.RegisteredName }}</td>
-                                <td>
-                                    <span class="text-dark fs-sm text-uppercase">{{ building.ApplicationType }}</span>
+                                <td class="fw-semibold text-dark fs-sm">{{ (currentPage - 1) * itemsPerPage + i + 1 }}</td>
+                                <td class="fw-semibold text-dark fs-sm">{{ building.Name }}</td>
+                                <td class="fw-semibold text-dark fs-sm">{{ building.ShortName }}</td>
+                                <td class="fw-semibold text-dark fs-sm">{{ building.RegisteredName }}</td>
+                                <td class="fw-semibold text-dark fs-sm text-uppercase">{{ building.ApplicationType }}</td>
+                                <td class="fw-semibold text-dark fs-sm">
+                                    {{ building.City }}
                                 </td>
-                                <td>
-                                    <div class="fs-sm text-dark">{{ building.City }}</div>
-                                    <div class="fs-xs text-dark">{{ building.State }}, {{ building.Country }}</div>
-                                </td>
-                                <td>
-                                    <div class="fs-sm text-dark">{{ building.Email }}</div>
-                                    <div class="fs-xs text-dark text-truncate" style="max-width: 150px;">{{ building.URL }}</div>
-                                </td>
+                                <td class="fw-semibold text-dark fs-sm">{{ building.Email }}</td>
                                 <td>
                                     <div class="d-flex justify-content-center">
                                         <a [routerLink]="['/building/buildingedit', building.id]"

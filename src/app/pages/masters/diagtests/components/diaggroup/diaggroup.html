@@ -38,8 +38,8 @@
                         </thead>
                         <tbody>
                             <tr *ngFor="let group of getPaginatedGroups(); let i = index">
-                                <td>{{ (currentPage - 1) * itemsPerPage + i + 1 }}</td>
-                                <td class="text-dark fs-sm">{{ group.Code }}</td>
+                                <td class="fw-semibold text-dark fs-sm">{{ (currentPage - 1) * itemsPerPage + i + 1 }}</td>
+                                <td class="fw-semibold text-dark fs-sm">{{ group.Code }}</td>
                                 <td class="fw-semibold text-dark fs-sm">{{ group.Name }}</td>
                                 <td>
                                     <div class="d-flex justify-content-center gap-1">
@@ -52,7 +52,7 @@
                                 </td>
                             </tr>
                             <tr *ngIf="getFilteredGroups().length === 0">
-                                <td colspan="5" class="text-center text-muted py-3">Nothing found.</td>
+                                <td colspan="4" class="text-center text-muted py-3">Nothing found.</td>
                             </tr>
                         </tbody>
                     </table>

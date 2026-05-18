@@ -1,5 +1,4 @@
 import {Routes} from '@angular/router';
-import { CLINICAL_ROUTES } from './clinical/clinical.routes';
 
 export const MASTER_ROUTES: Routes = [
     // {
@@ -62,5 +61,9 @@ export const MASTER_ROUTES: Routes = [
     {
         path: '',
         loadChildren: () => import('./inpatient/inpatient.routes').then((mod) => mod.INPATIENT_ROUTES)
+    },
+    {
+        path: '',
+        loadChildren: () => import('./pharmacy/pharmacy.routes').then((mod) => mod.PHARMACY_ROUTES)
     },
 ];

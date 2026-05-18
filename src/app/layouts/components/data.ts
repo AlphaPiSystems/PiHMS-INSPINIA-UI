@@ -103,6 +103,7 @@ export const menuItems: MenuItemType[] = [
                 isCollapsed: true,
                 children: [
                     { label: 'Staff', url: '/staff/stafflist' },
+                    { label: 'Role', url: '/staff/rolelist' },
                     { label: 'Payroll Details', url: '/staff/payroll/payrolllist' },
                 ]
             },
@@ -186,6 +187,10 @@ export const menuItems: MenuItemType[] = [
                     { label: 'Vendor', url: '/inventory/vendor/vendorlist' },
                     { label: 'Department', url: '/inventory/invdepartment/invdepartmentlist' }
                 ]
+            },
+            {
+                label: 'Pharmacy',
+                url: '/pharmacy/pharmacylist'
             }
         ]
     },

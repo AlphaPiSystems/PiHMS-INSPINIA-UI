@@ -43,11 +43,11 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr *ngFor="let item of getPaginatedItems(); let i = index">
-                                <td>{{ (currentPage - 1) * itemsPerPage + i + 1 }}</td>
-                                <td><span class="fw-semibold text-dark fs-sm">{{ item.Title }}</span></td>
-                                <td class="text-dark fs-sm">{{ item.ScanName }}</td>
-                                <td class="text-dark fs-sm">{{ item.Priority }}</td>
+                             <tr *ngFor="let item of getPaginatedItems(); let i = index">
+                                <td class="fw-semibold text-dark fs-sm">{{ (currentPage - 1) * itemsPerPage + i + 1 }}</td>
+                                <td class="fw-semibold text-dark fs-sm">{{ item.Title }}</td>
+                                <td class="fw-semibold text-dark fs-sm">{{ item.ScanName }}</td>
+                                <td class="fw-semibold text-dark fs-sm">{{ item.Priority }}</td>
                                 <td>
                                     <div class="d-flex justify-content-center">
                                         <a [routerLink]="['/scanning/scanningitemedit', item.id]"

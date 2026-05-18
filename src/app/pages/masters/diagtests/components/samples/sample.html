@@ -77,18 +77,18 @@
                         <tbody>
                             @if ((total$ | async)! > 0) {
                             @for (sample of this.samples$ | async; track $index; let i = $index) {
-                            <tr>
-                                <td>{{ (tableService.page - 1) * tableService.pageSize + i + 1 }}</td>
-                                <td><span class="fw-semibold text-dark fs-sm">{{ sample.Code }}</span></td>
-                                <td class="text-dark fs-sm">{{ sample.FullName }}</td>
-                                <td class="text-dark fs-sm">{{ sample.ShortName }}</td>
-                                <td class="text-dark fs-sm" style="max-width: 250px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
+                             <tr>
+                                <td class="fw-semibold text-dark fs-sm">{{ (tableService.page - 1) * tableService.pageSize + i + 1 }}</td>
+                                <td class="fw-semibold text-dark fs-sm">{{ sample.Code }}</td>
+                                <td class="fw-semibold text-dark fs-sm">{{ sample.FullName }}</td>
+                                <td class="fw-semibold text-dark fs-sm">{{ sample.ShortName }}</td>
+                                <td class="fw-semibold text-dark fs-sm" style="max-width: 250px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
                                     {{ sample.Description }}
                                 </td>
-                                <td class="text-dark fs-sm">{{ sample.BranchName }}</td>
-                                <td class="text-dark fs-sm">{{ sample.DepartmentName }}</td>
-                                <td class="text-dark fs-sm">{{ sample.SampleForm }}</td>
-                                <td class="text-dark fs-sm">{{ sample.Container }}</td>
+                                <td class="fw-semibold text-dark fs-sm">{{ sample.BranchName }}</td>
+                                <td class="fw-semibold text-dark fs-sm">{{ sample.DepartmentName }}</td>
+                                <td class="fw-semibold text-dark fs-sm">{{ sample.SampleForm }}</td>
+                                <td class="fw-semibold text-dark fs-sm">{{ sample.Container }}</td>
                                 <td>
                                     <div class="d-flex justify-content-center gap-1">
                                         <a class="btn btn-light btn-icon btn-sm rounded-circle" ngbTooltip="View">
@@ -106,7 +106,7 @@
                             }
                             } @else {
                             <tr class="no-results">
-                                <td colspan="8" class="text-center text-muted py-3">Nothing found.</td>
+                                <td colspan="10" class="text-center text-muted py-3">Nothing found.</td>
                             </tr>
                             }
                         </tbody>

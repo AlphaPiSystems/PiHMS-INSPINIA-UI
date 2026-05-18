@@ -47,18 +47,14 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr *ngFor="let unit of getPaginatedUnits(); let i = index">
-                                <td>{{ (currentPage - 1) * itemsPerPage + i + 1 }}</td>
-                                <td><span class="fw-semibold text-dark fs-sm">{{ unit.Name }}</span></td>
-                                <td class="text-dark fs-sm">{{ unit.DisplayName }}</td>
-                                <td class="text-dark fs-sm">{{ unit.Description }}</td>
-                                <td class="text-dark fs-sm">{{ unit.BranchName }}</td>
-                                <td class="text-dark fs-sm">{{ unit.DepartmentName }}</td>
-                                <td class="text-center">
-                                    <span class="fs-sm fw-medium text-dark">
-                                        {{ unit.Status }}
-                                    </span>
-                                </td>
+                             <tr *ngFor="let unit of getPaginatedUnits(); let i = index">
+                                <td class="fw-semibold text-dark fs-sm">{{ (currentPage - 1) * itemsPerPage + i + 1 }}</td>
+                                <td class="fw-semibold text-dark fs-sm">{{ unit.Name }}</td>
+                                <td class="fw-semibold text-dark fs-sm">{{ unit.DisplayName }}</td>
+                                <td class="fw-semibold text-dark fs-sm">{{ unit.Description }}</td>
+                                <td class="fw-semibold text-dark fs-sm">{{ unit.BranchName }}</td>
+                                <td class="fw-semibold text-dark fs-sm">{{ unit.DepartmentName }}</td>
+                                <td class="fw-semibold text-dark fs-sm text-center">{{ unit.Status }}</td>
                                 <td>
                                     <div class="d-flex justify-content-center">
                                         <a [routerLink]="['/unit/unitedit', unit.id]"
@@ -71,7 +67,7 @@
                                 </td>
                             </tr>
                             <tr *ngIf="getFilteredUnits().length === 0">
-                                <td colspan="6" class="text-center text-muted py-4">
+                                <td colspan="8" class="text-center text-muted py-4">
                                     <div class="py-3">
                                         <lucide-angular [img]="LucideSearch" class="mb-2 text-muted-50" size="40" />
                                         <p>No units found matching your search.</p>

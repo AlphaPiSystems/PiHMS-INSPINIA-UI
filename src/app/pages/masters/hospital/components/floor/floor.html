@@ -47,14 +47,14 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr *ngFor="let floor of getPaginatedFloors(); let i = index">
-                                <td>{{ (currentPage - 1) * itemsPerPage + i + 1 }}</td>
-                                <td><span class="fw-semibold text-dark fs-sm">{{ floor.FloorNumber }}</span></td>
-                                <td><span class="text-dark fs-sm">{{ floor.FloorName }}</span></td>
-                                <td class="text-dark fs-sm">{{ floor.HospitalBuildingName }}</td>
-                                <td class="text-dark fs-sm">{{ floor.Accessibility }}</td>
-                                <td class="text-dark fs-sm">{{ floor.BranchName }}</td>
-                                <td class="text-dark fs-sm">{{ floor.Department }}</td>
+                             <tr *ngFor="let floor of getPaginatedFloors(); let i = index">
+                                <td class="fw-semibold text-dark fs-sm">{{ (currentPage - 1) * itemsPerPage + i + 1 }}</td>
+                                <td class="fw-semibold text-dark fs-sm">{{ floor.FloorNumber }}</td>
+                                <td class="fw-semibold text-dark fs-sm">{{ floor.FloorName }}</td>
+                                <td class="fw-semibold text-dark fs-sm">{{ floor.HospitalBuildingName }}</td>
+                                <td class="fw-semibold text-dark fs-sm">{{ floor.Accessibility }}</td>
+                                <td class="fw-semibold text-dark fs-sm">{{ floor.BranchName }}</td>
+                                <td class="fw-semibold text-dark fs-sm">{{ floor.Department }}</td>
                                 <td>
                                     <div class="d-flex justify-content-center">
                                         <a [routerLink]="['/floor/flooredit', floor.id]"

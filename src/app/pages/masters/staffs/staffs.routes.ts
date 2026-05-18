@@ -15,6 +15,22 @@ export const STAFFS_ROUTES: Routes = [
         path: 'staff/staffedit/:id',
         loadComponent: () => import('./components/staffedit/staffedit').then(c => c.StaffEdit)
     },
+    // Role Routes
+    {
+        path: 'staff/rolelist',
+        loadComponent: () => import('./components/role/role').then(c => c.Role),
+        data: {title: "Role List"}
+    },
+    {
+        path: 'staff/roleadd',
+        loadComponent: () => import('./components/roleadd/roleadd').then(c => c.RoleAdd),
+        data: {title: "Add Role"}
+    },
+    {
+        path: 'staff/roleedit/:id',
+        loadComponent: () => import('./components/roleedit/roleedit').then(c => c.RoleEdit),
+        data: {title: "Edit Role"}
+    },
     // Payroll Routes
     {
         path: 'staff/payroll/payrolllist',

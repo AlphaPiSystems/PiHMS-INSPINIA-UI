@@ -44,12 +44,12 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr *ngFor="let s of getPaginatedSurgeries(); let i = index">
-                                <td>{{ (currentPage - 1) * itemsPerPage + i + 1 }}</td>
-                                <td><span class="fw-semibold text-dark fs-sm">{{ s.Name }}</span></td>
-                                <td class="text-dark fs-sm">{{ getDepartmentName(s.DepartmentID) }}</td>
-                                <td class="text-dark fs-sm">{{ getBranchName(s.BranchID) }}</td>
-                                <td class="text-dark fs-sm">{{ s.Description }}</td>
+                             <tr *ngFor="let s of getPaginatedSurgeries(); let i = index">
+                                <td class="fw-semibold text-dark fs-sm">{{ (currentPage - 1) * itemsPerPage + i + 1 }}</td>
+                                <td class="fw-semibold text-dark fs-sm">{{ s.Name }}</td>
+                                <td class="fw-semibold text-dark fs-sm">{{ getDepartmentName(s.DepartmentID) }}</td>
+                                <td class="fw-semibold text-dark fs-sm">{{ getBranchName(s.BranchID) }}</td>
+                                <td class="fw-semibold text-dark fs-sm">{{ s.Description }}</td>
                                 <td>
                                     <div class="d-flex justify-content-center">
                                         <a [routerLink]="['/clinical/surgeryedit', s.id]"

@@ -49,16 +49,14 @@
                         </thead>
                         <tbody>
                             <tr *ngFor="let wb of getPaginatedWardBeds(); let i = index">
-                                <td>{{ (currentPage - 1) * itemsPerPage + i + 1 }}</td>
-                                <td><span class="fw-semibold text-dark fs-sm">{{ wb.BedNumber }}</span></td>
-                                <td><span class="text-dark fs-sm">{{ wb.Description }}</span></td>
-                                <td class="text-dark fs-sm">{{ wb.BranchName }}</td>
-                                <td class="text-dark fs-sm">{{ wb.DepartmentName }}</td>
-                                <td class="text-dark fs-sm">{{ wb.FloorName }}</td>
-                                <td class="text-dark fs-sm">{{ wb.WardName }}</td>
-                                <td class="text-dark fs-sm">
-                                    {{ wb.OccupancyStatus }}
-                                </td>
+                                <td class="fw-semibold text-dark fs-sm">{{ (currentPage - 1) * itemsPerPage + i + 1 }}</td>
+                                <td class="fw-semibold text-dark fs-sm">{{ wb.BedNumber }}</td>
+                                <td class="fw-semibold text-dark fs-sm">{{ wb.Description }}</td>
+                                <td class="fw-semibold text-dark fs-sm">{{ wb.BranchName }}</td>
+                                <td class="fw-semibold text-dark fs-sm">{{ wb.DepartmentName }}</td>
+                                <td class="fw-semibold text-dark fs-sm">{{ wb.FloorName }}</td>
+                                <td class="fw-semibold text-dark fs-sm">{{ wb.WardName }}</td>
+                                <td class="fw-semibold text-dark fs-sm">{{ wb.OccupancyStatus }}</td>
                                 <td>
                                     <div class="d-flex justify-content-center">
                                         <a [routerLink]="['/wardbed/wardbededit', wb.id]"
@@ -71,7 +69,7 @@
                                 </td>
                             </tr>
                             <tr *ngIf="getFilteredWardBeds().length === 0">
-                                <td colspan="8" class="text-center text-muted py-4">
+                                <td colspan="9" class="text-center text-muted py-4">
                                     <div class="py-3">
                                         <lucide-angular [img]="LucideSearch" class="mb-2 text-muted-50" size="40" />
                                         <p>No ward beds found matching your search.</p>

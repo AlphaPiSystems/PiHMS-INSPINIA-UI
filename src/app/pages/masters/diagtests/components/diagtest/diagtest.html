@@ -76,20 +76,14 @@
                         <tbody>
                             @if ((total$ | async)! > 0) {
                             @for (test of this.tests$ | async; track $index; let i = $index) {
-                            <tr>
-                                <td>{{ (tableService.page - 1) * tableService.pageSize + i + 1 }}</td>
-                                <td class="text-dark fs-sm">
-                                    {{ test.Code }}</td>
-
-                                <td class="text-dark fs-sm">{{ test.Name }}</td>
-                                <td class="text-dark fs-sm">{{ test.ShortName }}</td>
-                                <td class="text-dark fs-sm">
-                                    {{ test.ReportName }}
-                                </td>
-                                <td class="text-dark fs-sm">
-                                    {{ test.Type }}
-                                </td>
-                                <td class="text-dark fs-sm">{{ test.IsOutsourced }}</td>
+                             <tr>
+                                <td class="fw-semibold text-dark fs-sm">{{ (tableService.page - 1) * tableService.pageSize + i + 1 }}</td>
+                                <td class="fw-semibold text-dark fs-sm">{{ test.Code }}</td>
+                                <td class="fw-semibold text-dark fs-sm">{{ test.Name }}</td>
+                                <td class="fw-semibold text-dark fs-sm">{{ test.ShortName }}</td>
+                                <td class="fw-semibold text-dark fs-sm">{{ test.ReportName }}</td>
+                                <td class="fw-semibold text-dark fs-sm">{{ test.Type }}</td>
+                                <td class="fw-semibold text-dark fs-sm">{{ test.IsOutsourced }}</td>
                                 <td>
                                     <div class="d-flex justify-content-center gap-1">
 
@@ -107,21 +101,13 @@
                                             <ng-icon name="tablerPencil" class="fs-lg" />
                                         </a>
 
-                                        <!-- Billing Button as Anchor -->
-                                        
-                                        <!-- Admit -->
-                                        <!-- <button class="btn btn-danger btn-icon btn-sm rounded-circle"
-                                            ngbTooltip="Admit Patient">
-                                            <ng-icon name="tablerBed" class="fs-lg" />
-                                        </button> -->
-
                                     </div>
                                 </td>
                             </tr>
                             }
                             } @else {
                             <tr class="no-results">
-                                <td colspan="11" class="text-center text-muted py-3">Nothing found.</td>
+                                <td colspan="8" class="text-center text-muted py-3">Nothing found.</td>
                             </tr>
                             }
                         </tbody>

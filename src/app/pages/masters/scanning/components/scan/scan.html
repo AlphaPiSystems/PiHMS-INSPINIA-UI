@@ -42,10 +42,10 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr *ngFor="let scan of getPaginatedScans(); let i = index">
-                                <td>{{ (currentPage - 1) * itemsPerPage + i + 1 }}</td>
-                                <td><span class="fw-semibold text-dark fs-sm">{{ scan.Name }}</span></td>
-                                <td class="text-dark fs-sm">{{ scan.Description }}</td>
+                             <tr *ngFor="let scan of getPaginatedScans(); let i = index">
+                                <td class="fw-semibold text-dark fs-sm">{{ (currentPage - 1) * itemsPerPage + i + 1 }}</td>
+                                <td class="fw-semibold text-dark fs-sm">{{ scan.Name }}</td>
+                                <td class="fw-semibold text-dark fs-sm">{{ scan.Description }}</td>
                                 <td>
                                     <div class="d-flex justify-content-center">
                                         <a [routerLink]="['/scanning/scanedit', scan.id]"

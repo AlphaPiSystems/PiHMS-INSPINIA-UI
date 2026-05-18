@@ -43,11 +43,11 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr *ngFor="let instrument of getPaginatedInstruments(); let i = index">
-                                <td>{{ (currentPage - 1) * itemsPerPage + i + 1 }}</td>
-                                <td><span class="fw-semibold text-dark fs-sm">{{ instrument.InstrumentationName }}</span></td>
-                                <td class="text-dark fs-sm">{{ instrument.BranchName }}</td>
-                                <td class="text-dark fs-sm">{{ instrument.DepartmentName }}</td>
+                             <tr *ngFor="let instrument of getPaginatedInstruments(); let i = index">
+                                <td class="fw-semibold text-dark fs-sm">{{ (currentPage - 1) * itemsPerPage + i + 1 }}</td>
+                                <td class="fw-semibold text-dark fs-sm">{{ instrument.InstrumentationName }}</td>
+                                <td class="fw-semibold text-dark fs-sm">{{ instrument.BranchName }}</td>
+                                <td class="fw-semibold text-dark fs-sm">{{ instrument.DepartmentName }}</td>
                                 <td>
                                     <div class="d-flex justify-content-center">
                                         <a [routerLink]="['/instrument/instrumentedit', instrument.id]"

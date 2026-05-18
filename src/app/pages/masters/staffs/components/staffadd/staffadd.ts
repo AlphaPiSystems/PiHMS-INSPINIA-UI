@@ -34,6 +34,7 @@ export class StaffAdd implements OnInit {
       StaffNumber: '',
       Gender: '',
       DOB: '',
+      Age: null,
       MaritalStatus: '',
       SpouseName: '',
       EmergencyContactRelationship: '',
@@ -45,7 +46,22 @@ export class StaffAdd implements OnInit {
       DoctorPercentage: 0,
       Designation: '',
       Department: '',
-      Status: 'Active'
+      Status: 'Active',
+      IdentificationNo: '',
+      PassportNumber: '',
+      PassportExpiryDate: '',
+      DrivingLicenceNo: '',
+      DrivingLicenceExpiryDate: '',
+      OtherIdentificationNo: '',
+      Ethnicity: '',
+      DateOfJoining: '',
+      PhoneSecondary: '',
+      Email: '',
+      PermanentAddress: '',
+      TemporaryAddress: '',
+      EmergencyContactPhone: '',
+      EmergencyContactEmail: '',
+      Notes: ''
     };
   }
 

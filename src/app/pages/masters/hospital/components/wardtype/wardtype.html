@@ -45,12 +45,12 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr *ngFor="let wt of getPaginatedWardTypes(); let i = index">
-                                <td>{{ (currentPage - 1) * itemsPerPage + i + 1 }}</td>
-                                <td><span class="fw-semibold text-dark fs-sm">{{ wt.Type }}</span></td>
-                                <td><span class="text-dark fs-sm">{{ wt.Description }}</span></td>
-                                <td class="text-dark fs-sm">{{ wt.BranchName }}</td>
-                                <td class="text-dark fs-sm">{{ wt.DepartmentName }}</td>
+                             <tr *ngFor="let wt of getPaginatedWardTypes(); let i = index">
+                                <td class="fw-semibold text-dark fs-sm">{{ (currentPage - 1) * itemsPerPage + i + 1 }}</td>
+                                <td class="fw-semibold text-dark fs-sm">{{ wt.Type }}</td>
+                                <td class="fw-semibold text-dark fs-sm">{{ wt.Description }}</td>
+                                <td class="fw-semibold text-dark fs-sm">{{ wt.BranchName }}</td>
+                                <td class="fw-semibold text-dark fs-sm">{{ wt.DepartmentName }}</td>
                                 <td>
                                     <div class="d-flex justify-content-center">
                                         <a [routerLink]="['/wardtype/wardtypeedit', wt.id]"

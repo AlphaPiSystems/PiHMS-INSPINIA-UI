@@ -29,7 +29,25 @@ export class StaffEdit implements OnInit {
     if (id) {
       const foundStaff = STAFF_LIST.find(s => s.id === id);
       if (foundStaff) {
-        this.staff = { ...foundStaff };
+        this.staff = { 
+          Age: null,
+          IdentificationNo: '',
+          PassportNumber: '',
+          PassportExpiryDate: '',
+          DrivingLicenceNo: '',
+          DrivingLicenceExpiryDate: '',
+          OtherIdentificationNo: '',
+          Ethnicity: '',
+          DateOfJoining: '',
+          PhoneSecondary: '',
+          Email: '',
+          PermanentAddress: '',
+          TemporaryAddress: '',
+          EmergencyContactPhone: '',
+          EmergencyContactEmail: '',
+          Notes: '',
+          ...foundStaff 
+        };
       }
     }
   }

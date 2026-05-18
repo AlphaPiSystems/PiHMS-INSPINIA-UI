@@ -1,0 +1,171 @@
+<div class="container-fluid">
+  <app-page-title title="Edit Pharmacy Item" />
+
+  <div class="wrapper wrapper-content animated fadeInRight" style="padding-top: 0;">
+    <div class="row">
+      <!-- Section 1: Item Details -->
+      <div class="col-lg-12 mb-1">
+        <div class="ibox float-e-margins"
+          style="background:#fff; box-shadow: 0 2px 4px rgba(0,0,0,0.08); border-radius: 4px;">
+          <div class="ibox-title" style="border-top: 4px solid #1ab394; padding: 6px 15px; border-bottom: 1px solid #f0f0f0;">
+            <h5 style="font-weight: 600; margin: 0; font-size: 14px; text-transform: uppercase;">Item Details</h5>
+          </div>
+          <div class="ibox-content" style="padding: 10px 15px;">
+            <form role="form">
+              <div class="row">
+                <div class="col-md-3 col-sm-12">
+                  <div class="form-group row align-items-center" style="margin-bottom: 8px;">
+                    <label class="col-sm-4 text-start col-form-label" style="font-weight: 600;">Item Code <span class="text-danger">*</span></label>
+                    <div class="col-sm-8">
+                      <input type="text" class="form-control" [(ngModel)]="item.ItemCode" name="itemcode" placeholder="Item Code" required style="border-radius: 2px;">
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-3 col-sm-12">
+                  <div class="form-group row align-items-center" style="margin-bottom: 8px;">
+                    <label class="col-sm-4 text-start col-form-label" style="font-weight: 600;">Item Name <span class="text-danger">*</span></label>
+                    <div class="col-sm-8">
+                      <input type="text" class="form-control" [(ngModel)]="item.ItemName" name="itemname" placeholder="Item Name" required style="border-radius: 2px;">
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-3 col-sm-12">
+                  <div class="form-group row align-items-center" style="margin-bottom: 8px;">
+                    <label class="col-sm-4 text-start col-form-label" style="font-weight: 600;">Batch Num</label>
+                    <div class="col-sm-8">
+                      <input type="text" class="form-control" [(ngModel)]="item.BatchNum" name="batchnum" placeholder="Batch Num" style="border-radius: 2px;">
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-3 col-sm-12">
+                  <div class="form-group row align-items-center" style="margin-bottom: 8px;">
+                    <label class="col-sm-4 text-start col-form-label" style="font-weight: 600;">Expiry Date</label>
+                    <div class="col-sm-8">
+                      <div class="input-group">
+                        <input type="text" ngxDaterangepickerBootstrap [singleDatePicker]="true" [autoApply]="true"
+                          [locale]="{ format: 'DD/MM/YYYY' }" class="form-control" [(ngModel)]="item.ExpiryDate"
+                          name="expirydate" placeholder="DD/MM/YYYY" style="border-radius: 2px 0 0 2px;">
+                        <span class="input-group-text bg-white border-left-0" style="border-radius: 0 2px 2px 0;">
+                          <lucide-angular [img]="LucideCalendar" size="14" class="text-muted" />
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-3 col-sm-12">
+                  <div class="form-group row align-items-center" style="margin-bottom: 8px;">
+                    <label class="col-sm-4 text-start col-form-label" style="font-weight: 600;">Dosage Form</label>
+                    <div class="col-sm-8">
+                      <select class="form-select form-control" [(ngModel)]="item.DosageForm" name="dosageform" style="border-radius: 2px;">
+                        <option value="">Select</option>
+                        <option value="Tablet">Tablet</option>
+                        <option value="Capsule">Capsule</option>
+                        <option value="Syrup">Syrup</option>
+                        <option value="Injection">Injection</option>
+                        <option value="Ointment">Ointment</option>
+                        <option value="Cream">Cream</option>
+                        <option value="Suspension">Suspension</option>
+                        <option value="Drops">Drops</option>
+                        <option value="Inhaler">Inhaler</option>
+                        <option value="Other">Other</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-3 col-sm-12">
+                  <div class="form-group row align-items-center" style="margin-bottom: 8px;">
+                    <label class="col-sm-4 text-start col-form-label" style="font-weight: 600;">Constituents</label>
+                    <div class="col-sm-8">
+                      <input type="text" class="form-control" [(ngModel)]="item.ConstituentsPerUnit" name="constituentsperunit" placeholder="Constituents Per Unit" style="border-radius: 2px;">
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-3 col-sm-12">
+                  <div class="form-group row align-items-center" style="margin-bottom: 8px;">
+                    <label class="col-sm-4 text-start col-form-label" style="font-weight: 600;">Manufacturer</label>
+                    <div class="col-sm-8">
+                      <input type="text" class="form-control" [(ngModel)]="item.Manufacturer" name="manufacturer" placeholder="Manufacturer" style="border-radius: 2px;">
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-3 col-sm-12">
+                  <div class="form-group row align-items-center" style="margin-bottom: 8px;">
+                    <label class="col-sm-4 text-start col-form-label" style="font-weight: 600;">Distributor</label>
+                    <div class="col-sm-8">
+                      <input type="text" class="form-control" [(ngModel)]="item.Distributor" name="distributor" placeholder="Distributor" style="border-radius: 2px;">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <!-- Section 2: Organizational Details -->
+      <div class="col-lg-12 mb-1">
+        <div class="ibox float-e-margins"
+          style="background:#fff; box-shadow: 0 2px 4px rgba(0,0,0,0.08); border-radius: 4px;">
+          <div class="ibox-title" style="border-top: 4px solid #1c84c6; padding: 6px 15px; border-bottom: 1px solid #f0f0f0;">
+            <h5 style="font-weight: 600; margin: 0; font-size: 14px; text-transform: uppercase;">Organizational Details</h5>
+          </div>
+          <div class="ibox-content" style="padding: 10px 15px;">
+            <form role="form">
+              <div class="row">
+                <div class="col-md-3 col-sm-12">
+                  <div class="form-group row align-items-center" style="margin-bottom: 8px;">
+                    <label class="col-sm-4 text-start col-form-label" style="font-weight: 600;">Branch <span class="text-danger">*</span></label>
+                    <div class="col-sm-8">
+                      <select class="form-select form-control" [(ngModel)]="item.BranchID" name="branchid" required style="border-radius: 2px;">
+                        <option [ngValue]="null">Select Branch</option>
+                        <option *ngFor="let b of branches" [ngValue]="b.id">{{b.Name}}</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-3 col-sm-12">
+                  <div class="form-group row align-items-center" style="margin-bottom: 8px;">
+                    <label class="col-sm-4 text-start col-form-label" style="font-weight: 600;">Department <span class="text-danger">*</span></label>
+                    <div class="col-sm-8">
+                      <select class="form-select form-control" [(ngModel)]="item.DepartmentID" name="departmentid" required style="border-radius: 2px;">
+                        <option [ngValue]="null">Select Department</option>
+                        <option *ngFor="let d of departments" [ngValue]="d.id">{{d.Name}}</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-3 col-sm-12">
+                  <div class="form-group row align-items-center" style="margin-bottom: 8px;">
+                    <label class="col-sm-4 text-start col-form-label" style="font-weight: 600;">Status <span class="text-danger">*</span></label>
+                    <div class="col-sm-8">
+                      <select class="form-select form-control" [(ngModel)]="item.IsRowDeleted" name="isrowdeleted" required style="border-radius: 2px;">
+                        <option value="N">Active</option>
+                        <option value="Y">Inactive</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Action Buttons -->
+    <div class="row mt-2">
+      <div class="col-lg-12">
+        <div class="hr-line-dashed" style="border-top: 1px dashed #e7eaec; margin: 10px 0;"></div>
+        <div class="text-right d-flex justify-content-end gap-2" style="justify-content: flex-end; margin-bottom: 30px;">
+          <button class="btn btn-white" type="button" (click)="cancel()"
+            style="border: 1px solid #d2d2d2; background: #fff; padding: 8px 20px; font-weight: 600; border-radius: 2px; color: #555; margin-right: 10px;">Cancel</button>
+          <button class="btn btn-primary" type="button" (click)="saveChanges()"
+            style="background: #1ab394; border-color: #1ab394; color: #fff; padding: 8px 20px; font-weight: 600; border-radius: 2px;">Save Changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
