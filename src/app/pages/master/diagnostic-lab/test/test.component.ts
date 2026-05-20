@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { LucideAngularModule, LucideBox, LucidePlus, LucideSearch } from 'lucide-angular';
 import { NgbPagination, NgbPaginationNext, NgbPaginationPrevious, NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
 import { TableService } from '@core/services/table.service';
-import { Router, RouterLink } from '@angular/router';
+import { Router } from '@angular/router';
 import { NgIcon } from '@ng-icons/core';
 import { Observable } from 'rxjs';
 
@@ -811,7 +811,6 @@ const TEST_DATA: TestType[] = [
     CommonModule,
     FormsModule,
     LucideAngularModule,
-    RouterLink,
     NgIcon,
     AsyncPipe,
     NgbPagination,
@@ -847,6 +846,10 @@ export class TestComponent implements OnInit {
 
   addTest() {
     this.router.navigate(['/master/diagnostic-lab/test-new']);
+  }
+
+  editTest(id: number) {
+    this.router.navigate(['/master/diagnostic-lab/test-new'], { queryParams: { id: id } });
   }
 
   get hasSelection(): boolean {

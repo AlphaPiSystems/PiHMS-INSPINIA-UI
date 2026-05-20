@@ -70,16 +70,10 @@
                                 <td class="text-dark fs-sm">{{ test.Name }}</td>
                                 <td class="text-dark fs-sm">{{ test.ShortName }}</td>
                                 <td class="text-dark fs-sm">{{ test.ReportName }}</td>
-                                <td><span class="badge bg-light text-dark fw-normal border">{{ test.Type }}</span></td>
+                                <td class="text-dark fs-sm">{{ test.Type }}</td>
                                 <td>
                                     <div class="d-flex justify-content-center gap-1">
-                                        <!-- View -->
-                                        <a routerLink="/master/diagnostic-lab/test-list"
-                                            class="btn btn-light btn-icon btn-sm rounded-circle" ngbTooltip="View">
-                                            <ng-icon name="tablerEye" class="fs-lg" />
-                                        </a>
-                                        <!-- Edit -->
-                                        <a routerLink="/master/diagnostic-lab/test-list"
+                                        <a (click)="editTest(test.id)"
                                             class="btn btn-primary btn-icon btn-sm rounded-circle"
                                             style="background-color: #1ab394; border-color: #1ab394;"
                                             ngbTooltip="Edit Test">
