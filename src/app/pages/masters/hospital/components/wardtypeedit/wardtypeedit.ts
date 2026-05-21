@@ -4,7 +4,7 @@ import { ActivatedRoute, RouterLink, Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { PageTitleComponent } from '../../../../../components/page-title.component';
 import { LucideAngularModule } from 'lucide-angular';
-import { WARDTYPE_LIST } from '../wardtype/hospital-data';
+import { HttpClient } from '@angular/common/http';
 import { DEPARTMENT_LIST } from '../../../departments/components/department/department-data';
 
 @Component({
@@ -19,18 +19,31 @@ export class WardTypeEdit implements OnInit {
   branches = ['Main Branch', 'City Center Branch'];
   departments = DEPARTMENT_LIST;
 
-  constructor(private route: ActivatedRoute, private router: Router) {}
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router,
+    private http: HttpClient
+  ) {}
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
       const id = params.get('id');
       if (id) {
-        const found = WARDTYPE_LIST.find(wt => wt.id === id);
-        if (found) {
-          this.wardType = { ...found };
-        } else {
-          this.router.navigate(['/wardtype/wardtypelist']);
-        }
+        this.http.get<{wardtype: any[]}>('assets/data/db.json').subscribe({
+          next: (data) => {
+            if (data && data.wardtype) {
+              const found = data.wardtype.find(wt => wt.id == id);
+              if (found) {
+                this.wardType = { ...found };
+              } else {
+                this.router.navigate(['/wardtype/wardtypelist']);
+              }
+            }
+          },
+          error: (err) => {
+            console.error('Error loading ward type details for edit:', err);
+          }
+        });
       }
     });
   }

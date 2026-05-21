@@ -1,0 +1,106 @@
+<div class="container-fluid">
+    <app-page-title title="View Patient Insurance" />
+
+    <div class="row" *ngIf="insurance.id !== 0">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <form (ngSubmit)="save()" #insForm="ngForm">
+                        
+                        <!-- Section 1: Core Policy Information -->
+                        <h5 class="mb-3 text-primary">Policy Information</h5>
+                        <div class="row mb-3">
+                            <div class="col-md-4">
+                                <label class="form-label fw-semibold">Patient <span class="text-danger">*</span></label>
+                                <select disabled class="form-select" [(ngModel)]="insurance.PatientID" name="PatientID" required>
+                                    <option [ngValue]="null" disabled>Select Patient</option>
+                                    <option *ngFor="let p of patients" [ngValue]="p.id">{{ p.patientNo }} - {{ p.firstName }} {{ p.lastName }}</option>
+                                </select>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label fw-semibold">Insurance Name <span class="text-danger">*</span></label>
+                                <input disabled type="text" class="form-control" [(ngModel)]="insurance.InsuranceName" name="InsuranceName" required placeholder="Insurance Name">
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label fw-semibold">Policy Number <span class="text-danger">*</span></label>
+                                <input disabled type="text" class="form-control" [(ngModel)]="insurance.PolicyNumber" name="PolicyNumber" required placeholder="Policy Number">
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col-md-3">
+                                <label class="form-label fw-semibold">Plan Number</label>
+                                <input disabled type="text" class="form-control" [(ngModel)]="insurance.PlanNumber" name="PlanNumber" placeholder="Plan Number">
+                            </div>
+                            <div class="col-md-3">
+                                <label class="form-label fw-semibold">Plan Type</label>
+                                <input disabled type="text" class="form-control" [(ngModel)]="insurance.PlanType" name="PlanType" placeholder="Plan Type">
+                            </div>
+                            <div class="col-md-3">
+                                <label class="form-label fw-semibold">Effective Date</label>
+                                <input disabled type="date" class="form-control" [ngModel]="insurance.EffectiveDate | date:'yyyy-MM-dd'" (ngModelChange)="insurance.EffectiveDate = $event" name="EffectiveDate">
+                            </div>
+                            <div class="col-md-3">
+                                <label class="form-label fw-semibold">Expiry Date</label>
+                                <input disabled type="date" class="form-control" [ngModel]="insurance.ExpiryDate | date:'yyyy-MM-dd'" (ngModelChange)="insurance.ExpiryDate = $event" name="ExpiryDate">
+                            </div>
+                        </div>
+
+                        <hr class="my-4">
+
+
+
+                        <hr class="my-4">
+
+                        <!-- Section 3: Insurer Info -->
+                        <h5 class="mb-3 text-primary">Insurer Details (As in Policy)</h5>
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label class="form-label fw-semibold">Insurer Name</label>
+                                <input disabled type="text" class="form-control" [(ngModel)]="insurance.InsurerNameAsInPolicy" name="InsurerNameAsInPolicy" placeholder="Name as in Policy">
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label fw-semibold">Address</label>
+                                <input disabled type="text" class="form-control" [(ngModel)]="insurance.Address" name="Address" placeholder="Address">
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-md-3">
+                                <label class="form-label fw-semibold">City</label>
+                                <input disabled type="text" class="form-control" [(ngModel)]="insurance.City" name="City" placeholder="City">
+                            </div>
+                            <div class="col-md-3">
+                                <label class="form-label fw-semibold">State</label>
+                                <input disabled type="text" class="form-control" [(ngModel)]="insurance.State" name="State" placeholder="State">
+                            </div>
+                            <div class="col-md-3">
+                                <label class="form-label fw-semibold">Postal Code</label>
+                                <input disabled type="text" class="form-control" [(ngModel)]="insurance.PostalCode" name="PostalCode" placeholder="Postal Code">
+                            </div>
+                            <div class="col-md-3">
+                                <label class="form-label fw-semibold">Country</label>
+                                <input disabled type="text" class="form-control" [(ngModel)]="insurance.Country" name="Country" placeholder="Country">
+                            </div>
+                        </div>
+
+                        <div class="d-flex gap-2 mt-4">
+                            <button type="button" (click)="back()" class="btn btn-white" style="border: 1px solid #d2d2d2; background: #fff; padding: 8px 25px; font-weight: 600; border-radius: 2px; color: #555;">Back</button>
+                <a [routerLink]="back()" (click)="navigateToEdit()" class="btn btn-primary" style="background: #1ab394; border-color: #1ab394; color: #fff; padding: 8px 25px; font-weight: 600; border-radius: 2px;">Edit Patient Insurance</a>
+                            
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row" *ngIf="insurance.id === 0">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body text-center py-5">
+                    <p class="text-muted">Loading patient insurance data...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

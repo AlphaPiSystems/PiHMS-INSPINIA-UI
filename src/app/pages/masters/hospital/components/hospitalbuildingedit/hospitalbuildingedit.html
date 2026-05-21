@@ -2,6 +2,7 @@
   <app-page-title title="Edit Hospital Building" />
 
   <div class="wrapper wrapper-content animated fadeInRight" style="padding-top: 0;">
+    <form #buildingForm="ngForm" (ngSubmit)="buildingForm.form.valid && saveChanges()">
     <div class="row">
       <!-- Section 1: Basic Information -->
       <div class="col-lg-12 mb-1">
@@ -11,13 +12,17 @@
             <h5 style="font-weight: 600; margin: 0; font-size: 14px; text-transform: uppercase;">Basic Information</h5>
           </div>
           <div class="ibox-content" style="padding: 10px 15px;">
-            <form role="form">
+            
               <div class="row">
                 <div class="col-md-4 col-sm-12">
                   <div class="form-group row align-items-center" style="margin-bottom: 8px;">
                     <label class="col-sm-4 text-start col-form-label" style="font-weight: 600;">Building Name <span class="text-danger">*</span></label>
                     <div class="col-sm-8">
-                      <input type="text" class="form-control" [(ngModel)]="building.Name" name="name" placeholder="Building Name" required style="border-radius: 2px;">
+                      <input type="text" class="form-control" [(ngModel)]="building.Name" name="name" #nameCtrl="ngModel" placeholder="Building Name" required style="border-radius: 2px;">
+                      <div class="text-danger mt-1"
+                           *ngIf="(nameCtrl.invalid || !building.Name?.trim()) && (nameCtrl.touched || buildingForm.submitted)">
+                        Building Name is required
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -25,7 +30,11 @@
                   <div class="form-group row align-items-center" style="margin-bottom: 8px;">
                     <label class="col-sm-4 text-start col-form-label" style="font-weight: 600;">Short Name <span class="text-danger">*</span></label>
                     <div class="col-sm-8">
-                      <input type="text" class="form-control" [(ngModel)]="building.ShortName" name="shortname" placeholder="Short Name" required style="border-radius: 2px;">
+                      <input type="text" class="form-control" [(ngModel)]="building.ShortName" name="shortname" #shortnameCtrl="ngModel" placeholder="Short Name" required style="border-radius: 2px;">
+                      <div class="text-danger mt-1"
+                           *ngIf="(shortnameCtrl.invalid || !building.ShortName?.trim()) && (shortnameCtrl.touched || buildingForm.submitted)">
+                        Short Name is required
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -69,7 +78,7 @@
                   </div>
                 </div>
               </div>
-            </form>
+            
           </div>
         </div>
       </div>
@@ -82,13 +91,17 @@
             <h5 style="font-weight: 600; margin: 0; font-size: 14px; text-transform: uppercase;">Location & Contact</h5>
           </div>
           <div class="ibox-content" style="padding: 10px 15px;">
-            <form role="form">
+            
               <div class="row">
                 <div class="col-md-8 col-sm-12">
                   <div class="form-group row align-items-center" style="margin-bottom: 8px;">
-                    <label class="col-sm-2 text-start col-form-label" style="font-weight: 600;">Address</label>
+                    <label class="col-sm-2 text-start col-form-label" style="font-weight: 600;">Address <span class="text-danger">*</span></label>
                     <div class="col-sm-10">
-                      <input type="text" class="form-control" [(ngModel)]="building.Address" name="address" placeholder="Building Address" style="border-radius: 2px;">
+                      <input type="text" class="form-control" [(ngModel)]="building.Address" name="address" #addressCtrl="ngModel" placeholder="Building Address" required style="border-radius: 2px;">
+                      <div class="text-danger mt-1"
+                           *ngIf="(addressCtrl.invalid || !building.Address?.trim()) && (addressCtrl.touched || buildingForm.submitted)">
+                        Address is required
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -128,7 +141,7 @@
                   </div>
                 </div>
               </div>
-            </form>
+            
           </div>
         </div>
       </div>
@@ -141,13 +154,17 @@
             <h5 style="font-weight: 600; margin: 0; font-size: 14px; text-transform: uppercase;">Communication Details</h5>
           </div>
           <div class="ibox-content" style="padding: 10px 15px;">
-            <form role="form">
+            
               <div class="row">
                 <div class="col-md-3 col-sm-12">
                   <div class="form-group row align-items-center" style="margin-bottom: 8px;">
-                    <label class="col-sm-4 text-start col-form-label" style="font-weight: 600;">Primary Phone</label>
+                    <label class="col-sm-4 text-start col-form-label" style="font-weight: 600;">Primary Phone <span class="text-danger">*</span></label>
                     <div class="col-sm-8">
-                      <input type="text" class="form-control" [(ngModel)]="building.PhonePrimary" name="phoneprimary" placeholder="Primary Phone" style="border-radius: 2px;">
+                      <input type="text" class="form-control" [(ngModel)]="building.PhonePrimary" name="phoneprimary" #phoneprimaryCtrl="ngModel" placeholder="Primary Phone" required style="border-radius: 2px;">
+                      <div class="text-danger mt-1"
+                           *ngIf="(phoneprimaryCtrl.invalid || !building.PhonePrimary?.trim()) && (phoneprimaryCtrl.touched || buildingForm.submitted)">
+                        Primary Phone is required
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -176,11 +193,24 @@
                   </div>
                 </div>
               </div>
-            </form>
+            
           </div>
         </div>
       </div>
     </div>
+
+    
+        <div *ngIf="buildingForm.submitted && 
+                     (buildingForm.invalid || 
+                     !building.Name?.trim() || 
+                     !building.ShortName?.trim() || 
+                     !building.Address?.trim() || 
+                     !building.PhonePrimary?.trim())"
+             class="alert alert-danger d-flex align-items-center mb-3"
+             style="border-radius: 2px; padding: 10px 15px;">
+          <i class="fa fa-exclamation-triangle me-2" style="font-size: 16px;"></i>
+          <span>Please fill in all mandatory fields marked with an asterisk (*).</span>
+        </div>
 
     <!-- Action Buttons -->
     <div class="row mt-2">
@@ -189,10 +219,11 @@
         <div class="text-right d-flex justify-content-end gap-2" style="justify-content: flex-end; margin-bottom: 30px;">
           <button class="btn btn-white" type="button" [routerLink]="['/building/buildinglist']"
             style="border: 1px solid #d2d2d2; background: #fff; padding: 8px 20px; font-weight: 600; border-radius: 2px; color: #555; margin-right: 10px;">Cancel</button>
-          <button class="btn btn-primary" type="button" (click)="saveChanges()"
-            style="background: #1ab394; border-color: #1ab394; color: #fff; padding: 8px 20px; font-weight: 600; border-radius: 2px;">Update Building</button>
+          <button class="btn btn-primary" type="submit"
+            style="background: #1ab394; border-color: #1ab394; color: #fff; padding: 8px 20px; font-weight: 600; border-radius: 2px;">Save Changes</button>
         </div>
       </div>
     </div>
+    </form>
   </div>
 </div>

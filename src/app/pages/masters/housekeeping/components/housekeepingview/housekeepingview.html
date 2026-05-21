@@ -1,0 +1,81 @@
+<div class="container-fluid">
+    <app-page-title title="View Task" />
+
+    <div class="row" *ngIf="task.id !== 0">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header border-light">
+                    <h5 class="card-title mb-0">Task Details</h5>
+                </div>
+                <div class="card-body">
+                    <form (ngSubmit)="save()" #taskForm="ngForm">
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label class="form-label fw-semibold">Task Name</label>
+                                <input disabled type="text" class="form-control" [(ngModel)]="task.TaskName" name="TaskName" required placeholder="e.g. Floor Mopping">
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label fw-semibold">Category</label>
+                                <select disabled class="form-select" [(ngModel)]="task.Category" name="Category" required>
+                                    <option value="" disabled>Select Category</option>
+                                    <option *ngFor="let cat of categories" [value]="cat">{{ cat }}</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col-md-8">
+                                <label class="form-label fw-semibold">Description</label>
+                                <input disabled type="text" class="form-control" [(ngModel)]="task.Descriptions" name="Descriptions" placeholder="Enter detailed description">
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label fw-semibold">Duration</label>
+                                <input disabled type="text" class="form-control" [(ngModel)]="task.Duration" name="Duration" placeholder="e.g. 30 mins">
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label class="form-label fw-semibold">Department</label>
+                                <select disabled class="form-select" [(ngModel)]="task.DepartmentID" name="DepartmentID" required>
+                                    <option [ngValue]="null" disabled>Select Department</option>
+                                    <option *ngFor="let dept of departments" [ngValue]="dept.id">{{ dept.Name }}</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label fw-semibold">Branch</label>
+                                <select disabled class="form-select" [(ngModel)]="task.BranchID" name="BranchID" required>
+                                    <option [ngValue]="null" disabled>Select Branch</option>
+                                    <option *ngFor="let branch of branches" [ngValue]="branch.id">{{ branch.Name }}</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col-12">
+                                <label class="form-label fw-semibold">Notes</label>
+                                <textarea disabled class="form-control" [(ngModel)]="task.Notes" name="Notes" rows="2" placeholder="Add any special instructions or notes"></textarea>
+                            </div>
+                        </div>
+
+                        <div class="d-flex gap-2 justify-content-end">
+                            <button type="button" (click)="back()" class="btn btn-white" style="border: 1px solid #d2d2d2; background: #fff; padding: 8px 25px; font-weight: 600; border-radius: 2px; color: #555;">Back</button>
+                <a [routerLink]="back()" (click)="navigateToEdit()" class="btn btn-primary" style="background: #1ab394; border-color: #1ab394; color: #fff; padding: 8px 25px; font-weight: 600; border-radius: 2px;">Edit Housekeeping</a>
+                            
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row" *ngIf="task.id === 0">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body text-center py-5">
+                    <p class="text-muted">Loading task data...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

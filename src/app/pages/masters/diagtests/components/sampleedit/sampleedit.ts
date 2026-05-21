@@ -41,7 +41,10 @@ export class SampleEdit implements OnInit {
     });
   }
 
-  saveChanges() {
+  saveChanges(form: any) {
+    if (form.invalid) {
+      return;
+    }
     console.log('Updating sample data:', this.sample);
   }
 }

@@ -31,14 +31,14 @@
                 <div class="table-responsive">
                     <table class="table table-custom table-centered table-select table-hover w-100 mb-0">
                         <thead class="bg-light align-middle bg-opacity-25 thead-sm">
-                            <tr class="text-uppercase fs-md fw-bold text-dark">
-                                <th style="border-bottom: 1px solid #e7eaec;">SL.No</th>
-                                <th style="border-bottom: 1px solid #e7eaec;">Country Name</th>
-                                <th style="border-bottom: 1px solid #e7eaec;">Is Supported</th>
-                                <th style="border-bottom: 1px solid #e7eaec;">Branch</th>
-                                <th style="border-bottom: 1px solid #e7eaec;">Department</th>
-                                <th style="border-bottom: 1px solid #e7eaec;">Status</th>
-                                <th class="text-center" style="width: 1%; border-bottom: 1px solid #e7eaec;">Actions</th>
+                            <tr class="text-uppercase fs-xxs">
+                                <th style="width: 60px;">SL.No</th>
+                                <th >Country Name</th>
+                                <th >Is Supported</th>
+                                <th >Branch</th>
+                                <th >Department</th>
+                                <th >Status</th>
+                                <th class="text-center" style="width: 1%;">Actions</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -46,13 +46,13 @@
                             @for (country of this.countries$ | async; track $index; let i = $index) {
                             <tr>
                                 <td>{{ (tableService.page - 1) * tableService.pageSize + i + 1 }}</td>
-                                <td class="fw-semibold text-dark fs-sm">{{ country.Name }}</td>
-                                <td class="fw-semibold text-dark fs-sm">
+                                <td >{{ country.Name }}</td>
+                                <td >
                                     {{ country.IsSupported === 'Y' ? 'Supported' : 'Not Supported' }}
                                 </td>
-                                <td class="fw-semibold text-dark fs-sm">{{ country.BranchName }}</td>
-                                <td class="fw-semibold text-dark fs-sm">{{ country.DepartmentName }}</td>
-                                <td class="fw-semibold text-dark fs-sm">{{ country.Status || 'Active' }}</td>
+                                <td >{{ country.BranchName }}</td>
+                                <td >{{ country.DepartmentName }}</td>
+                                <td >{{ country.Status || 'Active' }}</td>
                                 <td class="text-center">
                                     <div class="d-flex justify-content-center gap-1">
                                         <a [routerLink]="['/misc/country/countryedit', country.id]"

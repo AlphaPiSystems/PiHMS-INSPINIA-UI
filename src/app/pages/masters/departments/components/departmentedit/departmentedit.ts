@@ -42,7 +42,10 @@ export class DepartmentEdit implements OnInit {
     }
   }
 
-  saveChanges() {
+  saveChanges(form?: any) {
+    if (form && form.invalid) {
+      return;
+    }
     this.department.UpdatedDateTime = new Date().toISOString().slice(0, 19).replace('T', ' ');
     console.log('Preparing payload for updating department:', this.department);
     

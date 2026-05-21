@@ -44,15 +44,13 @@ export class Ward implements OnInit {
     let filtered = this.wardList;
     if (this.searchText.trim()) {
       const search = this.searchText.toLowerCase();
-      filtered = this.wardList.filter(w => 
-        (w.WardNumber && w.WardNumber.toLowerCase().includes(search)) ||
-        (w.Name && w.Name.toLowerCase().includes(search)) ||
-        (w.Description && w.Description.toLowerCase().includes(search)) ||
-        (w.FloorName && w.FloorName.toLowerCase().includes(search)) ||
-        (w.WardTypeID && w.WardTypeID.toLowerCase().includes(search)) ||
-        (w.Department && w.Department.toLowerCase().includes(search)) ||
-        (w.Status && w.Status.toLowerCase().includes(search))
-      );
+      filtered = this.wardList.filter(w => {
+        if (!w) return false;
+        return Object.values(w).some(val => 
+          val !== null && val !== undefined && 
+          String(val).toLowerCase().includes(search)
+        );
+      });
     }
     return filtered;
   }

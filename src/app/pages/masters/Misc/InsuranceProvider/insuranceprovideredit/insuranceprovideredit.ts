@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NgIcon } from '@ng-icons/core';
-import { ActivatedRoute, RouterLink } from '@angular/router';
+import { ActivatedRoute, RouterLink, Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { PageTitleComponent } from '../../../../../components/page-title.component';
 import { HttpClient } from '@angular/common/http';
@@ -17,7 +17,7 @@ export class InsuranceProviderEdit implements OnInit {
   departments: any[] = [];
   branches: any[] = [];
 
-  constructor(private route: ActivatedRoute, private http: HttpClient) {}
+  constructor(private route: ActivatedRoute, private http: HttpClient, private router: Router) {}
 
   ngOnInit(): void {
     this.http.get<any>('assets/data/db.json').subscribe(data => {
@@ -27,16 +27,28 @@ export class InsuranceProviderEdit implements OnInit {
 
         const id = this.route.snapshot.paramMap.get('id');
         if (id && data.insuranceprovider) {
-          const found = data.insuranceprovider.find((p: any) => p.id == id);
+          const found = data.insuranceprovider.find((p: any) => p.id?.toString() === id.toString());
           if (found) {
             this.provider = { ...found };
+
+            // Ensure database-loaded dropdown names exist in lists so they don't display as empty
+            if (this.provider.BranchName && !this.branches.some(b => b.Name === this.provider.BranchName)) {
+              this.branches.push({ id: 0, Name: this.provider.BranchName });
+            }
+            if (this.provider.DepartmentName && !this.departments.some(d => d.Name === this.provider.DepartmentName)) {
+              this.departments.push({ id: 0, Name: this.provider.DepartmentName });
+            }
           }
         }
       }
     });
   }
 
-  saveChanges() {
+  saveChanges(form?: any) {
+    if (form && form.invalid) {
+      return;
+    }
     console.log('Updating insurance provider data:', this.provider);
+    this.router.navigate(['/misc/insuranceprovider/insuranceproviderlist']);
   }
 }

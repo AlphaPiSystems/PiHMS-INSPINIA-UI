@@ -9,14 +9,18 @@
             <h5 style="font-weight: 600; margin: 0; font-size: 14px; text-transform: uppercase;">Postal Code Information</h5>
           </div>
           <div class="ibox-content" style="padding: 10px 15px;">
-            <form (ngSubmit)="saveChanges()">
+            <form #myForm="ngForm" (ngSubmit)="myForm.form.valid && saveChanges()">
               <div class="row">
                 <!-- Postal Code -->
                 <div class="col-md-6 col-sm-12">
                   <div class="form-group row align-items-center" style="margin-bottom: 8px;">
                     <label class="col-sm-4 text-start col-form-label" style="font-weight: 600;">Postal Code <span class="text-danger">*</span></label>
                     <div class="col-sm-8">
-                      <input type="text" [(ngModel)]="postalCode.PostalCode" name="PostalCode" class="form-control" placeholder="e.g. 400001" required style="border-radius: 2px;">
+                      <input type="text" [(ngModel)]="postalCode.PostalCode" name="PostalCode" #pcCtrl="ngModel" class="form-control" placeholder="e.g. 400001" required style="border-radius: 2px;">
+                      <div class="text-danger mt-1"
+                           *ngIf="(pcCtrl.invalid || !postalCode.PostalCode?.trim()) && (pcCtrl.touched || myForm.submitted)">
+                        Postal Code is required
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -24,9 +28,13 @@
                 <!-- Post Office Name -->
                 <div class="col-md-6 col-sm-12">
                   <div class="form-group row align-items-center" style="margin-bottom: 8px;">
-                    <label class="col-sm-4 text-start col-form-label" style="font-weight: 600;">Post Office Name</label>
+                    <label class="col-sm-4 text-start col-form-label" style="font-weight: 600;">Post Office Name <span class="text-danger">*</span></label>
                     <div class="col-sm-8">
-                      <input type="text" [(ngModel)]="postalCode.PostOfficeName" name="PostOfficeName" class="form-control" placeholder="e.g. Mumbai GPO" style="border-radius: 2px;">
+                      <input type="text" [(ngModel)]="postalCode.PostOfficeName" name="PostOfficeName" #poCtrl="ngModel" class="form-control" placeholder="e.g. Mumbai GPO" required style="border-radius: 2px;">
+                      <div class="text-danger mt-1"
+                           *ngIf="(poCtrl.invalid || !postalCode.PostOfficeName?.trim()) && (poCtrl.touched || myForm.submitted)">
+                        Post Office Name is required
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -34,9 +42,13 @@
                 <!-- Area Name -->
                 <div class="col-md-6 col-sm-12">
                   <div class="form-group row align-items-center" style="margin-bottom: 8px;">
-                    <label class="col-sm-4 text-start col-form-label" style="font-weight: 600;">Area Name</label>
+                    <label class="col-sm-4 text-start col-form-label" style="font-weight: 600;">Area Name <span class="text-danger">*</span></label>
                     <div class="col-sm-8">
-                      <input type="text" [(ngModel)]="postalCode.AreaName" name="AreaName" class="form-control" placeholder="e.g. Fort" style="border-radius: 2px;">
+                      <input type="text" [(ngModel)]="postalCode.AreaName" name="AreaName" #areaCtrl="ngModel" class="form-control" placeholder="e.g. Fort" required style="border-radius: 2px;">
+                      <div class="text-danger mt-1"
+                           *ngIf="(areaCtrl.invalid || !postalCode.AreaName?.trim()) && (areaCtrl.touched || myForm.submitted)">
+                        Area Name is required
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -44,12 +56,16 @@
                 <!-- City -->
                 <div class="col-md-6 col-sm-12">
                   <div class="form-group row align-items-center" style="margin-bottom: 8px;">
-                    <label class="col-sm-4 text-start col-form-label" style="font-weight: 600;">City</label>
+                    <label class="col-sm-4 text-start col-form-label" style="font-weight: 600;">City <span class="text-danger">*</span></label>
                     <div class="col-sm-8">
-                      <select [(ngModel)]="postalCode.CityName" name="CityName" class="form-select form-control" style="border-radius: 2px;">
+                      <select [(ngModel)]="postalCode.CityName" name="CityName" #cityCtrl="ngModel" class="form-select form-control" required style="border-radius: 2px;">
                         <option value="">Select City</option>
                         <option *ngFor="let c of cities" [value]="c.Name">{{c.Name}}</option>
                       </select>
+                      <div class="text-danger mt-1"
+                           *ngIf="cityCtrl.invalid && (cityCtrl.touched || myForm.submitted)">
+                        City is required
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -57,12 +73,16 @@
                 <!-- District -->
                 <div class="col-md-6 col-sm-12">
                   <div class="form-group row align-items-center" style="margin-bottom: 8px;">
-                    <label class="col-sm-4 text-start col-form-label" style="font-weight: 600;">District</label>
+                    <label class="col-sm-4 text-start col-form-label" style="font-weight: 600;">District <span class="text-danger">*</span></label>
                     <div class="col-sm-8">
-                      <select [(ngModel)]="postalCode.DistrictName" name="DistrictName" class="form-select form-control" style="border-radius: 2px;">
+                      <select [(ngModel)]="postalCode.DistrictName" name="DistrictName" #districtCtrl="ngModel" class="form-select form-control" required style="border-radius: 2px;">
                         <option value="">Select District</option>
                         <option *ngFor="let d of districts" [value]="d.Name">{{d.Name}}</option>
                       </select>
+                      <div class="text-danger mt-1"
+                           *ngIf="districtCtrl.invalid && (districtCtrl.touched || myForm.submitted)">
+                        District is required
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -70,12 +90,16 @@
                 <!-- State -->
                 <div class="col-md-6 col-sm-12">
                   <div class="form-group row align-items-center" style="margin-bottom: 8px;">
-                    <label class="col-sm-4 text-start col-form-label" style="font-weight: 600;">State</label>
+                    <label class="col-sm-4 text-start col-form-label" style="font-weight: 600;">State <span class="text-danger">*</span></label>
                     <div class="col-sm-8">
-                      <select [(ngModel)]="postalCode.StateName" name="StateName" class="form-select form-control" style="border-radius: 2px;">
+                      <select [(ngModel)]="postalCode.StateName" name="StateName" #stateCtrl="ngModel" class="form-select form-control" required style="border-radius: 2px;">
                         <option value="">Select State</option>
                         <option *ngFor="let s of states" [value]="s.Name">{{s.Name}}</option>
                       </select>
+                      <div class="text-danger mt-1"
+                           *ngIf="stateCtrl.invalid && (stateCtrl.touched || myForm.submitted)">
+                        State is required
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -83,12 +107,16 @@
                 <!-- Country -->
                 <div class="col-md-6 col-sm-12">
                   <div class="form-group row align-items-center" style="margin-bottom: 8px;">
-                    <label class="col-sm-4 text-start col-form-label" style="font-weight: 600;">Country</label>
+                    <label class="col-sm-4 text-start col-form-label" style="font-weight: 600;">Country <span class="text-danger">*</span></label>
                     <div class="col-sm-8">
-                      <select [(ngModel)]="postalCode.CountryName" name="CountryName" class="form-select form-control" style="border-radius: 2px;">
+                      <select [(ngModel)]="postalCode.CountryName" name="CountryName" #countryCtrl="ngModel" class="form-select form-control" required style="border-radius: 2px;">
                         <option value="">Select Country</option>
                         <option *ngFor="let c of countries" [value]="c.Name">{{c.Name}}</option>
                       </select>
+                      <div class="text-danger mt-1"
+                           *ngIf="countryCtrl.invalid && (countryCtrl.touched || myForm.submitted)">
+                        Country is required
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -96,12 +124,16 @@
                 <!-- Branch -->
                 <div class="col-md-6 col-sm-12">
                   <div class="form-group row align-items-center" style="margin-bottom: 8px;">
-                    <label class="col-sm-4 text-start col-form-label" style="font-weight: 600;">Branch</label>
+                    <label class="col-sm-4 text-start col-form-label" style="font-weight: 600;">Branch <span class="text-danger">*</span></label>
                     <div class="col-sm-8">
-                      <select [(ngModel)]="postalCode.BranchName" name="BranchName" class="form-select form-control" style="border-radius: 2px;">
+                      <select [(ngModel)]="postalCode.BranchName" name="BranchName" #branchCtrl="ngModel" class="form-select form-control" required style="border-radius: 2px;">
                         <option value="">Select Branch</option>
                         <option *ngFor="let b of branches" [value]="b.Name">{{b.Name}}</option>
                       </select>
+                      <div class="text-danger mt-1"
+                           *ngIf="branchCtrl.invalid && (branchCtrl.touched || myForm.submitted)">
+                        Branch is required
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -109,34 +141,56 @@
                 <!-- Department -->
                 <div class="col-md-6 col-sm-12">
                   <div class="form-group row align-items-center" style="margin-bottom: 8px;">
-                    <label class="col-sm-4 text-start col-form-label" style="font-weight: 600;">Department</label>
+                    <label class="col-sm-4 text-start col-form-label" style="font-weight: 600;">Department <span class="text-danger">*</span></label>
                     <div class="col-sm-8">
-                      <select [(ngModel)]="postalCode.DepartmentName" name="DepartmentName" class="form-select form-control" style="border-radius: 2px;">
+                      <select [(ngModel)]="postalCode.DepartmentName" name="DepartmentName" #deptCtrl="ngModel" class="form-select form-control" required style="border-radius: 2px;">
                         <option value="">Select Department</option>
                         <option *ngFor="let d of departments" [value]="d.Name">{{d.Name}}</option>
                       </select>
+                      <div class="text-danger mt-1"
+                           *ngIf="deptCtrl.invalid && (deptCtrl.touched || myForm.submitted)">
+                        Department is required
+                      </div>
                     </div>
                   </div>
                 </div>
                 <!-- Status -->
                 <div class="col-md-6 col-sm-12">
                   <div class="form-group row align-items-center" style="margin-bottom: 8px;">
-                    <label class="col-sm-4 text-start col-form-label" style="font-weight: 600;">Status</label>
+                    <label class="col-sm-4 text-start col-form-label" style="font-weight: 600;">Status <span class="text-danger">*</span></label>
                     <div class="col-sm-8">
-                      <select [(ngModel)]="postalCode.Status" name="Status" class="form-select form-control" style="border-radius: 2px;">
+                      <select [(ngModel)]="postalCode.Status" name="Status" #statusCtrl="ngModel" class="form-select form-control" required style="border-radius: 2px;">
                         <option value="Active">Active</option>
                         <option value="Inactive">Inactive</option>
                       </select>
+                      <div class="text-danger mt-1"
+                           *ngIf="statusCtrl.invalid && (statusCtrl.touched || myForm.submitted)">
+                        Status is required
+                      </div>
                     </div>
                   </div>
                 </div>
+              </div>
+
+              <!-- Validation Alert Banner -->
+              <div *ngIf="myForm.submitted && 
+                       (myForm.invalid || 
+                       !postalCode.PostalCode?.trim() || 
+                       !postalCode.PostOfficeName?.trim() || 
+                       !postalCode.AreaName?.trim())"
+                   class="alert alert-danger d-flex align-items-center mb-3 mt-3"
+                   style="border-radius: 2px; padding: 10px 15px;">
+                <i class="fa fa-exclamation-triangle me-2" style="font-size: 16px;"></i>
+                <span>
+                  Please fill in all mandatory fields marked with an asterisk (*).
+                </span>
               </div>
 
               <div class="hr-line-dashed" style="border-top: 1px dashed #e7eaec; margin: 15px 0;"></div>
               
               <div class="d-flex justify-content-end gap-2">
                 <button type="button" routerLink="/misc/postalcode/postalcodelist" class="btn btn-white" style="border: 1px solid #d2d2d2; background: #fff; padding: 8px 20px; font-weight: 600; border-radius: 2px; color: #555;">Cancel</button>
-                <button type="submit" class="btn btn-primary" style="background: #1ab394; border-color: #1ab394; color: #fff; padding: 8px 20px; font-weight: 600; border-radius: 2px;">Update Postal Code</button>
+                <button type="submit" class="btn btn-primary" style="background: #1ab394; border-color: #1ab394; color: #fff; padding: 8px 20px; font-weight: 600; border-radius: 2px;">Save Changes</button>
               </div>
             </form>
           </div>

@@ -44,13 +44,13 @@ export class HospitalBuilding implements OnInit {
     let filtered = this.buildingList;
     if (this.searchText.trim()) {
       const search = this.searchText.toLowerCase();
-      filtered = this.buildingList.filter(b => 
-        (b.Name && b.Name.toLowerCase().includes(search)) ||
-        (b.ShortName && b.ShortName.toLowerCase().includes(search)) ||
-        (b.City && b.City.toLowerCase().includes(search)) ||
-        (b.Email && b.Email.toLowerCase().includes(search)) ||
-        (b.PhonePrimary && b.PhonePrimary.toLowerCase().includes(search))
-      );
+      filtered = this.buildingList.filter(b => {
+        if (!b) return false;
+        return Object.values(b).some(val => 
+          val !== null && val !== undefined && 
+          String(val).toLowerCase().includes(search)
+        );
+      });
     }
     return filtered;
   }

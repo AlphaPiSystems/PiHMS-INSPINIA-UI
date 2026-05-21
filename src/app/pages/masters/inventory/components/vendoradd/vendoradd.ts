@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { PageTitleComponent } from '../../../../../components/page-title.component';
 import { HttpClient } from '@angular/common/http';
@@ -16,7 +16,10 @@ export class VendorAdd implements OnInit {
   departments: any[] = [];
   branches: any[] = [];
 
-  constructor(private http: HttpClient) {}
+  constructor(
+    private router: Router,
+    private http: HttpClient
+  ) {}
 
   ngOnInit(): void {
     this.http.get<any>('assets/data/db.json').subscribe(data => {
@@ -44,7 +47,24 @@ export class VendorAdd implements OnInit {
     };
   }
 
+  isFormValid(): boolean {
+    return !!(
+      this.vendor.Name?.trim() &&
+      this.vendor.ContactPersonName?.trim() &&
+      this.vendor.ContactPersonPhone?.trim() &&
+      this.vendor.Address?.trim() &&
+      this.vendor.City?.trim() &&
+      this.vendor.State?.trim() &&
+      this.vendor.PostalCode?.trim() &&
+      this.vendor.Country?.trim() &&
+      this.vendor.BranchID &&
+      this.vendor.DepartmentID
+    );
+  }
+
   saveChanges() {
     console.log('Saving vendor data:', this.vendor);
+    alert('Vendor added successfully (Mock)');
+    this.router.navigate(['/inventory/vendor/vendorlist']);
   }
 }

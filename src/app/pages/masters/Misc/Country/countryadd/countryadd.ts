@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NgIcon } from '@ng-icons/core';
-import { ActivatedRoute, RouterLink } from '@angular/router';
+import { ActivatedRoute, RouterLink, Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { PageTitleComponent } from '../../../../../components/page-title.component';
 import { HttpClient } from '@angular/common/http';
@@ -17,7 +17,7 @@ export class CountryAdd implements OnInit {
   departments: any[] = [];
   branches: any[] = [];
 
-  constructor(private route: ActivatedRoute, private http: HttpClient) {}
+  constructor(private route: ActivatedRoute, private http: HttpClient, private router: Router) {}
 
   ngOnInit(): void {
     this.http.get<any>('assets/data/db.json').subscribe(data => {
@@ -32,11 +32,16 @@ export class CountryAdd implements OnInit {
       Name: '',
       IsSupported: 'Y',
       BranchName: 'Main Branch',
-      DepartmentName: 'Bio Chemistry'
+      DepartmentName: 'Bio Chemistry',
+      Status: 'Active'
     };
   }
 
-  saveChanges() {
+  saveChanges(form?: any) {
+    if (form && form.invalid) {
+      return;
+    }
     console.log('Saving country data:', this.country);
+    this.router.navigate(['/misc/country/countrylist']);
   }
 }

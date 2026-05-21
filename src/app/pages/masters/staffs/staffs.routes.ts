@@ -22,6 +22,11 @@ export const STAFFS_ROUTES: Routes = [
         data: {title: "Role List"}
     },
     {
+        path: 'staff/staffview/:id',
+        loadComponent: () => import('./components/staffview/staffview').then(c => c.StaffView),
+        data: { title: 'View' }
+    },
+    {
         path: 'staff/roleadd',
         loadComponent: () => import('./components/roleadd/roleadd').then(c => c.RoleAdd),
         data: {title: "Add Role"}
@@ -31,6 +36,11 @@ export const STAFFS_ROUTES: Routes = [
         loadComponent: () => import('./components/roleedit/roleedit').then(c => c.RoleEdit),
         data: {title: "Edit Role"}
     },
+  {
+    path: 'staff/roleview/:id',
+    loadComponent: () => import('./components/roleview/roleview').then(c => c.RoleView),
+    data: { title: 'View' }
+  },
     // Payroll Routes
     {
         path: 'staff/payroll/payrolllist',
@@ -46,5 +56,10 @@ export const STAFFS_ROUTES: Routes = [
         path: 'staff/payroll/payrolledit/:id',
         loadComponent: () => import('./components/payrolledit/payrolledit').then(c => c.StaffPayrollEdit),
         data: { title: 'Edit Staff Payroll Details' }
-    }
+    },
+  {
+    path: 'staff/payroll/payrollview/:id',
+    loadComponent: () => import('./components/payrollview/payrollview').then(c => c.PayrollView),
+    data: { title: 'View' }
+  }
 ];

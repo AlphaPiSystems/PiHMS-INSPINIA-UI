@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NgIcon } from '@ng-icons/core';
-import { ActivatedRoute ,RouterLink} from '@angular/router';
+import { ActivatedRoute ,Router,RouterLink} from '@angular/router';
 import { CountUpModule } from 'ngx-countup';
 import { FormsModule } from '@angular/forms';
 import { NgxDaterangepickerBootstrapDirective } from 'ngx-daterangepicker-bootstrap';
@@ -20,6 +20,9 @@ export class DiagTestEdit implements OnInit {
   lastVisit: any = null;
   patient: any = {};
   samples: any[] = [];
+  departments: any[] = [];
+  instruments: any[] = [];
+  units: any[] = [];
 
   totalVisits: number = 0;
   pendingBill: number = 0;
@@ -85,16 +88,35 @@ export class DiagTestEdit implements OnInit {
     }
   }
 
-  constructor(private route: ActivatedRoute, private http: HttpClient) {}
+  constructor(private route: ActivatedRoute, private router: Router, private http: HttpClient) {}
 
   hover: string = '';
 
+  onSubmit(form: any) {
+    if (form.valid) {
+      if (this.patient.HasRange === 'Yes' && (!this.referenceRanges || this.referenceRanges.length === 0)) {
+        return;
+      }
+      console.log('Saving test data:', this.patient);
+      this.router.navigate(['/diagtest/diagtestlist']);
+    }
+  }
+
   ngOnInit() {
-    this.http.get<{diagtest: any[], sample: any[]}>('assets/data/db.json').subscribe({
+    this.http.get<{diagtest: any[], sample: any[], departments: any[], instrument: any[], unit: any[]}>('assets/data/db.json').subscribe({
       next: (data) => {
         if (data) {
           if (data.sample) {
-            this.samples = data.sample;
+            this.samples = data.sample.filter((s: any) => s.IsRowDeleted === 'N');
+          }
+          if (data.departments) {
+            this.departments = data.departments.filter((d: any) => d.IsRowDeleted === 'N');
+          }
+          if (data.instrument) {
+            this.instruments = data.instrument.filter((i: any) => i.IsRowDeleted === 'N');
+          }
+          if (data.unit) {
+            this.units = data.unit.filter((u: any) => u.Status === 'Active');
           }
           
           const id = Number(this.route.snapshot.paramMap.get('id'));
@@ -104,7 +126,6 @@ export class DiagTestEdit implements OnInit {
             this.patient = {};
           }
 
-          // Mock assignment based on template requirements
           if (this.patient) {
             this.totalVisits = this.patient.visits?.length || 0;
             this.pendingBill = this.patient.pendingBill || 0;

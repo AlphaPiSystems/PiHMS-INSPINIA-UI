@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterLink } from '@angular/router';
+import { RouterLink, Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { PageTitleComponent } from '../../../../../components/page-title.component';
 import { HttpClient } from '@angular/common/http';
@@ -17,7 +17,7 @@ export class StaffPayrollAdd implements OnInit {
   staffs: any[] = [];
   departments: any[] = [];
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private router: Router) { }
 
   ngOnInit(): void {
     this.http.get<any>('assets/data/db.json').subscribe(data => {
@@ -58,7 +58,11 @@ export class StaffPayrollAdd implements OnInit {
     };
   }
 
-  saveChanges() {
+  saveChanges(form: any) {
+    if (form && form.invalid) {
+      return;
+    }
     console.log('Saving staff payroll data:', this.payroll);
+    this.router.navigate(['/staff/payroll/payrolllist']);
   }
 }

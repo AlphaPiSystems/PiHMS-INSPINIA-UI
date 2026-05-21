@@ -9,14 +9,18 @@
             <h5 style="font-weight: 600; margin: 0; font-size: 14px; text-transform: uppercase;">District Information</h5>
           </div>
           <div class="ibox-content" style="padding: 10px 15px;">
-            <form (ngSubmit)="saveChanges()">
+            <form #myForm="ngForm" (ngSubmit)="saveChanges(myForm)" novalidate>
               <div class="row">
                 <!-- District Name -->
                 <div class="col-md-6 col-sm-12">
                   <div class="form-group row align-items-center" style="margin-bottom: 8px;">
                     <label class="col-sm-4 text-start col-form-label" style="font-weight: 600;">District Name <span class="text-danger">*</span></label>
                     <div class="col-sm-8">
-                      <input type="text" [(ngModel)]="district.Name" name="Name" class="form-control" placeholder="e.g. Mumbai City" required style="border-radius: 2px;">
+                      <input type="text" [(ngModel)]="district.Name" name="Name" #nameCtrl="ngModel" class="form-control" placeholder="e.g. Mumbai City" required style="border-radius: 2px;"
+                        [class.is-invalid]="nameCtrl.invalid && (nameCtrl.dirty || nameCtrl.touched || myForm.submitted)">
+                      <div class="invalid-feedback" *ngIf="nameCtrl.invalid && (nameCtrl.dirty || nameCtrl.touched || myForm.submitted)">
+                        District Name is required
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -24,12 +28,16 @@
                 <!-- State -->
                 <div class="col-md-6 col-sm-12">
                   <div class="form-group row align-items-center" style="margin-bottom: 8px;">
-                    <label class="col-sm-4 text-start col-form-label" style="font-weight: 600;">State</label>
+                    <label class="col-sm-4 text-start col-form-label" style="font-weight: 600;">State <span class="text-danger">*</span></label>
                     <div class="col-sm-8">
-                      <select [(ngModel)]="district.StateName" name="StateName" class="form-select form-control" style="border-radius: 2px;">
+                      <select [(ngModel)]="district.StateName" name="StateName" #stateCtrl="ngModel" class="form-select form-control" required style="border-radius: 2px;"
+                        [class.is-invalid]="stateCtrl.invalid && (stateCtrl.dirty || stateCtrl.touched || myForm.submitted)">
                         <option value="">Select State</option>
                         <option *ngFor="let s of states" [value]="s.Name">{{s.Name}}</option>
                       </select>
+                      <div class="invalid-feedback" *ngIf="stateCtrl.invalid && (stateCtrl.dirty || stateCtrl.touched || myForm.submitted)">
+                        State is required
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -37,12 +45,16 @@
                 <!-- Country -->
                 <div class="col-md-6 col-sm-12">
                   <div class="form-group row align-items-center" style="margin-bottom: 8px;">
-                    <label class="col-sm-4 text-start col-form-label" style="font-weight: 600;">Country</label>
+                    <label class="col-sm-4 text-start col-form-label" style="font-weight: 600;">Country <span class="text-danger">*</span></label>
                     <div class="col-sm-8">
-                      <select [(ngModel)]="district.CountryName" name="CountryName" class="form-select form-control" style="border-radius: 2px;">
+                      <select [(ngModel)]="district.CountryName" name="CountryName" #countryCtrl="ngModel" class="form-select form-control" required style="border-radius: 2px;"
+                        [class.is-invalid]="countryCtrl.invalid && (countryCtrl.dirty || countryCtrl.touched || myForm.submitted)">
                         <option value="">Select Country</option>
                         <option *ngFor="let c of countries" [value]="c.Name">{{c.Name}}</option>
                       </select>
+                      <div class="invalid-feedback" *ngIf="countryCtrl.invalid && (countryCtrl.dirty || countryCtrl.touched || myForm.submitted)">
+                        Country is required
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -50,12 +62,16 @@
                 <!-- Branch -->
                 <div class="col-md-6 col-sm-12">
                   <div class="form-group row align-items-center" style="margin-bottom: 8px;">
-                    <label class="col-sm-4 text-start col-form-label" style="font-weight: 600;">Branch</label>
+                    <label class="col-sm-4 text-start col-form-label" style="font-weight: 600;">Branch <span class="text-danger">*</span></label>
                     <div class="col-sm-8">
-                      <select [(ngModel)]="district.BranchName" name="BranchName" class="form-select form-control" style="border-radius: 2px;">
+                      <select [(ngModel)]="district.BranchName" name="BranchName" #branchCtrl="ngModel" class="form-select form-control" required style="border-radius: 2px;"
+                        [class.is-invalid]="branchCtrl.invalid && (branchCtrl.dirty || branchCtrl.touched || myForm.submitted)">
                         <option value="">Select Branch</option>
                         <option *ngFor="let b of branches" [value]="b.Name">{{b.Name}}</option>
                       </select>
+                      <div class="invalid-feedback" *ngIf="branchCtrl.invalid && (branchCtrl.dirty || branchCtrl.touched || myForm.submitted)">
+                        Branch is required
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -63,34 +79,48 @@
                 <!-- Department -->
                 <div class="col-md-6 col-sm-12">
                   <div class="form-group row align-items-center" style="margin-bottom: 8px;">
-                    <label class="col-sm-4 text-start col-form-label" style="font-weight: 600;">Department</label>
+                    <label class="col-sm-4 text-start col-form-label" style="font-weight: 600;">Department <span class="text-danger">*</span></label>
                     <div class="col-sm-8">
-                      <select [(ngModel)]="district.DepartmentName" name="DepartmentName" class="form-select form-control" style="border-radius: 2px;">
+                      <select [(ngModel)]="district.DepartmentName" name="DepartmentName" #deptCtrl="ngModel" class="form-select form-control" required style="border-radius: 2px;"
+                        [class.is-invalid]="deptCtrl.invalid && (deptCtrl.dirty || deptCtrl.touched || myForm.submitted)">
                         <option value="">Select Department</option>
                         <option *ngFor="let d of departments" [value]="d.Name">{{d.Name}}</option>
                       </select>
+                      <div class="invalid-feedback" *ngIf="deptCtrl.invalid && (deptCtrl.dirty || deptCtrl.touched || myForm.submitted)">
+                        Department is required
+                      </div>
                     </div>
                   </div>
                 </div>
                 <!-- Status -->
                 <div class="col-md-6 col-sm-12">
                   <div class="form-group row align-items-center" style="margin-bottom: 8px;">
-                    <label class="col-sm-4 text-start col-form-label" style="font-weight: 600;">Status</label>
+                    <label class="col-sm-4 text-start col-form-label" style="font-weight: 600;">Status <span class="text-danger">*</span></label>
                     <div class="col-sm-8">
-                      <select [(ngModel)]="district.Status" name="Status" class="form-select form-control" style="border-radius: 2px;">
+                      <select [(ngModel)]="district.Status" name="Status" #statusCtrl="ngModel" class="form-select form-control" required style="border-radius: 2px;"
+                        [class.is-invalid]="statusCtrl.invalid && (statusCtrl.dirty || statusCtrl.touched || myForm.submitted)">
                         <option value="Active">Active</option>
                         <option value="Inactive">Inactive</option>
                       </select>
+                      <div class="invalid-feedback" *ngIf="statusCtrl.invalid && (statusCtrl.dirty || statusCtrl.touched || myForm.submitted)">
+                        Status is required
+                      </div>
                     </div>
                   </div>
                 </div>
+              </div>
+
+              <!-- Validation Alert Banner -->
+              <div *ngIf="myForm.submitted && myForm.invalid" class="alert alert-danger d-flex align-items-center mb-3 mt-3" style="border-radius: 2px; padding: 10px 15px;">
+                <span class="fw-bold me-2">Required Fields:</span>
+                <span>Please fill in all mandatory fields marked with an asterisk (*).</span>
               </div>
 
               <div class="hr-line-dashed" style="border-top: 1px dashed #e7eaec; margin: 15px 0;"></div>
               
               <div class="d-flex justify-content-end gap-2">
                 <button type="button" routerLink="/misc/district/districtlist" class="btn btn-white" style="border: 1px solid #d2d2d2; background: #fff; padding: 8px 20px; font-weight: 600; border-radius: 2px; color: #555;">Cancel</button>
-                <button type="submit" class="btn btn-primary" style="background: #1ab394; border-color: #1ab394; color: #fff; padding: 8px 20px; font-weight: 600; border-radius: 2px;">Save District</button>
+                <button type="submit" class="btn btn-primary" style="background: #1ab394; border-color: #1ab394; color: #fff; padding: 8px 20px; font-weight: 600; border-radius: 2px;">Save Changes</button>
               </div>
             </form>
           </div>

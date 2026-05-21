@@ -16,15 +16,19 @@
           <h5 style="font-weight: 600; margin: 0; font-size: 14px; text-transform: uppercase;">Unit Information</h5>
         </div>
         <div class="ibox-content" style="padding: 20px;">
-          <form role="form">
+          <form #unitForm="ngForm" (ngSubmit)="save(unitForm)" novalidate>
             <div class="row mb-3" *ngIf="unit">
               <div class="col-md-6">
                 <div class="form-group row align-items-center">
                   <label class="col-sm-3 text-start col-form-label" style="font-weight: 600;">Unit Name <span
                       class="text-danger">*</span></label>
                   <div class="col-sm-9">
-                    <input type="text" class="form-control" [(ngModel)]="unit.Name" name="unitname"
-                      placeholder="e.g. mg/dL" required style="border-radius: 2px;">
+                    <input type="text" class="form-control" [(ngModel)]="unit.Name" name="unitname" #unitname="ngModel"
+                      placeholder="e.g. mg/dL" required style="border-radius: 2px;"
+                      [class.is-invalid]="unitname.invalid && (unitname.dirty || unitname.touched || unitForm.submitted)">
+                    <div class="invalid-feedback" *ngIf="unitname.invalid && (unitname.dirty || unitname.touched || unitForm.submitted)">
+                      Unit Name is required
+                    </div>
                   </div>
                 </div>
               </div>
@@ -33,8 +37,12 @@
                   <label class="col-sm-3 text-start col-form-label" style="font-weight: 600;">Display Name <span
                       class="text-danger">*</span></label>
                   <div class="col-sm-9">
-                    <input type="text" class="form-control" [(ngModel)]="unit.DisplayName" name="unitdisplayname"
-                      placeholder="e.g. mg/dL" required style="border-radius: 2px;">
+                    <input type="text" class="form-control" [(ngModel)]="unit.DisplayName" name="unitdisplayname" #unitdisplayname="ngModel"
+                      placeholder="e.g. mg/dL" required style="border-radius: 2px;"
+                      [class.is-invalid]="unitdisplayname.invalid && (unitdisplayname.dirty || unitdisplayname.touched || unitForm.submitted)">
+                    <div class="invalid-feedback" *ngIf="unitdisplayname.invalid && (unitdisplayname.dirty || unitdisplayname.touched || unitForm.submitted)">
+                      Display Name is required
+                    </div>
                   </div>
                 </div>
               </div>
@@ -43,10 +51,14 @@
             <div class="row mb-3" *ngIf="unit">
               <div class="col-md-6">
                 <div class="form-group row align-items-center">
-                  <label class="col-sm-3 text-start col-form-label" style="font-weight: 600;">Description</label>
+                  <label class="col-sm-3 text-start col-form-label" style="font-weight: 600;">Description <span class="text-danger">*</span></label>
                   <div class="col-sm-9">
-                    <input type="text" class="form-control" [(ngModel)]="unit.Description" name="unitdescription"
-                      placeholder="Enter description..." style="border-radius: 2px;">
+                    <input type="text" class="form-control" [(ngModel)]="unit.Description" name="unitdescription" #unitdescription="ngModel"
+                      placeholder="Enter description..." required style="border-radius: 2px;"
+                      [class.is-invalid]="unitdescription.invalid && (unitdescription.dirty || unitdescription.touched || unitForm.submitted)">
+                    <div class="invalid-feedback" *ngIf="unitdescription.invalid && (unitdescription.dirty || unitdescription.touched || unitForm.submitted)">
+                      Description is required
+                    </div>
                   </div>
                 </div>
               </div>
@@ -55,10 +67,15 @@
                   <label class="col-sm-3 text-start col-form-label" style="font-weight: 600;">Branch <span
                       class="text-danger">*</span></label>
                   <div class="col-sm-9">
-                    <select class="form-select form-control" [(ngModel)]="unit.BranchName" name="unitbranch" required
-                      style="border-radius: 2px; cursor: pointer;">
+                    <select class="form-select form-control" [(ngModel)]="unit.BranchName" name="unitbranch" #unitbranch="ngModel" required
+                      style="border-radius: 2px; cursor: pointer;"
+                      [class.is-invalid]="unitbranch.invalid && (unitbranch.dirty || unitbranch.touched || unitForm.submitted)">
+                      <option value="" disabled>Select Branch</option>
                       <option *ngFor="let branch of branches" [value]="branch.Name">{{branch.Name}}</option>
                     </select>
+                    <div class="invalid-feedback" *ngIf="unitbranch.invalid && (unitbranch.dirty || unitbranch.touched || unitForm.submitted)">
+                      Branch is required
+                    </div>
                   </div>
                 </div>
               </div>
@@ -70,10 +87,15 @@
                   <label class="col-sm-3 text-start col-form-label" style="font-weight: 600;">Department <span
                       class="text-danger">*</span></label>
                   <div class="col-sm-9">
-                    <select class="form-select form-control" [(ngModel)]="unit.DepartmentName" name="unitdepartment" required
-                      style="border-radius: 2px; cursor: pointer;">
+                    <select class="form-select form-control" [(ngModel)]="unit.DepartmentName" name="unitdepartment" #unitdepartment="ngModel" required
+                      style="border-radius: 2px; cursor: pointer;"
+                      [class.is-invalid]="unitdepartment.invalid && (unitdepartment.dirty || unitdepartment.touched || unitForm.submitted)">
+                      <option value="" disabled>Select Department</option>
                       <option *ngFor="let dept of departments" [value]="dept.Name">{{dept.Name}}</option>
                     </select>
+                    <div class="invalid-feedback" *ngIf="unitdepartment.invalid && (unitdepartment.dirty || unitdepartment.touched || unitForm.submitted)">
+                      Department is required
+                    </div>
                   </div>
                 </div>
               </div>
@@ -82,11 +104,16 @@
                   <label class="col-sm-3 text-start col-form-label" style="font-weight: 600;">Status <span
                       class="text-danger">*</span></label>
                   <div class="col-sm-9">
-                    <select class="form-select form-control" [(ngModel)]="unit.Status" name="unitstatus" required
-                      style="border-radius: 2px; cursor: pointer;">
+                    <select class="form-select form-control" [(ngModel)]="unit.Status" name="unitstatus" #unitstatus="ngModel" required
+                      style="border-radius: 2px; cursor: pointer;"
+                      [class.is-invalid]="unitstatus.invalid && (unitstatus.dirty || unitstatus.touched || unitForm.submitted)">
+                      <option value="" disabled>Select Status</option>
                       <option value="Active">Active</option>
                       <option value="Inactive">Inactive</option>
                     </select>
+                    <div class="invalid-feedback" *ngIf="unitstatus.invalid && (unitstatus.dirty || unitstatus.touched || unitForm.submitted)">
+                      Status is required
+                    </div>
                   </div>
                 </div>
               </div>
@@ -94,10 +121,15 @@
 
             <div class="hr-line-dashed" style="border-top: 1px dashed #e7eaec; margin: 20px 0;"></div>
             
+            <div *ngIf="unitForm.submitted && unitForm.invalid" class="alert alert-danger d-flex align-items-center mb-3" style="border-radius: 2px; padding: 10px 15px;">
+              <i class="fa fa-exclamation-triangle me-2" style="font-size: 16px;"></i>
+              <span>Please fill in all mandatory fields marked with an asterisk (*).</span>
+            </div>
+
             <div class="form-group row">
               <div class="col-sm-12 text-end">
                 <button class="btn btn-white me-2" type="button" (click)="cancel()" style="border: 1px solid #e7eaec;">Cancel</button>
-                <button class="btn btn-primary" type="submit" (click)="save()" style="background-color: #1ab394; border-color: #1ab394; min-width: 100px;">Save Changes</button>
+                <button class="btn btn-primary" type="submit" style="background-color: #1ab394; border-color: #1ab394; min-width: 100px;">Save Changes</button>
               </div>
             </div>
           </form>

@@ -44,10 +44,13 @@ export class ScanningTemplate implements OnInit {
     let filtered = this.scanningTemplates;
     if (this.searchText.trim()) {
       const search = this.searchText.toLowerCase();
-      filtered = this.scanningTemplates.filter(i => 
-        (i.Name && i.Name.toLowerCase().includes(search)) ||
-        (i.Description && i.Description.toLowerCase().includes(search))
-      );
+      filtered = this.scanningTemplates.filter(i => {
+        if (!i) return false;
+        return Object.values(i).some(val => 
+          val !== null && val !== undefined && 
+          String(val).toLowerCase().includes(search)
+        );
+      });
     }
     return filtered;
   }

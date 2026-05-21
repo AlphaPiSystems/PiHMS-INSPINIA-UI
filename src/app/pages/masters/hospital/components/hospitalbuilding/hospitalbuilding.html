@@ -18,7 +18,7 @@
                         </div>
                     </div>
 
-                    <div class="d-flex gap-2">
+                    <div class="d-flex gap-2 justify-content-end">
                         <div class="app-search">
                             <input [(ngModel)]="searchText" (ngModelChange)="currentPage = 1" type="search"
                                 class="form-control" placeholder="Search Buildings...">
@@ -35,28 +35,28 @@
                 <div class="table-responsive">
                     <table class="table table-custom table-centered table-select table-hover w-100 mb-0">
                         <thead class="bg-light align-middle bg-opacity-25 thead-sm">
-                            <tr class="text-uppercase fs-md fw-bold text-dark">
-                                <th style="width: 60px; border-bottom: 1px solid #e7eaec;">SL.No</th>
-                                <th style="border-bottom: 1px solid #e7eaec;">Building Name</th>
-                                <th style="border-bottom: 1px solid #e7eaec;">Short Name</th>
-                                <th style="border-bottom: 1px solid #e7eaec;">Registered Name</th>
-                                <th style="border-bottom: 1px solid #e7eaec;">App Type</th>
-                                <th style="border-bottom: 1px solid #e7eaec;">City</th>
-                                <th style="border-bottom: 1px solid #e7eaec;">Email</th>
-                                <th class="text-center" style="width: 100px; border-bottom: 1px solid #e7eaec;">Actions</th>
+                            <tr class="text-uppercase fs-xxs">
+                                <th style="width: 60px;">SL.No</th>
+                                <th >Building Name</th>
+                                <th >Short Name</th>
+                                <th >Registered Name</th>
+                                <th >App Type</th>
+                                <th >City</th>
+                                <th >Email</th>
+                                <th class="text-center" style="width: 100px;">Actions</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr *ngFor="let building of getPaginatedBuildings(); let i = index">
-                                <td class="fw-semibold text-dark fs-sm">{{ (currentPage - 1) * itemsPerPage + i + 1 }}</td>
-                                <td class="fw-semibold text-dark fs-sm">{{ building.Name }}</td>
-                                <td class="fw-semibold text-dark fs-sm">{{ building.ShortName }}</td>
-                                <td class="fw-semibold text-dark fs-sm">{{ building.RegisteredName }}</td>
-                                <td class="fw-semibold text-dark fs-sm text-uppercase">{{ building.ApplicationType }}</td>
-                                <td class="fw-semibold text-dark fs-sm">
+                                <td >{{ (currentPage - 1) * itemsPerPage + i + 1 }}</td>
+                                <td >{{ building.Name }}</td>
+                                <td >{{ building.ShortName }}</td>
+                                <td >{{ building.RegisteredName }}</td>
+                                <td class="text-uppercase">{{ building.ApplicationType }}</td>
+                                <td >
                                     {{ building.City }}
                                 </td>
-                                <td class="fw-semibold text-dark fs-sm">{{ building.Email }}</td>
+                                <td >{{ building.Email }}</td>
                                 <td>
                                     <div class="d-flex justify-content-center">
                                         <a [routerLink]="['/building/buildingedit', building.id]"

@@ -17,6 +17,7 @@ export class ItemEdit implements OnInit {
   branches: any[] = [];
   staffs: any[] = [];
   itemId: any;
+  submitted: boolean = false; // Track if Save Changes was clicked
 
   constructor(private route: ActivatedRoute, private http: HttpClient) {}
 
@@ -40,6 +41,15 @@ export class ItemEdit implements OnInit {
   }
 
   saveChanges() {
+    this.submitted = true; // Mark form as submitted
+
+    // Validate mandatory fields
+    if (!this.item?.Name?.trim() || !this.item?.Category?.trim() || !this.item?.ItemType) {
+      console.warn('Please fill in all mandatory fields marked with an asterisk (*)');
+      return; // Stop saving if validation fails
+    }
+
     console.log('Updating item data:', this.item);
+    // TODO: Call API/service to actually save the item
   }
 }

@@ -11,7 +11,7 @@
                     <form (ngSubmit)="save()" #itemForm="ngForm">
                         <div class="row mb-3">
                             <div class="col-md-4">
-                                <label class="form-label fw-semibold">Name</label>
+                                <label class="form-label fw-semibold">Name <span class="text-danger">*</span></label>
                                 <input type="text" class="form-control" [(ngModel)]="item.Name" name="Name" required placeholder="Enter Template Name">
                             </div>
                             <div class="col-md-4">
@@ -33,13 +33,11 @@
                             </div>
                         </div>
 
-                        <div class="d-flex gap-2">
-                            <button type="submit" class="btn btn-primary" [disabled]="!itemForm.form.valid" style="background-color: #1ab394; border-color: #1ab394;">
-                                Save Template
-                            </button>
+                        <div class="d-flex gap-2 justify-content-end">
                             <button type="button" class="btn btn-light" (click)="cancel()">
                                 Cancel
                             </button>
+<button type="submit" class="btn btn-primary" [disabled]="!itemForm.form.valid" style="background-color: #1ab394; border-color: #1ab394;">Save Changes</button>
                         </div>
                     </form>
                 </div>

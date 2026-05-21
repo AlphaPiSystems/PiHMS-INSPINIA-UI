@@ -17,7 +17,7 @@
                         </div>
                     </div>
 
-                    <div class="d-flex gap-2">
+                    <div class="d-flex gap-2 justify-content-end">
                         <div class="app-search">
                             <input [(ngModel)]="searchText" (ngModelChange)="currentPage = 1" type="search"
                                 class="form-control" placeholder="Search Items...">
@@ -34,32 +34,32 @@
                 <div class="table-responsive">
                     <table class="table table-custom table-centered table-select table-hover w-100 mb-0">
                         <thead class="bg-light align-middle bg-opacity-25 thead-sm">
-                            <tr class="text-uppercase fs-md fw-bold text-dark">
-                                <th style="width: 60px; border-bottom: 1px solid #e7eaec;">SL.No</th>
-                                <th style="border-bottom: 1px solid #e7eaec;">Item Code</th>
-                                <th style="border-bottom: 1px solid #e7eaec;">Item Name</th>
-                                <th style="border-bottom: 1px solid #e7eaec;">Batch Num</th>
-                                <th style="border-bottom: 1px solid #e7eaec;">Expiry Date</th>
-                                <th style="border-bottom: 1px solid #e7eaec;">Dosage Form</th>
-                                <th style="border-bottom: 1px solid #e7eaec;">Manufacturer</th>
-                                <th style="border-bottom: 1px solid #e7eaec;">Branch</th>
-                                <th class="text-center" style="width: 100px; border-bottom: 1px solid #e7eaec;">Actions</th>
+                            <tr class="text-uppercase fs-xxs">
+                                <th style="width: 60px;">SL.No</th>
+                                <th >Item Code</th>
+                                <th >Item Name</th>
+                                <th >Batch Num</th>
+                                <th >Expiry Date</th>
+                                <th >Dosage Form</th>
+                                <th >Manufacturer</th>
+                                <th >Branch</th>
+                                <th class="text-center" style="width: 100px;">Actions</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr *ngFor="let item of getPaginatedItems(); let i = index">
-                                <td class="fw-semibold text-dark fs-sm">{{ (currentPage - 1) * itemsPerPage + i + 1 }}</td>
-                                <td class="fw-semibold text-dark fs-sm">{{ item.ItemCode }}</td>
-                                <td class="fw-semibold text-dark fs-sm">{{ item.ItemName }}</td>
-                                <td class="fw-semibold text-dark fs-sm">{{ item.BatchNum || '-' }}</td>
-                                <td class="fw-semibold text-dark fs-sm">{{ item.ExpiryDate | date:'dd/MM/yyyy' }}</td>
-                                <td class="fw-semibold text-dark fs-sm">{{ item.DosageForm || '-' }}</td>
-                                <td class="fw-semibold text-dark fs-sm">{{ item.Manufacturer || '-' }}</td>
-                                <td class="fw-semibold text-dark fs-sm">
+                                <td >{{ (currentPage - 1) * itemsPerPage + i + 1 }}</td>
+                                <td >{{ item.ItemCode }}</td>
+                                <td >{{ item.ItemName }}</td>
+                                <td >{{ item.BatchNum || '-' }}</td>
+                                <td >{{ item.ExpiryDate | date:'dd/MM/yyyy' }}</td>
+                                <td >{{ item.DosageForm || '-' }}</td>
+                                <td >{{ item.Manufacturer || '-' }}</td>
+                                <td >
                                     {{ getBranchName(item.BranchID) }}
                                 </td>
                                 <td>
-                                    <div class="d-flex justify-content-center">
+                                    <div class="d-flex justify-content-center gap-1">
                                         <a [routerLink]="['/pharmacy/pharmacyedit']"
                                             [state]="{ item: item }"
                                             class="btn btn-primary btn-icon btn-sm rounded-circle"

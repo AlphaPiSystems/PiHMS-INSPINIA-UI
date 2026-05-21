@@ -1,7 +1,7 @@
 <div class="container-fluid">
   <app-page-title title="Edit Test" />
 
-<div class="wrapper wrapper-content animated fadeInRight" style="padding-top: 0;">
+<form #diagForm="ngForm" (ngSubmit)="onSubmit(diagForm)" class="wrapper wrapper-content animated fadeInRight" style="padding-top: 0;" novalidate>
   <div class="row">
     <!-- Section 1: General Test Information -->
     <div class="col-lg-12 mb-1">
@@ -12,14 +12,19 @@
           </h5>
         </div>
         <div class="ibox-content" style="padding: 8px 15px;">
-          <form role="form">
+          <div role="form">
             <div class="row">
               <div class="col-md-4 col-sm-12">
                 <div class="form-group row align-items-center" style="margin-bottom: 8px;">
-                  <label class="col-sm-4 text-start col-form-label" style="font-weight: 600;">Name</label>
+                  <label class="col-sm-4 text-start col-form-label" style="font-weight: 600;">Name <span
+                      class="text-danger">*</span></label>
                   <div class="col-sm-8">
-                    <input type="text" class="form-control" [(ngModel)]="patient.Name" name="testname"
-                      placeholder="Test Name" style="border-radius: 2px;">
+                    <input type="text" class="form-control" [(ngModel)]="patient.Name" name="testname" #testname="ngModel"
+                      placeholder="Enter Test Name" required style="border-radius: 2px;"
+                      [class.is-invalid]="testname.invalid && (testname.dirty || testname.touched || diagForm.submitted)">
+                    <div class="invalid-feedback" *ngIf="testname.invalid && (testname.dirty || testname.touched || diagForm.submitted)">
+                      Test Name is required
+                    </div>
                   </div>
                 </div>
               </div>
@@ -34,10 +39,15 @@
               </div>
               <div class="col-md-4 col-sm-12">
                 <div class="form-group row align-items-center" style="margin-bottom: 8px;">
-                  <label class="col-sm-4 text-start col-form-label" style="font-weight: 600;">Short Name</label>
+                  <label class="col-sm-4 text-start col-form-label" style="font-weight: 600;">Short Name <span
+                      class="text-danger">*</span></label>
                   <div class="col-sm-8">
-                    <input type="text" class="form-control" [(ngModel)]="patient.ShortName" name="testshortname"
-                      placeholder="Short" style="border-radius: 2px;">
+                    <input type="text" class="form-control" [(ngModel)]="patient.ShortName" name="testshortname" #testshortname="ngModel"
+                      placeholder="Short Name" required style="border-radius: 2px;"
+                      [class.is-invalid]="testshortname.invalid && (testshortname.dirty || testshortname.touched || diagForm.submitted)">
+                    <div class="invalid-feedback" *ngIf="testshortname.invalid && (testshortname.dirty || testshortname.touched || diagForm.submitted)">
+                      Short Name is required
+                    </div>
                   </div>
                 </div>
               </div>
@@ -45,30 +55,40 @@
             <div class="row">
               <div class="col-md-4 col-sm-12">
                 <div class="form-group row align-items-center" style="margin-bottom: 0;">
-                  <label class="col-sm-4 text-start col-form-label" style="font-weight: 600;">Report Name</label>
+                  <label class="col-sm-4 text-start col-form-label" style="font-weight: 600;">Report Name <span
+                      class="text-danger">*</span></label>
                   <div class="col-sm-8">
-                    <input type="text" class="form-control" [(ngModel)]="patient.ReportName" name="testreportname"
-                      placeholder="Report Name" style="border-radius: 2px;">
+                    <input type="text" class="form-control" [(ngModel)]="patient.ReportName" name="testreportname" #testreportname="ngModel"
+                      placeholder="Full Report Name" required style="border-radius: 2px;"
+                      [class.is-invalid]="testreportname.invalid && (testreportname.dirty || testreportname.touched || diagForm.submitted)">
+                    <div class="invalid-feedback" *ngIf="testreportname.invalid && (testreportname.dirty || testreportname.touched || diagForm.submitted)">
+                      Report Name is required
+                    </div>
                   </div>
                 </div>
               </div>
               <div class="col-md-4 col-sm-12">
                 <div class="form-group row align-items-center" style="margin-bottom: 0;">
-                  <label class="col-sm-4 text-start col-form-label" style="font-weight: 600;">Type</label>
+                  <label class="col-sm-4 text-start col-form-label" style="font-weight: 600;">Type <span
+                      class="text-danger">*</span></label>
                   <div class="col-sm-8">
-                    <select class="form-select form-control" [(ngModel)]="patient.Type" name="testtype"
-                      style="border-radius: 2px; cursor: pointer;">
-                      <option value="" disabled>Select</option>
-                      <option value="SNG">Single (SNG)</option>
-                      <option value="MUL">Multiple (MUL)</option>
-                      <option value="PRO">Profile (PRO)</option>
-                      <option value="PKG">Package (PKG)</option>
+                    <select class="form-select form-control" [(ngModel)]="patient.Type" name="testtype" #testtype="ngModel" required
+                      style="border-radius: 2px; cursor: pointer;"
+                      [class.is-invalid]="testtype.invalid && (testtype.dirty || testtype.touched || diagForm.submitted)">
+                      <option value="" disabled>Select Type</option>
+                      <option value="SNG">Single Test (SNG)</option>
+                      <option value="MUL">Multiple Test (MUL)</option>
+                      <option value="PRO">Test Profile (PRO)</option>
+                      <option value="PKG">Test Package (PKG)</option>
                     </select>
+                    <div class="invalid-feedback" *ngIf="testtype.invalid && (testtype.dirty || testtype.touched || diagForm.submitted)">
+                      Type is required
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
-          </form>
+          </div>
         </div>
       </div>
     </div>
@@ -82,20 +102,24 @@
             Equipment</h5>
         </div>
         <div class="ibox-content" style="padding: 8px 15px;">
-          <form role="form">
+          <div role="form">
             <div class="row">
               <div class="col-md-4 col-sm-12">
                 <div class="form-group row align-items-center" style="margin-bottom: 8px;">
                   <label class="col-sm-4 text-start col-form-label" style="font-weight: 600;">Investig. Type <span
                       class="text-danger">*</span></label>
                   <div class="col-sm-8">
-                    <select class="form-select form-control" [(ngModel)]="patient.InvestigationType"
-                      name="investigationtype" required style="border-radius: 2px; cursor: pointer;">
+                    <select class="form-select form-control" [(ngModel)]="patient.InvestigationType" #investigationtype="ngModel"
+                      name="investigationtype" required style="border-radius: 2px; cursor: pointer;"
+                      [class.is-invalid]="investigationtype.invalid && (investigationtype.dirty || investigationtype.touched || diagForm.submitted)">
                       <option value="" disabled>Select</option>
                       <option value="Special">Special</option>
                       <option value="Routine">Routine</option>
                       <option value="Death">Death</option>
                     </select>
+                    <div class="invalid-feedback" *ngIf="investigationtype.invalid && (investigationtype.dirty || investigationtype.touched || diagForm.submitted)">
+                      Investigation Type is required
+                    </div>
                   </div>
                 </div>
               </div>
@@ -104,11 +128,15 @@
                   <label class="col-sm-4 text-start col-form-label" style="font-weight: 600;">Sample <span
                       class="text-danger">*</span></label>
                   <div class="col-sm-8">
-                    <select class="form-select form-control" [(ngModel)]="patient.SampleID" name="sampleid"
-                      required style="border-radius: 2px;">
+                    <select class="form-select form-control" [(ngModel)]="patient.SampleID" name="sampleid" #sampleid="ngModel"
+                      required style="border-radius: 2px;"
+                      [class.is-invalid]="sampleid.invalid && (sampleid.dirty || sampleid.touched || diagForm.submitted)">
                       <option value="">Select Sample</option>
                       <option *ngFor="let s of samples" [value]="s.FullName">{{ s.FullName }}</option>
                     </select>
+                    <div class="invalid-feedback" *ngIf="sampleid.invalid && (sampleid.dirty || sampleid.touched || diagForm.submitted)">
+                      Sample is required
+                    </div>
                   </div>
                 </div>
               </div>
@@ -117,8 +145,15 @@
                   <label class="col-sm-4 text-start col-form-label" style="font-weight: 600;">Department <span
                       class="text-danger">*</span></label>
                   <div class="col-sm-8">
-                    <input class="form-control" [(ngModel)]="patient.DepartmentID" name="testdepartment"
-                      placeholder="Department" required style="border-radius: 2px;">
+                    <select class="form-select form-control" [(ngModel)]="patient.DepartmentID" name="testdepartment" #testdepartment="ngModel"
+                      required style="border-radius: 2px; cursor: pointer;"
+                      [class.is-invalid]="testdepartment.invalid && (testdepartment.dirty || testdepartment.touched || diagForm.submitted)">
+                      <option value="" disabled>Select Department</option>
+                      <option *ngFor="let dept of departments" [ngValue]="dept.id">{{ dept.Name }}</option>
+                    </select>
+                    <div class="invalid-feedback" *ngIf="testdepartment.invalid && (testdepartment.dirty || testdepartment.touched || diagForm.submitted)">
+                      Department is required
+                    </div>
                   </div>
                 </div>
               </div>
@@ -130,8 +165,11 @@
                   <label class="col-sm-4 text-start col-form-label" style="font-weight: 600;">Instrument <span
                       class="text-danger">*</span></label>
                   <div class="col-sm-8">
-                    <input class="form-control" [(ngModel)]="patient.Instrument" name="testinstrument"
-                      placeholder="Instrument" required style="border-radius: 2px;">
+                    <select class="form-select form-control" [(ngModel)]="patient.Instrument" name="testinstrument"
+                      required style="border-radius: 2px; cursor: pointer;">
+                      <option value="" disabled>Select Instrument</option>
+                      <option *ngFor="let inst of instruments" [value]="inst.InstrumentationName">{{ inst.InstrumentationName }}</option>
+                    </select>
                   </div>
                 </div>
               </div>
@@ -163,12 +201,16 @@
                   <label class="col-sm-4 text-start col-form-label" style="font-weight: 600;">Outsourced <span
                       class="text-danger">*</span></label>
                   <div class="col-sm-8">
-                    <select class="form-select form-control" [(ngModel)]="patient.IsOutsourced" name="testisoutsourced"
-                      required style="border-radius: 2px; cursor: pointer;">
+                    <select class="form-select form-control" [(ngModel)]="patient.IsOutsourced" name="testisoutsourced" #testisoutsourced="ngModel"
+                      required style="border-radius: 2px; cursor: pointer;"
+                      [class.is-invalid]="testisoutsourced.invalid && (testisoutsourced.dirty || testisoutsourced.touched || diagForm.submitted)">
                       <option value="" disabled>Select</option>
                       <option value="Yes">Yes</option>
                       <option value="No">No</option>
                     </select>
+                    <div class="invalid-feedback" *ngIf="testisoutsourced.invalid && (testisoutsourced.dirty || testisoutsourced.touched || diagForm.submitted)">
+                      Outsourced is required
+                    </div>
                   </div>
                 </div>
               </div>
@@ -197,7 +239,7 @@
                 </div>
               </div>
             </div>
-          </form>
+          </div>
         </div>
       </div>
     </div>
@@ -211,20 +253,24 @@
             Output</h5>
         </div>
         <div class="ibox-content" style="padding: 8px 15px; background-color: #fcfcfc;">
-          <form role="form">
+          <div role="form">
             <div class="row">
               <div class="col-md-4 col-sm-12">
                 <div class="form-group row align-items-center" style="margin-bottom: 8px;">
                   <label class="col-sm-4 text-start col-form-label" style="font-weight: 600;">Report. Type <span
                       class="text-danger">*</span></label>
                   <div class="col-sm-8">
-                    <select class="form-select form-control" [(ngModel)]="patient.ReportingType" name="reportingtype"
-                      required style="border-radius: 2px; cursor: pointer;">
+                    <select class="form-select form-control" [(ngModel)]="patient.ReportingType" name="reportingtype" #reportingtype="ngModel"
+                      required style="border-radius: 2px; cursor: pointer;"
+                      [class.is-invalid]="reportingtype.invalid && (reportingtype.dirty || reportingtype.touched || diagForm.submitted)">
                       <option value="" disabled>Select</option>
                       <option value="Value">Value</option>
                       <option value="Text Fixed">Fixed</option>
                       <option value="Text MultiLine">MultiLine</option>
                     </select>
+                    <div class="invalid-feedback" *ngIf="reportingtype.invalid && (reportingtype.dirty || reportingtype.touched || diagForm.submitted)">
+                      Reporting Type is required
+                    </div>
                   </div>
                 </div>
               </div>
@@ -233,13 +279,17 @@
                   <label class="col-sm-4 text-start col-form-label" style="font-weight: 600;">Report. Align <span
                       class="text-danger">*</span></label>
                   <div class="col-sm-8">
-                    <select class="form-select form-control" [(ngModel)]="patient.ReportingAlign" name="reportingalign"
-                      required style="border-radius: 2px; cursor: pointer;">
+                    <select class="form-select form-control" [(ngModel)]="patient.ReportingAlign" name="reportingalign" #reportingalign="ngModel"
+                      required style="border-radius: 2px; cursor: pointer;"
+                      [class.is-invalid]="reportingalign.invalid && (reportingalign.dirty || reportingalign.touched || diagForm.submitted)">
                       <option value="" disabled>Select</option>
                       <option value="LeftAlign">Left</option>
                       <option value="CenterBold">Bold</option>
                       <option value="Not Required">None</option>
                     </select>
+                    <div class="invalid-feedback" *ngIf="reportingalign.invalid && (reportingalign.dirty || reportingalign.touched || diagForm.submitted)">
+                      Reporting Align is required
+                    </div>
                   </div>
                 </div>
               </div>
@@ -248,12 +298,16 @@
                   <label class="col-sm-4 text-start col-form-label" style="font-weight: 600; padding-right: 0;">Page
                     Break<span class="text-danger">*</span></label>
                   <div class="col-sm-8">
-                    <select class="form-select form-control" [(ngModel)]="patient.ReportingPageBreak"
-                      name="reportingpagebreak" required style="border-radius: 2px; cursor: pointer;">
+                    <select class="form-select form-control" [(ngModel)]="patient.ReportingPageBreak" #reportingpagebreak="ngModel"
+                      name="reportingpagebreak" required style="border-radius: 2px; cursor: pointer;"
+                      [class.is-invalid]="reportingpagebreak.invalid && (reportingpagebreak.dirty || reportingpagebreak.touched || diagForm.submitted)">
                       <option value="" disabled>Select</option>
                       <option value="Yes">Yes</option>
                       <option value="No">No</option>
                     </select>
+                    <div class="invalid-feedback" *ngIf="reportingpagebreak.invalid && (reportingpagebreak.dirty || reportingpagebreak.touched || diagForm.submitted)">
+                      Page Break is required
+                    </div>
                   </div>
                 </div>
               </div>
@@ -280,7 +334,7 @@
                 </div>
               </div>
             </div>
-          </form>
+          </div>
         </div>
       </div>
     </div>
@@ -293,15 +347,22 @@
           <h5 style="font-weight: 600; margin: 0; font-size: 14px; text-transform: uppercase;">Result Configuration</h5>
         </div>
         <div class="ibox-content" style="padding: 10px 15px; flex: 1;">
-          <form role="form">
+          <div role="form">
             <div class="row">
               <div class="col-md-4 col-sm-12">
                 <div class="form-group row align-items-center" style="margin-bottom: 0;">
                   <label class="col-sm-4 text-start col-form-label" style="font-weight: 600;">Unit <span
                       class="text-danger">*</span></label>
                   <div class="col-sm-8">
-                    <input type="text" class="form-control" [(ngModel)]="patient.Unit" name="testunit"
-                      placeholder="mg/dL" required style="border-radius: 2px;">
+                    <select class="form-select form-control" [(ngModel)]="patient.Unit" name="testunit" #testunit="ngModel"
+                      required style="border-radius: 2px; cursor: pointer;"
+                      [class.is-invalid]="testunit.invalid && (testunit.dirty || testunit.touched || diagForm.submitted)">
+                      <option value="" disabled>Select Unit</option>
+                      <option *ngFor="let u of units" [value]="u.Name">{{ u.Name }}</option>
+                    </select>
+                    <div class="invalid-feedback" *ngIf="testunit.invalid && (testunit.dirty || testunit.touched || diagForm.submitted)">
+                      Unit is required
+                    </div>
                   </div>
                 </div>
               </div>
@@ -310,12 +371,16 @@
                   <label class="col-sm-4 text-start col-form-label" style="font-weight: 600;">Has Range <span
                       class="text-danger">*</span></label>
                   <div class="col-sm-8">
-                    <select class="form-select form-control" [(ngModel)]="patient.HasRange" name="testhasnormalrange"
-                      required style="border-radius: 2px; cursor: pointer;">
+                    <select class="form-select form-control" [(ngModel)]="patient.HasRange" name="testhasnormalrange" #testhasnormalrange="ngModel"
+                      required style="border-radius: 2px; cursor: pointer;"
+                      [class.is-invalid]="testhasnormalrange.invalid && (testhasnormalrange.dirty || testhasnormalrange.touched || diagForm.submitted)">
                       <option value="" disabled>Select</option>
                       <option value="Yes">Yes</option>
                       <option value="No">No</option>
                     </select>
+                    <div class="invalid-feedback" *ngIf="testhasnormalrange.invalid && (testhasnormalrange.dirty || testhasnormalrange.touched || diagForm.submitted)">
+                      Has Range is required
+                    </div>
                   </div>
                 </div>
               </div>
@@ -330,7 +395,7 @@
                 </div>
               </div>
             </div>
-          </form>
+          </div>
         </div>
       </div>
     </div>
@@ -437,13 +502,7 @@
                   <select class="form-select form-control input-sm" [(ngModel)]="range.unit" [name]="'unit' + i"
                     style="border-radius: 2px; height: 26px; padding: 0px 5px; font-size: 12px;">
                     <option value="" disabled>Select</option>
-                    <option value="mg/dL">mg/dL</option>
-                    <option value="g/dL">g/dL</option>
-                    <option value="U/L">U/L</option>
-                    <option value="mmol/L">mmol/L</option>
-                    <option value="µg/dL">µg/dL</option>
-                    <option value="%">%</option>
-                    <option value="cells/mcL">cells/mcL</option>
+                    <option *ngFor="let u of units" [value]="u.Name">{{ u.Name }}</option>
                   </select>
                 </td>
                 <td style="padding: 4px 8px; border: 1px solid #e7eaec;">
@@ -515,13 +574,20 @@
   <div class="row mt-0">
     <div class="col-lg-12">
       <div class="hr-line-dashed" style="border-top: 1px dashed #e7eaec; margin: 5px 0;"></div>
+      <div *ngIf="diagForm.submitted && diagForm.invalid" class="alert alert-danger d-flex align-items-center mb-3" style="border-radius: 2px; padding: 10px 15px;">
+        <i class="fa fa-exclamation-triangle me-2" style="font-size: 16px;"></i>
+        <span>Please fill in all mandatory fields marked with an asterisk (*).</span>
+      </div>
+      <div *ngIf="diagForm.submitted && patient.HasRange === 'Yes' && (!referenceRanges || referenceRanges.length === 0)" class="alert alert-danger d-flex align-items-center mb-3" style="border-radius: 2px; padding: 10px 15px;">
+        <i class="fa fa-exclamation-triangle me-2" style="font-size: 16px;"></i>
+        <span>At least one record is required in the Reference Ranges section when 'Has Range' is Yes.</span>
+      </div>
       <div class="text-right d-flex justify-content-end gap-2" style="justify-content: flex-end; margin-bottom: 10px;">
-        <button class="btn btn-white" type="button"
+        <button class="btn btn-white" type="button" routerLink="/diagtest/diagtestlist"
           style="border: 1px solid #d2d2d2; background: #fff; padding: 8px 20px; font-weight: 600; border-radius: 2px; color: #555; margin-right: 10px;">Cancel</button>
         <button class="btn btn-primary" type="submit"
-          style="background-color: #1ab394; border-color: #1ab394; padding: 8px 24px; font-weight: 600; color: white; border-radius: 2px;">Save
-          Changes</button>
+          style="background-color: #1ab394; border-color: #1ab394; padding: 8px 24px; font-weight: 600; color: white; border-radius: 2px;">Save Changes</button>
       </div>
     </div>
   </div>
-</div>
+</form>

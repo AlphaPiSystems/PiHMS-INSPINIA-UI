@@ -48,6 +48,17 @@ export class DoctorPriceAdd implements OnInit {
           const found = data.doctor_price?.find((p: any) => p.id === +id);
           if (found) {
             this.item = { ...found };
+            
+            // Fix invalid references so they don't bypass validation silently
+            if (!this.staffs.find(s => s.id == this.item.DoctorID)) {
+              this.item.DoctorID = '';
+            }
+            if (!this.billItems.find(b => b.id == this.item.ItemID)) {
+              this.item.ItemID = '';
+            }
+            if (!this.wardTypes.find(w => w.id == this.item.WardTypeID)) {
+              this.item.WardTypeID = '';
+            }
           }
         }
       }

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NgIcon } from '@ng-icons/core';
-import { ActivatedRoute, RouterLink } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { PageTitleComponent } from '@app/components/page-title.component';
@@ -34,7 +34,7 @@ export class DiagGroupEdit implements OnInit {
 
   Math = Math;
 
-  constructor(private route: ActivatedRoute, private http: HttpClient) {}
+  constructor(private route: ActivatedRoute, private http: HttpClient, private router: Router) {}
 
   ngOnInit() {
     this.http.get<{diagtest: any[], diaggroup: any[]}>('assets/data/db.json').subscribe({
@@ -213,5 +213,10 @@ export class DiagGroupEdit implements OnInit {
 
   get totalAvailablePages() {
     return Math.ceil(this.getFilteredAvailableTests().length / this.availableItemsPerPage);
+  }
+
+  saveGroup() {
+    console.log('Saving group:', this.selectedGroup, 'with linked tests:', this.linkedTests);
+    this.router.navigate(['/diaggroup/diaggrouplist']);
   }
 }

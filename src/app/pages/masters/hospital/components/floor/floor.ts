@@ -53,15 +53,13 @@ export class Floor implements OnInit {
     let filtered = this.floorList;
     if (this.searchText.trim()) {
       const search = this.searchText.toLowerCase();
-      filtered = this.floorList.filter(f => 
-        (f.FloorNumber && f.FloorNumber.toLowerCase().includes(search)) ||
-        (f.FloorName && f.FloorName.toLowerCase().includes(search)) ||
-        (f.HospitalBuildingName && f.HospitalBuildingName.toLowerCase().includes(search)) ||
-        (f.Accessibility && f.Accessibility.toLowerCase().includes(search)) ||
-        (f.FrontDeskStaffName && f.FrontDeskStaffName.toLowerCase().includes(search)) ||
-        (f.BranchName && f.BranchName.toLowerCase().includes(search)) ||
-        (f.Department && f.Department.toString().toLowerCase().includes(search))
-      );
+      filtered = this.floorList.filter(f => {
+        if (!f) return false;
+        return Object.values(f).some(val => 
+          val !== null && val !== undefined && 
+          String(val).toLowerCase().includes(search)
+        );
+      });
     }
     return filtered;
   }

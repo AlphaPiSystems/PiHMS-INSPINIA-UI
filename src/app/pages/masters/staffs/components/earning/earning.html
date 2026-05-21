@@ -31,17 +31,17 @@
                 <div class="table-responsive">
                     <table class="table table-custom table-centered table-select table-hover w-100 mb-0">
                         <thead class="bg-light align-middle bg-opacity-25 thead-sm">
-                            <tr class="text-uppercase fs-md fw-bold text-dark">
-                                <th style="border-bottom: 1px solid #e7eaec;">SL.No</th>
-                                <th style="border-bottom: 1px solid #e7eaec;">Staff Name</th>
-                                <th style="border-bottom: 1px solid #e7eaec;">BASIC</th>
-                                <th style="border-bottom: 1px solid #e7eaec;">HRA</th>
-                                <th style="border-bottom: 1px solid #e7eaec;">CA</th>
-                                <th style="border-bottom: 1px solid #e7eaec;">MA</th>
-                                <th style="border-bottom: 1px solid #e7eaec;">VA</th>
-                                <th style="border-bottom: 1px solid #e7eaec;">PB</th>
-                                <th style="border-bottom: 1px solid #e7eaec;">Total</th>
-                                <th class="text-center" style="width: 1%; border-bottom: 1px solid #e7eaec;">Actions
+                            <tr class="text-uppercase fs-xxs">
+                                <th style="width: 60px;">SL.No</th>
+                                <th >Staff Name</th>
+                                <th >BASIC</th>
+                                <th >HRA</th>
+                                <th >CA</th>
+                                <th >MA</th>
+                                <th >VA</th>
+                                <th >PB</th>
+                                <th >Total</th>
+                                <th class="text-center" style="width: 1%;">Actions
                                 </th>
                             </tr>
                         </thead>
@@ -50,7 +50,7 @@
                             @for (earning of this.items$ | async; track $index; let i = $index) {
                             <tr>
                                 <td>{{ (tableService.page - 1) * tableService.pageSize + i + 1 }}</td>
-                                <td class="fw-semibold text-dark fs-sm">{{ earning.StaffName }}</td>
+                                <td >{{ earning.StaffName }}</td>
                                 <td class="fs-sm">{{ earning.BASIC | number: '1.2-2' }}</td>
                                 <td class="fs-sm">{{ earning.HRA | number: '1.2-2' }}</td>
                                 <td class="fs-sm">{{ earning.CA | number: '1.2-2' }}</td>

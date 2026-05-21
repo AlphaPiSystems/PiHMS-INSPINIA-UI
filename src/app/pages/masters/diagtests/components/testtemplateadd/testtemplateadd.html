@@ -8,42 +8,62 @@
                     <h5 class="card-title mb-0">Template Details</h5>
                 </div>
                 <div class="card-body">
-                    <form (ngSubmit)="save()" #templateForm="ngForm">
+                    <form (ngSubmit)="save(templateForm)" #templateForm="ngForm" novalidate>
                         <div class="row mb-3">
                             <div class="col-md-4">
-                                <label class="form-label fw-semibold">Test Name</label>
-                                <select class="form-select" [(ngModel)]="template.DiagTestID" name="DiagTestID" required (change)="onDiagTestChange()">
-                                    <option [ngValue]="null">Select Test</option>
+                                <label class="form-label fw-semibold">Test Name <span class="text-danger">*</span></label>
+                                <select class="form-select" [(ngModel)]="template.DiagTestID" name="DiagTestID" #diagtest="ngModel" required (change)="onDiagTestChange()"
+                                  [class.is-invalid]="diagtest.invalid && (diagtest.dirty || diagtest.touched || templateForm.submitted)">
+                                    <option [ngValue]="null" disabled>Select Test</option>
                                     <option *ngFor="let test of diagTests" [ngValue]="test.id">{{ test.Name }} ({{ test.Code }})</option>
                                 </select>
+                                <div class="invalid-feedback" *ngIf="diagtest.invalid && (diagtest.dirty || diagtest.touched || templateForm.submitted)">
+                                  Test Name is required
+                                </div>
                             </div>
                             <div class="col-md-4">
-                                <label class="form-label fw-semibold">Doctor / Staff</label>
-                                <select class="form-select" [(ngModel)]="template.DoctorStaffID" name="DoctorStaffID" (change)="onDoctorChange()">
-                                    <option [ngValue]="null">Select Doctor</option>
+                                <label class="form-label fw-semibold">Doctor / Staff <span class="text-danger">*</span></label>
+                                <select class="form-select" [(ngModel)]="template.DoctorStaffID" name="DoctorStaffID" #doctor="ngModel" required (change)="onDoctorChange()"
+                                  [class.is-invalid]="doctor.invalid && (doctor.dirty || doctor.touched || templateForm.submitted)">
+                                    <option [ngValue]="null" disabled>Select Doctor</option>
                                     <option *ngFor="let doc of doctors" [ngValue]="doc.id">{{ doc.Name }}</option>
                                 </select>
+                                <div class="invalid-feedback" *ngIf="doctor.invalid && (doctor.dirty || doctor.touched || templateForm.submitted)">
+                                  Doctor is required
+                                </div>
                             </div>
                             <div class="col-md-4">
-                                <label class="form-label fw-semibold">Template Name</label>
-                                <input type="text" class="form-control" [(ngModel)]="template.TemplateName" name="TemplateName" required placeholder="Enter Template Name">
+                                <label class="form-label fw-semibold">Template Name <span class="text-danger">*</span></label>
+                                <input type="text" class="form-control" [(ngModel)]="template.TemplateName" name="TemplateName" #templatename="ngModel" required placeholder="Enter Template Name"
+                                  [class.is-invalid]="templatename.invalid && (templatename.dirty || templatename.touched || templateForm.submitted)">
+                                <div class="invalid-feedback" *ngIf="templatename.invalid && (templatename.dirty || templatename.touched || templateForm.submitted)">
+                                  Template Name is required
+                                </div>
                             </div>
                         </div>
 
                         <div class="row mb-3">
                             <div class="col-md-12">
-                                <label class="form-label fw-semibold">Template Data (Rich Text)</label>
-                                <quill-editor [(ngModel)]="template.TemplateData" name="TemplateData" [modules]="quillConfig" [placeholder]="'Enter Template Data...'" [styles]="{height: '500px'}"></quill-editor>
+                                <label class="form-label fw-semibold">Template Data (Rich Text) <span class="text-danger">*</span></label>
+                                <quill-editor [(ngModel)]="template.TemplateData" name="TemplateData" #templatedata="ngModel" required [modules]="quillConfig" [placeholder]="'Enter Template Data...'" [styles]="{height: '500px'}"></quill-editor>
+                                <div class="invalid-feedback d-block" *ngIf="templatedata.invalid && (templatedata.dirty || templatedata.touched || templateForm.submitted)">
+                                  Template Data is required
+                                </div>
                             </div>
                         </div>
 
-                        <div class="d-flex gap-2">
-                            <button type="submit" class="btn btn-primary" [disabled]="!templateForm.form.valid" style="background-color: #1ab394; border-color: #1ab394;">
-                                Save Template
-                            </button>
+                        <div class="hr-line-dashed" style="border-top: 1px dashed #e7eaec; margin: 20px 0;"></div>
+            
+                        <div *ngIf="templateForm.submitted && templateForm.invalid" class="alert alert-danger d-flex align-items-center mb-3" style="border-radius: 2px; padding: 10px 15px;">
+                          <i class="fa fa-exclamation-triangle me-2" style="font-size: 16px;"></i>
+                          <span>Please fill in all mandatory fields marked with an asterisk (*).</span>
+                        </div>
+
+                        <div class="d-flex gap-2 justify-content-end">
                             <button type="button" class="btn btn-light" (click)="cancel()">
                                 Cancel
                             </button>
+<button type="submit" class="btn btn-primary" style="background-color: #1ab394; border-color: #1ab394;">Save Changes</button>
                         </div>
                     </form>
                 </div>

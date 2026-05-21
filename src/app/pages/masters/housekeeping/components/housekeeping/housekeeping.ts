@@ -61,13 +61,11 @@ export class Housekeeping implements OnInit {
     if (this.searchText.trim()) {
       const search = this.searchText.toLowerCase();
       filtered = this.tasks.filter(i => {
-        const deptName = this.getDepartmentName(i.DepartmentID).toLowerCase();
-        const branchName = this.getBranchName(i.BranchID).toLowerCase();
-        return (i.TaskName && i.TaskName.toLowerCase().includes(search)) ||
-          (i.Descriptions && i.Descriptions.toLowerCase().includes(search)) ||
-          (i.Category && i.Category.toLowerCase().includes(search)) ||
-          deptName.includes(search) ||
-          branchName.includes(search);
+        if (!i) return false;
+        return Object.values(i).some(val => 
+          val !== null && val !== undefined && 
+          String(val).toLowerCase().includes(search)
+        );
       });
     }
     return filtered;

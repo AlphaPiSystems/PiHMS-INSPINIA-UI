@@ -44,11 +44,13 @@ export class ScanningItem implements OnInit {
     let filtered = this.scanningItems;
     if (this.searchText.trim()) {
       const search = this.searchText.toLowerCase();
-      filtered = this.scanningItems.filter(i => 
-        (i.Title && i.Title.toLowerCase().includes(search)) ||
-        (i.ScanName && i.ScanName.toLowerCase().includes(search)) ||
-        (i.Description && i.Description.toLowerCase().includes(search))
-      );
+      filtered = this.scanningItems.filter(i => {
+        if (!i) return false;
+        return Object.values(i).some(val => 
+          val !== null && val !== undefined && 
+          String(val).toLowerCase().includes(search)
+        );
+      });
     }
     return filtered;
   }

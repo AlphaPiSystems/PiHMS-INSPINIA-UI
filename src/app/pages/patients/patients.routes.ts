@@ -1,12 +1,14 @@
 import { Routes } from '@angular/router';
 import { PatientIndex } from './patient-index/patient-index';
 import { PatientDashboard } from './patient-dashboard/patient-dashboard';
-import { Details } from './tabs/details/details';
+import { EditDetails } from './tabs/editdetails/editdetails';
+import { AddDetails } from './tabs/adddetails/adddetails';
 import {Visit}  from './tabs/visit/visit'
 import { History } from './tabs/history/history';
 import { Billing } from './tabs/billing/billing';
 import { VisitNew } from './tabs/visit-new/visit-new';
 import { VisitEdit } from './tabs/visit-edit/visit-edit';
+import { VisitView } from './tabs/visit-view/visit-view';
 import { Lab } from './tabs/lab/lab';
 import { Scanning } from './tabs/scanning/scanning'; 
 import { Insurance } from './tabs/insurance/insurance';
@@ -23,9 +25,15 @@ export const PATIENTS_ROUTES: Routes = [
 
   },
   {
-    path: 'details/:id',
-    component: Details,
+    path: 'editdetails/:id',
+    component: EditDetails,
     data: { title: "Patient Details" },
+    
+  },
+  {
+    path: 'adddetails',
+    component: AddDetails,
+    data: { title: "Add Patient Details" },
     
   },
   {
@@ -55,7 +63,13 @@ export const PATIENTS_ROUTES: Routes = [
   {
     path: 'visitedit/:id',
     component: VisitEdit,
-    data: { title: "new visit" },
+    data: { title: "edit visit" },
+    
+  },
+  {
+    path: 'visitview/:id',
+    component: VisitView,
+    data: { title: "view visit" },
     
   },
   {

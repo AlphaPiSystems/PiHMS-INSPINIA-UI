@@ -18,7 +18,7 @@
                         </div>
                     </div>
 
-                    <div class="d-flex gap-2">
+                    <div class="d-flex gap-2 justify-content-end">
                         <div class="app-search">
                             <input [(ngModel)]="searchText" (ngModelChange)="currentPage = 1" type="search"
                                 class="form-control" placeholder="Search Ward Types...">
@@ -35,22 +35,22 @@
                 <div class="table-responsive">
                     <table class="table table-custom table-centered table-select table-hover w-100 mb-0">
                         <thead class="bg-light align-middle bg-opacity-25 thead-sm">
-                            <tr class="text-uppercase fs-md fw-bold text-dark">
-                                <th style="width: 60px; border-bottom: 1px solid #e7eaec;">SL.No</th>
-                                <th style="border-bottom: 1px solid #e7eaec;">Type</th>
-                                <th style="border-bottom: 1px solid #e7eaec;">Description</th>
-                                <th style="border-bottom: 1px solid #e7eaec;">Branch</th>
-                                <th style="border-bottom: 1px solid #e7eaec;">Department Name</th>
-                                <th class="text-center" style="width: 100px; border-bottom: 1px solid #e7eaec;">Actions</th>
+                            <tr class="text-uppercase fs-xxs">
+                                <th style="width: 60px;">SL.No</th>
+                                <th>Type</th>
+                                <th>Description</th>
+                                <th>Branch</th>
+                                <th>Department Name</th>
+                                <th class="text-center" style="width: 100px;">Actions</th>
                             </tr>
                         </thead>
                         <tbody>
                              <tr *ngFor="let wt of getPaginatedWardTypes(); let i = index">
-                                <td class="fw-semibold text-dark fs-sm">{{ (currentPage - 1) * itemsPerPage + i + 1 }}</td>
-                                <td class="fw-semibold text-dark fs-sm">{{ wt.Type }}</td>
-                                <td class="fw-semibold text-dark fs-sm">{{ wt.Description }}</td>
-                                <td class="fw-semibold text-dark fs-sm">{{ wt.BranchName }}</td>
-                                <td class="fw-semibold text-dark fs-sm">{{ wt.DepartmentName }}</td>
+                                <td>{{ (currentPage - 1) * itemsPerPage + i + 1 }}</td>
+                                <td>{{ wt.Type }}</td>
+                                <td>{{ wt.Description }}</td>
+                                <td>{{ wt.BranchName }}</td>
+                                <td>{{ wt.DepartmentName }}</td>
                                 <td>
                                     <div class="d-flex justify-content-center">
                                         <a [routerLink]="['/wardtype/wardtypeedit', wt.id]"

@@ -17,7 +17,7 @@
                         </div>
                     </div>
 
-                    <div class="d-flex gap-2">
+                    <div class="d-flex gap-2 justify-content-end">
                         <div class="app-search">
                             <input [(ngModel)]="tableService.searchTerm" (ngModelChange)="tableService.page = 1" type="search"
                                 class="form-control" placeholder="Search Templates...">
@@ -34,20 +34,20 @@
                 <div class="table-responsive">
                     <table class="table table-custom table-centered table-select table-hover w-100 mb-0">
                         <thead class="bg-light align-middle bg-opacity-25 thead-sm">
-                            <tr class="text-uppercase fs-md fw-bold text-dark">
-                                <th style="width: 80px; border-bottom: 1px solid #e7eaec;">SL.No</th>
-                                <th style="border-bottom: 1px solid #e7eaec;">Template Name</th>
-                                <th style="border-bottom: 1px solid #e7eaec;">Test Name</th>
-                                <th style="border-bottom: 1px solid #e7eaec;">Doctor</th>
-                                <th class="text-center" style="width: 120px; border-bottom: 1px solid #e7eaec;">Actions</th>
+                            <tr class="text-uppercase fs-xxs">
+                                <th style="width: 60px;">SL.No</th>
+                                <th>Template Name</th>
+                                <th>Test Name</th>
+                                <th>Doctor</th>
+                                <th class="text-center" style="width: 120px;">Actions</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr *ngFor="let template of templates$ | async; let i = index">
                                 <td>{{ (tableService.page - 1) * tableService.pageSize + i + 1 }}</td>
-                                <td><span class="fw-semibold text-dark fs-sm">{{ template.TemplateName }}</span></td>
-                                <td class="text-dark fs-sm">{{ template.DiagTestName }} ({{ template.DiagTestCode }})</td>
-                                <td class="text-dark fs-sm">{{ template.DoctorStaffName }}</td>
+                                <td><span>{{ template.TemplateName }}</span></td>
+                                <td>{{ template.DiagTestName }} ({{ template.DiagTestCode }})</td>
+                                <td>{{ template.DoctorStaffName }}</td>
                                 <td>
                                     <div class="d-flex justify-content-center">
                                         <a [routerLink]="['/testtemplate/testtemplateedit', template.id]"

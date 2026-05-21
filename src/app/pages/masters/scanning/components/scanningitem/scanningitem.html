@@ -17,7 +17,7 @@
                         </div>
                     </div>
 
-                    <div class="d-flex gap-2">
+                    <div class="d-flex gap-2 justify-content-end">
                         <div class="app-search">
                             <input [(ngModel)]="searchText" (ngModelChange)="currentPage = 1" type="search"
                                 class="form-control" placeholder="Search Items...">
@@ -34,20 +34,20 @@
                 <div class="table-responsive">
                     <table class="table table-custom table-centered table-select table-hover w-100 mb-0">
                         <thead class="bg-light align-middle bg-opacity-25 thead-sm">
-                            <tr class="text-uppercase fs-md fw-bold text-dark">
-                                <th style="width: 80px; border-bottom: 1px solid #e7eaec;">SL.No</th>
-                                <th style="border-bottom: 1px solid #e7eaec;">Title</th>
-                                <th style="border-bottom: 1px solid #e7eaec;">Scan Name</th>
-                                <th style="border-bottom: 1px solid #e7eaec;">Priority</th>
-                                <th class="text-center" style="width: 120px; border-bottom: 1px solid #e7eaec;">Actions</th>
+                            <tr class="text-uppercase fs-xxs">
+                                <th style="width: 60px;">SL.No</th>
+                                <th >Title</th>
+                                <th >Scan Name</th>
+                                <th >Priority</th>
+                                <th class="text-center" style="width: 120px;">Actions</th>
                             </tr>
                         </thead>
                         <tbody>
                              <tr *ngFor="let item of getPaginatedItems(); let i = index">
-                                <td class="fw-semibold text-dark fs-sm">{{ (currentPage - 1) * itemsPerPage + i + 1 }}</td>
-                                <td class="fw-semibold text-dark fs-sm">{{ item.Title }}</td>
-                                <td class="fw-semibold text-dark fs-sm">{{ item.ScanName }}</td>
-                                <td class="fw-semibold text-dark fs-sm">{{ item.Priority }}</td>
+                                <td >{{ (currentPage - 1) * itemsPerPage + i + 1 }}</td>
+                                <td >{{ item.Title }}</td>
+                                <td >{{ item.ScanName }}</td>
+                                <td >{{ item.Priority }}</td>
                                 <td>
                                     <div class="d-flex justify-content-center">
                                         <a [routerLink]="['/scanning/scanningitemedit', item.id]"

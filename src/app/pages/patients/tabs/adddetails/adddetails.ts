@@ -11,13 +11,13 @@ import patientdata from '../../patientdata.json';
 import { PageTitleComponent } from '@app/components/page-title.component';
 
 @Component({
-  selector: 'app-details',
+  selector: 'app-adddetails',
   standalone: true,
   imports: [FormsModule, NgxDaterangepickerBootstrapDirective, PageTitleComponent],
-  templateUrl: './details.html',
-  styleUrl: './details.scss',
+  templateUrl: './adddetails.html',
+  styleUrl: './adddetails.scss',
 })
-export class Details implements OnInit {
+export class AddDetails implements OnInit {
   constructor(private route: ActivatedRoute) {}
 
   patient = {
@@ -33,6 +33,7 @@ export class Details implements OnInit {
 
     // Additional
     aadhaarNumber: '',
+    abhaNumber: '',
     phoneNumber: '',
     email: '',
     religion: '',
@@ -83,16 +84,8 @@ export class Details implements OnInit {
   ];
 
   ngOnInit(): void {
-  const id = this.route.snapshot.paramMap.get('id');
-
-  if (id) {
-    const data = (patientdata as any[]).find(p => p.id === +id);
-
-    if (data) {
-      this.patient = data; // ✅ PREFILL WORKS
-    }
+    // No ID parameter in AddDetails, new form is empty
   }
-}
 
   savePatient(): void {
     console.log('Save patient:', this.patient);

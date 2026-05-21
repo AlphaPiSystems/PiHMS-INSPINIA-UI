@@ -40,13 +40,26 @@ export class InstrumentEdit implements OnInit {
           const id = params['id'];
           if (id && data.instrument) {
             this.instrument = data.instrument.find((i: any) => i.id === id);
+            
+            // Check if existing BranchName and DepartmentName are valid
+            if (this.instrument) {
+              if (this.branches && !this.branches.some(b => b.Name === this.instrument?.BranchName)) {
+                this.instrument.BranchName = '';
+              }
+              if (this.departments && !this.departments.some(d => d.Name === this.instrument?.DepartmentName)) {
+                this.instrument.DepartmentName = '';
+              }
+            }
           }
         });
       }
     });
   }
 
-  save() {
+  save(form: any) {
+    if (form.invalid) {
+      return;
+    }
     if (this.instrument) {
       console.log('Updating instrument:', this.instrument);
       this.location.back();

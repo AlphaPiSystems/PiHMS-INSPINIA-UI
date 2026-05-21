@@ -24,9 +24,12 @@ function matches<T>(items: any, term: string, searchFields: (keyof T)[]) {
     term = term.toLowerCase()
 
     for (const field of searchFields) {
-        const value = (items[field] as unknown as string)?.toString().toLowerCase()
-        if (value?.includes(term)) {
-            return true
+        const val = items[field]
+        if (val !== null && val !== undefined) {
+            const strVal = String(val).toLowerCase()
+            if (strVal.includes(term)) {
+                return true
+            }
         }
     }
     return false
@@ -130,7 +133,7 @@ export class TableService<T extends {}> {
     }
 
     set searchTerm(searchTerm: string) {
-        this._set({searchTerm})
+        this._set({searchTerm, page: 1})
     }
 
     set sortColumn(sortColumn: keyof T | '') {
@@ -207,9 +210,9 @@ export class TableService<T extends {}> {
         const total = filteredItems.length
 
         // Paginate the items
-        this.startIndex = (page - 1) * pageSize
-        this.endIndex = this.startIndex + pageSize
-        const paginatedItems = filteredItems.slice(this.startIndex, this.endIndex)
+        this._state.startIndex = (page - 1) * pageSize
+        this._state.endIndex = this._state.startIndex + pageSize
+        const paginatedItems = filteredItems.slice(this._state.startIndex, this._state.endIndex)
         this._loading$.next(false)
         return of({items: paginatedItems, total})
     }

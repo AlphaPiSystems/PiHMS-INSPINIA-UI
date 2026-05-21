@@ -17,7 +17,7 @@
                         </div>
                     </div>
 
-                    <div class="d-flex gap-2">
+                    <div class="d-flex gap-2 justify-content-end">
                         <div class="app-search">
                             <input [(ngModel)]="searchText" (ngModelChange)="currentPage = 1" type="search"
                                 class="form-control" placeholder="Search Task...">
@@ -34,24 +34,24 @@
                 <div class="table-responsive">
                     <table class="table table-custom table-centered table-select table-hover w-100 mb-0">
                         <thead class="bg-light align-middle bg-opacity-25 thead-sm">
-                            <tr class="text-uppercase fs-md fw-bold text-dark">
-                                <th style="width: 80px; border-bottom: 1px solid #e7eaec;">SL.No</th>
-                                <th style="border-bottom: 1px solid #e7eaec;">Task Name</th>
-                                <th style="border-bottom: 1px solid #e7eaec;">Category</th>
-                                <th style="border-bottom: 1px solid #e7eaec;">Duration</th>
-                                <th style="border-bottom: 1px solid #e7eaec;">Department</th>
-                                <th style="border-bottom: 1px solid #e7eaec;">Branch</th>
-                                <th class="text-center" style="width: 120px; border-bottom: 1px solid #e7eaec;">Actions</th>
+                            <tr class="text-uppercase fs-xxs">
+                                <th style="width: 60px;">SL.No</th>
+                                <th >Task Name</th>
+                                <th >Category</th>
+                                <th >Duration</th>
+                                <th >Department</th>
+                                <th >Branch</th>
+                                <th class="text-center" style="width: 120px;">Actions</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr *ngFor="let t of getPaginatedTasks(); let i = index">
-                                <td><span class="fw-semibold text-dark fs-sm">{{ (currentPage - 1) * itemsPerPage + i + 1 }}</span></td>
-                                <td><span class="fw-semibold text-dark fs-sm">{{ t.TaskName }}</span></td>
-                                <td><span class="fw-semibold text-dark fs-sm">{{ t.Category }}</span></td>
-                                <td><span class="fw-semibold text-dark fs-sm">{{ t.Duration }}</span></td>
-                                <td><span class="fw-semibold text-dark fs-sm">{{ getDepartmentName(t.DepartmentID) }}</span></td>
-                                <td><span class="fw-semibold text-dark fs-sm">{{ getBranchName(t.BranchID) }}</span></td>
+                                <td><span >{{ (currentPage - 1) * itemsPerPage + i + 1 }}</span></td>
+                                <td><span >{{ t.TaskName }}</span></td>
+                                <td><span >{{ t.Category }}</span></td>
+                                <td><span >{{ t.Duration }}</span></td>
+                                <td><span >{{ getDepartmentName(t.DepartmentID) }}</span></td>
+                                <td><span >{{ getBranchName(t.BranchID) }}</span></td>
                                 <td>
                                     <div class="d-flex justify-content-center">
                                         <a [routerLink]="['/housekeeping/housekeepingedit', t.id]"

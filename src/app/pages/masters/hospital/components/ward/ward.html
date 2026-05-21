@@ -18,7 +18,7 @@
                         </div>
                     </div>
 
-                    <div class="d-flex gap-2">
+                    <div class="d-flex gap-2 justify-content-end">
                         <div class="app-search">
                             <input [(ngModel)]="searchText" (ngModelChange)="currentPage = 1" type="search"
                                 class="form-control" placeholder="Search Wards...">
@@ -35,28 +35,28 @@
                 <div class="table-responsive">
                     <table class="table table-custom table-centered table-select table-hover w-100 mb-0">
                         <thead class="bg-light align-middle bg-opacity-25 thead-sm">
-                             <tr class="text-uppercase fs-md fw-bold text-dark">
-                                <th style="width: 60px; border-bottom: 1px solid #e7eaec;">SL.No</th>
-                                <th style="border-bottom: 1px solid #e7eaec;">Ward No</th>
-                                <th style="border-bottom: 1px solid #e7eaec;">Ward Name</th>
-                                <th style="border-bottom: 1px solid #e7eaec;">Type</th>
-                                <th style="border-bottom: 1px solid #e7eaec;">Floor</th>
-                                <th style="border-bottom: 1px solid #e7eaec;">Phone</th>
-                                <th style="border-bottom: 1px solid #e7eaec;">Ext.</th>
-                                <th style="border-bottom: 1px solid #e7eaec;">Department</th>
-                                <th class="text-center" style="width: 100px; border-bottom: 1px solid #e7eaec;">Actions</th>
+                             <tr class="text-uppercase fs-xxs">
+                                <th style="width: 60px;">SL.No</th>
+                                <th>Ward No</th>
+                                <th>Ward Name</th>
+                                <th>Type</th>
+                                <th>Floor</th>
+                                <th>Phone</th>
+                                <th>Ext.</th>
+                                <th>Department</th>
+                                <th class="text-center" style="width: 100px;">Actions</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr *ngFor="let ward of getPaginatedWards(); let i = index">
-                                <td class="fw-semibold text-dark fs-sm">{{ (currentPage - 1) * itemsPerPage + i + 1 }}</td>
-                                <td class="fw-semibold text-dark fs-sm">{{ ward.WardNumber }}</td>
-                                <td class="fw-semibold text-dark fs-sm">{{ ward.Name }}</td>
-                                <td class="fw-semibold text-dark fs-sm">{{ ward.WardTypeID }}</td>
-                                <td class="fw-semibold text-dark fs-sm">{{ ward.FloorName }}</td>
-                                <td class="fw-semibold text-dark fs-sm">{{ ward.PhoneNumber }}</td>
-                                <td class="fw-semibold text-dark fs-sm">{{ ward.ExtensionNumber }}</td>
-                                <td class="fw-semibold text-dark fs-sm">{{ ward.Department }}</td>
+                                <td>{{ (currentPage - 1) * itemsPerPage + i + 1 }}</td>
+                                <td>{{ ward.WardNumber }}</td>
+                                <td>{{ ward.Name }}</td>
+                                <td>{{ ward.WardTypeID }}</td>
+                                <td>{{ ward.FloorName }}</td>
+                                <td>{{ ward.PhoneNumber }}</td>
+                                <td>{{ ward.ExtensionNumber }}</td>
+                                <td>{{ ward.Department }}</td>
                                 <td>
                                     <div class="d-flex justify-content-center">
                                         <a [routerLink]="['/ward/wardedit', ward.id]"

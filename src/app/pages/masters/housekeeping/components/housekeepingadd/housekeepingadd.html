@@ -11,11 +11,11 @@
                     <form (ngSubmit)="save()" #taskForm="ngForm">
                         <div class="row mb-3">
                             <div class="col-md-6">
-                                <label class="form-label fw-semibold">Task Name</label>
+                                <label class="form-label fw-semibold">Task Name <span class="text-danger">*</span></label>
                                 <input type="text" class="form-control" [(ngModel)]="task.TaskName" name="TaskName" required placeholder="e.g. Floor Mopping">
                             </div>
                             <div class="col-md-6">
-                                <label class="form-label fw-semibold">Category</label>
+                                <label class="form-label fw-semibold">Category <span class="text-danger">*</span></label>
                                 <select class="form-select" [(ngModel)]="task.Category" name="Category" required>
                                     <option value="" disabled selected>Select Category</option>
                                     <option *ngFor="let cat of categories" [value]="cat">{{ cat }}</option>
@@ -36,14 +36,14 @@
 
                         <div class="row mb-3">
                             <div class="col-md-6">
-                                <label class="form-label fw-semibold">Department</label>
+                                <label class="form-label fw-semibold">Department <span class="text-danger">*</span></label>
                                 <select class="form-select" [(ngModel)]="task.DepartmentID" name="DepartmentID" required>
                                     <option [ngValue]="null" disabled selected>Select Department</option>
                                     <option *ngFor="let dept of departments" [ngValue]="dept.id">{{ dept.Name }}</option>
                                 </select>
                             </div>
                             <div class="col-md-6">
-                                <label class="form-label fw-semibold">Branch</label>
+                                <label class="form-label fw-semibold">Branch <span class="text-danger">*</span></label>
                                 <select class="form-select" [(ngModel)]="task.BranchID" name="BranchID" required>
                                     <option [ngValue]="null" disabled selected>Select Branch</option>
                                     <option *ngFor="let branch of branches" [ngValue]="branch.id">{{ branch.Name }}</option>
@@ -58,13 +58,11 @@
                             </div>
                         </div>
 
-                        <div class="d-flex gap-2">
-                            <button type="submit" class="btn btn-primary" [disabled]="!taskForm.form.valid" style="background-color: #1ab394; border-color: #1ab394;">
-                                Save Task
-                            </button>
+                        <div class="d-flex gap-2 justify-content-end">
                             <button type="button" class="btn btn-light" (click)="cancel()">
                                 Cancel
                             </button>
+<button type="submit" class="btn btn-primary" [disabled]="!taskForm.form.valid" style="background-color: #1ab394; border-color: #1ab394;">Save Changes</button>
                         </div>
                     </form>
                 </div>

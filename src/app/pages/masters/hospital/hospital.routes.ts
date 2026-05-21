@@ -25,6 +25,11 @@ export const HOSPITAL_ROUTES: Routes = [
         path: 'building/buildingadd',
         loadComponent: () => import('./components/hospitalbuildingadd/hospitalbuildingadd').then(c => c.HospitalBuildingAdd)
     },
+  {
+    path: 'floor/floorview/:id',
+    loadComponent: () => import('./components/floorview/floorview').then(c => c.FloorView),
+    data: { title: 'View' }
+  },
     {
         path: 'building/buildingedit/:id',
         loadComponent: () => import('./components/hospitalbuildingedit/hospitalbuildingedit').then(c => c.HospitalBuildingEdit)
@@ -32,7 +37,13 @@ export const HOSPITAL_ROUTES: Routes = [
     {
         path: 'ward/wardlist',
         loadComponent: () => import('./components/ward/ward').then(c => c.Ward),
-        data: {title: "Ward"},
+        data: {title: "Ward"}
+    },
+    // Hospital Building View Route
+    {
+        path: 'building/buildingview/:id',
+        loadComponent: () => import('./components/hospitalbuildingview/hospitalbuildingview').then(c => c.HospitalBuildingView),
+        data: { title: 'View' }
     },
     {
         path: 'ward/wardadd',
@@ -45,7 +56,12 @@ export const HOSPITAL_ROUTES: Routes = [
     {
         path: 'wardbed/wardbedlist',
         loadComponent: () => import('./components/wardbed/wardbed').then(c => c.WardBed),
-        data: {title: "Ward Bed"},
+        data: {title: "Ward Bed"}
+    },
+    {
+        path: 'ward/wardview/:id',
+        loadComponent: () => import('./components/wardview/wardview').then(c => c.WardView),
+        data: { title: 'View' }
     },
     {
         path: 'wardbed/wardbedadd',
@@ -58,7 +74,12 @@ export const HOSPITAL_ROUTES: Routes = [
     {
         path: 'wardtype/wardtypelist',
         loadComponent: () => import('./components/wardtype/wardtype').then(c => c.WardType),
-        data: {title: "Ward Type"},
+        data: {title: "Ward Type"}
+    },
+    {
+        path: 'wardbed/wardbedview/:id',
+        loadComponent: () => import('./components/wardbedview/wardbedview').then(c => c.WardBedView),
+        data: { title: 'View' }
     },
     {
         path: 'wardtype/wardtypeadd',
@@ -68,4 +89,9 @@ export const HOSPITAL_ROUTES: Routes = [
         path: 'wardtype/wardtypeedit/:id',
         loadComponent: () => import('./components/wardtypeedit/wardtypeedit').then(c => c.WardTypeEdit)
     },
+    {
+        path: 'wardtype/wardtypeview/:id',
+        loadComponent: () => import('./components/wardtypeview/wardtypeview').then(c => c.WardTypeView),
+        data: { title: 'View' }
+    }
 ];

@@ -44,9 +44,13 @@ export class Instrument implements OnInit {
     let filtered = this.instruments;
     if (this.searchText.trim()) {
       const search = this.searchText.toLowerCase();
-      filtered = this.instruments.filter(i => 
-        i.InstrumentationName && i.InstrumentationName.toLowerCase().includes(search)
-      );
+      filtered = this.instruments.filter(i => {
+        if (!i) return false;
+        return Object.values(i).some(val => 
+          val !== null && val !== undefined && 
+          String(val).toLowerCase().includes(search)
+        );
+      });
     }
     return filtered;
   }

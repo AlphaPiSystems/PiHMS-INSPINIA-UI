@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NgIcon } from '@ng-icons/core';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { PageTitleComponent } from '@app/components/page-title.component';
 import { HttpClient } from '@angular/common/http';
@@ -30,7 +30,10 @@ export class BillDomainAdd implements OnInit {
     IsRowDeleted: 'N'
   };
 
-  constructor(private http: HttpClient) {}
+  constructor(
+    private router: Router,
+    private http: HttpClient
+  ) {}
 
   ngOnInit() {
     // Initialization if needed
@@ -40,5 +43,6 @@ export class BillDomainAdd implements OnInit {
     console.log('Submitting Bill Domain:', this.billDomain);
     // In a real app, you'd call a service to POST to the API
     alert('Bill Domain added successfully (Mock)');
+    this.router.navigate(['/bill-domain/bill-domainlist']);
   }
 }

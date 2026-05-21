@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NgIcon } from '@ng-icons/core';
-import { RouterLink, ActivatedRoute } from '@angular/router';
+import { RouterLink, ActivatedRoute, Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { PageTitleComponent } from '@app/components/page-title.component';
 import { HttpClient } from '@angular/common/http';
@@ -35,7 +35,8 @@ export class BillItemEdit implements OnInit {
 
   constructor(
     private http: HttpClient,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router
   ) {}
 
   ngOnInit() {
@@ -61,5 +62,6 @@ export class BillItemEdit implements OnInit {
   onSubmit() {
     console.log('Updating Bill Item:', this.billItem);
     alert('Bill Item updated successfully (Mock)');
+    this.router.navigate(['/bill-item/bill-itemlist']);
   }
 }

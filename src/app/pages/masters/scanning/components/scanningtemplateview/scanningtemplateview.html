@@ -1,0 +1,52 @@
+<div class="container-fluid">
+    <app-page-title title="View Scanning Template" />
+
+    <div class="row" *ngIf="item">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header border-light">
+                    <h5 class="card-title mb-0">Template Details</h5>
+                </div>
+                <div class="card-body">
+                    <form (ngSubmit)="save()" #itemForm="ngForm">
+                        <div class="row mb-3">
+                            <div class="col-md-4">
+                                <label class="form-label fw-semibold">Name</label>
+                                <input disabled type="text" class="form-control" [(ngModel)]="item.Name" name="Name" required placeholder="Enter Template Name">
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label fw-semibold">Scan Template Name</label>
+                                <input disabled type="text" class="form-control" [(ngModel)]="item.Description" name="Description" placeholder="Enter Scan Template Name">
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label fw-semibold">Status</label>
+                                <select disabled class="form-select" [(ngModel)]="item.Status" name="Status">
+                                    <option value="Active">Active</option>
+                                    <option value="Inactive">Inactive</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col-md-12">
+                                <quill-editor [(ngModel)]="item.ScanTemplateData" name="ScanTemplateData" [modules]="quillConfig" [placeholder]="'Enter Template Data...'" [styles]="{height: '500px'}"></quill-editor>
+                            </div>
+                        </div>
+
+                        <div class="d-flex gap-2 justify-content-end">
+                            <button type="button" (click)="back()" class="btn btn-white" style="border: 1px solid #d2d2d2; background: #fff; padding: 8px 25px; font-weight: 600; border-radius: 2px; color: #555;">Back</button>
+                <a [routerLink]="back()" (click)="navigateToEdit()" class="btn btn-primary" style="background: #1ab394; border-color: #1ab394; color: #fff; padding: 8px 25px; font-weight: 600; border-radius: 2px;">Edit Scanning Template</a>
+                            
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="row" *ngIf="!item">
+        <div class="col-12 text-center py-5">
+            <p class="text-muted">Loading template details...</p>
+        </div>
+    </div>
+</div>

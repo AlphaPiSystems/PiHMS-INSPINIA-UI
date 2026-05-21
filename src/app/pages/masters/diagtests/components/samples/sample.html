@@ -61,39 +61,36 @@
                 <div class="table-responsive">
                     <table class="table table-custom table-centered table-select table-hover w-100 mb-0">
                         <thead class="bg-light align-middle bg-opacity-25 thead-sm">
-                            <tr class="text-uppercase fs-md fw-bold text-dark">
-                                <th style="border-bottom: 1px solid #e7eaec;">SL.No</th>
-                                <th style="border-bottom: 1px solid #e7eaec;">Code</th>
-                                <th style="border-bottom: 1px solid #e7eaec;">Full Name</th>
-                                <th style="border-bottom: 1px solid #e7eaec;">Short Name</th>
-                                <th style="border-bottom: 1px solid #e7eaec;">Description</th>
-                                <th style="border-bottom: 1px solid #e7eaec;">Branch Name</th>
-                                <th style="border-bottom: 1px solid #e7eaec;">Department Name</th>
-                                <th style="border-bottom: 1px solid #e7eaec;">Sample Form</th>
-                                <th style="border-bottom: 1px solid #e7eaec;">Container</th>
-                                <th class="text-center" style="width: 1%; border-bottom: 1px solid #e7eaec;">Actions</th>
+                            <tr class="text-uppercase fs-xxs">
+                                <th style="width: 60px;">SL.No</th>
+                                <th >Code</th>
+                                <th >Full Name</th>
+                                <th >Short Name</th>
+                                <th >Description</th>
+                                <th >Branch Name</th>
+                                <th >Department Name</th>
+                                <th >Sample Form</th>
+                                <th >Container</th>
+                                <th class="text-center" style="width: 1%;">Actions</th>
                             </tr>
                         </thead>
                         <tbody>
                             @if ((total$ | async)! > 0) {
                             @for (sample of this.samples$ | async; track $index; let i = $index) {
                              <tr>
-                                <td class="fw-semibold text-dark fs-sm">{{ (tableService.page - 1) * tableService.pageSize + i + 1 }}</td>
-                                <td class="fw-semibold text-dark fs-sm">{{ sample.Code }}</td>
-                                <td class="fw-semibold text-dark fs-sm">{{ sample.FullName }}</td>
-                                <td class="fw-semibold text-dark fs-sm">{{ sample.ShortName }}</td>
-                                <td class="fw-semibold text-dark fs-sm" style="max-width: 250px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
+                                <td >{{ (tableService.page - 1) * tableService.pageSize + i + 1 }}</td>
+                                <td >{{ sample.Code }}</td>
+                                <td >{{ sample.FullName }}</td>
+                                <td >{{ sample.ShortName }}</td>
+                                <td  style="max-width: 250px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
                                     {{ sample.Description }}
                                 </td>
-                                <td class="fw-semibold text-dark fs-sm">{{ sample.BranchName }}</td>
-                                <td class="fw-semibold text-dark fs-sm">{{ sample.DepartmentName }}</td>
-                                <td class="fw-semibold text-dark fs-sm">{{ sample.SampleForm }}</td>
-                                <td class="fw-semibold text-dark fs-sm">{{ sample.Container }}</td>
+                                <td >{{ sample.BranchName }}</td>
+                                <td >{{ sample.DepartmentName }}</td>
+                                <td >{{ sample.SampleForm }}</td>
+                                <td >{{ sample.Container }}</td>
                                 <td>
                                     <div class="d-flex justify-content-center gap-1">
-                                        <a class="btn btn-light btn-icon btn-sm rounded-circle" ngbTooltip="View">
-                                            <ng-icon name="tablerEye" class="fs-lg" />
-                                        </a>
                                         <a [routerLink]="['/sample/sampleedit', sample.id]"
                                             class="btn btn-primary btn-icon btn-sm rounded-circle" 
                                             style="background-color: #1ab394; border-color: #1ab394;"

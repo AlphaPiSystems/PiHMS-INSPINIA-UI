@@ -29,18 +29,18 @@
                 <div class="table-responsive">
                     <table class="table table-custom table-centered table-select table-hover w-100 mb-0">
                         <thead class="bg-light align-middle bg-opacity-25 thead-sm">
-                            <tr class="text-uppercase fs-md fw-bold text-dark">
-                                <th style="width: 80px; border-bottom: 1px solid #e7eaec;">SL.No</th>
-                                <th style="border-bottom: 1px solid #e7eaec;">Code</th>
-                                <th style="border-bottom: 1px solid #e7eaec;">Name</th>
-                                <th class="text-center" style="width: 10%; border-bottom: 1px solid #e7eaec;">Actions</th>
+                            <tr class="text-uppercase fs-xxs">
+                                <th style="width: 60px;">SL.No</th>
+                                <th>Code</th>
+                                <th>Name</th>
+                                <th class="text-center" style="width: 10%;">Actions</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr *ngFor="let group of getPaginatedGroups(); let i = index">
-                                <td class="fw-semibold text-dark fs-sm">{{ (currentPage - 1) * itemsPerPage + i + 1 }}</td>
-                                <td class="fw-semibold text-dark fs-sm">{{ group.Code }}</td>
-                                <td class="fw-semibold text-dark fs-sm">{{ group.Name }}</td>
+                                <td>{{ (currentPage - 1) * itemsPerPage + i + 1 }}</td>
+                                <td>{{ group.Code }}</td>
+                                <td>{{ group.Name }}</td>
                                 <td>
                                     <div class="d-flex justify-content-center gap-1">
                                         <a [routerLink]="['/diaggroup/diaggroupedit', group.id]"

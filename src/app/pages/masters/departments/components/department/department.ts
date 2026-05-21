@@ -55,13 +55,13 @@ export class Department implements OnInit {
     let filtered = this.departmentList;
     if (this.searchText.trim()) {
       const search = this.searchText.toLowerCase();
-      filtered = this.departmentList.filter(d => 
-        (d.Name && d.Name.toLowerCase().includes(search)) ||
-        (d.Description && d.Description.toLowerCase().includes(search)) ||
-        (d.BranchID && d.BranchID.toString().toLowerCase().includes(search)) ||
-        (d.ReportPriority && d.ReportPriority.toString().toLowerCase().includes(search)) ||
-        (d.IsRowDeleted === 'N' ? 'active' : 'inactive').includes(search)
-      );
+      filtered = this.departmentList.filter(d => {
+        if (!d) return false;
+        return Object.values(d).some(val => 
+          val !== null && val !== undefined && 
+          String(val).toLowerCase().includes(search)
+        );
+      });
     }
     return filtered;
   }

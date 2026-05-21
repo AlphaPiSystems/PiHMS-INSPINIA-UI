@@ -7,287 +7,326 @@
         <div class="ibox float-e-margins"
           style="background:#fff; box-shadow: 0 2px 4px rgba(0,0,0,0.08); border-radius: 4px;">
           <div class="ibox-title"
-            style="border-top: 4px solid #1ab394; padding: 6px 15px; border-bottom: 1px solid #f0f0f0;">
+             style="border-top: 4px solid #1ab394; padding: 6px 15px; border-bottom: 1px solid #f0f0f0;">
             <h5 style="font-weight: 600; margin: 0; font-size: 14px; text-transform: uppercase;">&nbsp;</h5>
           </div>
           <div class="ibox-content" style="padding: 15px 20px;">
-            <ul ngbNav #nav="ngbNav" class="nav-tabs">
-              <li ngbNavItem>
-                <a ngbNavLink>General Information</a>
-                <ng-template ngbNavContent>
-                  <form (ngSubmit)="saveChanges()" class="mt-3">
-                    <div class="row">
-                      <!-- Staff Selection -->
-                      <div class="col-md-4 col-sm-12">
-                        <div class="form-group mb-3">
-                          <label class="form-label fw-bold">Staff <span class="text-danger">*</span></label>
-                          <select [(ngModel)]="payroll.StaffID" name="StaffID" class="form-select form-control" required
-                            [disabled]="payroll.id">
-                            <option value="">Select Staff</option>
-                            <option *ngFor="let s of staffs" [value]="s.id">{{s.Name}}</option>
-                          </select>
+            <form #payrollForm="ngForm" (ngSubmit)="saveChanges(payrollForm)" novalidate>
+              <ul ngbNav #nav="ngbNav" class="nav-tabs" [destroyOnHide]="false">
+                <li ngbNavItem>
+                  <a ngbNavLink>General Information</a>
+                  <ng-template ngbNavContent>
+                    <div class="mt-3">
+                      <div class="row">
+                        <!-- Staff Selection -->
+                        <div class="col-md-4 col-sm-12">
+                          <div class="form-group mb-3">
+                            <label class="form-label fw-bold">Staff <span class="text-danger">*</span></label>
+                            <input type="text" [(ngModel)]="payroll.StaffID" name="StaffID" #staffID="ngModel" class="form-control" required
+                              [disabled]="payroll.id" placeholder="Staff" [class.is-invalid]="staffID.invalid && (staffID.dirty || staffID.touched || payrollForm.submitted)">
+                            <div class="invalid-feedback" *ngIf="staffID.invalid && (staffID.dirty || staffID.touched || payrollForm.submitted)">
+                              Staff is required
+                            </div>
+                          </div>
+                        </div>
+
+                        <!-- Employer -->
+                        <div class="col-md-4 col-sm-12">
+                          <div class="form-group mb-3">
+                            <label class="form-label fw-bold">Employer <span class="text-danger">*</span></label>
+                            <input type="text" [(ngModel)]="payroll.Employer" name="Employer" #employer="ngModel" class="form-control"
+                              placeholder="Employer Name" required [class.is-invalid]="employer.invalid && (employer.dirty || employer.touched || payrollForm.submitted)">
+                            <div class="invalid-feedback" *ngIf="employer.invalid && (employer.dirty || employer.touched || payrollForm.submitted)">
+                              Employer is required
+                            </div>
+                          </div>
                         </div>
                       </div>
 
-                      <!-- Employer -->
-                      <div class="col-md-4 col-sm-12">
-                        <div class="form-group mb-3">
-                          <label class="form-label fw-bold">Employer</label>
-                          <input type="text" [(ngModel)]="payroll.Employer" name="Employer" class="form-control"
-                            placeholder="Employer Name">
+                      <div class="row mt-2">
+                        <!-- Working Period From -->
+                        <div class="col-md-4 col-sm-6">
+                          <div class="form-group mb-3">
+                            <label class="form-label fw-bold">Working Period From <span class="text-danger">*</span></label>
+                            <input type="date" [(ngModel)]="payroll.WorkingPeriodFrom" name="WorkingPeriodFrom" #workingPeriodFrom="ngModel"
+                              class="form-control" required [class.is-invalid]="workingPeriodFrom.invalid && (workingPeriodFrom.dirty || workingPeriodFrom.touched || payrollForm.submitted)">
+                            <div class="invalid-feedback" *ngIf="workingPeriodFrom.invalid && (workingPeriodFrom.dirty || workingPeriodFrom.touched || payrollForm.submitted)">
+                              Working Period From is required
+                            </div>
+                          </div>
                         </div>
-                      </div>
-                    </div>
 
-                    <div class="row mt-2">
-                      <!-- Working Period From -->
-                      <div class="col-md-4 col-sm-6">
-                        <div class="form-group mb-3">
-                          <label class="form-label fw-bold">Working Period From</label>
-                          <input type="date" [(ngModel)]="payroll.WorkingPeriodFrom" name="WorkingPeriodFrom"
-                            class="form-control">
+                        <!-- Working Period To -->
+                        <div class="col-md-4 col-sm-6">
+                          <div class="form-group mb-3">
+                            <label class="form-label fw-bold">Working Period To <span class="text-danger">*</span></label>
+                            <input type="date" [(ngModel)]="payroll.WorkingPeriodTo" name="WorkingPeriodTo" #workingPeriodTo="ngModel"
+                              class="form-control" required [class.is-invalid]="workingPeriodTo.invalid && (workingPeriodTo.dirty || workingPeriodTo.touched || payrollForm.submitted)">
+                            <div class="invalid-feedback" *ngIf="workingPeriodTo.invalid && (workingPeriodTo.dirty || workingPeriodTo.touched || payrollForm.submitted)">
+                              Working Period To is required
+                            </div>
+                          </div>
                         </div>
-                      </div>
 
-                      <!-- Working Period To -->
-                      <div class="col-md-4 col-sm-6">
-                        <div class="form-group mb-3">
-                          <label class="form-label fw-bold">Working Period To</label>
-                          <input type="date" [(ngModel)]="payroll.WorkingPeriodTo" name="WorkingPeriodTo"
-                            class="form-control">
-                        </div>
-                      </div>
-
-                      <!-- Position Held -->
-                      <div class="col-md-4 col-sm-12">
-                        <div class="form-group mb-3">
-                          <label class="form-label fw-bold">Position Held</label>
-                          <input type="text" [(ngModel)]="payroll.PositionHeld" name="PositionHeld" class="form-control"
-                            placeholder="Position held in company">
-                        </div>
-                      </div>
-                    </div>
-
-                    <div class="row mt-2">
-                      <!-- Department -->
-                      <div class="col-md-4 col-sm-12">
-                        <div class="form-group mb-3">
-                          <label class="form-label fw-bold">Department</label>
-                          <select [(ngModel)]="payroll.Department" name="Department" class="form-select form-control">
-                            <option value="">Select Department</option>
-                            <option *ngFor="let d of departments" [value]="d.Name">{{d.Name}}</option>
-                          </select>
+                        <!-- Position Held -->
+                        <div class="col-md-4 col-sm-12">
+                          <div class="form-group mb-3">
+                            <label class="form-label fw-bold">Position Held <span class="text-danger">*</span></label>
+                            <input type="text" [(ngModel)]="payroll.PositionHeld" name="PositionHeld" #positionHeld="ngModel" class="form-control"
+                              placeholder="Position held in company" required [class.is-invalid]="positionHeld.invalid && (positionHeld.dirty || positionHeld.touched || payrollForm.submitted)">
+                            <div class="invalid-feedback" *ngIf="positionHeld.invalid && (positionHeld.dirty || positionHeld.touched || payrollForm.submitted)">
+                              Position Held is required
+                            </div>
+                          </div>
                         </div>
                       </div>
 
-                      <!-- Speciality -->
-                      <div class="col-md-4 col-sm-12">
-                        <div class="form-group mb-3">
-                          <label class="form-label fw-bold">Speciality</label>
-                          <input type="text" [(ngModel)]="payroll.Speciality" name="Speciality" class="form-control"
-                            placeholder="Speciality">
+                      <div class="row mt-2">
+                        <!-- Department -->
+                        <div class="col-md-4 col-sm-12">
+                          <div class="form-group mb-3">
+                            <label class="form-label fw-bold">Department <span class="text-danger">*</span></label>
+                            <select [(ngModel)]="payroll.Department" name="Department" #department="ngModel" class="form-select form-control" required
+                              [class.is-invalid]="department.invalid && (department.dirty || department.touched || payrollForm.submitted)">
+                              <option value="">Select Department</option>
+                              <option *ngFor="let d of departments" [value]="d.Name">{{d.Name}}</option>
+                            </select>
+                            <div class="invalid-feedback" *ngIf="department.invalid && (department.dirty || department.touched || payrollForm.submitted)">
+                              Department is required
+                            </div>
+                          </div>
                         </div>
-                      </div>
 
-                      <!-- Discipline -->
-                      <div class="col-md-4 col-sm-12">
-                        <div class="form-group mb-3">
-                          <label class="form-label fw-bold">Discipline</label>
-                          <input type="text" [(ngModel)]="payroll.Discipline" name="Discipline" class="form-control"
-                            placeholder="Discipline">
+                        <!-- Speciality -->
+                        <div class="col-md-4 col-sm-12">
+                          <div class="form-group mb-3">
+                            <label class="form-label fw-bold">Speciality <span class="text-danger">*</span></label>
+                            <input type="text" [(ngModel)]="payroll.Speciality" name="Speciality" #speciality="ngModel" class="form-control"
+                              placeholder="Speciality" required [class.is-invalid]="speciality.invalid && (speciality.dirty || speciality.touched || payrollForm.submitted)">
+                            <div class="invalid-feedback" *ngIf="speciality.invalid && (speciality.dirty || speciality.touched || payrollForm.submitted)">
+                              Speciality is required
+                            </div>
+                          </div>
                         </div>
-                      </div>
-                    </div>
 
-                    <div class="hr-line-dashed" style="border-top: 1px dashed #e7eaec; margin: 20px 0;"></div>
-
-                    <div class="d-flex justify-content-end gap-2">
-                      <button type="button" routerLink="/staff/payroll/payrolllist" class="btn btn-white"
-                        style="border: 1px solid #d2d2d2; background: #fff; padding: 8px 25px; font-weight: 600; border-radius: 2px; color: #555;">Cancel</button>
-                      <button type="submit" class="btn btn-primary"
-                        style="background: #1ab394; border-color: #1ab394; color: #fff; padding: 8px 25px; font-weight: 600; border-radius: 2px;">
-                        {{ payroll.id ? 'Update Details' : 'Save Details' }}
-                      </button>
-                    </div>
-                  </form>
-                </ng-template>
-              </li>
-              <li ngbNavItem>
-                <a ngbNavLink>Earning</a>
-                <ng-template ngbNavContent>
-                  <form (ngSubmit)="saveChanges()" class="mt-3">
-                    <div class="row">
-                      <!-- Staff Selection (ReadOnly) -->
-                      <div class="col-md-4 col-sm-12">
-                        <div class="form-group mb-3">
-                          <label class="form-label fw-bold">Staff ID</label>
-                          <input type="text" [value]="payroll.StaffID" class="form-control" readonly>
+                        <!-- Discipline -->
+                        <div class="col-md-4 col-sm-12">
+                          <div class="form-group mb-3">
+                            <label class="form-label fw-bold">Discipline <span class="text-danger">*</span></label>
+                            <input type="text" [(ngModel)]="payroll.Discipline" name="Discipline" #discipline="ngModel" class="form-control"
+                              placeholder="Discipline" required [class.is-invalid]="discipline.invalid && (discipline.dirty || discipline.touched || payrollForm.submitted)">
+                            <div class="invalid-feedback" *ngIf="discipline.invalid && (discipline.dirty || discipline.touched || payrollForm.submitted)">
+                              Discipline is required
+                            </div>
+                          </div>
                         </div>
                       </div>
                     </div>
-
-                    <div class="row mt-2">
-                      <!-- BASIC -->
-                      <div class="col-md-2 col-sm-6">
-                        <div class="form-group mb-3">
-                          <label class="form-label fw-bold">BASIC</label>
-                          <input type="number" [(ngModel)]="payroll.BASIC" name="BASIC" class="form-control"
-                            placeholder="0.00" step="0.01">
+                  </ng-template>
+                </li>
+                <li ngbNavItem>
+                  <a ngbNavLink>Earning</a>
+                  <ng-template ngbNavContent>
+                    <div class="mt-3">
+                      <div class="row">
+                        <!-- Staff Selection (ReadOnly) -->
+                        <div class="col-md-4 col-sm-12">
+                          <div class="form-group mb-3">
+                            <label class="form-label fw-bold">Staff ID</label>
+                            <input type="text" [value]="payroll.StaffID" class="form-control" readonly>
+                          </div>
                         </div>
                       </div>
 
-                      <!-- HRA -->
-                      <div class="col-md-2 col-sm-6">
-                        <div class="form-group mb-3">
-                          <label class="form-label fw-bold">HRA</label>
-                          <input type="number" [(ngModel)]="payroll.HRA" name="HRA" class="form-control"
-                            placeholder="0.00" step="0.01">
+                      <div class="row mt-2">
+                        <!-- BASIC -->
+                        <div class="col-md-2 col-sm-6">
+                          <div class="form-group mb-3">
+                            <label class="form-label fw-bold">BASIC <span class="text-danger">*</span></label>
+                            <input type="number" [(ngModel)]="payroll.BASIC" name="BASIC" #basic="ngModel" class="form-control"
+                              placeholder="0.00" step="0.01" required [class.is-invalid]="basic.invalid && (basic.dirty || basic.touched || payrollForm.submitted)">
+                            <div class="invalid-feedback" *ngIf="basic.invalid && (basic.dirty || basic.touched || payrollForm.submitted)">
+                              BASIC is required
+                            </div>
+                          </div>
+                        </div>
+
+                        <!-- HRA -->
+                        <div class="col-md-2 col-sm-6">
+                          <div class="form-group mb-3">
+                            <label class="form-label fw-bold">HRA <span class="text-danger">*</span></label>
+                            <input type="number" [(ngModel)]="payroll.HRA" name="HRA" #hra="ngModel" class="form-control"
+                              placeholder="0.00" step="0.01" required [class.is-invalid]="hra.invalid && (hra.dirty || hra.touched || payrollForm.submitted)">
+                            <div class="invalid-feedback" *ngIf="hra.invalid && (hra.dirty || hra.touched || payrollForm.submitted)">
+                              HRA is required
+                            </div>
+                          </div>
+                        </div>
+
+                        <!-- CA -->
+                        <div class="col-md-2 col-sm-6">
+                          <div class="form-group mb-3">
+                            <label class="form-label fw-bold">CA <span class="text-danger">*</span></label>
+                            <input type="number" [(ngModel)]="payroll.CA" name="CA" #ca="ngModel" class="form-control"
+                              placeholder="0.00" step="0.01" required [class.is-invalid]="ca.invalid && (ca.dirty || ca.touched || payrollForm.submitted)">
+                            <div class="invalid-feedback" *ngIf="ca.invalid && (ca.dirty || ca.touched || payrollForm.submitted)">
+                              CA is required
+                            </div>
+                          </div>
+                        </div>
+
+                        <!-- MA -->
+                        <div class="col-md-2 col-sm-6">
+                          <div class="form-group mb-3">
+                            <label class="form-label fw-bold">MA <span class="text-danger">*</span></label>
+                            <input type="number" [(ngModel)]="payroll.MA" name="MA" #ma="ngModel" class="form-control"
+                              placeholder="0.00" step="0.01" required [class.is-invalid]="ma.invalid && (ma.dirty || ma.touched || payrollForm.submitted)">
+                            <div class="invalid-feedback" *ngIf="ma.invalid && (ma.dirty || ma.touched || payrollForm.submitted)">
+                              MA is required
+                            </div>
+                          </div>
+                        </div>
+
+                        <!-- VA -->
+                        <div class="col-md-2 col-sm-6">
+                          <div class="form-group mb-3">
+                            <label class="form-label fw-bold">VA <span class="text-danger">*</span></label>
+                            <input type="number" [(ngModel)]="payroll.VA" name="VA" #va="ngModel" class="form-control"
+                              placeholder="0.00" step="0.01" required [class.is-invalid]="va.invalid && (va.dirty || va.touched || payrollForm.submitted)">
+                            <div class="invalid-feedback" *ngIf="va.invalid && (va.dirty || va.touched || payrollForm.submitted)">
+                              VA is required
+                            </div>
+                          </div>
+                        </div>
+
+                        <!-- PB -->
+                        <div class="col-md-2 col-sm-6">
+                          <div class="form-group mb-3">
+                            <label class="form-label fw-bold">PB <span class="text-danger">*</span></label>
+                            <input type="number" [(ngModel)]="payroll.PB" name="PB" #pb="ngModel" class="form-control"
+                              placeholder="0.00" step="0.01" required [class.is-invalid]="pb.invalid && (pb.dirty || pb.touched || payrollForm.submitted)">
+                            <div class="invalid-feedback" *ngIf="pb.invalid && (pb.dirty || pb.touched || payrollForm.submitted)">
+                              PB is required
+                            </div>
+                          </div>
                         </div>
                       </div>
 
-                      <!-- CA -->
-                      <div class="col-md-2 col-sm-6">
-                        <div class="form-group mb-3">
-                          <label class="form-label fw-bold">CA</label>
-                          <input type="number" [(ngModel)]="payroll.CA" name="CA" class="form-control"
-                            placeholder="0.00" step="0.01">
-                        </div>
-                      </div>
-
-                      <!-- MA -->
-                      <div class="col-md-2 col-sm-6">
-                        <div class="form-group mb-3">
-                          <label class="form-label fw-bold">MA</label>
-                          <input type="number" [(ngModel)]="payroll.MA" name="MA" class="form-control"
-                            placeholder="0.00" step="0.01">
-                        </div>
-                      </div>
-
-                      <!-- VA -->
-                      <div class="col-md-2 col-sm-6">
-                        <div class="form-group mb-3">
-                          <label class="form-label fw-bold">VA</label>
-                          <input type="number" [(ngModel)]="payroll.VA" name="VA" class="form-control"
-                            placeholder="0.00" step="0.01">
-                        </div>
-                      </div>
-
-                      <!-- PB -->
-                      <div class="col-md-2 col-sm-6">
-                        <div class="form-group mb-3">
-                          <label class="form-label fw-bold">PB</label>
-                          <input type="number" [(ngModel)]="payroll.PB" name="PB" class="form-control"
-                            placeholder="0.00" step="0.01">
-                        </div>
-                      </div>
-                    </div>
-
-                    <div class="row">
-                      <div class="col-12 text-end">
-                        <h4 class="mt-2">Total Earnings: <span>{{ (payroll.BASIC + payroll.HRA + payroll.CA + payroll.MA
-                            + payroll.VA + payroll.PB) | number: '1.2-2' }}</span></h4>
-                      </div>
-                    </div>
-
-                    <div class="hr-line-dashed" style="border-top: 1px dashed #e7eaec; margin: 20px 0;"></div>
-
-                    <div class="d-flex justify-content-end gap-2">
-                      <button type="button" routerLink="/staff/payroll/payrolllist" class="btn btn-white"
-                        style="border: 1px solid #d2d2d2; background: #fff; padding: 8px 25px; font-weight: 600; border-radius: 2px; color: #555;">Cancel</button>
-                      <button type="submit" class="btn btn-primary"
-                        style="background: #1ab394; border-color: #1ab394; color: #fff; padding: 8px 25px; font-weight: 600; border-radius: 2px;">
-                        {{ payroll.id ? 'Update Earnings' : 'Save Earnings' }}
-                      </button>
-                    </div>
-                  </form>
-                </ng-template>
-              </li>
-              <li ngbNavItem>
-                <a ngbNavLink>Deduction</a>
-                <ng-template ngbNavContent>
-                  <form (ngSubmit)="saveChanges()" class="mt-3">
-                    <div class="row">
-                      <!-- Staff Selection (ReadOnly) -->
-                      <div class="col-md-4 col-sm-12">
-                        <div class="form-group mb-3">
-                          <label class="form-label fw-bold">Staff ID</label>
-                          <input type="text" [value]="payroll.StaffID" class="form-control" readonly>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div class="row mt-2">
-                      <!-- PF -->
-                      <div class="col-md-2 col-sm-6">
-                        <div class="form-group mb-3">
-                          <label class="form-label fw-bold">PF</label>
-                          <input type="number" [(ngModel)]="payroll.PF" name="PF" class="form-control"
-                            placeholder="0.00" step="0.01">
-                        </div>
-                      </div>
-
-                      <!-- PT -->
-                      <div class="col-md-2 col-sm-6">
-                        <div class="form-group mb-3">
-                          <label class="form-label fw-bold">PT</label>
-                          <input type="number" [(ngModel)]="payroll.PT" name="PT" class="form-control"
-                            placeholder="0.00" step="0.01">
-                        </div>
-                      </div>
-
-                      <!-- TDS -->
-                      <div class="col-md-2 col-sm-6">
-                        <div class="form-group mb-3">
-                          <label class="form-label fw-bold">TDS</label>
-                          <input type="number" [(ngModel)]="payroll.TDS" name="TDS" class="form-control"
-                            placeholder="0.00" step="0.01">
-                        </div>
-                      </div>
-
-                      <!-- ESI -->
-                      <div class="col-md-2 col-sm-6">
-                        <div class="form-group mb-3">
-                          <label class="form-label fw-bold">ESI</label>
-                          <input type="number" [(ngModel)]="payroll.ESI" name="ESI" class="form-control"
-                            placeholder="0.00" step="0.01">
-                        </div>
-                      </div>
-
-                      <!-- ADV -->
-                      <div class="col-md-2 col-sm-6">
-                        <div class="form-group mb-3">
-                          <label class="form-label fw-bold">ADV</label>
-                          <input type="number" [(ngModel)]="payroll.ADV" name="ADV" class="form-control"
-                            placeholder="0.00" step="0.01">
+                      <div class="row">
+                        <div class="col-12 text-end">
+                          <h4 class="mt-2">Total Earnings: <span>{{ (payroll.BASIC + payroll.HRA + payroll.CA + payroll.MA
+                              + payroll.VA + payroll.PB) | number: '1.2-2' }}</span></h4>
                         </div>
                       </div>
                     </div>
+                  </ng-template>
+                </li>
+                <li ngbNavItem>
+                  <a ngbNavLink>Deduction</a>
+                  <ng-template ngbNavContent>
+                    <div class="mt-3">
+                      <div class="row">
+                        <!-- Staff Selection (ReadOnly) -->
+                        <div class="col-md-4 col-sm-12">
+                          <div class="form-group mb-3">
+                            <label class="form-label fw-bold">Staff ID</label>
+                            <input type="text" [value]="payroll.StaffID" class="form-control" readonly>
+                          </div>
+                        </div>
+                      </div>
 
-                    <div class="row">
-                      <div class="col-12 text-end">
-                        <h4 class="mt-2">Total Deductions: <span>{{ (payroll.PF + payroll.PT + payroll.TDS + payroll.ESI
-                            + payroll.ADV) | number: '1.2-2' }}</span></h4>
-                        <h3 class="mt-4">Net Salary: <span>{{ ((payroll.BASIC + payroll.HRA + payroll.CA + payroll.MA +
-                            payroll.VA + payroll.PB) - (payroll.PF + payroll.PT + payroll.TDS + payroll.ESI +
-                            payroll.ADV)) | number: '1.2-2' }}</span></h3>
+                      <div class="row mt-2">
+                        <!-- PF -->
+                        <div class="col-md-2 col-sm-6">
+                          <div class="form-group mb-3">
+                            <label class="form-label fw-bold">PF <span class="text-danger">*</span></label>
+                            <input type="number" [(ngModel)]="payroll.PF" name="PF" #pf="ngModel" class="form-control"
+                              placeholder="0.00" step="0.01" required [class.is-invalid]="pf.invalid && (pf.dirty || pf.touched || payrollForm.submitted)">
+                            <div class="invalid-feedback" *ngIf="pf.invalid && (pf.dirty || pf.touched || payrollForm.submitted)">
+                              PF is required
+                            </div>
+                          </div>
+                        </div>
+
+                        <!-- PT -->
+                        <div class="col-md-2 col-sm-6">
+                          <div class="form-group mb-3">
+                            <label class="form-label fw-bold">PT <span class="text-danger">*</span></label>
+                            <input type="number" [(ngModel)]="payroll.PT" name="PT" #pt="ngModel" class="form-control"
+                              placeholder="0.00" step="0.01" required [class.is-invalid]="pt.invalid && (pt.dirty || pt.touched || payrollForm.submitted)">
+                            <div class="invalid-feedback" *ngIf="pt.invalid && (pt.dirty || pt.touched || payrollForm.submitted)">
+                              PT is required
+                            </div>
+                          </div>
+                        </div>
+
+                        <!-- TDS -->
+                        <div class="col-md-2 col-sm-6">
+                          <div class="form-group mb-3">
+                            <label class="form-label fw-bold">TDS <span class="text-danger">*</span></label>
+                            <input type="number" [(ngModel)]="payroll.TDS" name="TDS" #tds="ngModel" class="form-control"
+                              placeholder="0.00" step="0.01" required [class.is-invalid]="tds.invalid && (tds.dirty || tds.touched || payrollForm.submitted)">
+                            <div class="invalid-feedback" *ngIf="tds.invalid && (tds.dirty || tds.touched || payrollForm.submitted)">
+                              TDS is required
+                            </div>
+                          </div>
+                        </div>
+
+                        <!-- ESI -->
+                        <div class="col-md-2 col-sm-6">
+                          <div class="form-group mb-3">
+                            <label class="form-label fw-bold">ESI <span class="text-danger">*</span></label>
+                            <input type="number" [(ngModel)]="payroll.ESI" name="ESI" #esi="ngModel" class="form-control"
+                              placeholder="0.00" step="0.01" required [class.is-invalid]="esi.invalid && (esi.dirty || esi.touched || payrollForm.submitted)">
+                            <div class="invalid-feedback" *ngIf="esi.invalid && (esi.dirty || esi.touched || payrollForm.submitted)">
+                              ESI is required
+                            </div>
+                          </div>
+                        </div>
+
+                        <!-- ADV -->
+                        <div class="col-md-2 col-sm-6">
+                          <div class="form-group mb-3">
+                            <label class="form-label fw-bold">ADV <span class="text-danger">*</span></label>
+                            <input type="number" [(ngModel)]="payroll.ADV" name="ADV" #adv="ngModel" class="form-control"
+                              placeholder="0.00" step="0.01" required [class.is-invalid]="adv.invalid && (adv.dirty || adv.touched || payrollForm.submitted)">
+                            <div class="invalid-feedback" *ngIf="adv.invalid && (adv.dirty || adv.touched || payrollForm.submitted)">
+                              ADV is required
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="row">
+                        <div class="col-12 text-end">
+                          <h4 class="mt-2">Total Deductions: <span>{{ (payroll.PF + payroll.PT + payroll.TDS + payroll.ESI
+                              + payroll.ADV) | number: '1.2-2' }}</span></h4>
+                          <h3 class="mt-4">Net Salary: <span>{{ ((payroll.BASIC + payroll.HRA + payroll.CA + payroll.MA +
+                              payroll.VA + payroll.PB) - (payroll.PF + payroll.PT + payroll.TDS + payroll.ESI +
+                              payroll.ADV)) | number: '1.2-2' }}</span></h3>
+                        </div>
                       </div>
                     </div>
+                  </ng-template>
+                </li>
+              </ul>
+              <div [ngbNavOutlet]="nav" class="mt-2"></div>
 
-                    <div class="hr-line-dashed" style="border-top: 1px dashed #e7eaec; margin: 20px 0;"></div>
+              <!-- Validation Alert Banner -->
+              <div *ngIf="payrollForm.submitted && payrollForm.invalid" class="alert alert-danger d-flex align-items-center mb-3 mt-3" style="border-radius: 2px; padding: 10px 15px;">
+                <span class="fw-bold me-2">Required Fields:</span>
+                <span>Please fill in all mandatory fields in all tabs marked with an asterisk (*).</span>
+              </div>
 
-                    <div class="d-flex justify-content-end gap-2">
-                      <button type="button" routerLink="/staff/payroll/payrolllist" class="btn btn-white"
-                        style="border: 1px solid #d2d2d2; background: #fff; padding: 8px 25px; font-weight: 600; border-radius: 2px; color: #555;">Cancel</button>
-                      <button type="submit" class="btn btn-primary"
-                        style="background: #1ab394; border-color: #1ab394; color: #fff; padding: 8px 25px; font-weight: 600; border-radius: 2px;">
-                        {{ payroll.id ? 'Update Deductions' : 'Save Deductions' }}
-                      </button>
-                    </div>
-                  </form>
-                </ng-template>
-              </li>
-            </ul>
-            <div [ngbNavOutlet]="nav" class="mt-2"></div>
+              <div class="hr-line-dashed" style="border-top: 1px dashed #e7eaec; margin: 20px 0;"></div>
+
+              <div class="d-flex justify-content-end gap-2">
+                <button type="button" routerLink="/staff/payroll/payrolllist" class="btn btn-white"
+                  style="border: 1px solid #d2d2d2; background: #fff; padding: 8px 25px; font-weight: 600; border-radius: 2px; color: #555;">Cancel</button>
+                <button type="submit" class="btn btn-primary"
+                  style="background: #1ab394; border-color: #1ab394; color: #fff; padding: 8px 25px; font-weight: 600; border-radius: 2px;">Save Changes</button>
+              </div>
+            </form>
           </div>
         </div>
       </div>

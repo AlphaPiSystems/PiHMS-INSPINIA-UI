@@ -12,11 +12,15 @@
                     </a>
                 </div>
                 <div class="card-body">
-                    <form (ngSubmit)="onSubmit()" #billItemForm="ngForm">
+                    <form (ngSubmit)="billItemForm.form.valid && billItem.Name?.trim() && billItem.DefaultPrice > 0 && onSubmit()" #billItemForm="ngForm">
                         <div class="row g-3">
                             <div class="col-md-6">
                                 <label class="form-label">Name <span class="text-danger">*</span></label>
-                                <input type="text" class="form-control" name="Name" [(ngModel)]="billItem.Name" required>
+                                <input type="text" class="form-control" name="Name" [(ngModel)]="billItem.Name" #nameInput="ngModel" required placeholder="Enter name">
+                                <div class="text-danger mt-1"
+                                     *ngIf="(nameInput.invalid || !billItem.Name?.trim()) && (nameInput.touched || billItemForm.submitted)">
+                                    Name is required
+                                </div>
                             </div>
                             <div class="col-md-6">
                                 <label class="form-label">Short Name</label>
@@ -36,8 +40,12 @@
                                 </select>
                             </div>
                             <div class="col-md-6">
-                                <label class="form-label">Default Price</label>
-                                <input type="number" class="form-control" name="DefaultPrice" [(ngModel)]="billItem.DefaultPrice">
+                                <label class="form-label">Default Price <span class="text-danger">*</span></label>
+                                <input type="number" class="form-control" name="DefaultPrice" [(ngModel)]="billItem.DefaultPrice" #priceInput="ngModel" required min="1" placeholder="Enter default price">
+                                <div class="text-danger mt-1"
+                                     *ngIf="(priceInput.invalid || billItem.DefaultPrice === undefined || billItem.DefaultPrice === null || billItem.DefaultPrice <= 0) && (priceInput.touched || billItemForm.submitted)">
+                                    Default Price must be greater than 0
+                                </div>
                             </div>
                             <div class="col-md-6">
                                 <label class="form-label">Is Depricated?</label>
@@ -61,11 +69,16 @@
                             </div>
                         </div>
 
+                        <div *ngIf="billItemForm.submitted && (billItemForm.invalid || !billItem.Name?.trim() || billItem.DefaultPrice === undefined || billItem.DefaultPrice === null || billItem.DefaultPrice <= 0)"
+                             class="alert alert-danger d-flex align-items-center mb-3 mt-3"
+                             style="border-radius: 2px; padding: 10px 15px;">
+                            <i class="fa fa-exclamation-triangle me-2" style="font-size: 16px;"></i>
+                            <span>Please fill in all mandatory fields marked with an asterisk (*).</span>
+                        </div>
+
                         <div class="d-flex justify-content-end gap-2 mt-4">
                             <button type="button" class="btn btn-light" [routerLink]="['/bill-item/bill-itemlist']">Cancel</button>
-                            <button type="submit" class="btn btn-primary" [disabled]="!billItemForm.form.valid" style="background-color: #1ab394; border-color: #1ab394;">
-                                Update Bill Item
-                            </button>
+                            <button type="submit" class="btn btn-primary" style="background-color: #1ab394; border-color: #1ab394;">Save Changes</button>
                         </div>
                     </form>
                 </div>

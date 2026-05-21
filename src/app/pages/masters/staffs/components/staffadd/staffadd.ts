@@ -65,7 +65,10 @@ export class StaffAdd implements OnInit {
     };
   }
 
-  saveChanges() {
+  saveChanges(form: any) {
+    if (form.invalid) {
+      return;
+    }
     console.log('Saving staff data:', this.staff);
   }
 }

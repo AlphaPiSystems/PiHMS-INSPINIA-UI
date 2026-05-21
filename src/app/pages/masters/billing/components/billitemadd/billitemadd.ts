@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NgIcon } from '@ng-icons/core';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { PageTitleComponent } from '@app/components/page-title.component';
 import { HttpClient } from '@angular/common/http';
@@ -31,7 +31,10 @@ export class BillItemAdd implements OnInit {
     IsRowDeleted: 'N'
   };
 
-  constructor(private http: HttpClient) {}
+  constructor(
+    private router: Router,
+    private http: HttpClient
+  ) {}
 
   ngOnInit() {
   }
@@ -40,5 +43,6 @@ export class BillItemAdd implements OnInit {
     console.log('Submitting Bill Item:', this.billItem);
     // Mock success
     alert('Bill Item added successfully (Mock)');
+    this.router.navigate(['/bill-item/bill-itemlist']);
   }
 }

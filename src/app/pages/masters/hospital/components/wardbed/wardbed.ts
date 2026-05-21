@@ -44,14 +44,13 @@ export class WardBed implements OnInit {
     let filtered = this.wardBedList;
     if (this.searchText.trim()) {
       const search = this.searchText.toLowerCase();
-      filtered = this.wardBedList.filter(wb => 
-        (wb.BedNumber && wb.BedNumber.toLowerCase().includes(search)) ||
-        (wb.Description && wb.Description.toLowerCase().includes(search)) ||
-        (wb.BranchName && wb.BranchName.toLowerCase().includes(search)) ||
-        (wb.DepartmentName && wb.DepartmentName.toLowerCase().includes(search)) ||
-        (wb.FloorName && wb.FloorName.toLowerCase().includes(search)) ||
-        (wb.WardName && wb.WardName.toLowerCase().includes(search))
-      );
+      filtered = this.wardBedList.filter(wb => {
+        if (!wb) return false;
+        return Object.values(wb).some(val => 
+          val !== null && val !== undefined && 
+          String(val).toLowerCase().includes(search)
+        );
+      });
     }
     return filtered;
   }

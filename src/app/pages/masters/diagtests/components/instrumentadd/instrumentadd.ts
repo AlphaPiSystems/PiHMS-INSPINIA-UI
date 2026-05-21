@@ -19,8 +19,8 @@ export class InstrumentAdd implements OnInit {
   instrument: InstrumentType = {
     id: '',
     InstrumentationName: '',
-    BranchName: 'Main Branch',
-    DepartmentName: 'General',
+    BranchName: '',
+    DepartmentName: '',
     CreatedStaffID: '1',
     CreatedDateTime: null,
     UpdatedStaffID: null,
@@ -49,7 +49,10 @@ export class InstrumentAdd implements OnInit {
     });
   }
 
-  save() {
+  save(form: any) {
+    if (form.invalid) {
+      return;
+    }
     console.log('Saving instrument:', this.instrument);
     this.location.back();
   }

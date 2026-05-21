@@ -24,7 +24,7 @@ export type TestType = {
   ReportAlign: string;
   PageBreakNeeded: string;
   BranchID: number;
-  DepartmentID: string;
+  DepartmentID: number;
   CreatedStaffID: number;
   CreatedDateTime: string;
   UpdatedStaffID: number;

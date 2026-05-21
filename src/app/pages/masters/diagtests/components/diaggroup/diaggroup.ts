@@ -102,10 +102,13 @@ export class DiagGroup implements OnInit {
     let filtered = this.groupableTests;
     if (this.groupSearchText.trim()) {
       const search = this.groupSearchText.toLowerCase();
-      filtered = this.groupableTests.filter(t => 
-        t.Name.toLowerCase().includes(search) || 
-        t.Code.toLowerCase().includes(search)
-      );
+      filtered = this.groupableTests.filter(t => {
+        if (!t) return false;
+        return Object.values(t).some(val => 
+          val !== null && val !== undefined && 
+          String(val).toLowerCase().includes(search)
+        );
+      });
     }
     return filtered;
   }

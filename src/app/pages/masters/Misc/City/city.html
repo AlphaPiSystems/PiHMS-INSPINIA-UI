@@ -31,15 +31,15 @@
                 <div class="table-responsive">
                     <table class="table table-custom table-centered table-select table-hover w-100 mb-0">
                         <thead class="bg-light align-middle bg-opacity-25 thead-sm">
-                            <tr class="text-uppercase fs-md fw-bold text-dark">
-                                <th style="border-bottom: 1px solid #e7eaec;">SL.No</th>
-                                <th style="border-bottom: 1px solid #e7eaec;">City Name</th>
-                                <th style="border-bottom: 1px solid #e7eaec;">District</th>
-                                <th style="border-bottom: 1px solid #e7eaec;">State</th>
-                                <th style="border-bottom: 1px solid #e7eaec;">Country</th>
-                                <th style="border-bottom: 1px solid #e7eaec;">Type</th>
-                                <th style="border-bottom: 1px solid #e7eaec;">Branch</th>
-                                <th class="text-center" style="width: 1%; border-bottom: 1px solid #e7eaec;">Actions</th>
+                            <tr class="text-uppercase fs-xxs">
+                                <th style="width: 60px;">SL.No</th>
+                                <th >City Name</th>
+                                <th >District</th>
+                                <th >State</th>
+                                <th >Country</th>
+                                <th >Type</th>
+                                <th >Branch</th>
+                                <th class="text-center" style="width: 1%;">Actions</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -47,12 +47,12 @@
                             @for (city of this.cities$ | async; track $index; let i = $index) {
                             <tr>
                                 <td>{{ (tableService.page - 1) * tableService.pageSize + i + 1 }}</td>
-                                <td class="fw-semibold text-dark fs-sm">{{ city.Name }}</td>
-                                <td class="text-dark fs-sm">{{ city.DistrictName }}</td>
-                                <td class="text-dark fs-sm">{{ city.StateName }}</td>
-                                <td class="text-dark fs-sm">{{ city.CountryName }}</td>
-                                <td class="text-dark fs-sm">{{ city.Type }}</td>
-                                <td class="text-dark fs-sm">{{ city.BranchName }}</td>
+                                <td >{{ city.Name }}</td>
+                                <td >{{ city.DistrictName }}</td>
+                                <td >{{ city.StateName }}</td>
+                                <td >{{ city.CountryName }}</td>
+                                <td >{{ city.Type }}</td>
+                                <td >{{ city.BranchName }}</td>
                                 <td>
                                     <div class="d-flex justify-content-center gap-1">
                                         <a [routerLink]="['/misc/city/cityedit', city.id]"

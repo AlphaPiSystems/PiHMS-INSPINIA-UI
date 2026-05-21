@@ -17,6 +17,11 @@ export const INVENTORY_ROUTES: Routes = [
     loadComponent: () => import('./components/itemedit/itemedit').then(c => c.ItemEdit),
     data: { title: 'Edit Item' }
   },
+  {
+    path: 'inventory/item/itemview/:id',
+    loadComponent: () => import('./components/itemview/itemview').then(c => c.ItemView),
+    data: { title: 'View Item' }
+  },
   // Vendor Routes
   {
     path: 'inventory/vendor/vendorlist',
@@ -33,7 +38,12 @@ export const INVENTORY_ROUTES: Routes = [
     loadComponent: () => import('./components/vendoredit/vendoredit').then(c => c.VendorEdit),
     data: { title: 'Edit Vendor' }
   },
-  // Inventory Department Routes (Renamed Folders/Files)
+  {
+    path: 'inventory/vendor/vendorview/:id',
+    loadComponent: () => import('./components/vendorview/vendorview').then(c => c.VendorView),
+    data: { title: 'View Vendor' }
+  },
+  // Inventory Department Routes
   {
     path: 'inventory/invdepartment/invdepartmentlist',
     loadComponent: () => import('./components/invdepartment/invdepartment').then(c => c.InvDepartmentList),
@@ -48,5 +58,10 @@ export const INVENTORY_ROUTES: Routes = [
     path: 'inventory/invdepartment/invdepartmentedit/:id',
     loadComponent: () => import('./components/invdepartmentedit/invdepartmentedit').then(c => c.InvDepartmentEdit),
     data: { title: 'Edit Inventory Department' }
+  },
+  {
+    path: 'inventory/invdepartment/invdepartmentview/:id',
+    loadComponent: () => import('./components/invdepartmentview/invdepartmentview').then(c => c.InvDepartmentView),
+    data: { title: 'View Inventory Department' }
   }
 ];

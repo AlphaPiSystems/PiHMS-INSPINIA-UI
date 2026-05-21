@@ -81,6 +81,14 @@ export class TestTemplateEdit implements OnInit {
                 // Ensure ID is a number for comparison in select
                 this.template.DiagTestID = this.template.DiagTestID ? Number(this.template.DiagTestID) : null;
                 this.template.DoctorStaffID = this.template.DoctorStaffID ? Number(this.template.DoctorStaffID) : null;
+                
+                // Clear invalid selections
+                if (this.template.DiagTestID && !this.diagTests.some(t => t.id === this.template?.DiagTestID)) {
+                  this.template.DiagTestID = null;
+                }
+                if (this.template.DoctorStaffID && !this.doctors.some(d => d.id === this.template?.DoctorStaffID)) {
+                  this.template.DoctorStaffID = null;
+                }
             }
           }
         }
@@ -108,14 +116,12 @@ export class TestTemplateEdit implements OnInit {
     }
   }
 
-  save(): void {
-    if (!this.template) return;
-    
-    // Basic validation
-    if (!this.template.DiagTestID || !this.template.TemplateName) {
-      alert('Please fill in all required fields');
+  save(form: any): void {
+    if (form.invalid) {
       return;
     }
+    
+    if (!this.template) return;
 
     console.log('Updating template:', this.template);
     

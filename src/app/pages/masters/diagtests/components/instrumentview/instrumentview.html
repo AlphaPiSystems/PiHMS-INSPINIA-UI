@@ -1,0 +1,51 @@
+<div class="container-fluid">
+    <app-page-title title="View Diagnostic Instrument" />
+
+    <div class="row" *ngIf="instrument">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header border-light">
+                    <h5 class="card-title mb-0">Instrument Details</h5>
+                </div>
+                <div class="card-body">
+                    <form (ngSubmit)="save()" #instrumentForm="ngForm">
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label class="form-label fw-semibold">Instrument Name</label>
+                                <input disabled type="text" class="form-control" [(ngModel)]="instrument.InstrumentationName" name="InstrumentationName" required>
+                            </div>
+                            <div class="col-md-3">
+                                <label class="form-label fw-semibold">Branch Name</label>
+                                <select disabled class="form-select" [(ngModel)]="instrument.BranchName" name="BranchName">
+                                    <option *ngFor="let branch of branches" [value]="branch.Name">{{ branch.Name }}</option>
+                                </select>
+                            </div>
+                            <div class="col-md-3">
+                                <label class="form-label fw-semibold">Department Name</label>
+                                <select disabled class="form-select" [(ngModel)]="instrument.DepartmentName" name="DepartmentName">
+                                    <option *ngFor="let dept of departments" [value]="dept.Name">{{ dept.Name }}</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="d-flex gap-2 justify-content-end">
+                            <button type="button" (click)="back()" class="btn btn-white" style="border: 1px solid #d2d2d2; background: #fff; padding: 8px 25px; font-weight: 600; border-radius: 2px; color: #555;">Back</button>
+                <a [routerLink]="back()" (click)="navigateToEdit()" class="btn btn-primary" style="background: #1ab394; border-color: #1ab394; color: #fff; padding: 8px 25px; font-weight: 600; border-radius: 2px;">Edit Instrument</a>
+                            
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="row" *ngIf="!instrument">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body text-center py-5">
+                    <p class="text-muted">Loading instrument data...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

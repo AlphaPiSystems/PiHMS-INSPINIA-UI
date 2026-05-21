@@ -1,6 +1,6 @@
-import {ProductType} from '@/app/pages/masters/diagtests/types';
+import {TestType} from '@/app/pages/masters/diagtests/types';
 
-export const products: ProductType[] = [
+export const products: TestType[] = [
     {
   id: 1,
   Code: "TST2335",

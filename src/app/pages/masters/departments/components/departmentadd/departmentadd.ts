@@ -49,7 +49,10 @@ export class DepartmentAdd implements OnInit {
     };
   }
 
-  saveChanges() {
+  saveChanges(form?: any) {
+    if (form && form.invalid) {
+      return;
+    }
     console.log('Preparing payload for new department:', this.department);
     this.location.back();
   }

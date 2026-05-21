@@ -97,7 +97,7 @@
                       <div class="d-flex justify-content-center gap-1">
 
                         <!-- View Dashboard -->
-                        <a  (click)="openViewModal(visit)"
+                        <a  [routerLink]="['/patients/visitview', visit.id]"
                           class="btn btn-light btn-icon btn-sm rounded-circle" ngbTooltip="View">
                           <ng-icon name="tablerEye" class="fs-lg" />
                         </a>

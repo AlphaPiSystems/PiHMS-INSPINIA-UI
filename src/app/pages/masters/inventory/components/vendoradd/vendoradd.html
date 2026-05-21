@@ -9,92 +9,132 @@
             <h5 style="font-weight: 600; margin: 0; font-size: 14px; text-transform: uppercase;">Vendor Information</h5>
           </div>
           <div class="ibox-content" style="padding: 15px 20px;">
-            <form (ngSubmit)="saveChanges()">
+            <form #vendorForm="ngForm" (ngSubmit)="vendorForm.form.valid && isFormValid() && saveChanges()">
               <div class="row">
 
                 <!-- Vendor Name -->
                 <div class="col-md-3 col-sm-12">
                   <div class="form-group mb-3">
                     <label class="form-label fw-bold">Vendor Name <span class="text-danger">*</span></label>
-                    <input type="text" [(ngModel)]="vendor.Name" name="Name" class="form-control" placeholder="e.g. HealthCorp" required>
+                    <input type="text" [(ngModel)]="vendor.Name" name="Name" #nameInput="ngModel" class="form-control" placeholder="e.g. HealthCorp" required>
+                    <div class="text-danger mt-1"
+                         *ngIf="(nameInput.invalid || !vendor.Name?.trim()) && (nameInput.touched || vendorForm.submitted)">
+                      Vendor Name is required
+                    </div>
                   </div>
                 </div>
 
                 <!-- Contact Person -->
                 <div class="col-md-3 col-sm-12">
                   <div class="form-group mb-3">
-                    <label class="form-label fw-bold">Contact Person</label>
-                    <input type="text" [(ngModel)]="vendor.ContactPersonName" name="ContactPersonName" class="form-control">
+                    <label class="form-label fw-bold">Contact Person <span class="text-danger">*</span></label>
+                    <input type="text" [(ngModel)]="vendor.ContactPersonName" name="ContactPersonName" #contactInput="ngModel" class="form-control" placeholder="Contact Person" required>
+                    <div class="text-danger mt-1"
+                         *ngIf="(contactInput.invalid || !vendor.ContactPersonName?.trim()) && (contactInput.touched || vendorForm.submitted)">
+                      Contact Person is required
+                    </div>
                   </div>
                 </div>
 
                 <!-- Phone -->
                 <div class="col-md-3 col-sm-12">
                   <div class="form-group mb-3">
-                    <label class="form-label fw-bold">Phone</label>
-                    <input type="text" [(ngModel)]="vendor.ContactPersonPhone" name="ContactPersonPhone" class="form-control">
+                    <label class="form-label fw-bold">Phone <span class="text-danger">*</span></label>
+                    <input type="text" [(ngModel)]="vendor.ContactPersonPhone" name="ContactPersonPhone" #phoneInput="ngModel" class="form-control" placeholder="Phone" required>
+                    <div class="text-danger mt-1"
+                         *ngIf="(phoneInput.invalid || !vendor.ContactPersonPhone?.trim()) && (phoneInput.touched || vendorForm.submitted)">
+                      Phone is required
+                    </div>
                   </div>
                 </div>
 
                 <!-- Address -->
                 <div class="col-md-3 col-sm-12">
                   <div class="form-group mb-3">
-                    <label class="form-label fw-bold">Address</label>
-                    <input type="text" [(ngModel)]="vendor.Address" name="Address" class="form-control">
+                    <label class="form-label fw-bold">Address <span class="text-danger">*</span></label>
+                    <input type="text" [(ngModel)]="vendor.Address" name="Address" #addressInput="ngModel" class="form-control" placeholder="Address" required>
+                    <div class="text-danger mt-1"
+                         *ngIf="(addressInput.invalid || !vendor.Address?.trim()) && (addressInput.touched || vendorForm.submitted)">
+                      Address is required
+                    </div>
                   </div>
                 </div>
 
                 <!-- City -->
                 <div class="col-md-3 col-sm-12">
                   <div class="form-group mb-3">
-                    <label class="form-label fw-bold">City</label>
-                    <input type="text" [(ngModel)]="vendor.City" name="City" class="form-control">
+                    <label class="form-label fw-bold">City <span class="text-danger">*</span></label>
+                    <input type="text" [(ngModel)]="vendor.City" name="City" #cityInput="ngModel" class="form-control" placeholder="City" required>
+                    <div class="text-danger mt-1"
+                         *ngIf="(cityInput.invalid || !vendor.City?.trim()) && (cityInput.touched || vendorForm.submitted)">
+                      City is required
+                    </div>
                   </div>
                 </div>
 
                 <!-- State -->
                 <div class="col-md-3 col-sm-12">
                   <div class="form-group mb-3">
-                    <label class="form-label fw-bold">State</label>
-                    <input type="text" [(ngModel)]="vendor.State" name="State" class="form-control">
+                    <label class="form-label fw-bold">State <span class="text-danger">*</span></label>
+                    <input type="text" [(ngModel)]="vendor.State" name="State" #stateInput="ngModel" class="form-control" placeholder="State" required>
+                    <div class="text-danger mt-1"
+                         *ngIf="(stateInput.invalid || !vendor.State?.trim()) && (stateInput.touched || vendorForm.submitted)">
+                      State is required
+                    </div>
                   </div>
                 </div>
 
                 <!-- Postal Code -->
                 <div class="col-md-3 col-sm-12">
                   <div class="form-group mb-3">
-                    <label class="form-label fw-bold">Postal Code</label>
-                    <input type="text" [(ngModel)]="vendor.PostalCode" name="PostalCode" class="form-control">
+                    <label class="form-label fw-bold">Postal Code <span class="text-danger">*</span></label>
+                    <input type="text" [(ngModel)]="vendor.PostalCode" name="PostalCode" #postalInput="ngModel" class="form-control" placeholder="Postal Code" required>
+                    <div class="text-danger mt-1"
+                         *ngIf="(postalInput.invalid || !vendor.PostalCode?.trim()) && (postalInput.touched || vendorForm.submitted)">
+                      Postal Code is required
+                    </div>
                   </div>
                 </div>
 
                 <!-- Country -->
                 <div class="col-md-3 col-sm-12">
                   <div class="form-group mb-3">
-                    <label class="form-label fw-bold">Country</label>
-                    <input type="text" [(ngModel)]="vendor.Country" name="Country" class="form-control">
+                    <label class="form-label fw-bold">Country <span class="text-danger">*</span></label>
+                    <input type="text" [(ngModel)]="vendor.Country" name="Country" #countryInput="ngModel" class="form-control" placeholder="Country" required>
+                    <div class="text-danger mt-1"
+                         *ngIf="(countryInput.invalid || !vendor.Country?.trim()) && (countryInput.touched || vendorForm.submitted)">
+                      Country is required
+                    </div>
                   </div>
                 </div>
 
                 <!-- Branch -->
                 <div class="col-md-3 col-sm-12">
                   <div class="form-group mb-3">
-                    <label class="form-label fw-bold">Branch</label>
-                    <select [(ngModel)]="vendor.BranchID" name="BranchID" class="form-select form-control">
+                    <label class="form-label fw-bold">Branch <span class="text-danger">*</span></label>
+                    <select [(ngModel)]="vendor.BranchID" name="BranchID" #branchSelect="ngModel" class="form-select form-control" required>
                       <option value="">Select Branch</option>
                       <option *ngFor="let b of branches" [value]="b.id">{{b.Name}}</option>
                     </select>
+                    <div class="text-danger mt-1"
+                         *ngIf="branchSelect.invalid && (branchSelect.touched || vendorForm.submitted)">
+                      Branch is required
+                    </div>
                   </div>
                 </div>
 
                 <!-- Department -->
                 <div class="col-md-3 col-sm-12">
                   <div class="form-group mb-3">
-                    <label class="form-label fw-bold">Department</label>
-                    <select [(ngModel)]="vendor.DepartmentID" name="DepartmentID" class="form-select form-control">
+                    <label class="form-label fw-bold">Department <span class="text-danger">*</span></label>
+                    <select [(ngModel)]="vendor.DepartmentID" name="DepartmentID" #deptSelect="ngModel" class="form-select form-control" required>
                       <option value="">Select Department</option>
                       <option *ngFor="let d of departments" [value]="d.id">{{d.Name}}</option>
                     </select>
+                    <div class="text-danger mt-1"
+                         *ngIf="deptSelect.invalid && (deptSelect.touched || vendorForm.submitted)">
+                      Department is required
+                    </div>
                   </div>
                 </div>
 
@@ -107,13 +147,18 @@
                 </div>
               </div>
 
+              <div *ngIf="vendorForm.submitted && (vendorForm.invalid || !isFormValid())"
+                   class="alert alert-danger d-flex align-items-center mb-3 mt-3"
+                   style="border-radius: 2px; padding: 10px 15px;">
+                <i class="fa fa-exclamation-triangle me-2" style="font-size: 16px;"></i>
+                <span>Please fill in all mandatory fields marked with an asterisk (*).</span>
+              </div>
+
               <div class="hr-line-dashed" style="border-top: 1px dashed #e7eaec; margin: 20px 0;"></div>
               
               <div class="d-flex justify-content-end gap-2">
                 <button type="button" routerLink="/inventory/vendor/vendorlist" class="btn btn-white" style="border: 1px solid #d2d2d2; background: #fff; padding: 8px 25px; font-weight: 600; border-radius: 2px; color: #555;">Cancel</button>
-                <button type="submit" class="btn btn-primary" style="background: #1ab394; border-color: #1ab394; color: #fff; padding: 8px 25px; font-weight: 600; border-radius: 2px;">
-                  {{ vendor.id ? 'Update Vendor' : 'Save Vendor' }}
-                </button>
+                <button type="submit" class="btn btn-primary" style="background: #1ab394; border-color: #1ab394; color: #fff; padding: 8px 25px; font-weight: 600; border-radius: 2px;">Save Changes</button>
               </div>
             </form>
           </div>

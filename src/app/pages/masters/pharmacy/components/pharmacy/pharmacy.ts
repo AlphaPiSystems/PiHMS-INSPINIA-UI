@@ -64,13 +64,13 @@ export class Pharmacy implements OnInit {
     let filtered = this.pharmacyItems.filter(i => i.IsRowDeleted !== 'Y');
     if (this.searchText.trim()) {
       const search = this.searchText.toLowerCase();
-      filtered = filtered.filter(i => 
-        (i.ItemName && i.ItemName.toLowerCase().includes(search)) ||
-        (i.ItemCode && i.ItemCode.toLowerCase().includes(search)) ||
-        (i.BatchNum && i.BatchNum.toLowerCase().includes(search)) ||
-        (i.DosageForm && i.DosageForm.toLowerCase().includes(search)) ||
-        (i.Manufacturer && i.Manufacturer.toLowerCase().includes(search))
-      );
+      filtered = filtered.filter(i => {
+        if (!i) return false;
+        return Object.values(i).some(val => 
+          val !== null && val !== undefined && 
+          String(val).toLowerCase().includes(search)
+        );
+      });
     }
     return filtered;
   }

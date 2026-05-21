@@ -18,7 +18,7 @@
                         </div>
                     </div>
 
-                    <div class="d-flex gap-2">
+                    <div class="d-flex gap-2 justify-content-end">
                         <div class="app-search">
                             <input [(ngModel)]="searchText" (ngModelChange)="currentPage = 1" type="search"
                                 class="form-control" placeholder="Search Floors...">
@@ -35,26 +35,26 @@
                 <div class="table-responsive">
                     <table class="table table-custom table-centered table-select table-hover w-100 mb-0">
                         <thead class="bg-light align-middle bg-opacity-25 thead-sm">
-                            <tr class="text-uppercase fs-md fw-bold text-dark">
-                                <th style="width: 60px; border-bottom: 1px solid #e7eaec;">SL.No</th>
-                                <th style="border-bottom: 1px solid #e7eaec;">Floor No</th>
-                                <th style="border-bottom: 1px solid #e7eaec;">Floor Name</th>
-                                <th style="border-bottom: 1px solid #e7eaec;">Building</th>
-                                <th style="border-bottom: 1px solid #e7eaec;">Accessibility</th>
-                                <th style="border-bottom: 1px solid #e7eaec;">Branch</th>
-                                <th style="border-bottom: 1px solid #e7eaec;">Department</th>
-                                <th class="text-center" style="width: 100px; border-bottom: 1px solid #e7eaec;">Actions</th>
+                            <tr class="text-uppercase fs-xxs">
+                                <th style="width: 60px;">SL.No</th>
+                                <th>Floor No</th>
+                                <th>Floor Name</th>
+                                <th>Building</th>
+                                <th>Accessibility</th>
+                                <th>Branch</th>
+                                <th>Department</th>
+                                <th class="text-center" style="width: 100px;">Actions</th>
                             </tr>
                         </thead>
                         <tbody>
                              <tr *ngFor="let floor of getPaginatedFloors(); let i = index">
-                                <td class="fw-semibold text-dark fs-sm">{{ (currentPage - 1) * itemsPerPage + i + 1 }}</td>
-                                <td class="fw-semibold text-dark fs-sm">{{ floor.FloorNumber }}</td>
-                                <td class="fw-semibold text-dark fs-sm">{{ floor.FloorName }}</td>
-                                <td class="fw-semibold text-dark fs-sm">{{ floor.HospitalBuildingName }}</td>
-                                <td class="fw-semibold text-dark fs-sm">{{ floor.Accessibility }}</td>
-                                <td class="fw-semibold text-dark fs-sm">{{ floor.BranchName }}</td>
-                                <td class="fw-semibold text-dark fs-sm">{{ floor.Department }}</td>
+                                <td>{{ (currentPage - 1) * itemsPerPage + i + 1 }}</td>
+                                <td>{{ floor.FloorNumber }}</td>
+                                <td>{{ floor.FloorName }}</td>
+                                <td>{{ floor.HospitalBuildingName }}</td>
+                                <td>{{ floor.Accessibility }}</td>
+                                <td>{{ floor.BranchName }}</td>
+                                <td>{{ floor.Department }}</td>
                                 <td>
                                     <div class="d-flex justify-content-center">
                                         <a [routerLink]="['/floor/flooredit', floor.id]"

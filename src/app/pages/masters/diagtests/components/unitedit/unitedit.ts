@@ -41,13 +41,26 @@ export class UnitEdit implements OnInit {
           const id = +params['id'];
           if (id && data.unit) {
             this.unit = data.unit.find((u: any) => u.id === id);
+            
+            // Check if existing BranchName and DepartmentName are valid
+            if (this.unit) {
+              if (this.branches && !this.branches.some(b => b.Name === this.unit.BranchName)) {
+                this.unit.BranchName = '';
+              }
+              if (this.departments && !this.departments.some(d => d.Name === this.unit.DepartmentName)) {
+                this.unit.DepartmentName = '';
+              }
+            }
           }
         });
       }
     });
   }
 
-  save() {
+  save(form: any) {
+    if (form.invalid) {
+      return;
+    }
     console.log('Saving unit:', this.unit);
     this.location.back();
   }

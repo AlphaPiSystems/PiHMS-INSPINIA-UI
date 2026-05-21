@@ -17,7 +17,7 @@
                         </div>
                     </div>
 
-                    <div class="d-flex gap-2">
+                    <div class="d-flex gap-2 justify-content-end">
                         <div class="app-search">
                             <input [(ngModel)]="searchText" (ngModelChange)="currentPage = 1" type="search"
                                 class="form-control" placeholder="Search Scans...">
@@ -34,18 +34,18 @@
                 <div class="table-responsive">
                     <table class="table table-custom table-centered table-select table-hover w-100 mb-0">
                         <thead class="bg-light align-middle bg-opacity-25 thead-sm">
-                            <tr class="text-uppercase fs-md fw-bold text-dark">
-                                <th style="width: 80px; border-bottom: 1px solid #e7eaec;">SL.No</th>
-                                <th style="border-bottom: 1px solid #e7eaec;">Scan Name</th>
-                                <th style="border-bottom: 1px solid #e7eaec;">Description</th>
-                                <th class="text-center" style="width: 120px; border-bottom: 1px solid #e7eaec;">Actions</th>
+                            <tr class="text-uppercase fs-xxs">
+                                <th style="width: 60px;">SL.No</th>
+                                <th >Scan Name</th>
+                                <th >Description</th>
+                                <th class="text-center" style="width: 120px;">Actions</th>
                             </tr>
                         </thead>
                         <tbody>
                              <tr *ngFor="let scan of getPaginatedScans(); let i = index">
-                                <td class="fw-semibold text-dark fs-sm">{{ (currentPage - 1) * itemsPerPage + i + 1 }}</td>
-                                <td class="fw-semibold text-dark fs-sm">{{ scan.Name }}</td>
-                                <td class="fw-semibold text-dark fs-sm">{{ scan.Description }}</td>
+                                <td >{{ (currentPage - 1) * itemsPerPage + i + 1 }}</td>
+                                <td >{{ scan.Name }}</td>
+                                <td >{{ scan.Description }}</td>
                                 <td>
                                     <div class="d-flex justify-content-center">
                                         <a [routerLink]="['/scanning/scanedit', scan.id]"

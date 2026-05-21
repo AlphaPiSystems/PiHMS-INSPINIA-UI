@@ -31,17 +31,17 @@
                 <div class="table-responsive">
                     <table class="table table-custom table-centered table-select table-hover w-100 mb-0">
                         <thead class="bg-light align-middle bg-opacity-25 thead-sm">
-                            <tr class="text-uppercase fs-md fw-bold text-dark">
-                                <th style="border-bottom: 1px solid #e7eaec;">SL.No</th>
-                                <th style="border-bottom: 1px solid #e7eaec;">Staff Name</th>
-                                <th style="border-bottom: 1px solid #e7eaec;">Employer</th>
-                                <th style="border-bottom: 1px solid #e7eaec;">Working From</th>
-                                <th style="border-bottom: 1px solid #e7eaec;">Working To</th>
-                                <th style="border-bottom: 1px solid #e7eaec;">Position</th>
-                                <th style="border-bottom: 1px solid #e7eaec;">Department</th>
-                                <th style="border-bottom: 1px solid #e7eaec;">Speciality</th>
-                                <th style="border-bottom: 1px solid #e7eaec;">Discipline</th>
-                                <th class="text-center" style="width: 1%; border-bottom: 1px solid #e7eaec;">Actions
+                            <tr class="text-uppercase fs-xxs">
+                                <th style="width: 60px;">SL.No</th>
+                                <th >Staff Name</th>
+                                <th >Employer</th>
+                                <th >Working From</th>
+                                <th >Working To</th>
+                                <th >Position</th>
+                                <th >Department</th>
+                                <th >Speciality</th>
+                                <th >Discipline</th>
+                                <th class="text-center" style="width: 1%;">Actions
                                 </th>
                             </tr>
                         </thead>
@@ -49,15 +49,15 @@
                             @if ((total$ | async)! > 0) {
                             @for (payroll of this.items$ | async; track $index; let i = $index) {
                              <tr>
-                                <td class="fw-semibold text-dark fs-sm">{{ (tableService.page - 1) * tableService.pageSize + i + 1 }}</td>
-                                <td class="fw-semibold text-dark fs-sm">{{ payroll.StaffName }}</td>
-                                <td class="fw-semibold text-dark fs-sm">{{ payroll.Employer }}</td>
-                                <td class="fw-semibold text-dark fs-sm">{{ payroll.WorkingPeriodFrom }}</td>
-                                <td class="fw-semibold text-dark fs-sm">{{ payroll.WorkingPeriodTo }}</td>
-                                <td class="fw-semibold text-dark fs-sm">{{ payroll.PositionHeld }}</td>
-                                <td class="fw-semibold text-dark fs-sm">{{ payroll.Department }}</td>
-                                <td class="fw-semibold text-dark fs-sm">{{ payroll.Speciality }}</td>
-                                <td class="fw-semibold text-dark fs-sm">{{ payroll.Discipline }}</td>
+                                <td >{{ (tableService.page - 1) * tableService.pageSize + i + 1 }}</td>
+                                <td >{{ payroll.StaffName }}</td>
+                                <td >{{ payroll.Employer }}</td>
+                                <td >{{ payroll.WorkingPeriodFrom }}</td>
+                                <td >{{ payroll.WorkingPeriodTo }}</td>
+                                <td >{{ payroll.PositionHeld }}</td>
+                                <td >{{ payroll.Department }}</td>
+                                <td >{{ payroll.Speciality }}</td>
+                                <td >{{ payroll.Discipline }}</td>
                                 <td>
                                     <div class="d-flex justify-content-center">
                                         <a [routerLink]="['/staff/payroll/payrolledit', payroll.id]"

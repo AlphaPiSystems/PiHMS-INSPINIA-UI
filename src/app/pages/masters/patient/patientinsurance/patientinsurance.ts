@@ -51,11 +51,11 @@ export class PatientInsurance implements OnInit {
     if (this.searchText.trim()) {
       const search = this.searchText.toLowerCase();
       filtered = this.insuranceList.filter(i => {
-        const patientName = this.getPatientName(i.PatientID).toLowerCase();
-        return (i.PolicyNumber && i.PolicyNumber.toLowerCase().includes(search)) ||
-          (i.InsuranceName && i.InsuranceName.toLowerCase().includes(search)) ||
-          (i.VerificationStatus && i.VerificationStatus.toLowerCase().includes(search)) ||
-          patientName.includes(search);
+        if (!i) return false;
+        return Object.values(i).some(val => 
+          val !== null && val !== undefined && 
+          String(val).toLowerCase().includes(search)
+        );
       });
     }
     return filtered;

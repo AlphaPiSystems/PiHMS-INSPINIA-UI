@@ -113,10 +113,8 @@ export class TestTemplateAdd implements OnInit {
     }
   }
 
-  save(): void {
-    // Basic validation
-    if (!this.template.DiagTestID || !this.template.TemplateName) {
-      alert('Please fill in all required fields');
+  save(form: any): void {
+    if (form.invalid) {
       return;
     }
 

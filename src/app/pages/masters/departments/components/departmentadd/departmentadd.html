@@ -2,97 +2,122 @@
   <app-page-title title="Add New Department" />
 
   <div class="wrapper wrapper-content animated fadeInRight" style="padding-top: 0;">
-    <div class="row">
-      <!-- Section 1: Department Information -->
-      <div class="col-lg-12 mb-1">
-        <div class="ibox float-e-margins"
-          style="background:#fff; box-shadow: 0 2px 4px rgba(0,0,0,0.08); border-radius: 4px;">
-          <div class="ibox-title" style="border-top: 4px solid #1ab394; padding: 6px 15px; border-bottom: 1px solid #f0f0f0;">
-            <h5 style="font-weight: 600; margin: 0; font-size: 14px; text-transform: uppercase;">Department Information</h5>
-          </div>
-          <div class="ibox-content" style="padding: 10px 15px;">
-            <form role="form">
+    <form #deptForm="ngForm" (ngSubmit)="saveChanges(deptForm)" novalidate>
+      <div class="row">
+        <!-- Section 1: Department Information -->
+        <div class="col-lg-12 mb-1">
+          <div class="ibox float-e-margins"
+            style="background:#fff; box-shadow: 0 2px 4px rgba(0,0,0,0.08); border-radius: 4px;">
+            <div class="ibox-title" style="border-top: 4px solid #1ab394; padding: 6px 15px; border-bottom: 1px solid #f0f0f0;">
+              <h5 style="font-weight: 600; margin: 0; font-size: 14px; text-transform: uppercase;">Department Information</h5>
+            </div>
+            <div class="ibox-content" style="padding: 10px 15px;">
               <div class="row">
                 <div class="col-md-6 col-sm-12">
                   <div class="form-group row align-items-center" style="margin-bottom: 8px;">
                     <label class="col-sm-4 text-start col-form-label" style="font-weight: 600;">Department Name <span class="text-danger">*</span></label>
                     <div class="col-sm-8">
-                      <input type="text" class="form-control" [(ngModel)]="department.Name" name="name" placeholder="e.g. Cardiology" required style="border-radius: 2px;">
+                      <input type="text" class="form-control" [(ngModel)]="department.Name" name="name" #nameCtrl="ngModel" placeholder="e.g. Cardiology" required style="border-radius: 2px;"
+                        [class.is-invalid]="nameCtrl.invalid && (nameCtrl.dirty || nameCtrl.touched || deptForm.submitted)">
+                      <div class="invalid-feedback" *ngIf="nameCtrl.invalid && (nameCtrl.dirty || nameCtrl.touched || deptForm.submitted)">
+                        Department Name is required
+                      </div>
                     </div>
                   </div>
                 </div>
                 <div class="col-md-6 col-sm-12">
                   <div class="form-group row align-items-center" style="margin-bottom: 8px;">
-                    <label class="col-sm-4 text-start col-form-label" style="font-weight: 600;">Description</label>
+                    <label class="col-sm-4 text-start col-form-label" style="font-weight: 600;">Description <span class="text-danger">*</span></label>
                     <div class="col-sm-8">
-                      <input type="text" class="form-control" [(ngModel)]="department.Description" name="description" placeholder="e.g. Heart and cardiovascular diseases" style="border-radius: 2px;">
+                      <input type="text" class="form-control" [(ngModel)]="department.Description" name="description" #descriptionCtrl="ngModel" placeholder="e.g. Heart and cardiovascular diseases" required style="border-radius: 2px;"
+                        [class.is-invalid]="descriptionCtrl.invalid && (descriptionCtrl.dirty || descriptionCtrl.touched || deptForm.submitted)">
+                      <div class="invalid-feedback" *ngIf="descriptionCtrl.invalid && (descriptionCtrl.dirty || descriptionCtrl.touched || deptForm.submitted)">
+                        Description is required
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
-            </form>
+            </div>
           </div>
         </div>
-      </div>
 
-      <!-- Section 2: Organization Details -->
-      <div class="col-lg-12 mb-1">
-        <div class="ibox float-e-margins"
-          style="background:#fff; box-shadow: 0 2px 4px rgba(0,0,0,0.08); border-radius: 4px;">
-          <div class="ibox-title" style="border-top: 4px solid #f8ac59; padding: 6px 15px; border-bottom: 1px solid #f0f0f0;">
-            <h5 style="font-weight: 600; margin: 0; font-size: 14px; text-transform: uppercase;">Organization Details</h5>
-          </div>
-          <div class="ibox-content" style="padding: 10px 15px;">
-            <form role="form">
+        <!-- Section 2: Organization Details -->
+        <div class="col-lg-12 mb-1">
+          <div class="ibox float-e-margins"
+            style="background:#fff; box-shadow: 0 2px 4px rgba(0,0,0,0.08); border-radius: 4px;">
+            <div class="ibox-title" style="border-top: 4px solid #f8ac59; padding: 6px 15px; border-bottom: 1px solid #f0f0f0;">
+              <h5 style="font-weight: 600; margin: 0; font-size: 14px; text-transform: uppercase;">Organization Details</h5>
+            </div>
+            <div class="ibox-content" style="padding: 10px 15px;">
               <div class="row">
                 <div class="col-md-4 col-sm-12">
                   <div class="form-group row align-items-center" style="margin-bottom: 8px;">
-                    <label class="col-sm-4 text-start col-form-label" style="font-weight: 600;">Branch Name</label>
+                    <label class="col-sm-4 text-start col-form-label" style="font-weight: 600;">Branch Name <span class="text-danger">*</span></label>
                     <div class="col-sm-8">
-                      <select class="form-select form-control" [(ngModel)]="department.BranchID" name="branchid" style="border-radius: 2px;">
+                      <select class="form-select form-control" [(ngModel)]="department.BranchID" name="branchid" #branchidCtrl="ngModel" required style="border-radius: 2px;"
+                        [class.is-invalid]="branchidCtrl.invalid && (branchidCtrl.dirty || branchidCtrl.touched || deptForm.submitted)">
                         <option [ngValue]="null">Select Branch</option>
                         <option *ngFor="let branch of branches" [ngValue]="branch.id">{{branch.Name}}</option>
                       </select>
+                      <div class="invalid-feedback" *ngIf="branchidCtrl.invalid && (branchidCtrl.dirty || branchidCtrl.touched || deptForm.submitted)">
+                        Branch Name is required
+                      </div>
                     </div>
                   </div>
                 </div>
                 <div class="col-md-4 col-sm-12">
                   <div class="form-group row align-items-center" style="margin-bottom: 8px;">
-                    <label class="col-sm-4 text-start col-form-label" style="font-weight: 600;">Report Priority</label>
+                    <label class="col-sm-4 text-start col-form-label" style="font-weight: 600;">Report Priority <span class="text-danger">*</span></label>
                     <div class="col-sm-8">
-                      <input type="number" class="form-control" [(ngModel)]="department.ReportPriority" name="reportpriority" placeholder="e.g. 1" style="border-radius: 2px;">
+                      <input type="number" class="form-control" [(ngModel)]="department.ReportPriority" name="reportpriority" #reportpriorityCtrl="ngModel" placeholder="e.g. 1" required style="border-radius: 2px;"
+                        [class.is-invalid]="reportpriorityCtrl.invalid && (reportpriorityCtrl.dirty || reportpriorityCtrl.touched || deptForm.submitted)">
+                      <div class="invalid-feedback" *ngIf="reportpriorityCtrl.invalid && (reportpriorityCtrl.dirty || reportpriorityCtrl.touched || deptForm.submitted)">
+                        Report Priority is required
+                      </div>
                     </div>
                   </div>
                 </div>
                 <div class="col-md-4 col-sm-12">
                   <div class="form-group row align-items-center" style="margin-bottom: 8px;">
-                    <label class="col-sm-4 text-start col-form-label" style="font-weight: 600;">Status</label>
+                    <label class="col-sm-4 text-start col-form-label" style="font-weight: 600;">Status <span class="text-danger">*</span></label>
                     <div class="col-sm-8">
-                      <select class="form-select form-control" [(ngModel)]="department.IsRowDeleted" name="status" style="border-radius: 2px;">
+                      <select class="form-select form-control" [(ngModel)]="department.IsRowDeleted" name="status" #statusCtrl="ngModel" required style="border-radius: 2px;"
+                        [class.is-invalid]="statusCtrl.invalid && (statusCtrl.dirty || statusCtrl.touched || deptForm.submitted)">
+                        <option value="">Select Status</option>
                         <option value="N">Active</option>
                         <option value="Y">Inactive</option>
                       </select>
+                      <div class="invalid-feedback" *ngIf="statusCtrl.invalid && (statusCtrl.dirty || statusCtrl.touched || deptForm.submitted)">
+                        Status is required
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
-            </form>
+            </div>
           </div>
         </div>
       </div>
-    </div>
 
-    <!-- Action Buttons -->
-    <div class="row mt-2">
-      <div class="col-lg-12">
-        <div class="hr-line-dashed" style="border-top: 1px dashed #e7eaec; margin: 10px 0;"></div>
-        <div class="text-right d-flex justify-content-end gap-2" style="justify-content: flex-end; margin-bottom: 30px;">
-          <button class="btn btn-white" type="button" [routerLink]="['/department/departmentlist']"
-            style="border: 1px solid #d2d2d2; background: #fff; padding: 8px 20px; font-weight: 600; border-radius: 2px; color: #555; margin-right: 10px;">Cancel</button>
-          <button class="btn btn-primary" type="button" (click)="saveChanges()"
-            style="background: #1ab394; border-color: #1ab394; color: #fff; padding: 8px 20px; font-weight: 600; border-radius: 2px;">Save Changes</button>
+      <!-- Validation Alert Banner -->
+      <div *ngIf="deptForm.submitted && deptForm.invalid" class="alert alert-danger d-flex align-items-center mb-3 mt-3" style="border-radius: 2px; padding: 10px 15px;">
+        <span class="fw-bold me-2">Required Fields:</span>
+        <span>Please fill in all mandatory fields marked with an asterisk (*).</span>
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="row mt-2">
+        <div class="col-lg-12">
+          <div class="hr-line-dashed" style="border-top: 1px dashed #e7eaec; margin: 10px 0;"></div>
+          <div class="text-right d-flex justify-content-end gap-2" style="justify-content: flex-end; margin-bottom: 30px;">
+            <button class="btn btn-white" type="button" [routerLink]="['/department/departmentlist']"
+              style="border: 1px solid #d2d2d2; background: #fff; padding: 8px 20px; font-weight: 600; border-radius: 2px; color: #555; margin-right: 10px;">Cancel</button>
+            <button class="btn btn-primary" type="submit"
+              style="background: #1ab394; border-color: #1ab394; color: #fff; padding: 8px 20px; font-weight: 600; border-radius: 2px;">Save Changes</button>
+          </div>
         </div>
       </div>
-    </div>
+    </form>
   </div>
 </div>

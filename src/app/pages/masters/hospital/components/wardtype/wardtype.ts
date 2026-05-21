@@ -44,12 +44,13 @@ export class WardType implements OnInit {
     let filtered = this.wardTypeList;
     if (this.searchText.trim()) {
       const search = this.searchText.toLowerCase();
-      filtered = this.wardTypeList.filter(wt => 
-        (wt.Type && wt.Type.toLowerCase().includes(search)) ||
-        (wt.Description && wt.Description.toLowerCase().includes(search)) ||
-        (wt.BranchName && wt.BranchName.toLowerCase().includes(search)) ||
-        (wt.DepartmentName && wt.DepartmentName.toLowerCase().includes(search))
-      );
+      filtered = this.wardTypeList.filter(wt => {
+        if (!wt) return false;
+        return Object.values(wt).some(val => 
+          val !== null && val !== undefined && 
+          String(val).toLowerCase().includes(search)
+        );
+      });
     }
     return filtered;
   }

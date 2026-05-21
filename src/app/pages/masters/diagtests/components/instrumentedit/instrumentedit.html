@@ -8,33 +8,52 @@
                     <h5 class="card-title mb-0">Instrument Details</h5>
                 </div>
                 <div class="card-body">
-                    <form (ngSubmit)="save()" #instrumentForm="ngForm">
+                    <form (ngSubmit)="save(instrumentForm)" #instrumentForm="ngForm" novalidate>
                         <div class="row mb-3">
                             <div class="col-md-6">
-                                <label class="form-label fw-semibold">Instrument Name</label>
-                                <input type="text" class="form-control" [(ngModel)]="instrument.InstrumentationName" name="InstrumentationName" required>
+                                <label class="form-label fw-semibold">Instrument Name <span class="text-danger">*</span></label>
+                                <input type="text" class="form-control" [(ngModel)]="instrument.InstrumentationName" name="InstrumentationName" #instrumentname="ngModel" required
+                                  [class.is-invalid]="instrumentname.invalid && (instrumentname.dirty || instrumentname.touched || instrumentForm.submitted)">
+                                <div class="invalid-feedback" *ngIf="instrumentname.invalid && (instrumentname.dirty || instrumentname.touched || instrumentForm.submitted)">
+                                  Instrument Name is required
+                                </div>
                             </div>
                             <div class="col-md-3">
-                                <label class="form-label fw-semibold">Branch Name</label>
-                                <select class="form-select" [(ngModel)]="instrument.BranchName" name="BranchName">
+                                <label class="form-label fw-semibold">Branch Name <span class="text-danger">*</span></label>
+                                <select class="form-select" [(ngModel)]="instrument.BranchName" name="BranchName" #instrumentbranch="ngModel" required
+                                  [class.is-invalid]="instrumentbranch.invalid && (instrumentbranch.dirty || instrumentbranch.touched || instrumentForm.submitted)">
+                                    <option value="" disabled>Select Branch</option>
                                     <option *ngFor="let branch of branches" [value]="branch.Name">{{ branch.Name }}</option>
                                 </select>
+                                <div class="invalid-feedback" *ngIf="instrumentbranch.invalid && (instrumentbranch.dirty || instrumentbranch.touched || instrumentForm.submitted)">
+                                  Branch is required
+                                </div>
                             </div>
                             <div class="col-md-3">
-                                <label class="form-label fw-semibold">Department Name</label>
-                                <select class="form-select" [(ngModel)]="instrument.DepartmentName" name="DepartmentName">
+                                <label class="form-label fw-semibold">Department Name <span class="text-danger">*</span></label>
+                                <select class="form-select" [(ngModel)]="instrument.DepartmentName" name="DepartmentName" #instrumentdepartment="ngModel" required
+                                  [class.is-invalid]="instrumentdepartment.invalid && (instrumentdepartment.dirty || instrumentdepartment.touched || instrumentForm.submitted)">
+                                    <option value="" disabled>Select Department</option>
                                     <option *ngFor="let dept of departments" [value]="dept.Name">{{ dept.Name }}</option>
                                 </select>
+                                <div class="invalid-feedback" *ngIf="instrumentdepartment.invalid && (instrumentdepartment.dirty || instrumentdepartment.touched || instrumentForm.submitted)">
+                                  Department is required
+                                </div>
                             </div>
                         </div>
 
-                        <div class="d-flex gap-2">
-                            <button type="submit" class="btn btn-primary" [disabled]="!instrumentForm.form.valid" style="background-color: #1ab394; border-color: #1ab394;">
-                                Save Changes
-                            </button>
+                        <div class="hr-line-dashed" style="border-top: 1px dashed #e7eaec; margin: 20px 0;"></div>
+            
+                        <div *ngIf="instrumentForm.submitted && instrumentForm.invalid" class="alert alert-danger d-flex align-items-center mb-3" style="border-radius: 2px; padding: 10px 15px;">
+                          <i class="fa fa-exclamation-triangle me-2" style="font-size: 16px;"></i>
+                          <span>Please fill in all mandatory fields marked with an asterisk (*).</span>
+                        </div>
+
+                        <div class="d-flex gap-2 justify-content-end">
                             <button type="button" class="btn btn-light" (click)="cancel()">
                                 Cancel
                             </button>
+<button type="submit" class="btn btn-primary" style="background-color: #1ab394; border-color: #1ab394;">Save Changes</button>
                         </div>
                     </form>
                 </div>

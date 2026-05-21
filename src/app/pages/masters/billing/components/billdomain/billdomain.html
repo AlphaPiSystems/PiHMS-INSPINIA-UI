@@ -50,30 +50,30 @@
                 <div class="table-responsive">
                     <table class="table table-custom table-centered table-select table-hover w-100 mb-0">
                         <thead class="bg-light align-middle bg-opacity-25 thead-sm">
-                            <tr class="text-uppercase fs-md fw-bold text-dark">
-                                <th style="border-bottom: 1px solid #e7eaec;">SL.No</th>
-                                <th style="border-bottom: 1px solid #e7eaec;">Code</th>
-                                <th style="border-bottom: 1px solid #e7eaec;">Name</th>
-                                <th style="border-bottom: 1px solid #e7eaec;">Type</th>
-                                <th style="border-bottom: 1px solid #e7eaec;">Paper Size</th>
-                                <th style="border-bottom: 1px solid #e7eaec;">Description</th>
-                                <th style="border-bottom: 1px solid #e7eaec;">Priority</th>
-                                <th class="text-center" style="width: 1%; border-bottom: 1px solid #e7eaec;">Actions</th>
+                            <tr class="text-uppercase fs-xxs">
+                                <th style="width: 60px;">SL.No</th>
+                                <th >Code</th>
+                                <th >Name</th>
+                                <th >Type</th>
+                                <th >Paper Size</th>
+                                <th >Description</th>
+                                <th >Priority</th>
+                                <th class="text-center" style="width: 1%;">Actions</th>
                             </tr>
                         </thead>
                         <tbody>
                             @if ((total$ | async)! > 0) {
                             @for (item of this.billDomains$ | async; track $index; let i = $index) {
                              <tr>
-                                <td class="fw-semibold text-dark fs-sm">{{ (tableService.page - 1) * tableService.pageSize + i + 1 }}</td>
-                                <td class="fw-semibold text-dark fs-sm">{{ item.Code }}</td>
-                                <td class="fw-semibold text-dark fs-sm">{{ item.Name }}</td>
-                                <td class="fw-semibold text-dark fs-sm">{{ item.DomainType }}</td>
-                                <td class="fw-semibold text-dark fs-sm">{{ item.PaperSize }}</td>
-                                <td class="fw-semibold text-dark fs-sm" style="max-width: 250px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
+                                <td >{{ (tableService.page - 1) * tableService.pageSize + i + 1 }}</td>
+                                <td >{{ item.Code }}</td>
+                                <td >{{ item.Name }}</td>
+                                <td >{{ item.DomainType }}</td>
+                                <td >{{ item.PaperSize }}</td>
+                                <td  style="max-width: 250px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
                                     {{ item.Description }}
                                 </td>
-                                <td class="fw-semibold text-dark fs-sm">{{ item.DomainPriority }}</td>
+                                <td >{{ item.DomainPriority }}</td>
                                 <td>
                                     <div class="d-flex justify-content-center gap-1">
                                         <a [routerLink]="['/bill-domain/bill-domainedit', item.id]"

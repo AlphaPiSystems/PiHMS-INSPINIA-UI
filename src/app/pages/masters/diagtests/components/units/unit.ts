@@ -43,13 +43,13 @@ export class TestUnit implements OnInit {
     let filtered = this.testUnits;
     if (this.searchText.trim()) {
       const search = this.searchText.toLowerCase();
-      filtered = this.testUnits.filter(u => 
-        u.Name.toLowerCase().includes(search) ||
-        u.DisplayName.toLowerCase().includes(search) ||
-        u.Description.toLowerCase().includes(search) ||
-        u.BranchName.toLowerCase().includes(search) ||
-        u.DepartmentName.toLowerCase().includes(search)
-      );
+      filtered = this.testUnits.filter(u => {
+        if (!u) return false;
+        return Object.values(u).some(val => 
+          val !== null && val !== undefined && 
+          String(val).toLowerCase().includes(search)
+        );
+      });
     }
     return filtered;
   }

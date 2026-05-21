@@ -44,10 +44,13 @@ export class Role implements OnInit {
     let filtered = this.roleList;
     if (this.searchText.trim()) {
       const search = this.searchText.toLowerCase();
-      filtered = this.roleList.filter(s => 
-        (s.RoleName && s.RoleName.toLowerCase().includes(search)) ||
-        (s.RoleDescription && s.RoleDescription.toLowerCase().includes(search))
-      );
+      filtered = this.roleList.filter(s => {
+        if (!s) return false;
+        return Object.values(s).some(val => 
+          val !== null && val !== undefined && 
+          String(val).toLowerCase().includes(search)
+        );
+      });
     }
     return filtered;
   }

@@ -8,15 +8,23 @@
                     <h5 class="card-title mb-0">Bill Domain Details</h5>
                 </div>
                 <div class="card-body">
-                    <form (ngSubmit)="onSubmit()">
+                    <form #domainForm="ngForm" (ngSubmit)="domainForm.form.valid && billDomain.Name?.trim() && billDomain.Code?.trim() && onSubmit()">
                         <div class="row g-3">
                             <div class="col-md-6">
                                 <label class="form-label">Name <span class="text-danger">*</span></label>
-                                <input type="text" class="form-control" [(ngModel)]="billDomain.Name" name="Name" required placeholder="Enter domain name">
+                                <input type="text" class="form-control" [(ngModel)]="billDomain.Name" name="Name" #nameInput="ngModel" required placeholder="Enter domain name">
+                                <div class="text-danger mt-1"
+                                     *ngIf="(nameInput.invalid || !billDomain.Name?.trim()) && (nameInput.touched || domainForm.submitted)">
+                                    Name is required
+                                </div>
                             </div>
                             <div class="col-md-6">
                                 <label class="form-label">Code <span class="text-danger">*</span></label>
-                                <input type="text" class="form-control" [(ngModel)]="billDomain.Code" name="Code" required placeholder="Enter domain code">
+                                <input type="text" class="form-control" [(ngModel)]="billDomain.Code" name="Code" #codeInput="ngModel" required placeholder="Enter domain code">
+                                <div class="text-danger mt-1"
+                                     *ngIf="(codeInput.invalid || !billDomain.Code?.trim()) && (codeInput.touched || domainForm.submitted)">
+                                    Code is required
+                                </div>
                             </div>
                             <div class="col-md-6">
                                 <label class="form-label">Description</label>
@@ -68,9 +76,16 @@
                             </div>
                         </div>
 
+                        <div *ngIf="domainForm.submitted && (domainForm.invalid || !billDomain.Name?.trim() || !billDomain.Code?.trim())"
+                             class="alert alert-danger d-flex align-items-center mb-3 mt-3"
+                             style="border-radius: 2px; padding: 10px 15px;">
+                            <i class="fa fa-exclamation-triangle me-2" style="font-size: 16px;"></i>
+                            <span>Please fill in all mandatory fields marked with an asterisk (*).</span>
+                        </div>
+
                         <div class="mt-4 d-flex justify-content-end gap-2">
                             <button type="button" class="btn btn-light" [routerLink]="['/bill-domain/bill-domainlist']">Cancel</button>
-                            <button type="submit" class="btn btn-primary" style="background-color: #1ab394; border-color: #1ab394;">Update Bill Domain</button>
+                            <button type="submit" class="btn btn-primary" style="background-color: #1ab394; border-color: #1ab394;">Save Changes</button>
                         </div>
                     </form>
                 </div>

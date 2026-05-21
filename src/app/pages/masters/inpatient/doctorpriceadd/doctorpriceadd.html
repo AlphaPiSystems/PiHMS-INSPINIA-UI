@@ -10,63 +10,84 @@
                     </h5>
                 </div>
                 <div class="card-body" style="padding: 20px;">
-                    <form #priceForm="ngForm" (ngSubmit)="saveChanges()">
+                    <form #priceForm="ngForm" (ngSubmit)="priceForm.form.valid && item.Specialization?.trim() && saveChanges()">
                         <div class="row">
                             <div class="col-md-6 mb-3">
-                                <label class="form-label" style="font-weight: 600; color: #676a6c;">Doctor</label>
-                                <select name="DoctorID" [(ngModel)]="item.DoctorID" #doctorSelect="ngModel" required class="form-select" [class.is-invalid]="doctorSelect.invalid && (doctorSelect.dirty || doctorSelect.touched)" style="border: 1px solid #e5e6e7; border-radius: 1px; padding: 6px 12px;">
+                                <label class="form-label" style="font-weight: 600; color: #676a6c;">Doctor <span class="text-danger">*</span></label>
+                                <select name="DoctorID" [(ngModel)]="item.DoctorID" #doctorSelect="ngModel" required class="form-select" style="border: 1px solid #e5e6e7; border-radius: 1px; padding: 6px 12px;">
                                     <option value="">Select Doctor</option>
                                     @for (s of staffs; track s.id) {
                                         <option [value]="s.id">{{ s.Name }}</option>
                                     }
                                 </select>
-                                <div class="invalid-feedback" *ngIf="doctorSelect.invalid && (doctorSelect.dirty || doctorSelect.touched)">Doctor is required</div>
+                                <div class="text-danger mt-1"
+                                     *ngIf="(doctorSelect.invalid) && (doctorSelect.touched || priceForm.submitted)">
+                                    Doctor is required
+                                </div>
                             </div>
                             <div class="col-md-6 mb-3">
-                                <label class="form-label" style="font-weight: 600; color: #676a6c;">Item</label>
-                                <select name="ItemID" [(ngModel)]="item.ItemID" #itemSelect="ngModel" required class="form-select" [class.is-invalid]="itemSelect.invalid && (itemSelect.dirty || itemSelect.touched)" style="border: 1px solid #e5e6e7; border-radius: 1px; padding: 6px 12px;">
+                                <label class="form-label" style="font-weight: 600; color: #676a6c;">Item <span class="text-danger">*</span></label>
+                                <select name="ItemID" [(ngModel)]="item.ItemID" #itemSelect="ngModel" required class="form-select" style="border: 1px solid #e5e6e7; border-radius: 1px; padding: 6px 12px;">
                                     <option value="">Select Item</option>
                                     @for (bi of billItems; track bi.id) {
                                         <option [value]="bi.id">{{ bi.Name }}</option>
                                     }
                                 </select>
-                                <div class="invalid-feedback" *ngIf="itemSelect.invalid && (itemSelect.dirty || itemSelect.touched)">Item is required</div>
+                                <div class="text-danger mt-1"
+                                     *ngIf="(itemSelect.invalid) && (itemSelect.touched || priceForm.submitted)">
+                                    Item is required
+                                </div>
                             </div>
                         </div>
 
                         <div class="row">
                             <div class="col-md-6 mb-3">
-                                <label class="form-label" style="font-weight: 600; color: #676a6c;">Ward Type</label>
-                                <select name="WardTypeID" [(ngModel)]="item.WardTypeID" #wardSelect="ngModel" required class="form-select" [class.is-invalid]="wardSelect.invalid && (wardSelect.dirty || wardSelect.touched)" style="border: 1px solid #e5e6e7; border-radius: 1px; padding: 6px 12px;">
+                                <label class="form-label" style="font-weight: 600; color: #676a6c;">Ward Type <span class="text-danger">*</span></label>
+                                <select name="WardTypeID" [(ngModel)]="item.WardTypeID" #wardSelect="ngModel" required class="form-select" style="border: 1px solid #e5e6e7; border-radius: 1px; padding: 6px 12px;">
                                     <option value="">Select Ward Type</option>
                                     @for (wt of wardTypes; track wt.id) {
                                         <option [value]="wt.id">{{ wt.Type }}</option>
                                     }
                                 </select>
-                                <div class="invalid-feedback" *ngIf="wardSelect.invalid && (wardSelect.dirty || wardSelect.touched)">Ward type is required</div>
+                                <div class="text-danger mt-1"
+                                     *ngIf="(wardSelect.invalid) && (wardSelect.touched || priceForm.submitted)">
+                                    Ward type is required
+                                </div>
                             </div>
                             <div class="col-md-6 mb-3">
-                                <label class="form-label" style="font-weight: 600; color: #676a6c;">Specialization</label>
-                                <input type="text" name="Specialization" [(ngModel)]="item.Specialization" #specInput="ngModel" required class="form-control" [class.is-invalid]="specInput.invalid && (specInput.dirty || specInput.touched)" style="border: 1px solid #e5e6e7; border-radius: 1px; padding: 6px 12px;">
-                                <div class="invalid-feedback" *ngIf="specInput.invalid && (specInput.dirty || specInput.touched)">Specialization is required</div>
+                                <label class="form-label" style="font-weight: 600; color: #676a6c;">Specialization <span class="text-danger">*</span></label>
+                                <input type="text" name="Specialization" [(ngModel)]="item.Specialization" #specInput="ngModel" required class="form-control" style="border: 1px solid #e5e6e7; border-radius: 1px; padding: 6px 12px;">
+                                <div class="text-danger mt-1"
+                                     *ngIf="(specInput.invalid || !item.Specialization?.trim()) && (specInput.touched || priceForm.submitted)">
+                                    Specialization is required
+                                </div>
                             </div>
                         </div>
 
                         <div class="row">
                             <div class="col-md-6 mb-3">
-                                <label class="form-label" style="font-weight: 600; color: #676a6c;">Price</label>
-                                <input type="number" name="Price" [(ngModel)]="item.Price" #priceInput="ngModel" required min="1" class="form-control" [class.is-invalid]="priceInput.invalid && (priceInput.dirty || priceInput.touched)" style="border: 1px solid #e5e6e7; border-radius: 1px; padding: 6px 12px;">
-                                <div class="invalid-feedback" *ngIf="priceInput.invalid && (priceInput.dirty || priceInput.touched)">Price must be greater than 0</div>
+                                <label class="form-label" style="font-weight: 600; color: #676a6c;">Price <span class="text-danger">*</span></label>
+                                <input type="number" name="Price" [(ngModel)]="item.Price" #priceInput="ngModel" required min="1" class="form-control" style="border: 1px solid #e5e6e7; border-radius: 1px; padding: 6px 12px;">
+                                <div class="text-danger mt-1"
+                                     *ngIf="(priceInput.invalid) && (priceInput.touched || priceForm.submitted)">
+                                    Price must be greater than 0
+                                </div>
                             </div>
+                        </div>
+
+                        
+                        <div *ngIf="priceForm.submitted && (priceForm.invalid || !item.Specialization?.trim())"
+                             class="alert alert-danger d-flex align-items-center mb-3 mt-3"
+                             style="border-radius: 2px; padding: 10px 15px;">
+                            <i class="fa fa-exclamation-triangle me-2" style="font-size: 16px;"></i>
+                            <span>Please fill in all mandatory fields marked with an asterisk (*).</span>
                         </div>
 
                         <div class="hr-line-dashed" style="border-top: 1px dashed #e7eaec; margin: 20px 0;"></div>
                         
                         <div class="d-flex justify-content-end gap-2">
                             <button type="button" routerLink="/inpatient/doctorprice/list" class="btn btn-white" style="border: 1px solid #d2d2d2; background: #fff; padding: 8px 25px; font-weight: 600; border-radius: 2px; color: #555;">Cancel</button>
-                            <button type="submit" [disabled]="priceForm.invalid" class="btn btn-primary" style="background: #1ab394; border-color: #1ab394; color: #fff; padding: 8px 25px; font-weight: 600; border-radius: 2px;">
-                                {{ isEdit ? 'Update Details' : 'Save Details' }}
-                            </button>
+                            <button type="submit"  class="btn btn-primary" style="background: #1ab394; border-color: #1ab394; color: #fff; padding: 8px 25px; font-weight: 600; border-radius: 2px;">Save Changes</button>
                         </div>
                     </form>
                 </div>

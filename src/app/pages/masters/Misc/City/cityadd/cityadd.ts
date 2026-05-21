@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NgIcon } from '@ng-icons/core';
-import { ActivatedRoute, RouterLink } from '@angular/router';
+import { ActivatedRoute, RouterLink, Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { PageTitleComponent } from '../../../../../components/page-title.component';
 import { HttpClient } from '@angular/common/http';
@@ -20,7 +20,7 @@ export class CityAdd implements OnInit {
   departments: any[] = [];
   branches: any[] = [];
 
-  constructor(private route: ActivatedRoute, private http: HttpClient) {}
+  constructor(private route: ActivatedRoute, private http: HttpClient, private router: Router) {}
 
   ngOnInit(): void {
     this.http.get<any>('assets/data/db.json').subscribe(data => {
@@ -36,16 +36,21 @@ export class CityAdd implements OnInit {
     this.city = {
       id: null,
       Name: '',
-      DistrictName: '',
-      StateName: '',
-      CountryName: '',
-      Type: '',
-      BranchName: '',
-      DepartmentName: ''
+      DistrictName: 'Mumbai',
+      StateName: 'Maharashtra',
+      CountryName: 'India',
+      Type: 'Urban',
+      BranchName: 'Main Branch',
+      DepartmentName: 'Bio Chemistry',
+      Status: 'Active'
     };
   }
 
-  saveChanges() {
+  saveChanges(form?: any) {
+    if (form && form.invalid) {
+      return;
+    }
     console.log('Saving city data:', this.city);
+    this.router.navigate(['/misc/city/citylist']);
   }
 }

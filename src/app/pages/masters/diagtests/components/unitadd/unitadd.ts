@@ -21,9 +21,9 @@ export class UnitAdd implements OnInit {
     Name: '',
     DisplayName: '',
     Description: '',
-    BranchName: 'Main Branch',
-    DepartmentName: 'Bio Chemistry',
-    Status: 'Active'
+    BranchName: '',
+    DepartmentName: '',
+    Status: ''
   };
 
   departments: any[] = [];
@@ -48,7 +48,10 @@ export class UnitAdd implements OnInit {
     });
   }
 
-  save() {
+  save(form: any) {
+    if (form.invalid) {
+      return;
+    }
     console.log('Saving unit:', this.unit);
     this.location.back();
   }

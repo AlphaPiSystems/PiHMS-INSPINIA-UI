@@ -9,12 +9,16 @@
                         <h5 style="font-weight: 600; margin: 0; font-size: 14px; text-transform: uppercase;">&nbsp;</h5>
                     </div>
                     <div class="ibox-content" style="padding: 15px 20px;">
-                        <form (ngSubmit)="saveChanges()">
+                        <form #myForm="ngForm" (ngSubmit)="myForm.form.valid && saveChanges()">
                             <div class="row">
                                 <div class="col-md-6 col-sm-12">
                                     <div class="form-group mb-3">
                                         <label class="form-label fw-bold">Type <span class="text-danger">*</span></label>
-                                        <input type="text" [(ngModel)]="item.Type" name="Type" class="form-control" placeholder="Enter Type" required>
+                                        <input type="text" [(ngModel)]="item.Type" name="Type" #typeCtrl="ngModel" class="form-control" placeholder="Enter Type" required>
+                                        <div class="text-danger mt-1"
+                                             *ngIf="(typeCtrl.invalid || !item.Type?.trim()) && (typeCtrl.touched || myForm.submitted)">
+                                            Type is required
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="col-md-6 col-sm-12">
@@ -27,11 +31,17 @@
 
                             <div class="hr-line-dashed" style="border-top: 1px dashed #e7eaec; margin: 20px 0;"></div>
                             
+                            
+                            <div *ngIf="myForm.submitted && (myForm.invalid || !item.Type?.trim())"
+                                 class="alert alert-danger d-flex align-items-center mb-3 mt-3"
+                                 style="border-radius: 2px; padding: 10px 15px;">
+                                <i class="fa fa-exclamation-triangle me-2" style="font-size: 16px;"></i>
+                                <span>Please fill in all mandatory fields marked with an asterisk (*).</span>
+                            </div>
+
                             <div class="d-flex justify-content-end gap-2">
                                 <button type="button" routerLink="/admittedfor/admittedforlist" class="btn btn-white" style="border: 1px solid #d2d2d2; background: #fff; padding: 8px 25px; font-weight: 600; border-radius: 2px; color: #555;">Cancel</button>
-                                <button type="submit" class="btn btn-primary" style="background: #1ab394; border-color: #1ab394; color: #fff; padding: 8px 25px; font-weight: 600; border-radius: 2px;">
-                                    {{ isEdit ? 'Update Details' : 'Save Details' }}
-                                </button>
+                                <button type="submit" class="btn btn-primary" style="background: #1ab394; border-color: #1ab394; color: #fff; padding: 8px 25px; font-weight: 600; border-radius: 2px;">Save Changes</button>
                             </div>
                         </form>
                     </div>

@@ -41,12 +41,15 @@ export class SampleAdd implements OnInit {
       Description: '',
       SampleForm: 'Liquid',
       Container: '',
-      BranchName: 'Main Branch',
-      DepartmentName: 'Bio Chemistry'
+      BranchName: '',
+      DepartmentName: ''
     };
   }
 
-  saveChanges() {
+  saveChanges(form: any) {
+    if (form.invalid) {
+      return;
+    }
     console.log('Saving sample data:', this.sample);
   }
 }

@@ -1,0 +1,68 @@
+<div class="container-fluid">
+  <app-page-title title="View Inventory Department" />
+
+  <div class="wrapper wrapper-content animated fadeInRight" style="padding-top: 0;">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="ibox float-e-margins" style="background:#fff; box-shadow: 0 2px 4px rgba(0,0,0,0.08); border-radius: 4px;">
+          <div class="ibox-title" style="border-top: 4px solid #1ab394; padding: 6px 15px; border-bottom: 1px solid #f0f0f0;">
+            <h5 style="font-weight: 600; margin: 0; font-size: 14px; text-transform: uppercase;">Department Information</h5>
+          </div>
+          <div class="ibox-content" style="padding: 15px 20px;">
+            <form>
+              <div class="row">
+                <!-- Department Name -->
+                <div class="col-md-3 col-sm-12">
+                  <div class="form-group mb-3">
+                    <label class="form-label fw-bold">Department Name</label>
+                    <input type="text" [(ngModel)]="department.Name" name="Name" class="form-control" disabled>
+                  </div>
+                </div>
+
+                <!-- Description -->
+                <div class="col-md-3 col-sm-12">
+                  <div class="form-group mb-3">
+                    <label class="form-label fw-bold">Description</label>
+                    <input type="text" [(ngModel)]="department.Description" name="Description" class="form-control" disabled>
+                  </div>
+                </div>
+
+                <!-- Branch -->
+                <div class="col-md-3 col-sm-12">
+                  <div class="form-group mb-3">
+                    <label class="form-label fw-bold">Branch</label>
+                    <select [(ngModel)]="department.BranchID" name="BranchID" class="form-select form-control" disabled>
+                      <option value="">Select Branch</option>
+                      <option *ngFor="let b of branches" [value]="b.id">{{b.Name}}</option>
+                    </select>
+                  </div>
+                </div>
+
+                <!-- Hospital Department Reference -->
+                <div class="col-md-3 col-sm-12">
+                  <div class="form-group mb-3">
+                    <label class="form-label fw-bold">Hospital Department</label>
+                    <select [(ngModel)]="department.DepartmentID" name="DepartmentID" class="form-select form-control" disabled>
+                      <option value="">Select Hospital Dept</option>
+                      <option *ngFor="let d of hospDepartments" [value]="d.id">{{d.Name}}</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+
+              <div class="hr-line-dashed" style="border-top: 1px dashed #e7eaec; margin: 20px 0;"></div>
+
+              <div class="d-flex justify-content-end gap-2">
+                <button type="button" (click)="back()" class="btn btn-white" style="border: 1px solid #d2d2d2; background: #fff; padding: 8px 25px; font-weight: 600; border-radius: 2px; color: #555;">Back</button>
+                <a [routerLink]="['/inventory/invdepartment/invdepartmentedit', department.id]"
+                  class="btn btn-primary" style="background: #1ab394; border-color: #1ab394; color: #fff; padding: 8px 25px; font-weight: 600; border-radius: 2px;">
+                  Edit Department
+                </a>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

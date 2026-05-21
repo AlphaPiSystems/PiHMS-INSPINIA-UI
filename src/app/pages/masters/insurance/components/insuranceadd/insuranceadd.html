@@ -13,13 +13,13 @@
                             <div class="row">
                                 <div class="col-md-4 col-sm-12">
                                     <div class="form-group mb-3">
-                                        <label style="font-weight: 600; margin-bottom: 5px;">Insurance Name</label>
+                                        <label style="font-weight: 600; margin-bottom: 5px;">Insurance Name <span class="text-danger">*</span></label>
                                         <input type="text" class="form-control" [(ngModel)]="insurance.Name" name="Name" required placeholder="Enter Insurance Name" style="border-radius: 2px;">
                                     </div>
                                 </div>
                                 <div class="col-md-4 col-sm-12">
                                     <div class="form-group mb-3">
-                                        <label style="font-weight: 600; margin-bottom: 5px;">Department</label>
+                                        <label style="font-weight: 600; margin-bottom: 5px;">Department <span class="text-danger">*</span></label>
                                         <select class="form-select form-control" [(ngModel)]="insurance.DepartmentID" name="DepartmentID" required style="border-radius: 2px;">
                                             <option [ngValue]="null" disabled selected>Select Department</option>
                                             <option *ngFor="let dept of departments" [ngValue]="dept.id">{{ dept.Name }}</option>
@@ -28,7 +28,7 @@
                                 </div>
                                 <div class="col-md-4 col-sm-12">
                                     <div class="form-group mb-3">
-                                        <label style="font-weight: 600; margin-bottom: 5px;">Branch</label>
+                                        <label style="font-weight: 600; margin-bottom: 5px;">Branch <span class="text-danger">*</span></label>
                                         <select class="form-select form-control" [(ngModel)]="insurance.BranchID" name="BranchID" required style="border-radius: 2px;">
                                             <option [ngValue]="null" disabled selected>Select Branch</option>
                                             <option *ngFor="let branch of branches" [ngValue]="branch.id">{{ branch.Name }}</option>
@@ -52,9 +52,7 @@
                                 <button type="button" class="btn btn-white" (click)="cancel()" style="border: 1px solid #d2d2d2; background: #fff; padding: 8px 20px; font-weight: 600; border-radius: 2px; color: #555;">
                                     Cancel
                                 </button>
-                                <button type="submit" class="btn btn-primary" [disabled]="!insForm.form.valid" style="background-color: #1ab394; border-color: #1ab394; padding: 8px 24px; font-weight: 600; color: white; border-radius: 2px;">
-                                    Save Insurance
-                                </button>
+                                <button type="submit" class="btn btn-primary" [disabled]="!insForm.form.valid" style="background-color: #1ab394; border-color: #1ab394; padding: 8px 24px; font-weight: 600; color: white; border-radius: 2px;">Save Changes</button>
                             </div>
                         </form>
                     </div>

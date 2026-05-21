@@ -61,12 +61,11 @@ export class Insurance implements OnInit {
     if (this.searchText.trim()) {
       const search = this.searchText.toLowerCase();
       filtered = this.insuranceList.filter(i => {
-        const deptName = this.getDepartmentName(i.DepartmentID).toLowerCase();
-        const branchName = this.getBranchName(i.BranchID).toLowerCase();
-        return (i.Name && i.Name.toLowerCase().includes(search)) ||
-          (i.Description && i.Description.toLowerCase().includes(search)) ||
-          deptName.includes(search) ||
-          branchName.includes(search);
+        if (!i) return false;
+        return Object.values(i).some(val => 
+          val !== null && val !== undefined && 
+          String(val).toLowerCase().includes(search)
+        );
       });
     }
     return filtered;

@@ -44,11 +44,13 @@ export class Staff implements OnInit {
     let filtered = this.staffList;
     if (this.searchText.trim()) {
       const search = this.searchText.toLowerCase();
-      filtered = this.staffList.filter(s => 
-        s.Name.toLowerCase().includes(search) ||
-        s.Designation.toLowerCase().includes(search) ||
-        s.Department.toLowerCase().includes(search)
-      );
+      filtered = this.staffList.filter(s => {
+        if (!s) return false;
+        return Object.values(s).some(val => 
+          val !== null && val !== undefined && 
+          String(val).toLowerCase().includes(search)
+        );
+      });
     }
     return filtered;
   }

@@ -1,0 +1,81 @@
+<div class="container-fluid">
+    <app-page-title title="View Bill Domain" />
+
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-header border-light">
+                    <h5 class="card-title mb-0">Bill Domain Details</h5>
+                </div>
+                <div class="card-body">
+                    <form (ngSubmit)="onSubmit()">
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <label class="form-label">Name <span class="text-danger">*</span></label>
+                                <input disabled type="text" class="form-control" [(ngModel)]="billDomain.Name" name="Name" required placeholder="Enter domain name">
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Code <span class="text-danger">*</span></label>
+                                <input disabled type="text" class="form-control" [(ngModel)]="billDomain.Code" name="Code" required placeholder="Enter domain code">
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Description</label>
+                                <textarea disabled class="form-control" [(ngModel)]="billDomain.Description" name="Description" rows="1" placeholder="Enter description"></textarea>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Domain Type</label>
+                                <select disabled class="form-select" [(ngModel)]="billDomain.DomainType" name="DomainType">
+                                    <option value="General">General</option>
+                                    <option value="Specific">Specific</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Paper Size</label>
+                                <select disabled class="form-select" [(ngModel)]="billDomain.PaperSize" name="PaperSize">
+                                    <option value="A4">A4</option>
+                                    <option value="A5">A5</option>
+                                    <option value="Letter">Letter</option>
+                                    <option value="Legal">Legal</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Priority</label>
+                                <input disabled type="text" class="form-control" [(ngModel)]="billDomain.DomainPriority" name="DomainPriority" placeholder="Enter priority">
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-check form-switch mt-4">
+                                    <input disabled class="form-check-input" type="checkbox" id="headerImage" [(ngModel)]="billDomain.IsHeaderImagePresent" name="IsHeaderImagePresent" [checked]="billDomain.IsHeaderImagePresent === 'Y'" (change)="billDomain.IsHeaderImagePresent = billDomain.IsHeaderImagePresent === 'Y' ? 'N' : 'Y'">
+                                    <label class="form-check-label" for="headerImage">Is Header Image Present?</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-check form-switch mt-4">
+                                    <input disabled class="form-check-input" type="checkbox" id="footerImage" [(ngModel)]="billDomain.IsFooterImagePresent" name="IsFooterImagePresent" [checked]="billDomain.IsFooterImagePresent === 'Y'" (change)="billDomain.IsFooterImagePresent = billDomain.IsFooterImagePresent === 'Y' ? 'N' : 'Y'">
+                                    <label class="form-check-label" for="footerImage">Is Footer Image Present?</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6" *ngIf="billDomain.IsHeaderImagePresent === 'Y'">
+                                <label class="form-label">Header Image</label>
+                                <input disabled type="file" class="form-control" name="HeaderImage">
+                            </div>
+                            <div class="col-md-6" *ngIf="billDomain.IsFooterImagePresent === 'Y'">
+                                <label class="form-label">Footer Image</label>
+                                <input disabled type="file" class="form-control" name="FooterImage">
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Domain Config</label>
+                                <input disabled type="text" class="form-control" [(ngModel)]="billDomain.DomainConfig" name="DomainConfig" placeholder="Enter domain config">
+                            </div>
+                        </div>
+
+                        <div class="mt-4 d-flex justify-content-end gap-2">
+                            <button type="button" class="btn btn-light" [routerLink]="['/bill-domain/bill-domainlist']">Cancel</button>
+                            <button type="button" (click)="back()" class="btn btn-white" style="border: 1px solid #d2d2d2; background: #fff; padding: 8px 25px; font-weight: 600; border-radius: 2px; color: #555;">Back</button>
+                <a [routerLink]="back()" (click)="navigateToEdit()" class="btn btn-primary" style="background: #1ab394; border-color: #1ab394; color: #fff; padding: 8px 25px; font-weight: 600; border-radius: 2px;">Edit Bill Domain</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
