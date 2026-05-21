@@ -1,19 +1,19 @@
-import {Injectable, signal} from '@angular/core';
-import {LayoutState} from '@/app/types/layout';
+import { Injectable, signal } from '@angular/core';
+import { LayoutState } from '@/app/types/layout';
 
-import {NgbOffcanvas} from '@ng-bootstrap/ng-bootstrap';
-import {CustomizerComponent} from '@layouts/components/customizer/customizer.component';
-import {BehaviorSubject} from 'rxjs';
+import { NgbOffcanvas } from '@ng-bootstrap/ng-bootstrap';
+import { CustomizerComponent } from '@layouts/components/customizer/customizer.component';
+import { BehaviorSubject } from 'rxjs';
 
 const STORAGE_KEY = '__INSPINIA_ANGULAR_CONFIG__';
 
 const defaultState: LayoutState = {
-    skin: 'material',
+    skin: 'classic',
     theme: 'light',
     orientation: 'vertical',
     position: 'fixed',
     width: 'fluid',
-    topbar: {color: 'light'},
+    topbar: { color: 'light' },
     sidenav: {
         color: 'light',
         size: 'default',
@@ -22,7 +22,7 @@ const defaultState: LayoutState = {
     isLoading: false
 };
 
-@Injectable({providedIn: 'root'})
+@Injectable({ providedIn: 'root' })
 export class LayoutStoreService {
 
     constructor(private offcanvasService: NgbOffcanvas) {
@@ -93,46 +93,46 @@ export class LayoutStoreService {
     setSkin(skin: LayoutState['skin'], persist = true): void {
         this.setHtmlAttribute('data-skin', skin);
         if (persist) {
-            this.state.update(s => ({...s, skin}));
+            this.state.update(s => ({ ...s, skin }));
             this.persistToStorage();
         }
-        this.layoutStateSubject.next({...this.state(), skin});
+        this.layoutStateSubject.next({ ...this.state(), skin });
     }
 
     setTheme(theme: LayoutState['theme'], persist = true): void {
         this.setHtmlAttribute('data-bs-theme', theme === 'system' ? this.getSystemTheme() : theme);
         if (persist) {
-            this.state.update(s => ({...s, theme}));
+            this.state.update(s => ({ ...s, theme }));
             this.persistToStorage();
         }
-        this.layoutStateSubject.next({...this.state(), theme});
+        this.layoutStateSubject.next({ ...this.state(), theme });
     }
 
     setLayoutOrientation(orientation: LayoutState['orientation'], persist = true): void {
         this.setHtmlAttribute('data-layout', orientation === 'horizontal' ? 'topnav' : '');
         if (persist) {
-            this.state.update(s => ({...s, orientation,}));
+            this.state.update(s => ({ ...s, orientation, }));
             this.persistToStorage();
         }
-        this.layoutStateSubject.next({...this.state(), orientation});
+        this.layoutStateSubject.next({ ...this.state(), orientation });
     }
 
     setLayoutPosition(position: LayoutState['position'], persist = true): void {
         this.setHtmlAttribute('data-layout-position', position);
         if (persist) {
-            this.state.update(s => ({...s, position,}));
+            this.state.update(s => ({ ...s, position, }));
             this.persistToStorage();
         }
-        this.layoutStateSubject.next({...this.state(), position});
+        this.layoutStateSubject.next({ ...this.state(), position });
     }
 
     setLayoutWidth(width: LayoutState['width'], persist = true): void {
         this.setHtmlAttribute('data-layout-width', width);
         if (persist) {
-            this.state.update(s => ({...s, width,}));
+            this.state.update(s => ({ ...s, width, }));
             this.persistToStorage();
         }
-        this.layoutStateSubject.next({...this.state(), width});
+        this.layoutStateSubject.next({ ...this.state(), width });
     }
 
     setTopbarColor(color: LayoutState['topbar']['color'], persist = true): void {
@@ -140,11 +140,11 @@ export class LayoutStoreService {
         if (persist) {
             this.state.update(s => ({
                 ...s,
-                topbar: {...s.topbar, color},
+                topbar: { ...s.topbar, color },
             }));
             this.persistToStorage();
         }
-        this.layoutStateSubject.next({...this.state(), topbar: {...this.state().topbar, color}});
+        this.layoutStateSubject.next({ ...this.state(), topbar: { ...this.state().topbar, color } });
     }
 
     setSidenavColor(color: LayoutState['sidenav']['color'], persist = true): void {
@@ -152,11 +152,11 @@ export class LayoutStoreService {
         if (persist) {
             this.state.update(s => ({
                 ...s,
-                sidenav: {...s.sidenav, color},
+                sidenav: { ...s.sidenav, color },
             }));
             this.persistToStorage();
         }
-        this.layoutStateSubject.next({...this.state(), sidenav: {...this.state().sidenav, color}});
+        this.layoutStateSubject.next({ ...this.state(), sidenav: { ...this.state().sidenav, color } });
     }
 
     setSidenavSize(size: LayoutState['sidenav']['size'], persist = true): void {
@@ -164,11 +164,11 @@ export class LayoutStoreService {
         if (persist) {
             this.state.update(s => ({
                 ...s,
-                sidenav: {...s.sidenav, size},
+                sidenav: { ...s.sidenav, size },
             }));
             this.persistToStorage();
         }
-        this.layoutStateSubject.next({...this.state(), sidenav: {...this.state().sidenav, size}});
+        this.layoutStateSubject.next({ ...this.state(), sidenav: { ...this.state().sidenav, size } });
     }
 
     toggleSidenavUser(persist = true): void {
@@ -177,11 +177,11 @@ export class LayoutStoreService {
         if (persist) {
             this.state.update(s => ({
                 ...s,
-                sidenav: {...s.sidenav, user},
+                sidenav: { ...s.sidenav, user },
             }));
             this.persistToStorage();
         }
-        this.layoutStateSubject.next({...this.state(), sidenav: {...this.state().sidenav, user}});
+        this.layoutStateSubject.next({ ...this.state(), sidenav: { ...this.state().sidenav, user } });
     }
 
     setIsLoading(isLoading: boolean): void {
