@@ -4,6 +4,7 @@ import { TestNewComponent } from './test-new/test-new.component';
 import { TestGroupsComponent } from './test-groups/test-groups.component';
 import { SamplesComponent } from './samples/samples.component';
 import { UnitsComponent } from './units/units.component';
+import { TestGroupsEdit } from './test-groups-edit/test-groups-edit';
 
 export const DIAGNOSTIC_LAB_ROUTES: Routes = [
     {
@@ -20,6 +21,16 @@ export const DIAGNOSTIC_LAB_ROUTES: Routes = [
         path: 'test-groups-list',
         component: TestGroupsComponent,
         data: { title: "Test Groups" },
+    },
+    {
+        path: 'test-groups-edit',
+        component: TestGroupsEdit,
+        data: { title: "Edit Test Group" },
+    },
+    {
+        path: 'test-groups-edit/:id',
+        component: TestGroupsEdit,
+        data: { title: "Edit Test Group" },
     },
     {
         path: 'samples-list',

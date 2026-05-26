@@ -1,0 +1,199 @@
+<div class="container-fluid">
+    <div class="row pt-3">
+        <div class="col-12">
+            <h4 class="fw-semibold text-dark mb-0">Edit Diagnostic Group</h4>
+        </div>
+    </div>
+
+    <div class="row mt-3">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header border-light d-flex flex-column gap-2">
+                    <span class="fw-semibold text-uppercase">Search Test and Add to Group</span>
+                    <div class="app-search w-100">
+                        <input [(ngModel)]="tableService.searchTerm" data-table-search type="search"
+                            class="form-control" placeholder="Filter available tests...">
+                        <lucide-angular [img]="LucideSearch" class="app-search-icon text-muted" />
+                    </div>
+                </div>
+
+                <div class="table-responsive">
+                    <table class="table table-custom table-centered table-select table-hover w-100 mb-0">
+                        <thead class="bg-light align-middle  thead-sm">
+                            <tr class="text-uppercase">
+                                <th style="width: 15%;">Code</th>
+                                <th class="text-nowrap" style="width: 35%;">Test Name</th>
+                                <th class="text-end">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if ((total$ | async)! > 0) {
+                            @for (group of testGroups$ | async; track $index; let i = $index) {
+                            <tr>
+                                <td class="text-dark fs-sm fw-medium">{{ group.Code }}</td>
+                                <td class="text-dark fs-sm text-nowrap">{{ group.Name }}</td>
+                                <td>
+                                    <div class="d-flex justify-content-end gap-1">
+                                        <button (click)="addTest(group.id)"
+                                            class="btn btn-primary btn-sm"
+                                            style="background-color: #1ab394; border-color: #1ab394;">
+                                            Add
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                            }
+                            } @else {
+                            <tr class="no-results">
+                                <td colspan="8" class="text-center text-muted py-3">Nothing found.</td>
+                            </tr>
+                            }
+                        </tbody>
+                    </table>
+
+                </div>
+                <div class="card-footer border-0">
+                    @if ((total$ | async)! > 0) {
+                    <div class="d-flex justify-content-between align-items-center pagination-boxed">
+                        <div class="text-muted fs-xs">
+                            {{ tableService.showingRange }} groups
+                        </div>
+                        <ngb-pagination [collectionSize]="(total$ | async)!" [(page)]="tableService.page"
+                            [pageSize]="tableService.pageSize">
+                            <ng-template ngbPaginationPrevious>
+                                <ng-icon name="tablerChevronLeft" />
+                            </ng-template>
+                            <ng-template ngbPaginationNext>
+                                <ng-icon name="tablerChevronRight" />
+                            </ng-template>
+                        </ngb-pagination>
+                    </div>
+                    }
+                </div>
+            </div>
+
+        </div>
+
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header border-light d-flex flex-column gap-2">
+                    <span class="fw-semibold text-uppercase">Tests Linked with:
+                        <span>{{ groupName }}</span>
+                    </span>
+                    <div style="height: 38px;"></div>
+                </div>
+                <div class="card-body p-0">
+                    @if (linkedTests.length > 0) {
+                    <table class="table table-custom table-hover w-100 mb-0">
+                        <thead class="bg-light align-middle thead-sm">
+                            <tr class="text-uppercase">
+                                <th style="width: 1%; white-space: nowrap;">SL</th>
+                                <th style="width: 15%;">Code</th>
+                                <th class="text-nowrap" style="width: 35%;">Test Name</th>
+                                <th style="width: 25%;">Reporting Priority</th>
+                                <th class="text-end">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @for (test of linkedTests; track test.DiagTestID; let i = $index) {
+                            <tr>
+                                <td class="text-muted fs-sm">{{ i + 1 }}</td>
+                                <td class="text-dark fs-sm fw-medium">{{ test.Code }}</td>
+                                <td class="text-dark fs-sm text-nowrap">{{ test.DiagTestName }}</td>
+                                <td>
+                                    <input type="text" class="form-control form-control-sm" [(ngModel)]="test.ReportingPriority" style="max-width: 100px;">
+                                </td>
+                                <td class="text-end">
+                                    <button class="btn btn-danger btn-sm" (click)="removeTest(test.DiagTestID)">Delete</button>
+                                </td>
+                            </tr>
+                            }
+                        </tbody>
+                    </table>
+                    } @else {
+                    <div class="text-center text-muted py-4 fs-sm">No tests linked to this group.</div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-3">
+        <div class="col-12 d-flex justify-content-end mb-2">
+            <button type="button" class="btn btn-outline-info btn-sm px-4" (click)="openPreviewModal(previewModal)">Preview</button>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12 d-flex justify-content-end gap-2 mb-4">
+            <button type="button" class="btn btn-light btn-sm px-4 border" (click)="cancel()">Cancel</button>
+            <button type="button" class="btn btn-success btn-sm px-4" (click)="saveChanges()" style="background-color: #1ab394; border-color: #1ab394;">Save Changes</button>
+        </div>
+    </div>
+</div>
+
+<ng-template #previewModal let-modal>
+    <div class="modal-header">
+        <h5 class="modal-title fw-bold text-uppercase">Structure Report</h5>
+        <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+    </div>
+    <div class="modal-body">
+        <div class="table-responsive">
+            <table class="table table-bordered table-striped table-hover mb-0">
+                <thead class="bg-light text-uppercase text-nowrap">
+                    <tr>
+                        <th>Investigation</th>
+                        <th>Observed Values</th>
+                        <th>Unit</th>
+                        <th>Reference Range</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @for (test of sortedLinkedTests; track test.DiagTestID) {
+                        @if (isSubGroup(test.DiagTestType)) {
+                        <tr>
+                            <td colspan="4" class="text-center fw-bold bg-light text-uppercase py-2" style="letter-spacing: 0.5px;">
+                                {{ test.DiagTestName }}
+                            </td>
+                        </tr>
+                        @for (subTest of getSubTests(test.DiagTestID); track subTest.DiagTestID) {
+                        <tr>
+                            <td class="ps-4 fw-normal text-muted">{{ subTest.DiagTestName }}</td>
+                            <td>
+                                <span class="text-muted">--</span>
+                            </td>
+                            <td>
+                                <span>{{ getTestUnit(subTest.DiagTestID) }}</span>
+                            </td>
+                            <td>
+                                <span>{{ getTestReferenceRange(subTest.DiagTestID) }}</span>
+                            </td>
+                        </tr>
+                        }
+                        } @else {
+                        <tr>
+                            <td class="fw-semibold text-dark">{{ test.DiagTestName }}</td>
+                            <td>
+                                <span class="text-muted">--</span>
+                            </td>
+                            <td>
+                                <span>{{ getTestUnit(test.DiagTestID) }}</span>
+                            </td>
+                            <td>
+                                <span>{{ getTestReferenceRange(test.DiagTestID) }}</span>
+                            </td>
+                        </tr>
+                        }
+                    } @empty {
+                    <tr>
+                        <td colspan="4" class="text-center text-muted py-3">No tests linked to preview.</td>
+                    </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary btn-sm" (click)="modal.close('Close click')">Close</button>
+    </div>
+</ng-template>
