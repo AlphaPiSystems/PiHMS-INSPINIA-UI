@@ -805,7 +805,7 @@ const TEST_DATA: TestType[] = [
 ];
 
 @Component({
-  selector: 'app-test',
+  selector: 'app-test-list',
   standalone: true,
   imports: [
     CommonModule,
@@ -818,10 +818,10 @@ const TEST_DATA: TestType[] = [
     NgbPaginationPrevious,
     NgbTooltipModule
   ],
-  templateUrl: './test.component.html',
+  templateUrl: './test-list.component.html',
   providers: [TableService]
 })
-export class TestComponent implements OnInit {
+export class TestListComponent implements OnInit {
   private router = inject(Router);
   protected readonly LucideSearch = LucideSearch;
   protected readonly LucideBox = LucideBox;

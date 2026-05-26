@@ -77,7 +77,7 @@ export const menuItems: MenuItemType[] = [
                 isCollapsed: true,
                 children: [
                     { label: 'Test-list', url: '/master/diagnostic-lab/test-list' },
-                    { label: 'Test-groups-list', url: '/master/diagnostic-lab/test-groups-list' },
+                    { label: 'Test-groups-list', url: '/master/diagnostic-lab/test-group-list' },
                     { label: 'Samples-list', url: '/master/diagnostic-lab/samples-list' },
                     { label: 'Units-list', url: '/master/diagnostic-lab/units-list' }
                 ]

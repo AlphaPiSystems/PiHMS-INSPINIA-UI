@@ -7,10 +7,10 @@ import { NgbPagination, NgbPaginationNext, NgbPaginationPrevious, NgbTooltipModu
 import { TableService } from '@core/services/table.service';
 import { NgIcon } from '@ng-icons/core';
 import { Observable } from 'rxjs';
-import { DIAG_GROUP_DATA, DIAG_TEST_DATA } from '../test-groups/test-groups.component';
+import { DIAG_GROUP_DATA, DIAG_TEST_DATA } from './test-group-list.component';
 
 @Component({
-  selector: 'app-test-groups-edit',
+  selector: 'app-test-group-edit',
   standalone: true,
   imports: [
     CommonModule,
@@ -23,14 +23,14 @@ import { DIAG_GROUP_DATA, DIAG_TEST_DATA } from '../test-groups/test-groups.comp
     NgbTooltipModule,
     FormsModule
   ],
-  templateUrl: './test-groups-edit.html',
+  templateUrl: './test-group-edit.html',
   providers: [TableService]
 })
-export class TestGroupsEdit implements OnInit {
+export class TestGroupEdit implements OnInit {
   private route = inject(ActivatedRoute);
   private router = inject(Router);
   private modalService = inject(NgbModal);
-  
+
   protected readonly LucideSearch = LucideSearch;
   protected readonly LucideBox = LucideBox;
   protected readonly LucidePlus = LucidePlus;
@@ -55,7 +55,7 @@ export class TestGroupsEdit implements OnInit {
       // Get group name from the first matching DIAG_GROUP_DATA entry
       const groupEntry = DIAG_GROUP_DATA.find(g => g.DiagGroupID === groupId);
       this.groupName = groupEntry?.DiagGroupName || `Group ${groupId}`;
-      
+
       // Get tests already linked under this DiagGroupID for Section 2
       this.linkedTests = DIAG_GROUP_DATA
         .filter(g => g.DiagGroupID === groupId)
@@ -103,7 +103,7 @@ export class TestGroupsEdit implements OnInit {
       const test = this.linkedTests[testIndex];
       // Remove from Section 2
       this.linkedTests = this.linkedTests.filter(t => t.DiagTestID !== id);
-      
+
       // Add back to Section 1 if it matches type filtering criteria
       const originalTest = DIAG_TEST_DATA.find(t => t.id === id);
       if (originalTest && ['PRO', 'MUL', 'SNG', 'PKG'].includes(originalTest.Type)) {

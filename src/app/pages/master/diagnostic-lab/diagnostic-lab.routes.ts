@@ -1,15 +1,15 @@
 import { Routes } from '@angular/router';
-import { TestComponent } from './test/test.component';
-import { TestNewComponent } from './test-new/test-new.component';
-import { TestGroupsComponent } from './test-groups/test-groups.component';
+import { TestListComponent } from './test/test-list.component';
+import { TestNewComponent } from './test/test-new.component';
+import { TestGroupListComponent } from './test-group/test-group-list.component';
 import { SamplesComponent } from './samples/samples.component';
 import { UnitsComponent } from './units/units.component';
-import { TestGroupsEdit } from './test-groups-edit/test-groups-edit';
+import { TestGroupEdit } from './test-group/test-group-edit';
 
 export const DIAGNOSTIC_LAB_ROUTES: Routes = [
     {
         path: 'test-list',
-        component: TestComponent,
+        component: TestListComponent,
         data: { title: "Test" },
     },
     {
@@ -18,18 +18,13 @@ export const DIAGNOSTIC_LAB_ROUTES: Routes = [
         data: { title: "New Test" },
     },
     {
-        path: 'test-groups-list',
-        component: TestGroupsComponent,
+        path: 'test-group-list',
+        component: TestGroupListComponent,
         data: { title: "Test Groups" },
     },
     {
-        path: 'test-groups-edit',
-        component: TestGroupsEdit,
-        data: { title: "Edit Test Group" },
-    },
-    {
-        path: 'test-groups-edit/:id',
-        component: TestGroupsEdit,
+        path: 'test-group-edit/:id',
+        component: TestGroupEdit,
         data: { title: "Edit Test Group" },
     },
     {

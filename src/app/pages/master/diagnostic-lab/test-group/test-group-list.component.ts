@@ -1105,7 +1105,7 @@ export const DIAG_TEST_DATA: any[] = [
 ];
 
 @Component({
-  selector: 'app-test-groups',
+  selector: 'app-test-group-list',
   standalone: true,
   imports: [
     CommonModule,
@@ -1118,10 +1118,10 @@ export const DIAG_TEST_DATA: any[] = [
     NgbPaginationPrevious,
     NgbTooltipModule
   ],
-  templateUrl: './test-groups.component.html',
+  templateUrl: './test-group-list.component.html',
   providers: [TableService]
 })
-export class TestGroupsComponent implements OnInit {
+export class TestGroupListComponent implements OnInit {
   private router = inject(Router);
   protected readonly LucideSearch = LucideSearch;
   protected readonly LucideBox = LucideBox;
@@ -1137,7 +1137,7 @@ export class TestGroupsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    const filteredData = DIAG_TEST_DATA.filter(test => 
+    const filteredData = DIAG_TEST_DATA.filter(test =>
       ['MUL', 'PRO', 'PKG'].includes(test.Type)
     );
     this.tableService.setItems(filteredData, 10);
