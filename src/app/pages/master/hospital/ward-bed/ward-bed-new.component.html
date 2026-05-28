@@ -1,0 +1,82 @@
+<div class="container-fluid pt-3">
+    <div class="row">
+        <div class="col-12">
+            <div class="card border-0 shadow-sm">
+                <div class="card-body">
+                    <form #wardBedForm="ngForm" (ngSubmit)="saveWardBed()">
+                        <div class="row mb-3">
+                            <div class="col-12">
+                                <h5 class="text-primary mb-0 fw-semibold">Add New Ward Bed</h5>
+                            </div>
+                        </div>
+
+                        <div class="row mb-4">
+                            <div class="col-md-3 mb-3">
+                                <label class="form-label fw-semibold mb-1">ID <span class="text-danger">*</span></label>
+                                <input type="text" class="form-control form-control-sm border-light bg-light-op-10"
+                                    [(ngModel)]="wardBed.id" name="id" required placeholder="e.g. WB001">
+                            </div>
+                            <div class="col-md-3 mb-3">
+                                <label class="form-label fw-semibold mb-1">Bed Number <span class="text-danger">*</span></label>
+                                <input type="text" class="form-control form-control-sm border-light bg-light-op-10"
+                                    [(ngModel)]="wardBed.BedNumber" name="BedNumber" required placeholder="e.g. BED-101">
+                            </div>
+                            <div class="col-md-3 mb-3">
+                                <label class="form-label fw-semibold mb-1">Description</label>
+                                <input type="text" class="form-control form-control-sm border-light bg-light-op-10"
+                                    [(ngModel)]="wardBed.Description" name="Description" placeholder="e.g. General Bed">
+                            </div>
+                            <div class="col-md-3 mb-3">
+                                <label class="form-label fw-semibold mb-1">Ward Name</label>
+                                <input type="text" class="form-control form-control-sm border-light bg-light-op-10"
+                                    [(ngModel)]="wardBed.WardName" name="WardName" placeholder="e.g. General Ward - Male">
+                            </div>
+                            <div class="col-md-3 mb-3">
+                                <label class="form-label fw-semibold mb-1">Floor</label>
+                                <select class="form-select form-select-sm border-light bg-light-op-10"
+                                    [(ngModel)]="wardBed.FloorID" name="FloorID">
+                                    <option [ngValue]="null" disabled>Select Floor</option>
+                                    <option value="FLR001">First Floor</option>
+                                    <option value="FLR002">Second Floor</option>
+                                    <option value="FLR003">Third Floor</option>
+                                </select>
+                            </div>
+                            <div class="col-md-3 mb-3">
+                                <label class="form-label fw-semibold mb-1">Department</label>
+                                <select class="form-select form-select-sm border-light bg-light-op-10"
+                                    [(ngModel)]="wardBed.DepartmentName" name="DepartmentName">
+                                    <option value="" disabled>Select Department</option>
+                                    <option value="Clinical Pathology">Clinical Pathology</option>
+                                    <option value="Bio Chemistry">Bio Chemistry</option>
+                                    <option value="Microbiology">Microbiology</option>
+                                    <option value="Cardiology">Cardiology</option>
+                                    <option value="Neurology">Neurology</option>
+                                    <option value="Oncology">Oncology</option>
+                                </select>
+                            </div>
+                            <div class="col-md-3 mb-3">
+                                <label class="form-label fw-semibold mb-1">Branch Name</label>
+                                <input type="text" class="form-control form-control-sm border-light bg-light-op-10"
+                                    [(ngModel)]="wardBed.BranchName" name="BranchName" placeholder="e.g. Main Branch">
+                            </div>
+                            <div class="col-md-3 mb-3">
+                                <label class="form-label fw-semibold mb-1">Occupancy Status</label>
+                                <select class="form-select form-select-sm border-light bg-light-op-10"
+                                    [(ngModel)]="wardBed.OccupancyStatus" name="OccupancyStatus">
+                                    <option value="Available">Available</option>
+                                    <option value="Allocated">Allocated</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="d-flex justify-content-end gap-2 mt-3">
+                            <button type="button" class="btn btn-light btn-sm px-4 py-2 border"
+                                routerLink="/master/hospital/ward-beds-list">Cancel</button>
+                            <button type="submit" class="btn btn-success btn-sm px-4 py-2">Save Changes</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

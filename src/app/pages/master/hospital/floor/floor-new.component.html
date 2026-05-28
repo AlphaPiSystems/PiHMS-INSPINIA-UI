@@ -1,0 +1,86 @@
+<div class="container-fluid pt-3">
+    <div class="row">
+        <div class="col-12">
+            <div class="card border-0 shadow-sm">
+                <div class="card-body">
+                    <form #floorForm="ngForm" (ngSubmit)="saveFloor()">
+                        <div class="row mb-3">
+                            <div class="col-12">
+                                <h5 class="text-primary mb-0 fw-semibold">Add New Floor</h5>
+                            </div>
+                        </div>
+
+                        <div class="row mb-4">
+                            <div class="col-md-3 mb-3">
+                                <label class="form-label fw-semibold mb-1">Floor No <span class="text-danger">*</span></label>
+                                <input type="text" class="form-control form-control-sm border-light bg-light-op-10"
+                                    [(ngModel)]="floor.FloorNumber" name="FloorNumber" required>
+                            </div>
+                            <div class="col-md-3 mb-3">
+                                <label class="form-label fw-semibold mb-1">Floor Name <span class="text-danger">*</span></label>
+                                <input type="text" class="form-control form-control-sm border-light bg-light-op-10"
+                                    [(ngModel)]="floor.FloorName" name="FloorName" required>
+                            </div>
+                            <div class="col-md-3 mb-3">
+                                <label class="form-label fw-semibold mb-1">Building <span class="text-danger">*</span></label>
+                                <select class="form-select form-select-sm border-light bg-light-op-10"
+                                    [(ngModel)]="floor.HospitalBuildingID" name="HospitalBuildingID" required>
+                                    <option [ngValue]="null" disabled>Select Building</option>
+                                    <option [ngValue]="1">City Center Multispeciality Hospital</option>
+                                    <option [ngValue]="2">Main Block</option>
+                                    <option [ngValue]="3">Annex Building</option>
+                                    <option [ngValue]="4">Diagnostic Center</option>
+                                </select>
+                            </div>
+                            <div class="col-md-3 mb-3">
+                                <label class="form-label fw-semibold mb-1">Department</label>
+                                <select class="form-select form-select-sm border-light bg-light-op-10"
+                                    [(ngModel)]="floor.DepartmentID" name="DepartmentID">
+                                    <option [ngValue]="null" disabled>Select Department</option>
+                                    <option [ngValue]="1">Clinical Pathology</option>
+                                    <option [ngValue]="2">Bio Chemistry</option>
+                                    <option [ngValue]="3">Microbiology</option>
+                                    <option [ngValue]="4">Radiology</option>
+                                    <option [ngValue]="5">Cardiology</option>
+                                    <option [ngValue]="6">Neurology</option>
+                                    <option [ngValue]="7">Oncology</option>
+                                </select>
+                            </div>
+                            <div class="col-md-3 mb-3">
+                                <label class="form-label fw-semibold mb-1">Accessibility</label>
+                                <input type="text" class="form-control form-control-sm border-light bg-light-op-10"
+                                    [(ngModel)]="floor.Accessibility" name="Accessibility">
+                            </div>
+                            <div class="col-md-3 mb-3">
+                                <label class="form-label fw-semibold mb-1">Front Desk Present</label>
+                                <select class="form-select form-select-sm border-light bg-light-op-10"
+                                    [(ngModel)]="floor.FrontDeskPresent" name="FrontDeskPresent">
+                                    <option value="Y">Yes</option>
+                                    <option value="N">No</option>
+                                </select>
+                            </div>
+                            @if (floor.FrontDeskPresent === 'Y') {
+                            <div class="col-md-3 mb-3">
+                                <label class="form-label fw-semibold mb-1">Front Desk Number</label>
+                                <input type="text" class="form-control form-control-sm border-light bg-light-op-10"
+                                    [(ngModel)]="floor.FrontDeskNumber" name="FrontDeskNumber">
+                            </div>
+                            <div class="col-md-3 mb-3">
+                                <label class="form-label fw-semibold mb-1">Front Desk Staff Name</label>
+                                <input type="text" class="form-control form-control-sm border-light bg-light-op-10"
+                                    [(ngModel)]="floor.FrontDeskStaffName" name="FrontDeskStaffName">
+                            </div>
+                            }
+                        </div>
+
+                        <div class="d-flex justify-content-end gap-2 mt-3">
+                            <button type="button" class="btn btn-light btn-sm px-4 py-2 border"
+                                routerLink="/master/hospital/floors-list">Cancel</button>
+                            <button type="submit" class="btn btn-success btn-sm px-4 py-2">Save Changes</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

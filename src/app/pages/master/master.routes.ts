@@ -8,6 +8,10 @@ export const MASTER_ROUTES: Routes = [
         data: { title: "Master" },
     },
     {
+        path: 'hospital',
+        loadChildren: () => import('./hospital/hospital.routes').then((mod) => mod.HOSPITAL_ROUTES)
+    },
+    {
         path: 'diagnostic-lab',
         loadChildren: () => import('./diagnostic-lab/diagnostic-lab.routes').then((mod) => mod.DIAGNOSTIC_LAB_ROUTES)
     }

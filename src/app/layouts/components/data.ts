@@ -82,7 +82,18 @@ export const menuItems: MenuItemType[] = [
                     { label: 'Unit-list', url: '/master/diagnostic-lab/unit-list' },
                     { label: 'Instrument-list', url: '/master/diagnostic-lab/instrument-list' }
                 ]
-            }
+            },
+            {
+                label: 'Hospital',
+                isCollapsed: true,
+                children: [
+                    { label: 'Building-list', url: '/master/hospital/building-list' },
+                    { label: 'Floor-list', url: '/master/hospital/floor-list' },
+                    { label: 'Ward-type-list', url: '/master/hospital/ward-type-list' },
+                    { label: 'Ward-list', url: '/master/hospital/ward-list' },
+                    { label: 'Ward-bed-list', url: '/master/hospital/ward-bed-list' }
+                ]
+            },
         ]
     },
     // },
