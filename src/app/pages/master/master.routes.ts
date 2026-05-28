@@ -1,11 +1,11 @@
-import {Routes} from '@angular/router';
-import {MasterComponent} from '@/app/pages/master/master.component';
+import { Routes } from '@angular/router';
+import { MasterComponent } from '@/app/pages/master/master.component';
 
 export const MASTER_ROUTES: Routes = [
     {
         path: '',
         component: MasterComponent,
-        data: {title: "Master"},
+        data: { title: "Master" },
     },
     {
         path: 'diagnostic-lab',

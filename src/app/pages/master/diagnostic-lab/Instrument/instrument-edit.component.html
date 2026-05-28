@@ -1,0 +1,98 @@
+<div class="container-fluid pt-3">
+    <div class="row">
+        <div class="col-12">
+            <div class="card border-0 shadow-sm">
+                <div class="card-body">
+                    <form #sampleForm="ngForm" (ngSubmit)="updateSample()">
+                        <div class="row mb-3">
+                            <div class="col-12">
+                                <h5 class="text-primary mb-0 fw-semibold">Edit Sample</h5>
+                            </div>
+                        </div>
+
+                        <div class="row mb-4">
+                            <!-- Full Name -->
+                            <div class="col-md-3 mb-3">
+                                <label class="form-label fw-semibold mb-1">Full Name <span class="text-danger">*</span></label>
+                                <input type="text" class="form-control form-control-sm border-light bg-light-op-10"
+                                    placeholder="e.g. Blood, EDTA Blood"
+                                    [(ngModel)]="sample.FullName" name="FullName" required>
+                            </div>
+
+                            <!-- Short Name -->
+                            <div class="col-md-3 mb-3">
+                                <label class="form-label fw-semibold mb-1">Short Name <span class="text-danger">*</span></label>
+                                <input type="text" class="form-control form-control-sm border-light bg-light-op-10"
+                                    placeholder="e.g. BLD, EDTA"
+                                    [(ngModel)]="sample.ShortName" name="ShortName" required>
+                            </div>
+
+                            <!-- Code -->
+                            <div class="col-md-3 mb-3">
+                                <label class="form-label fw-semibold mb-1">Code <span class="text-danger">*</span></label>
+                                <input type="text" class="form-control form-control-sm border-light bg-light-op-10"
+                                    placeholder="e.g. SMP001"
+                                    [(ngModel)]="sample.Code" name="Code" required>
+                            </div>
+
+                            <!-- Description -->
+                            <div class="col-md-3 mb-3">
+                                <label class="form-label fw-semibold mb-1">Description</label>
+                                <input type="text" class="form-control form-control-sm border-light bg-light-op-10"
+                                    placeholder="e.g. Plain Blood used BioChemistry Investigation"
+                                    [(ngModel)]="sample.Description" name="Description">
+                            </div>
+
+                            <!-- Sample Form -->
+                            <div class="col-md-3 mb-3">
+                                <label class="form-label fw-semibold mb-1">Sample Form <span class="text-danger">*</span></label>
+                                <select class="form-select form-select-sm border-light bg-light-op-10"
+                                    [(ngModel)]="sample.SampleForm" name="SampleForm" required>
+                                    <option value="" disabled>Select Form</option>
+                                    <option value="Liquid">Liquid</option>
+                                    <option value="Semi-solid">Semi-solid</option>
+                                    <option value="Solid">Solid</option>
+                                </select>
+                            </div>
+
+                            <!-- Container -->
+                            <div class="col-md-3 mb-3">
+                                <label class="form-label fw-semibold mb-1">Container <span class="text-danger">*</span></label>
+                                <input type="text" class="form-control form-control-sm border-light bg-light-op-10"
+                                    placeholder="e.g. Plain Tube, EDTA Tube"
+                                    [(ngModel)]="sample.Container" name="Container" required>
+                            </div>
+
+                            <!-- Branch Name -->
+                            <div class="col-md-3 mb-3">
+                                <label class="form-label fw-semibold mb-1">Branch <span class="text-danger">*</span></label>
+                                <input type="text" class="form-control form-control-sm border-light bg-light-op-10"
+                                    placeholder="e.g. Main Branch"
+                                    [(ngModel)]="sample.BranchName" name="BranchName" required>
+                            </div>
+
+                            <!-- Department Name -->
+                            <div class="col-md-3 mb-3">
+                                <label class="form-label fw-semibold mb-1">Department <span class="text-danger">*</span></label>
+                                <select class="form-select form-select-sm border-light bg-light-op-10"
+                                    [(ngModel)]="sample.DepartmentName" name="DepartmentName" required>
+                                    <option value="" disabled>Select Department</option>
+                                    <option value="Bio Chemistry">Bio Chemistry</option>
+                                    <option value="Haematology">Haematology</option>
+                                    <option value="Microbiology">Microbiology</option>
+                                    <option value="Pathology">Pathology</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="d-flex justify-content-end gap-2 mt-3">
+                            <button type="button" class="btn btn-light btn-sm px-4 py-2 border"
+                                routerLink="/master/diagnostic-lab/samples-list">Cancel</button>
+                            <button type="submit" class="btn btn-success btn-sm px-4 py-2">Save Changes</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1148,11 +1148,11 @@ export class TestGroupListComponent implements OnInit {
   }
 
   addTestGroup() {
-    // Add logic if needed
+    this.router.navigate(['/master/diagnostic-lab/test-group-add']);
   }
 
   editTestGroup(id: number) {
-    this.router.navigate(['/master/diagnostic-lab/test-groups-edit', id]);
+    this.router.navigate(['/master/diagnostic-lab/test-group-edit', id]);
   }
 
   get hasSelection(): boolean {

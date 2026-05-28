@@ -77,9 +77,10 @@ export const menuItems: MenuItemType[] = [
                 isCollapsed: true,
                 children: [
                     { label: 'Test-list', url: '/master/diagnostic-lab/test-list' },
-                    { label: 'Test-groups-list', url: '/master/diagnostic-lab/test-group-list' },
-                    { label: 'Samples-list', url: '/master/diagnostic-lab/samples-list' },
-                    { label: 'Units-list', url: '/master/diagnostic-lab/units-list' }
+                    { label: 'Test-group-list', url: '/master/diagnostic-lab/test-group-list' },
+                    { label: 'Sample-list', url: '/master/diagnostic-lab/sample-list' },
+                    { label: 'Unit-list', url: '/master/diagnostic-lab/unit-list' },
+                    { label: 'Instrument-list', url: '/master/diagnostic-lab/instrument-list' }
                 ]
             }
         ]

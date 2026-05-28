@@ -1,11 +1,32 @@
 <div class="container-fluid">
     <div class="row pt-3">
         <div class="col-12">
-            <h4 class="fw-semibold text-dark mb-0">Edit Diagnostic Group</h4>
+            <h4 class="fw-semibold text-dark mb-0">Add Diagnostic Group</h4>
         </div>
     </div>
 
-    <div class="row mt-3">
+    <div class="row mt-2">
+        <div class="col-12 mb-2">
+            <div class="card border-0 shadow-sm">
+                <div class="card-body py-2 px-3">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <label class="form-label fw-semibold mb-1">Select Group Name <span class="text-danger">*</span></label>
+                            <select class="form-select form-select-sm border-light bg-light-op-10"
+                                [(ngModel)]="selectedParentGroup" (ngModelChange)="onGroupSelected()" required>
+                                <option [ngValue]="null" disabled>Select Group Name</option>
+                                @for (group of availableGroupNames; track group.id) {
+                                    <option [ngValue]="group">{{ group.Name }} ({{ group.Type }})</option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
         <div class="col-md-6">
             <div class="card h-100">
                 <div class="card-header border-light d-flex flex-column gap-2">
@@ -78,7 +99,7 @@
             <div class="card h-100">
                 <div class="card-header border-light d-flex flex-column gap-2">
                     <span class="fw-semibold text-uppercase">Tests Linked with:
-                        <span>{{ groupName }}</span>
+                        <span>{{ selectedParentGroup?.Name || 'Select a Group' }}</span>
                     </span>
                     <div style="height: 38px;"></div>
                 </div>

@@ -40,9 +40,9 @@
                         @if (hasSelection) {
                         <button class="btn btn-danger" (click)="deleteSelected()">Delete</button>
                         }
-                        <!-- <button (click)="addTestGroup()" class="btn btn-success ms-1" ngbTooltip="New Group">
+                        <button (click)="addTestGroup()" class="btn btn-success ms-1" ngbTooltip="New Group">
                             <lucide-angular [img]="LucidePlus" class="fs-sm" />
-                        </button> -->
+                        </button>
                     </div>
                 </div>
 
@@ -50,23 +50,23 @@
                     <table class="table table-custom table-centered table-select table-hover w-100 mb-0">
                         <thead class="bg-light align-middle  thead-sm">
                             <tr class="text-uppercase">
-                                <th style="width: 1%; white-space: nowrap;">SL.No</th>
+                                <th class="text-center" style="width: 1%; white-space: nowrap;">SL.No</th>
                                 <th style="width: 15%;">Code</th>
-                                <th style="width: 35%;">Group Name</th>
-                                <th style="width: 15%;">Type</th>
-                                <th class="text-end">Actions</th>
+                                <th style="width: 56%;">Group Name</th>
+                                <th class="text-center" style="width: 20%;">Type</th>
+                                <th class="text-center" style="width: 8%;">Actions</th>
                             </tr>
                         </thead>
                         <tbody>
                             @if ((total$ | async)! > 0) {
                             @for (group of testGroups$ | async; track $index; let i = $index) {
                             <tr>
-                                <td>{{ (tableService.page - 1) * tableService.pageSize + i + 1 }}</td>
+                                <td class="text-center">{{ (tableService.page - 1) * tableService.pageSize + i + 1 }}</td>
                                 <td class="text-dark fs-sm fw-medium">{{ group.Code }}</td>
                                 <td class="text-dark fs-sm">{{ group.Name }}</td>
-                                <td class="text-dark fs-sm">{{ group.Type }}</td>
+                                <td class="text-dark fs-sm text-center">{{ group.Type }}</td>
                                 <td>
-                                    <div class="d-flex justify-content-end gap-1">
+                                    <div class="d-flex justify-content-center gap-1">
                                         <a (click)="editTestGroup(group.id)"
                                             class="btn btn-primary btn-icon btn-sm rounded-circle"
                                             style="background-color: #1ab394; border-color: #1ab394;"

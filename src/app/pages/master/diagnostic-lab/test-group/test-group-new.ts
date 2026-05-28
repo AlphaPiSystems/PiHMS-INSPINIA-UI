@@ -1,7 +1,7 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule, AsyncPipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { LucideAngularModule, LucideBox, LucidePlus, LucideSearch } from 'lucide-angular';
 import { NgbPagination, NgbPaginationNext, NgbPaginationPrevious, NgbTooltipModule, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { TableService } from '@core/services/table.service';
@@ -10,7 +10,7 @@ import { Observable } from 'rxjs';
 import { DIAG_GROUP_DATA, DIAG_TEST_DATA } from './test-group-list.component';
 
 @Component({
-  selector: 'app-test-group-edit',
+  selector: 'app-test-group-new',
   standalone: true,
   imports: [
     CommonModule,
@@ -23,11 +23,10 @@ import { DIAG_GROUP_DATA, DIAG_TEST_DATA } from './test-group-list.component';
     NgbTooltipModule,
     FormsModule
   ],
-  templateUrl: './test-group-edit.html',
+  templateUrl: './test-group-new.html',
   providers: [TableService]
 })
-export class TestGroupEdit implements OnInit {
-  private route = inject(ActivatedRoute);
+export class TestGroupNew implements OnInit {
   private router = inject(Router);
   private modalService = inject(NgbModal);
 
@@ -39,8 +38,9 @@ export class TestGroupEdit implements OnInit {
   testGroups$: Observable<any[]>;
   linkedTests: any[] = [];
   groupName: string = '';
+  selectedParentGroup: any = null;
+  availableGroupNames: any[] = [];
   availableTests: any[] = [];
-  groupId!: number;
 
   constructor(public tableService: TableService<any>) {
     this.testGroups$ = this.tableService.items$;
@@ -48,34 +48,18 @@ export class TestGroupEdit implements OnInit {
   }
 
   ngOnInit(): void {
-    this.route.paramMap.subscribe(params => {
-      this.groupId = Number(params.get('id'));
-      const groupId = this.groupId;
+    // Populate the dropdown with tests that can act as groups
+    this.availableGroupNames = DIAG_TEST_DATA.filter(t => ['PRO', 'MUL', 'PKG'].includes(t.Type));
 
-      // Get group name from the first matching DIAG_GROUP_DATA entry
-      const groupEntry = DIAG_GROUP_DATA.find(g => g.DiagGroupID === groupId);
-      this.groupName = groupEntry?.DiagGroupName || `Group ${groupId}`;
+    // Get all tests of required types for Section 1 (available tests to add)
+    this.availableTests = DIAG_TEST_DATA.filter(t => ['PRO', 'MUL', 'SNG', 'PKG'].includes(t.Type));
+    this.tableService.setItems(this.availableTests, 8);
+  }
 
-      // Get tests already linked under this DiagGroupID for Section 2
-      this.linkedTests = DIAG_GROUP_DATA
-        .filter(g => g.DiagGroupID === groupId)
-        .map(g => {
-          const testDetail = DIAG_TEST_DATA.find(t => t.id === g.DiagTestID);
-          return {
-            DiagTestID: g.DiagTestID,
-            DiagTestName: g.DiagTestName,
-            DiagTestType: g.DiagTestType,
-            Code: testDetail?.Code || '',
-            ReportingPriority: g.ReportingPriority,
-            Notes: g.Notes
-          };
-        });
-
-      // Get all tests of required types for Section 1 (available tests to add), excluding already linked ones
-      const linkedIds = this.linkedTests.map(t => t.DiagTestID);
-      this.availableTests = DIAG_TEST_DATA.filter(t => ['PRO', 'MUL', 'SNG', 'PKG'].includes(t.Type) && !linkedIds.includes(t.id));
-      this.tableService.setItems(this.availableTests, 8);
-    });
+  onGroupSelected() {
+    if (this.selectedParentGroup) {
+      this.groupName = this.selectedParentGroup.Name;
+    }
   }
 
   addTest(id: number) {
@@ -114,46 +98,30 @@ export class TestGroupEdit implements OnInit {
   }
 
   saveChanges() {
-    const existingEntriesForGroup = DIAG_GROUP_DATA.filter(g => g.DiagGroupID === this.groupId);
-    const templateEntry = existingEntriesForGroup[0] || {
-      DiagGroupName: this.groupName,
-      BranchID: 1,
-      DepartmentID: 10,
-      IsRowDeleted: 'N'
-    };
+    if (!this.selectedParentGroup) {
+      alert("Please select a Group Name.");
+      return;
+    }
 
-    const updatedGroupEntries = this.linkedTests.map(test => {
-      const matched = existingEntriesForGroup.find(e => e.DiagTestID === test.DiagTestID);
-      if (matched) {
-        return {
-          ...matched,
-          ReportingPriority: Number(test.ReportingPriority) || 0,
-          Notes: test.Notes || ''
-        };
-      } else {
-        return {
-          ID: Math.floor(Math.random() * 100000),
-          DiagGroupID: this.groupId,
-          DiagGroupName: templateEntry.DiagGroupName,
-          DiagTestID: test.DiagTestID,
-          DiagTestName: test.DiagTestName,
-          DiagTestType: test.DiagTestType,
-          ReportingPriority: Number(test.ReportingPriority) || 0,
-          Notes: test.Notes || '',
-          BranchID: templateEntry.BranchID,
-          DepartmentID: templateEntry.DepartmentID,
-          IsRowDeleted: 'N'
-        };
-      }
+    const newGroupId = this.selectedParentGroup.id;
+
+    const newGroupEntries = this.linkedTests.map(test => {
+      return {
+        ID: Math.floor(Math.random() * 100000),
+        DiagGroupID: newGroupId,
+        DiagGroupName: this.groupName,
+        DiagTestID: test.DiagTestID,
+        DiagTestName: test.DiagTestName,
+        DiagTestType: test.DiagTestType,
+        ReportingPriority: Number(test.ReportingPriority) || 0,
+        Notes: test.Notes || '',
+        BranchID: 1,
+        DepartmentID: 10,
+        IsRowDeleted: 'N'
+      };
     });
 
-    // Mutate DIAG_GROUP_DATA in-place to clear existing entries for the group and insert new ones
-    for (let i = DIAG_GROUP_DATA.length - 1; i >= 0; i--) {
-      if (DIAG_GROUP_DATA[i].DiagGroupID === this.groupId) {
-        DIAG_GROUP_DATA.splice(i, 1);
-      }
-    }
-    DIAG_GROUP_DATA.push(...updatedGroupEntries);
+    DIAG_GROUP_DATA.push(...newGroupEntries);
 
     this.router.navigate(['/master/diagnostic-lab/test-group-list']);
   }
