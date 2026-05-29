@@ -1,0 +1,54 @@
+<div class="container-fluid pt-3">
+    <div class="row">
+        <div class="col-12">
+            <div class="card border-0 shadow-sm">
+                <div class="card-body">
+                    <form #bankForm="ngForm" (ngSubmit)="updateBank()">
+                        <div class="row mb-3">
+                            <div class="col-12">
+                                <h5 class="text-primary mb-0 fw-semibold">Edit Bank</h5>
+                            </div>
+                        </div>
+
+                        <div class="row mb-4">
+                            <div class="col-md-4 mb-3">
+                                <label class="form-label fw-semibold mb-1">Bank Name <span class="text-danger">*</span></label>
+                                <input type="text" class="form-control form-control-sm border-light bg-light-op-10"
+                                    [(ngModel)]="bankData.Name" name="Name" required placeholder="e.g. State Bank of India">
+                            </div>
+                            <div class="col-md-8 mb-3">
+                                <label class="form-label fw-semibold mb-1">Address</label>
+                                <input type="text" class="form-control form-control-sm border-light bg-light-op-10"
+                                    [(ngModel)]="bankData.Address" name="Address" placeholder="e.g. Mumbai Main Branch, Fort, Mumbai">
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <label class="form-label fw-semibold mb-1">Branch Name</label>
+                                <input type="text" class="form-control form-control-sm border-light bg-light-op-10"
+                                    [(ngModel)]="bankData.BranchName" name="BranchName" placeholder="e.g. Main Branch">
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <label class="form-label fw-semibold mb-1">Department Name</label>
+                                <input type="text" class="form-control form-control-sm border-light bg-light-op-10"
+                                    [(ngModel)]="bankData.DepartmentName" name="DepartmentName" placeholder="e.g. Bio Chemistry">
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <label class="form-label fw-semibold mb-1">Status</label>
+                                <select class="form-select form-select-sm border-light bg-light-op-10"
+                                    [(ngModel)]="bankData.Status" name="Status">
+                                    <option value="Active">Active</option>
+                                    <option value="Inactive">Inactive</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="d-flex justify-content-end gap-2 mt-3">
+                            <button type="button" class="btn btn-light btn-sm px-4 py-2 border"
+                                routerLink="/master/misc/bank-list">Cancel</button>
+                            <button type="submit" class="btn btn-success btn-sm px-4 py-2">Save Changes</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

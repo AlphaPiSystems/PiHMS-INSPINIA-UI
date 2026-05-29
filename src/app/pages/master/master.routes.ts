@@ -14,5 +14,9 @@ export const MASTER_ROUTES: Routes = [
     {
         path: 'diagnostic-lab',
         loadChildren: () => import('./diagnostic-lab/diagnostic-lab.routes').then((mod) => mod.DIAGNOSTIC_LAB_ROUTES)
+    },
+    {
+        path: 'misc',
+        loadChildren: () => import('./misc/misc.routes').then((mod) => mod.MISC_ROUTES)
     }
 ];

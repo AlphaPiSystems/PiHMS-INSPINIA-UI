@@ -1,10 +1,8 @@
 <div class="container-fluid">
-
     <div class="row mt-3">
         <div class="col-12">
             <div class="card">
                 <div class="card-header border-light justify-content-between">
-
                     <div class="d-flex align-items-center gap-2">
                         <div>
                             <select [(ngModel)]="tableService.pageSize" class="form-select form-control my-1 my-md-0">
@@ -20,13 +18,13 @@
                     <div class="d-flex gap-1">
                         <div class="app-search">
                             <input [(ngModel)]="tableService.searchTerm" data-table-search type="search"
-                                class="form-control" placeholder="Search Instrument Name / Department">
+                                class="form-control" placeholder="Search Post Office">
                             <lucide-angular [img]="LucideSearch" class="app-search-icon text-muted" />
                         </div>
                         @if (hasSelection) {
                         <button class="btn btn-danger" (click)="deleteSelected()">Delete</button>
                         }
-                        <button (click)="addInstrument()" class="btn btn-success ms-1" ngbTooltip="New Instrument">
+                        <button (click)="addPostalCode()" class="btn btn-success ms-1" ngbTooltip="New Postal Code">
                             <lucide-angular [img]="LucidePlus" class="fs-sm" />
                         </button>
                     </div>
@@ -37,26 +35,34 @@
                         <thead class="bg-light align-middle  thead-sm">
                             <tr class="text-uppercase">
                                 <th class="text-center" style="width: 1%; white-space: nowrap;">SL.No</th>
-                                <th style="width: 41%;">Instrumentation Name</th>
-                                <th style="width: 25%;">Branch</th>
-                                <th style="width: 25%;">Department</th>
+                                <th style="width: 11%;">Postal Code</th>
+                                <th style="width: 15%;">Post Office</th>
+                                <th style="width: 15%;">Area</th>
+                                <th style="width: 10%;">City</th>
+                                <th style="width: 15%;">District</th>
+                                <th style="width: 10%;">State</th>
+                                <th style="width: 15%;">Department</th>
                                 <th class="text-center" style="width: 8%;">Actions</th>
                             </tr>
                         </thead>
                         <tbody>
                             @if ((total$ | async)! > 0) {
-                            @for (instrument of instruments$ | async; track $index; let i = $index) {
+                            @for (pc of postalCodes$ | async; track $index; let i = $index) {
                             <tr>
                                 <td class="text-center">{{ (tableService.page - 1) * tableService.pageSize + i + 1 }}</td>
-                                <td class="text-dark fs-sm fw-medium">{{ instrument.InstrumentationName }}</td>
-                                <td class="text-dark fs-sm">{{ instrument.BranchName }}</td>
-                                <td class="text-dark fs-sm">{{ instrument.DepartmentName }}</td>
+                                <td class="text-dark fs-sm fw-medium">{{ pc.PostalCode }}</td>
+                                <td class="text-dark fs-sm">{{ pc.PostOfficeName }}</td>
+                                <td class="text-dark fs-sm">{{ pc.AreaName }}</td>
+                                <td class="text-dark fs-sm">{{ pc.CityName }}</td>
+                                <td class="text-dark fs-sm">{{ pc.DistrictName }}</td>
+                                <td class="text-dark fs-sm">{{ pc.StateName }}</td>
+                                <td class="text-dark fs-sm">{{ pc.DepartmentName }}</td>
                                 <td>
                                     <div class="d-flex justify-content-center gap-1">
-                                        <a (click)="editInstrument(instrument.id)"
+                                        <a (click)="editPostalCode(pc.id)"
                                             class="btn btn-primary btn-icon btn-sm rounded-circle"
                                             style="background-color: #1ab394; border-color: #1ab394;"
-                                            ngbTooltip="Edit Instrument">
+                                            ngbTooltip="Edit Postal Code">
                                             <ng-icon name="tablerPencil" class="fs-lg" />
                                         </a>
                                     </div>
@@ -65,18 +71,17 @@
                             }
                             } @else {
                             <tr class="no-results">
-                                <td colspan="5" class="text-center text-muted py-3">Nothing found.</td>
+                                <td colspan="9" class="text-center text-muted py-3">Nothing found.</td>
                             </tr>
                             }
                         </tbody>
                     </table>
-
                 </div>
                 <div class="card-footer border-0">
                     @if ((total$ | async)! > 0) {
                     <div class="d-flex justify-content-between align-items-center pagination-boxed">
                         <div class="text-muted fs-xs">
-                            {{ tableService.showingRange }} instruments
+                            {{ tableService.showingRange }} postal codes
                         </div>
                         <ngb-pagination [collectionSize]="(total$ | async)!" [(page)]="tableService.page"
                             [pageSize]="tableService.pageSize">
@@ -91,7 +96,6 @@
                     }
                 </div>
             </div>
-
         </div>
     </div>
 </div>

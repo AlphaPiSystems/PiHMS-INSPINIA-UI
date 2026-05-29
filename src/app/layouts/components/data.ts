@@ -94,6 +94,18 @@ export const menuItems: MenuItemType[] = [
                     { label: 'Ward-bed-list', url: '/master/hospital/ward-bed-list' }
                 ]
             },
+            {
+                label: 'Misc',
+                isCollapsed: true,
+                children: [
+                    { label: 'Country-list', url: '/master/misc/country-list' },
+                    { label: 'State-list', url: '/master/misc/state-list' },
+                    { label: 'District-list', url: '/master/misc/district-list' },
+                    { label: 'City-list', url: '/master/misc/city-list' },
+                    { label: 'Postal-Code-list', url: '/master/misc/postal-code-list' },
+                    { label: 'Bank-list', url: '/master/misc/bank-list' }
+                ]
+            }
         ]
     },
     // },
