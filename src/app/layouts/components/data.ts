@@ -105,6 +105,15 @@ export const menuItems: MenuItemType[] = [
                     { label: 'Postal-Code-list', url: '/master/misc/postal-code-list' },
                     { label: 'Bank-list', url: '/master/misc/bank-list' }
                 ]
+            },
+            {
+                label: 'Inventory',
+                isCollapsed: true,
+                children: [
+                    { label: 'Item-list', url: '/master/misc/item-list' },
+                    { label: 'Vendor-list', url: '/master/misc/vendor-list' },
+                    { label: 'Department-list', url: '/master/department/department-list' }
+                ]
             }
         ]
     },

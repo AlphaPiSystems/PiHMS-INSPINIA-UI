@@ -90,6 +90,36 @@ export const MISC_ROUTES: Routes = [
         path: 'bank-edit',
         loadComponent: () => import('./bank/bank-edit.component').then(m => m.BankEditComponent),
         data: { title: 'Edit Bank' }
+    },
+    {
+        path: 'item-list',
+        loadComponent: () => import('../Inventory/item/item-list.component').then(m => m.ItemListComponent),
+        data: { title: 'Items List' }
+    },
+    {
+        path: 'item-new',
+        loadComponent: () => import('../Inventory/item/item-new.component').then(m => m.ItemNewComponent),
+        data: { title: 'New Item' }
+    },
+    {
+        path: 'item-edit',
+        loadComponent: () => import('../Inventory/item/item-edit.component').then(m => m.ItemEditComponent),
+        data: { title: 'Edit Item' }
+    },
+    {
+        path: 'vendor-list',
+        loadComponent: () => import('../Inventory/vendor/vendor-list.component').then(m => m.VendorListComponent),
+        data: { title: 'Vendors List' }
+    },
+    {
+        path: 'vendor-new',
+        loadComponent: () => import('../Inventory/vendor/vendor-new.component').then(m => m.VendorNewComponent),
+        data: { title: 'New Vendor' }
+    },
+    {
+        path: 'vendor-edit',
+        loadComponent: () => import('../Inventory/vendor/vendor-edit.component').then(m => m.VendorEditComponent),
+        data: { title: 'Edit Vendor' }
     }
 ];
 
